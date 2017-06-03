@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="VillageMapper">
+	<!--表名 -->
+	<sql id="tableName">
+		village
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		id, name, streetcode, code, maxrecord, points
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+
+	</sql>
+
+	<!--通过ID获取其子一级菜单 -->
+	<select id="findById" parameterType="com.wdkj.wf.house.entity.VillageEntity"
+		resultType="com.wdkj.wf.house.entity.VillageEntity">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="code != null and code != '' ">
+			and code = #{code}
+		</if>
+	</select>
+
+	<select id="listAll" parameterType="com.wdkj.wf.house.entity.VillageEntity"
+		resultType="pd">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where 1=1
+		<if test="streetcode !=null and streetcode !='' ">
+			and streetcode like concat( concat(#{streetcode}) , '%')
+		</if>
+	</select>
+
+	<select id="list" parameterType="com.wdkj.wf.house.entity.VillageEntity"
+			resultType="com.wdkj.wf.house.entity.VillageEntity">
+		select
+		vil.id, vil.name, vil.streetcode, vil.code, vil.maxrecord, vil.points,
+		str.name as street
+		from
+		<include refid="tableName"></include> vil
+		left join street str on str.code = vil.streetcode
+		where 1=1
+		<if test="streetcode != null and streetcode != '' ">
+			and streetcode like concat( concat(#{streetcode}) , '%')
+		</if>
+		<if test="streetId != null">
+			and str.id = #{streetId}
+		</if>
+	</select>
+
+	<update id="update" parameterType="com.wdkj.wf.house.entity.VillageEntity">
+		UPDATE <include refid="tableName"></include>
+		SET
+			maxrecord=#{maxRecord}
+		WHERE
+			id = #{id}
+	</update>
+
+</mapper>

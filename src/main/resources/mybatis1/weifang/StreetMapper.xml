@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StreetMapper">
+
+	<resultMap id="resultMap" type="com.wdkj.wf.house.entity.StreetEntity">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="code" property="areacode"/>
+		<result column="maxrecord" property="maxrecord"/>
+		<result column="points" property="boundaryPoints"/>
+	</resultMap>
+
+	<!--表名 -->
+	<sql id="tableName">
+		street
+	</sql>
+
+	<!-- 字段 -->
+	<sql id="Field">
+		id, name, code, maxrecord, points
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{id}, #{name}, #{code}, #{maxrecord}, #{points}
+	</sql>
+
+
+	<!--获取街道信息 -->
+	<select id="findById" parameterType="com.wdkj.wf.house.entity.StreetEntity" resultType="com.wdkj.wf.house.entity.StreetEntity">
+		select
+		*
+		from
+		<include refid="tableName"></include>
+		where  1=1
+		<if test="areacode !=null and areacode !=''">
+			and	areacode   like  concat(  concat('%', #{areacode,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="name !=null and name !=''">
+			and	name   like  concat(  concat('%', #{name,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="maxrecord !=null and maxrecord !=''">
+			and	maxrecord   like  concat(  concat('%', #{maxrecord,jdbcType=INTEGER}) , '%')
+		</if>
+	</select>
+<update id="edit" parameterType="com.wdkj.wf.house.entity.StreetEntity">
+update 
+<include refid="tableName"></include>
+set maxrecord=#{maxrecord}+1
+where name=#{name}
+</update>
+	<select id="listAll" parameterType="com.wdkj.wf.house.entity.StreetEntity" resultType="pd">
+		select
+		*
+		from
+		<include refid="tableName"></include>
+		where  1=1
+		<if test="areacode !=null and areacode !=''">
+			and	areacode   like  concat(  concat('%', #{areacode,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="name !=null and name !=''">
+			and	name   like  concat(  concat('%', #{name,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="maxrecord !=null and maxrecord !=''">
+			and	maxrecord   like  concat(  concat('%', #{maxrecord,jdbcType=INTEGER}) , '%')
+		</if>
+	</select>
+
+	<select id="list" parameterType="com.wdkj.wf.house.entity.StreetEntity" resultMap="resultMap">
+		select
+		<include refid="Field"></include>
+		from
+		<include refid="tableName"></include>
+		where  1=1
+		<if test="areacode !=null and areacode !=''">
+			and	areacode   like  concat(  concat('%', #{areacode,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="name !=null and name !=''">
+			and	name   like  concat(  concat('%', #{name,jdbcType=VARCHAR}) , '%')
+		</if>
+		<if test="maxrecord !=null and maxrecord !=''">
+			and	maxrecord   like  concat(  concat('%', #{maxrecord,jdbcType=INTEGER}) , '%')
+		</if>
+	</select>
+</mapper>

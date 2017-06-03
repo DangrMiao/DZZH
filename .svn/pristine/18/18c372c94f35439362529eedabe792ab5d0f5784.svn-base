@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DirectoryMapper">
+	<!--表名 -->
+<!-- 	<sql id="tableName">
+		bulltetin
+	</sql> -->
+	<!-- 查询公告 -->
+    <select id="listAll" parameterType="com.wdkj.wf.house.entity.BulltetinEntity" resultType="pd">
+    SELECT
+		 a.bid,
+		 b.NAME AS name,
+		 a.fbtime,
+		 a.fblr,
+		 a.depart_id,
+		 a.title
+ 
+    FROM bulltetin AS a
+		LEFT JOIN sys_user AS b ON a.uid = b.USER_ID
+    WHERE 1=1
+    <if test="bid !=null and bid !=''">
+			and	bid=#{bid,jdbcType=VARCHAR}
+	</if>
+    </select>
+    
+    <!-- 查询位置（经纬度） -->
+    <select id="listLocation" parameterType="com.wdkj.wf.house.entity.LocationEntity" resultType="pd">
+    SELECT
+		 id,
+		 task_id,
+		 x,
+		 y
+ 
+    FROM task_location
+    WHERE 1=1
+    <if test="task_id !=null and task_id !=''">
+			and	task_id=#{task_id,jdbcType=VARCHAR}
+	</if>
+    </select>
+    
+<!-- 	
+		//新增 
+	<insert id="save" parameterType="com.wdkj.wf.house.entity.TaskEntity">
+		insert into
+		<include refid="tableName"></include>
+		(bh, xzjd, ssc, mph, jznd, zflb, cs, jzmj, js, zdmj, zfsyqk, jglx, tdxz, fcz, x, y, zt, wxdj
+		)
+		values (
+		#{bh},
+		#{xzjd},
+		#{ssc},
+		#{mph},
+		#{jznd},
+		#{zflb},
+		#{cs},
+		#{jzmj},
+		#{js},
+		#{zdmj},
+		#{zfsyqk},
+		#{jglx},
+		#{tdxz},
+		#{fcz},
+		#{x},
+		#{y},
+		#{zt},
+		#{wxdj}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.wdkj.wf.house.entity.TaskEntity">
+		UPDATE decrepithouse.house
+		SET
+			xzjd = #{xzjd},
+			ssc = #{ssc},
+			mph = #{mph},
+			jznd = #{jznd},
+			zflb = #{zflb},
+			cs = #{cs},
+			jzmj = #{jzmj},
+			js = #{js},
+			zdmj = #{zbmj},
+			zfsyqk = #{zfsyqk},
+			jglx = #{jglx},
+			tdxz = #{tdxz},
+			x = #{x},
+			fcz = #{fcz},
+			y = #{y},
+			zt = #{zt},
+			wxdj = #{wxdj}
+		WHERE
+		id = #{id}
+
+	</update> 
+	-->
+</mapper>

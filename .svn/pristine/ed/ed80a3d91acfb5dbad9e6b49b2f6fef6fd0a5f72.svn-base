@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysUserMapper">
+	<!--表名 -->
+	<sql id="tableName">
+		sys_user
+	</sql>
+
+	<!-- 字段 -->
+	<!-- 字段 -->
+	<sql id="Field">
+		USER_ID,
+		USERNAME,
+		PASSWORD,
+		NAME,
+		RIGHTS,
+		ROLE_ID,
+		LAST_LOGIN,
+		IP,
+		STATUS,
+		BZ,
+		SKIN,
+		EMAIL,
+		NUMBER,
+		PHONE
+	</sql>
+
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+
+	</sql>
+	<!-- 用户信息 列表 -->
+	<select id="userinfo" parameterType="com.wdkj.wf.house.entity.SysUserEntity"
+		resultType="pd">
+		select
+		u.user_id,
+		u.name,
+		u.phone,
+		p.PHOTO1,
+		p.PHOTO2,
+		p.PHOTO3
+		from
+		sys_user u
+		left join
+		sys_userphoto p
+		on u.USERNAME = p.USERNAME
+		where
+		1=1 ORDER BY convert(u.name using
+		gbk) ASC
+	</select>
+	<!-- 获取用户信息 -->
+	<select id="getUserInfo" parameterType="com.wdkj.wf.house.entity.SysUserEntity"
+		resultType="pd">
+		SELECT
+		u.USER_ID,
+		u.USERNAME,
+		u.NAME,
+		u.PASSWORD,
+		u.SKIN,
+		u.LAST_LOGIN,
+		u.
+		STATUS,
+		u.BZ,
+		u.EMAIL,
+		u.NUMBER,
+		u.PHONE,
+		u.ADDRESS,
+		u.tdate,
+		r.ROLE_NAME,
+		r.RIGHTS AS ROLE_RIGHTS,
+		p.PHOTO1,
+		p.PHOTO2,
+		p.PHOTO3
+		FROM
+		sys_user u left
+		join
+		sys_role r on u.ROLE_ID = r.ROLE_ID
+		left join
+		sys_userphoto p
+		on
+		u.USERNAME =
+		p.USERNAME
+		where
+		1=1
+		<if test="USER_ID != null and USER_ID !=''">
+			and u.USER_ID = #{USER_ID,jdbcType=VARCHAR}
+		</if>
+		<if test="USERNAME != null and USERNAME !=''">
+			and u.USERNAME = #{USERNAME,jdbcType=VARCHAR}
+		</if>
+	</select>
+	<!--插入数据 -->
+	<insert id="insert" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint">
+		INSERT INTO decrepithouse.monitor_settlement_ob_point
+		( house_id, name
+		)
+		VALUES(
+		<include refid="FieldValue"></include>
+		);
+	</insert>
+
+	<!-- 根据id查询部门 -->
+	<select id="findbyid" parameterType="string" resultType="pd">
+		select
+		d.name
+		from
+		oa_department d, sys_user s
+		where
+		d.DEPARTMENT_ID=s.DEPARTMENT_ID
+		and
+		s.USER_ID=#{USER_ID,jdbcType=VARCHAR}
+	</select>
+	<!-- 我的下属 -->
+	<select id="listunderling" parameterType="String" resultType="pd">
+		select
+		s.name,
+		s.user_id,
+		s.phone,
+		p.PHOTO1,
+		p.PHOTO2,
+		p.PHOTO3
+		from
+		sys_user
+		s left join oa_department o on
+		s.DEPARTMENT_ID = o.DEPARTMENT_ID left
+		join sys_userphoto p on
+		s.USERNAME = p.USERNAME
+		where
+		1 = 1
+		and
+		o.PARENT_ID = #{user_id}
+		and s.USER_ID != #{user_id}
+	</select>
+	<!-- 判断用户是否是领导 -->
+	<select id="judgeUser"  parameterType="String" resultType="pd">
+	select DEPARTMENT_ID from oa_department
+	where PARENT_ID=#{userid}
+	</select>
+	<!-- 后台用户查询 -->
+	<select id="listuser" parameterType="pd" resultType="pd">
+		select
+		s.USERNAME as name,s.USER_ID as bh,
+		s.NAME as qc,s.PHONE ,
+		r.ROLE_NAME
+		as js,
+		d.NAME as bm,s.ROLE_ID, s.DEPARTMENT_ID
+		from sys_user s left join sys_role r on
+		s.ROLE_ID=r.ROLE_ID
+		left join oa_department d on
+		s.DEPARTMENT_ID=d.DEPARTMENT_ID
+		where 1=1
+	</select>
+	<!-- 角色下拉框 -->
+	<select id="listrole" parameterType="pd" resultType="pd">
+		select
+		ROLE_ID,ROLE_NAME from sys_role where 1=1
+	</select>
+	<!-- 修改用户信息 -->
+	<update id="upduser" parameterType="pd">
+		update sys_user
+		set
+		USERNAME=#{name},
+		DEPARTMENT_ID=#{DEPARTMENT_ID},
+		ROLE_ID=#{ROLE_ID}
+		where USER_ID=#{bh}
+	</update>
+	<!-- 删除用户 -->
+	<delete id="deluser" parameterType="pd">
+		delete from sys_user
+		where
+		USER_ID=#{bh}
+	</delete>
+</mapper>

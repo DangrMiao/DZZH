@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BulltetinMapper">
+	<!-- 查询最新公告 -->
+	<select id="listNew" parameterType="com.wdkj.wf.house.entity.BulltetinEntity"
+		resultType="pd">
+		select
+		b.bid,
+		b.uid,
+		b.fbtime,
+		b.fblr,
+		b.title,
+		s.name as release_name
+		from
+		bulltetin b left join sys_user s on b.uid =s.user_id
+		where 1=1
+		<if test="bid !=null and bid!=''">
+			and b.bid=#{bid,jdbcType=INTEGER}
+		</if>
+		order by b.fbtime desc
+	</select>
+	<!-- 查询今日任务 -->
+	<select id="listToday" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,p.photo2,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID =
+		t.creator_id
+		) name,
+		( SELECT u. NAME FROM sys_user AS u
+		WHERE u.USER_ID
+		= t.sharer_id
+		) sname,
+		( SELECT u. NAME FROM sys_user AS
+		u WHERE
+		u.USER_ID =
+		t.performer_id
+		) pname
+		FROM task t
+		left join
+		sys_user s
+		on
+		t.performer_id=s.user_id
+		left join
+		sys_userphoto p
+		on
+		s.username =p.username
+		where 1=1
+		and
+		to_days(t.starttime)
+		=to_days(now())
+		and t.status in(1)
+		<if test="id != null and id !=''">
+			and t.id=#{id,jdbcType=INTEGER}
+		</if>
+		<if test="user_id != null and user_id !=''">
+			and t.performer_id=#{user_id}
+		</if>
+		order by t.starttime desc
+	</select>
+	<!-- 已耽误任务 -->
+	<select id="listDnc" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,p.photo2,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID =
+		t.creator_id
+		) name,
+		( SELECT u. NAME FROM sys_user AS u
+		WHERE
+		u.USER_ID
+		= t.sharer_id
+		) sname,
+		( SELECT u. NAME FROM sys_user
+		AS u
+		WHERE
+		u.USER_ID =
+		t.performer_id
+		) pname
+		FROM task t
+		left join
+		sys_user s
+		on
+		t.performer_id=s.user_id
+		left join
+		sys_userphoto p
+		on
+		s.username =p.username
+		where 1=1
+		and t.status in
+		(1)
+		and
+		to_days(endtime) &lt;=to_days(now())
+		<if test="id != null and id !='' ">
+			and t.id=#{id,jdbcType=INTEGER}
+		</if>
+		<if test="user_id != null and user_id !=''">
+			and t.performer_id=#{user_id}
+		</if>
+		order by
+		t.starttime desc
+	</select>
+
+	<!-- 查询已完成任务 -->
+	<select id="listFinish" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,p.photo2,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID =
+		t.creator_id
+		) name,
+		( SELECT u. NAME FROM sys_user AS u
+		WHERE
+		u.USER_ID
+		= t.sharer_id
+		) sname,
+		( SELECT u. NAME FROM sys_user
+		AS u
+		WHERE
+		u.USER_ID =
+		t.performer_id
+		) pname
+		FROM task t
+		left join
+		sys_user s
+		on
+		t.performer_id=s.user_id
+		left join
+		sys_userphoto p
+		on
+		s.username =p.username
+		where 1=1
+		and
+		t.status
+		in(2,3)
+		<if test="id  != null and id !='' ">
+			and t.id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="user_id != null and user_id !=''">
+			and t.performer_id=#{user_id}
+		</if>
+		order by t.starttime desc
+	</select>
+
+	<!-- 下属昨日成就 -->
+	<select id="listyesTerday" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,
+		( SELECT u. NAME FROM sys_user AS u WHERE u.USER_ID =
+		t.creator_id
+		) name,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID
+		= t.sharer_id
+		) sname,
+		( SELECT u. NAME FROM sys_user
+		AS u WHERE
+		u.USER_ID =
+		t.performer_id
+		) pname,
+		s.user_id
+		FROM task t ,sys_user
+		s,oa_department o
+		WHERE 1=1
+		and
+		s.USER_ID =t.creator_id
+		and
+		s.DEPARTMENT_ID = o.DEPARTMENT_ID
+		and o.PARENT_ID = #{user_id}
+		and
+		s.USER_ID != #{user_id,jdbcType=VARCHAR}
+		<if test="time_id !=null and time_id ==1">
+			and DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+			&lt;=date(t.starttime)
+		</if>
+		<if test="time_id !=null and time_id ==2">
+			and DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+			&lt;=date(t.starttime)
+		</if>
+		<if test="time_id !=null and time_id ==3">
+			and QUARTER(t.starttime)=QUARTER(now())
+		</if>
+		<if test="time_id !=null and time_id ==4">
+			and YEAR(t.starttime)=YEAR(NOW())
+		</if>
+		order by t.starttime desc
+
+	</select>
+
+	<!-- 已完成 -->
+	<select id="listyesTerday1" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,
+		( SELECT u. NAME FROM sys_user AS u WHERE u.user_id =
+		t.creator_id )
+		name,
+		( SELECT u. NAME FROM sys_user AS u WHERE u.user_id
+		= t.sharer_id )
+		sname,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.user_id = t.performer_id )
+		pname,s.user_id
+		FROM task t ,sys_user s
+		WHERE 1=1
+		and
+		s.USER_ID = t.creator_id
+		<if test="user_id!=null and user_id!=''">
+			and s.user_id =#{user_id,jdbcType=VARCHAR}
+		</if>
+		<if test="id!=null and id!=''">
+			and t.id =#{id,jdbcType=INTEGER}
+		</if>
+		and t.status in (2,3)
+		order by t.starttime desc
+	</select>
+	<!-- 耽误 -->
+	<select id="listyesTerday2" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,
+		( SELECT u. NAME FROM sys_user AS u WHERE u.user_id =
+		t.creator_id)
+		name,
+		( SELECT u. NAME FROM sys_user AS u WHERE u.USER_ID
+		= t.sharer_id)
+		sname,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID
+		= t.performer_id )
+		pname,s.user_id
+		FROM task t ,sys_user s
+		where
+		1=1
+		and
+		s.USER_ID =
+		t.creator_id
+		<if test="user_id!=null and user_id!=''">
+			and s.user_id =#{user_id,jdbcType=VARCHAR}
+		</if>
+		<if test="id!=null and id!=''">
+			and t.id =#{id,jdbcType=INTEGER}
+		</if>
+		and t.status in (1)
+		order by t.starttime desc
+	</select>
+	<!-- 获取名字 -->
+	<select id="getName" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="string">
+		select
+		name
+		from sys_user
+		where
+		user_id=#{user_id,jdbcType=VARCHAR}
+	</select>
+	<!--表名 -->
+	<sql id="tableName">
+		bulltetin
+	</sql>
+	<!-- 字段名 -->
+	<sql id="Field">
+		uid,
+		fbtime,
+		fblr,
+		title
+	</sql>
+	<!-- 字段名值 -->
+	<sql id="FieldValue">
+		#{uid},
+		curdate(),
+		#{fblr},
+		#{title}
+	</sql>
+	<!-- 填写公告 -->
+	<insert id="savebt" parameterType="com.wdkj.wf.house.entity.BulltetinEntity">
+		insert into
+		<include refid="tableName"></include>
+		(
+		<include refid="Field"></include>
+		) values (
+		<include refid="FieldValue"></include>
+		)
+	</insert>
+	<!-- 修改公告 -->
+	<update id="editbt" parameterType="com.wdkj.wf.house.entity.BulltetinEntity">
+		update
+		<include refid="tableName"></include>
+		set
+		fblr=#{fblr},
+		title=#{title}
+		where bid=#{bid}
+	</update>
+	<!-- 删除公告 -->
+	<delete id="deletebt" parameterType="com.wdkj.wf.house.entity.BulltetinEntity">
+		delete from
+		<include refid="tableName"></include>
+		where bid=#{bid}
+	</delete>
+	<!-- task表字段 -->
+	<sql id="taskfile">
+		content,
+		type,
+		target,
+		status,
+		creator_id,
+		sharer_id,
+		performer_id,
+		starttime,
+		endtime,
+		overtime
+	</sql>
+	<!--task字段值 -->
+	<sql id="taskvalue">
+		#{content},
+		#{type},
+		#{target},
+		0,
+		#{creator_id},
+		#{sharer_id},
+		#{performer_id},
+		#{starttime},
+		#{endtime},
+		#{overtime}
+	</sql>
+	<!-- 类型 -->
+	<select id="listtype" parameterType="integer" resultType="pd">
+		select * from type where
+		1=1
+		<if test="id!=null and id!=''">
+			and id=#{type}
+		</if>
+	</select>
+	<!-- 添加任务 -->
+	<insert id="savetask" parameterType="com.wdkj.wf.house.entity.TaskEntity">
+		insert into task(content,
+		type,
+		endtime,
+		target,
+		starttime,
+		creator_id,
+		status)
+		values
+		(#{content},#{type},#{endtime},#{target},curdate(),#{creator_id},0)
+	</insert>
+	<!-- 删除任务 -->
+	<delete id="deltask" parameterType="integer">
+		delete from task where
+		id=#{id}
+	</delete>
+	<!-- 获取单个任务信息 -->
+	<select id="gettask" parameterType="integer" resultType="pd">
+		select *
+		from task where id=#{id}
+	</select>
+	<!-- 未分配任务 -->
+	<select id="unlisttask" parameterType="com.wdkj.wf.house.entity.TaskEntity"
+		resultType="pd">
+		SELECT t.*,p.photo2,
+		( SELECT u. NAME FROM sys_user AS u WHERE
+		u.USER_ID =
+		t.creator_id
+		) name,
+		( SELECT u. NAME FROM sys_user AS u
+		WHERE
+		u.USER_ID
+		= t.sharer_id
+		) sname,
+		( SELECT u. NAME FROM sys_user
+		AS u
+		WHERE
+		u.USER_ID =
+		t.performer_id
+		) pname
+		FROM task t
+		left join
+		sys_user s
+		on
+		t.performer_id=s.user_id
+		left join
+		sys_userphoto p
+		on
+		s.username =p.username
+		where 1=1
+		and
+		t.status
+		in(0)
+		<if test="id  != null and id !='' ">
+			and t.id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="user_id != null and user_id !=''">
+			and t.performer_id=#{user_id}
+		</if>
+		order by t.starttime desc
+	</select>
+	<!-- 分配任务 -->
+	<update id="allottask" parameterType="java.util.List">
+		<foreach collection="list" item="num" index="index" open=""
+			close="" separator=";">
+			update task
+			<set>
+				sharer_id=#{num.sharer_id},
+				performer_id=#{num.performer_id},
+				status=1
+			</set>
+			where id = #{num.id,jdbcType=INTEGER}
+		</foreach>
+	</update>
+	<!-- 完成任务 -->
+	<update id="overtask" parameterType="com.wdkj.wf.house.entity.TaskEntity">
+		update task set
+		status=#{status}
+		where id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,1246 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseMapper">
+	<!--表名 -->
+	<sql id="tableName">
+		house
+	</sql>
+
+	<select id="listAll" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="pd">
+		select
+		bh,
+		jznd,
+		zflb,cs,
+		jzmj,js,zdmj,
+		zfsyqk,tdxz,xzjd,
+		ssc,mph,jglx,fcz
+		,x,y,photos
+		from
+		<include refid="tableName"></include>
+		where x &gt;= #{xmin} and x &lt;= #{xmax} and y &gt;= #{ymin} and y
+		&lt;= #{ymax}
+	</select>
+
+	<select id="findById" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		select
+		house.id,bh,zt,
+		jznd,
+		zflb,cs,
+		jzmj,js,zdmj,
+		zfsyqk,tdxz,xzjd,
+		ssc,mph,jglx,fcz,x,y, house.photos,
+		ident.level as dangerLevel
+		from
+		<include refid="tableName"></include>
+		house
+		left join house_identification ident on ident.house_code =
+		house.bh
+		where 1 = 1
+		<if test="id != null">
+			and house.id = #{id}
+		</if>
+		<if test="bh != null and bh != ''">
+			and bh = #{bh}
+		</if>
+	</select>
+	<!-- 获取文件路径 -->
+	<select id="listfile" parameterType="pd" resultType="pd">
+		select file,
+		photos
+		from house_identification where house_code=#{house_code}
+	</select>
+	<!-- 新增 -->
+	<insert id="save" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		insert into
+		<include refid="tableName"></include>
+		(bh, xzjd, ssc, mph, jznd, zflb, cs, jzmj, js, zdmj, zfsyqk, jglx,
+		tdxz, fcz, x, y, zt
+		)
+		values (
+		#{bh},
+		#{xzjd},
+		#{ssc},
+		#{mph},
+		#{jznd},
+		#{zflb},
+		#{cs},
+		#{jzmj},
+		#{js},
+		#{zdmj},
+		#{zfsyqk},
+		#{jglx},
+		#{tdxz},
+		#{fcz},
+		#{x},
+		#{y},
+		#{zt}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		UPDATE house
+		SET
+		cs =#{cs},
+		js = #{js},
+		jzmj = #{jzmj},
+		mph = #{mph},
+		ssc =#{ssc},
+		xzjd =#{xzjd},
+		zdmj = #{zdmj},
+		zflb = #{zflb},
+		zfsyqk = #{zfsyqk},
+		jglx = #{jglx},
+		fcz = #{fcz},
+		zt = #{zt}
+		WHERE
+		
+		bh =#{bh}
+	</update>
+
+		<update id="updateSxgx" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		UPDATE house
+		SET
+		cs =#{cs},
+		js = #{js},
+		jzmj = #{jzmj},
+		mph = #{mph},
+		ssc =#{ssc},
+		xzjd =#{xzjd},
+		zdmj = #{zdmj},
+		zflb = #{zflb},
+		zfsyqk = #{zfsyqk},
+		jglx = #{jglx},
+		fcz = #{fcz}
+		WHERE
+		
+		bh =#{bh}
+	</update>
+	<update id="updateOwner" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		UPDATE house_owner
+		SET
+		name= #{name},
+		identity = #{identity},
+		phonenum = #{phonenum}
+		WHERE
+		house_code = #{bh}
+	</update>
+	
+
+	<select id="page" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		SELECT
+		a.id,
+		a.bh,
+		a.xzjd,
+		a.ssc,
+		a.mph,
+		a.jznd,
+		a.zflb,
+		a.jglx,
+		a.cs,
+		a.jzmj,
+		a.js,
+		a.zdmj,
+		a.zfsyqk,
+		a.tdxz,
+		a.fcz,
+		a.y,
+		a.x,
+		a.zt,
+		c.level,
+		c.company,
+		c.identifier,
+		b.dismantle_time,
+		b.complete_time,
+		d.name,
+		d.identity,
+		d.phonenum,
+		c.date
+		FROM house AS a left join
+		house_disposes AS b on
+		a.bh = b.house_code
+		left join
+		house_identification AS c on a.bh =
+		c.house_code
+		left join
+		house_owner
+		AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="day!=null and day!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}
+		</if>
+		<if test="month!=null and month!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m')= #{month}
+		</if>
+		<if test="year!=null and year!=''">
+			AND DATE_FORMAT(c.date,'%Y')= #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+		<if test="Startime != null">
+			AND c.date &gt;=  #{Startime}
+		</if>
+		<if test="jznd!=null and jznd!=''">
+			and a.jznd=#{jznd}
+		</if>
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="zdmj1 !=null and zdmj2 !=null">
+			and a.zdmj between #{zdmj1} and and #{zdmj2}
+		</if>
+		<if test="zdmj !=null ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj2 !=null ">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="jglx !=null and jglx!=''">
+			and a.jglx=#{jglx}
+		</if>
+		<if test="cs !=null and  cs!=''">
+			and a.cs =#{cs}
+		</if>
+		<if test="js1 !=null and  js2 !=null">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null ">
+			and a.js =#{js}
+		</if>
+		<if test="zt!=null">
+			AND a.zt = #{zt}
+		</if>
+		<if test="zfsyqk !=null and zfsyqk!=''">
+			AND a.zfsyqk = #{zfsyqk}
+		</if>
+		<if test="Endtime != null ">
+			AND c.date &lt;= #{Endtime}
+		</if>
+		order by c.date desc
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
+	</select>
+	<!-- 地基检测导表 -->
+	<select id="toExcel" parameterType="com.wdkj.wf.house.entity.HouseEntity" resultType="pd">
+	SELECT
+		a.id,
+		a.bh,
+		a.xzjd,
+		a.ssc,
+		a.mph,
+		a.jznd,
+		a.zflb,
+		a.cs,
+		a.jglx,
+		a.jzmj,
+		a.js,
+		a.zdmj,
+		a.zfsyqk,
+		a.tdxz,
+		a.fcz,
+		a.y,
+		a.x,
+		a.zt,
+		c.level,
+		c.company,
+		c.identifier,
+		b.dismantle_time,
+		b.complete_time,
+		d.name,
+		d.identity,
+		d.phonenum,
+		c.date
+		FROM house AS a left join
+		house_disposes AS b on
+		a.bh = b.house_code
+		left join
+		house_identification AS c on a.bh =
+		c.house_code
+		left join
+		house_owner
+		AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="day!=null and day!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}
+		</if>
+		<if test="month!=null and month!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m')= #{month}
+		</if>
+		<if test="year!=null and year!=''">
+			AND DATE_FORMAT(c.date,'%Y')= #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+		<if test="Startime != null">
+			AND c.date &gt;=  #{Startime}
+		</if>
+		<if test="jznd!=null and jznd!=''">
+			and a.jznd=#{jznd}
+		</if>
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="zdmj1 !=null and zdmj2 !=null">
+			and a.zdmj between #{zdmj1} and and #{zdmj2}
+		</if>
+		<if test="zdmj !=null ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj2 !=null ">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="jglx !=null and jglx!=''">
+			and a.jglx=#{jglx}
+		</if>
+		<if test="cs !=null and  cs!=''">
+			and a.cs =#{cs}
+		</if>
+		<if test="js1 !=null and  js2 !=null">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null ">
+			and a.js =#{js}
+		</if>
+		<if test="zt!=null">
+			AND a.zt = #{zt}
+		</if>
+		<if test="zfsyqk !=null and zfsyqk!=''">
+			AND a.zfsyqk = #{zfsyqk}
+		</if>
+		<if test="Endtime != null ">
+			AND c.date &lt;= #{Endtime}
+		</if>
+		order by c.date desc
+	</select>
+	<select id="count" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM house AS a left join
+		house_disposes AS b on a.bh =
+		b.house_code
+		left join
+		house_identification AS c on a.bh = c.house_code
+		left join
+		house_owner AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="day!=null and day!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}
+		</if>
+		<if test="month!=null and month!=''">
+			AND DATE_FORMAT(c.date,'%Y/%m')= #{month}
+		</if>
+		<if test="year!=null and year!=''">
+			AND DATE_FORMAT(c.date,'%Y')= #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+		<if test="Startime != null">
+			AND c.date &gt;=  #{Startime}
+		</if>
+		<if test="jznd!=null and jznd!=''">
+			and a.jznd=#{jznd}
+		</if>
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="zdmj1 !=null and zdmj2 !=null">
+			and a.zdmj between #{zdmj1} and and #{zdmj2}
+		</if>
+		<if test="zdmj !=null ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj2 !=null ">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="jglx !=null and jglx!=''">
+			and a.jglx=#{jglx}
+		</if>
+		<if test="cs !=null and  cs!=''">
+			and a.cs =#{cs}
+		</if>
+		<if test="js1 !=null and  js2 !=null">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null ">
+			and a.js =#{js}
+		</if>
+		<if test="zt!=null">
+			AND a.zt = #{zt}
+		</if>
+		<if test="zfsyqk !=null and zfsyqk!=''">
+			AND a.zfsyqk = #{zfsyqk}
+		</if>
+		<if test="Endtime != null ">
+			AND c.date &lt;= #{Endtime}
+		</if>
+		order by c.date desc
+	</select>
+
+
+	<!-- 历史回溯搜索实现 -->
+	<select id="pageHistory" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		SELECT
+		a.id,
+		a.bh,
+		a.xzjd,
+		a.ssc,
+		a.mph,
+		a.zflb,
+		a.cs,
+		a.jzmj,
+		a.js,
+		a.zdmj,
+		a.zfsyqk,
+		a.fcz,
+		a.tdxz,
+		a.zt,
+		a.y,
+		a.x,
+		c.level,
+		c.date,
+		c.company,
+		c.identifier,
+		b.dismantle_time,
+		b.reform_time,
+		b.reform_type,
+		b.complete_time,
+		d.name,
+		d.identity,
+		d.phonenum
+		FROM house AS a left join
+		house_disposes AS b on a.bh = b.house_code
+		left join
+		house_identification AS c on a.bh = c.house_code
+		left join
+		house_owner
+		AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="zt !=null and zt!=''">
+			AND a.zt = #{zt}
+		</if>					
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+
+		<if test="Startime != null">
+			AND b.dismantle_time &gt;= #{Startime}
+		</if>
+		<if test="reform_type!=null and reform_type!=''">
+			and b.reform_type =#{reform_type}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="zdmj1 !=null and zdmj1!=''and zdmj2 !=null and zdmj2!=''">
+			and a.zdmj between #{zdmj1} and #{zdmj2}
+		</if>
+		<if test="zdmj !=null and zdmj!='' ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj1!=''and jzmj2 !=null and jzmj2!=''">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null and jzmj!='' ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+		
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="cs !=null and cs!=''">
+			and a.cs=#{cs}
+		</if>
+ 
+		<if test="js1 !=null and js1!='' and  js2 !=null and js2!=''">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null and js!='' ">
+			and a.js =#{js}
+		</if>
+		<if test="Endtime != null ">
+			AND b.dismantle_time &lt;= #{Endtime}
+		</if>
+
+		<!-- 吴老铁传过来的年月判断-->
+		<if test="day!=null and day!='' ">
+			AND  DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}		
+		</if>
+		<if test="month!=null and month!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m')= #{month}		
+		</if>
+		<if test="year!=null and year!='' ">
+			 AND YEAR(b.dismantle_time) = #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		
+		<if test="dismantle_timeday!=null and dismantle_timeday!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m/%d')= #{dismantle_timeday}		
+		</if>
+		<if test="dismantle_timemonth!=null and dismantle_timemonth!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m')= #{dismantle_timemonth}		
+		</if>
+		<if test="dismantle_timeyear!=null and dismantle_timeyear!='' ">
+			 AND YEAR(b.dismantle_time) = #{dismantle_timeyear}
+		</if>
+		<if test="dismantle_timeday=='' or dismantle_timemonth=='' or dismantle_timeyear=='' ">
+			AND b.dismantle_time is null
+		</if>
+		
+		<if test="reform_timeday!=null and reform_timeday!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m/%d')= #{reform_timeday}		
+		</if>
+		<if test="reform_timemonth!=null and reform_timemonth!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m')= #{reform_timemonth}		
+		</if>
+		<if test="reform_timeyear!=null and reform_timeyear!='' ">
+			 AND YEAR(b.reform_time) = #{reform_timeyear}
+		</if>
+		<if test="reform_timeday=='' or reform_timemonth=='' or reform_timeyear=='' ">
+			AND b.reform_time is null
+		</if>
+				
+		<if test="complete_timeday!=null and complete_timeday!=''">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m/%d')= #{complete_timeday}		
+		</if>
+		<if test="complete_timemonth!=null and complete_timemonth!=''">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m')= #{complete_timemonth}		
+		</if>
+		<if test="complete_timeyear!=null and complete_timeyear!=''">
+			 AND YEAR(b.complete_time) = #{complete_timeyear}
+		</if>
+		<if test="complete_timeday=='' or complete_timemonth=='' or complete_timeyear=='' ">
+			AND b.complete_time is null
+		</if>
+		
+		order by b.dismantle_time desc
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
+	</select>
+
+	<select id="countHistory" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM house AS a left join
+		house_disposes AS b on a.bh =
+		b.house_code
+		left join
+		house_identification AS c on a.bh = c.house_code
+		left join
+		house_owner AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+		<if test="zt !=null and zt!=''">
+			AND a.zt = #{zt}
+		</if>
+		<if test="Startime != null">
+			AND b.dismantle_time &gt;= #{Startime}
+		</if>
+		<if test="reform_type!=null and reform_type!=''">
+			and b.reform_type =#{reform_type}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+
+		<if test="zdmj1 !=null and zdmj1!=''and zdmj2 !=null and zdmj2!=''">
+			and a.zdmj between #{zdmj1} and #{zdmj2}
+		</if>
+		<if test="zdmj !=null and zdmj!='' ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj1!=''and jzmj2 !=null and jzmj2!=''">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null and jzmj!='' ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="cs !=null and cs!=''">
+			and a.cs=#{cs}
+		</if>
+		<if test="js1 !=null and js1!='' and  js2 !=null and js2!=''">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null and js!='' ">
+			and a.js =#{js}
+		</if>
+		<if test="Endtime != null ">
+			AND b.dismantle_time &lt;= #{Endtime}
+		</if>
+		
+		<if test="day!=null and day!='' ">
+			AND  DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}		
+		</if>
+		<if test="month!=null and month!='' ">
+			AND  DATE_FORMAT(c.date,'%Y/%m')= #{month}		
+		</if>
+		<if test="year!=null and year!='' ">
+			 AND YEAR(c.date) = #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		
+		<if test="dismantle_timeday!=null and dismantle_timeday!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m/%d')= #{dismantle_timeday}		
+		</if>
+		<if test="dismantle_timemonth!=null and dismantle_timemonth!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m')= #{dismantle_timemonth}		
+		</if>
+		<if test="dismantle_timeyear!=null and dismantle_timeyear!='' ">
+			 AND YEAR(b.dismantle_time) = #{dismantle_timeyear}
+		</if>
+		<if test="dismantle_timeday=='' or dismantle_timemonth=='' or dismantle_timeyear=='' ">
+			AND b.dismantle_time is null
+		</if>
+		
+		<if test="reform_timeday!=null and reform_timeday!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m/%d')= #{reform_timeday}		
+		</if>
+		<if test="reform_timemonth!=null and reform_timemonth!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m')= #{reform_timemonth}		
+		</if>
+		<if test="reform_timeyear!=null and reform_timeyear!='' ">
+			 AND YEAR(b.reform_time) = #{reform_timeyear}
+		</if>
+		<if test="reform_timeday=='' or reform_timemonth=='' or reform_timeyear=='' ">
+			AND b.reform_time is null
+		</if>
+		
+		<if test="complete_timeday!=null and complete_timeday!='' ">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m/%d')= #{complete_timeday}		
+		</if>
+		<if test="complete_timemonth!=null and complete_timemonth!='' ">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m')= #{complete_timemonth}		
+		</if>
+		<if test="complete_timeyear!=null and complete_timeyear!='' ">
+			 AND YEAR(b.complete_time) = #{complete_timeyear}
+		</if>
+		<if test="complete_timeday=='' or complete_timemonth=='' or complete_timeyear=='' ">
+			AND b.complete_time is null
+		</if>
+		
+		order by b.dismantle_time desc
+	</select>
+
+
+	<!-- 历史回溯房屋节点展示-缪秀诚 -->
+	<select id="listHistory" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		SELECT
+		a.id,
+		a.bh,		<!-- 编号 -->
+		a.xzjd,		<!-- 乡镇街道 -->
+		a.ssc,		<!-- 所属村 -->
+		a.mph,		<!-- 门牌号 -->
+		a.zflb,		<!-- 住房类别 -->
+		a.cs,		<!-- 房屋层数 -->
+		a.jzmj,		<!-- 建筑面积 -->
+		a.js,		<!-- 间数 -->
+		a.zdmj,		<!-- 占地面积 -->
+		a.zfsyqk,	<!-- 住房使用情况 -->
+		a.fcz,		<!-- 房产证 -->
+		a.x,		<!-- X -->
+		a.y,		<!-- Y -->
+		a.zt,		<!-- 状态 -->
+		b.reform_type,		<!-- 改造类型 -->
+		b.dismantle_time,		<!-- 拆除时间 -->
+		b.complete_time,		<!-- 验收时间 -->
+		b.reform_time,		<!-- 改造时间 -->
+		c.date,		<!-- 鉴定日期 -->
+		c.company,  <!-- 鉴定机构 -->
+		c.identifier,	<!-- 鉴定人 -->
+		c.level,	<!-- 鉴定等级 -->
+		d.name,	<!-- 姓名 -->
+		d.identity,	<!-- 身份证号 -->
+		d.phonenum<!-- 电话号码 -->
+
+		FROM house AS a left join
+		house_disposes AS b on a.bh = b.house_code
+		left join
+		house_identification AS c on a.bh = c.house_code
+		left join
+		house_owner AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="zt!=null and zt!=''">
+			AND a.zt = #{zt}
+		</if>
+	</select>
+
+	<!-- 历史excel导出-缪秀诚 (加了判断条件) -->
+	<select id="listExcel" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="pd">
+		SELECT
+		a.id,
+		a.bh,
+		a.xzjd,
+		a.ssc,
+		a.mph,
+		a.zflb,
+		a.cs,
+		a.jzmj,
+		a.js,
+		a.zdmj,
+		a.zfsyqk,
+		a.fcz,
+		a.zt,
+		a.y,
+		a.x,
+		c.level,
+		c.date,
+		b.dismantle_time,
+		b.reform_time,
+		b.reform_type,
+		b.complete_time,
+		d.name,
+		d.identity,
+		d.phonenum
+		FROM house AS a left join
+		house_disposes AS b on a.bh = b.house_code
+		left join
+		house_identification AS c on a.bh = c.house_code
+		left join
+		house_owner AS d on a.bh = d.house_code
+		WHERE 1=1
+		<if test="zt !=null and zt!=''">
+			AND a.zt = #{zt}
+		</if>					
+		<if test="bh!=null and bh!=''">
+			AND a.bh LIKE CONCAT(CONCAT('%', #{bh}), '%')
+		</if>
+
+		<if test="Startime != null">
+			AND b.dismantle_time &gt;= #{Startime}
+		</if>
+		<if test="reform_type!=null and reform_type!=''">
+			and b.reform_type =#{reform_type}
+		</if>
+		<if test="zflb !=null and zflb!=''">
+			and a.zflb=#{zflb}
+		</if>
+		<if test="zdmj1 !=null and zdmj1!=''and zdmj2 !=null and zdmj2!=''">
+			and a.zdmj between #{zdmj1} and #{zdmj2}
+		</if>
+		<if test="zdmj !=null and zdmj!='' ">
+			and a.zdmj =#{zdmj}
+		</if>
+		<if test="jzmj1 !=null and jzmj1!=''and jzmj2 !=null and jzmj2!=''">
+			and a.jzmj between #{jzmj1} and #{jzmj2}
+		</if>
+		<if test="jzmj !=null and jzmj!='' ">
+			and a.jzmj =#{jzmj}
+		</if>
+		<if test="xzjd !=null and xzjd!=''">
+			and a.xzjd=#{xzjd}
+		</if>
+		
+		<if test="level!=null and level!=''">
+			and c.level =#{level}
+		</if>
+		<if test="tdxz !=null and tdxz!=''">
+			and a.tdxz=#{tdxz}
+		</if>
+		
+		<if test="ssc !=null and ssc!=''">
+			and a.ssc=#{ssc}
+		</if>
+		<if test="mph !=null and mph!=''">
+			and a.mph=#{mph}
+		</if>
+		<if test="cs !=null and cs!=''">
+			and a.cs=#{cs}
+		</if>
+ 
+		<if test="js1 !=null and js1!='' and  js2 !=null and js2!=''">
+			and a.js between #{js1} and #{js2}
+		</if>
+		<if test="js !=null and js!='' ">
+			and a.js =#{js}
+		</if>
+		<if test="Endtime != null ">
+			AND b.dismantle_time &lt;= #{Endtime}
+		</if>
+
+		<!-- 吴老铁传过来的年月判断-->
+		<if test="day!=null and day!='' ">
+			AND  DATE_FORMAT(c.date,'%Y/%m/%d')= #{day}		
+		</if>
+		<if test="month!=null and month!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m')= #{month}		
+		</if>
+		<if test="year!=null and year!='' ">
+			 AND YEAR(b.dismantle_time) = #{year}
+		</if>
+		<if test="day=='' or month=='' or year=='' ">
+			AND c.date is null
+		</if>
+		
+		<if test="dismantle_timeday!=null and dismantle_timeday!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m/%d')= #{dismantle_timeday}		
+		</if>
+		<if test="dismantle_timemonth!=null and dismantle_timemonth!='' ">
+			AND  DATE_FORMAT(b.dismantle_time,'%Y/%m')= #{dismantle_timemonth}		
+		</if>
+		<if test="dismantle_timeyear!=null and dismantle_timeyear!='' ">
+			 AND YEAR(b.dismantle_time) = #{dismantle_timeyear}
+		</if>
+		<if test="dismantle_timeday=='' or dismantle_timemonth=='' or dismantle_timeyear=='' ">
+			AND b.dismantle_time is null
+		</if>
+		
+		<if test="reform_timeday!=null and reform_timeday!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m/%d')= #{reform_timeday}		
+		</if>
+		<if test="reform_timemonth!=null and reform_timemonth!='' ">
+			AND  DATE_FORMAT(b.reform_time,'%Y/%m')= #{reform_timemonth}		
+		</if>
+		<if test="reform_timeyear!=null and reform_timeyear!='' ">
+			 AND YEAR(b.reform_time) = #{reform_timeyear}
+		</if>
+		<if test="reform_timeday=='' or reform_timemonth=='' or reform_timeyear=='' ">
+			AND b.reform_time is null
+		</if>
+				
+		<if test="complete_timeday!=null and complete_timeday!=''">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m/%d')= #{complete_timeday}		
+		</if>
+		<if test="complete_timemonth!=null and complete_timemonth!=''">
+			AND  DATE_FORMAT(b.complete_time,'%Y/%m')= #{complete_timemonth}		
+		</if>
+		<if test="complete_timeyear!=null and complete_timeyear!=''">
+			 AND YEAR(b.complete_time) = #{complete_timeyear}
+		</if>
+		<if test="complete_timeday=='' or complete_timemonth=='' or complete_timeyear=='' ">
+			AND b.complete_time is null
+		</if>
+		order by b.dismantle_time desc
+	</select>
+
+	<!-- 历史回溯属性更新 -->
+	<update id="historyUpdate" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		UPDATE house
+		SET
+		cs =
+		#{cs},
+		js = #{js},
+		jzmj = #{jzmj},
+		mph = #{mph},
+		ssc =
+		#{ssc},
+		xzjd =
+		#{xzjd},
+		zdmj = #{zdmj},
+		zflb = #{zflb},
+		zfsyqk = #{zfsyqk}
+		WHERE
+		bh =
+		#{bh}
+
+	</update>
+	<update id="historyUpdate1" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+		UPDATE house_disposes
+		SET
+		dismantle_time= #{dismantle_time},
+		reform_time = #{reform_time}
+		WHERE
+		house_code = #{bh}
+
+	</update>
+
+
+	<!-- 报表统计 -->
+	<select id="statis" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		select count(*) as counts,
+		<if test="ybnb != null and ybnb=='yb' and zt !=null and zt==1">
+			DATE_FORMAT(jd.date,'%Y/%m') as month,
+		</if>
+		<if test="ybnb != null and ybnb=='nb' and zt !=null and zt==1">
+			YEAR(jd.date) as year,
+		</if>
+		<if test="ybnb != null and ybnb=='yb' and zt !=null and zt==2">
+			DATE_FORMAT(hd.dismantle_time,'%Y/%m') as dismantle_timemonth,
+		</if>
+		<if test="ybnb != null and ybnb=='nb' and zt !=null and zt==2">
+			YEAR(hd.dismantle_time) as dismantle_timeyear,
+		</if>
+		dh.xzjd as xzjd,jd.level as dangerLevel
+		from decrepithouse.house dh
+		left join
+		decrepithouse.house_identification jd
+		on
+		dh.bh=jd.house_code
+		left join
+		decrepithouse.house_disposes hd
+		on
+		dh.bh=hd.house_code
+		where
+		1=1
+		<if test="Startime != null and zt !=null and zt==1">
+			and date(jd.date) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==1">
+			and date(jd.date)&lt;= #{Endtime}
+		</if>
+		<if test="Startime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time)&lt;= #{Endtime}
+		</if>
+		<if test="zt != null">
+			and dh.zt=#{zt}
+		</if>
+		<if test="tdxz !=null and tdxz !=''">
+			and dh.tdxz like concat ('%',#{tdxz},'%')
+		</if>
+		<if test="ybnb != null and ybnb=='yb' and zt !=null and zt==1">
+			group by month
+		</if>
+		<if test="ybnb != null and ybnb=='yb' and zt !=null and zt==2">
+			group by dismantle_timemonth
+		</if>
+		<if test="ybnb != null and ybnb=='nb' and zt !=null and zt==1">
+			group by year
+		</if>
+		<if test="ybnb != null and ybnb=='nb' and zt !=null and zt==2">
+			group by dismantle_timeyear
+		</if>
+		<if test="xzjd != null and xzjd !=''">
+			,xzjd
+		</if>
+		<if test="dangerLevel !=null and dangerLevel !=''">
+			,dangerLevel
+		</if>
+	</select>
+	
+   	<select id="countStatic" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		from decrepithouse.house dh
+		left join
+		decrepithouse.house_identification jd
+		on
+		dh.bh=jd.house_code
+		left join
+		decrepithouse.house_disposes hd
+		on
+		dh.bh=hd.house_code
+		where
+		 1=1
+		<if test="Startime != null and zt !=null and zt==1">
+			and date(jd.date) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==1">
+			and date(jd.date)&lt;= #{Endtime}
+		</if>
+		<if test="Startime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time)&lt;= #{Endtime}
+		</if>
+		<if test="zt != null">
+			and dh.zt=#{zt}
+		</if>
+		<if test="tdxz !=null and tdxz !=''">
+			and dh.tdxz like concat ('%',#{tdxz},'%')
+		</if>
+		
+	</select>
+ 
+	
+	<!-- 综合统计 -->
+	<select id="integrative" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="com.wdkj.wf.house.entity.HouseEntity">
+		select count(*) as counts,
+		<if test="ybnb != null and ybnb=='day'">DATE_FORMAT(jd.date,'%Y/%m/%d') as day,</if>
+		<if test="ybnb != null and ybnb=='month'">DATE_FORMAT(jd.date,'%Y/%m') as month,</if>
+		<if test="ybnb != null and ybnb=='year'">YEAR(jd.date) as year,</if>
+
+		<if test="ybnb != null and ybnb=='day' and zt !=null and zt==2 ">DATE_FORMAT(hd.reform_time,'%Y/%m/%d') as reform_timeday,
+		</if>
+		<if test="ybnb != null and ybnb=='month' and zt !=null and zt==2">DATE_FORMAT(hd.reform_time,'%Y/%m') as reform_timemonth,
+		</if>
+		<if test="ybnb != null and ybnb=='year' and zt !=null and zt==2">YEAR(hd.reform_time) as reform_timeyear,</if>
+
+		<if test="ybnb != null and ybnb=='day' and zt !=null and zt==2">DATE_FORMAT(hd.dismantle_time,'%Y/%m/%d') as
+			dismantle_timeday,
+		</if>
+		<if test="ybnb != null and ybnb=='month' and zt !=null and zt==2">DATE_FORMAT(hd.dismantle_time,'%Y/%m') as
+			dismantle_timemonth,
+		</if>
+		<if test="ybnb != null and ybnb=='year' and zt !=null and zt==2">YEAR(hd.dismantle_time) as dismantle_timeyear,</if>
+
+		<if test="ybnb != null and ybnb=='day' and zt !=null and zt==2">DATE_FORMAT(hd.complete_time,'%Y/%m/%d') as
+			complete_timeday,
+		</if>
+		<if test="ybnb != null and ybnb=='month' and zt !=null and zt==2">DATE_FORMAT(hd.complete_time,'%Y/%m') as
+			complete_timemonth,
+		</if>
+		<if test="ybnb != null and ybnb=='year' and zt !=null and zt==2">YEAR(hd.complete_time) as complete_timeyear,</if>
+		<if test="reform_type != null and reform_type !='' and zt !=null and zt==2">hd.reform_type as reform_type,</if>
+
+
+		dh.jznd as jznd,
+		dh.zflb as zflb,
+		dh.cs as cs,
+		dh.jzmj as jzmj,
+		dh.js as
+		js,
+		dh.zdmj as zdmj,
+		dh.zfsyqk as zfsyqk,
+		dh.jglx as jglx,
+		dh.xzjd as
+		xzjd,
+		dh.ssc as ssc,
+		jd.level as dangerLevel
+
+
+		from decrepithouse.house dh
+		left join decrepithouse.house_identification jd
+		on dh.bh=jd.house_code
+		left
+		join decrepithouse.house_disposes hd
+		on dh.bh=hd.house_code
+		where
+		1=1
+		<if test="Startime != null and zt !=null and zt==1">
+			and date(jd.date) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==1">
+			and date(jd.date)&lt;= #{Endtime}
+		</if>
+		<if test="Startime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time)&lt;= #{Endtime}
+		</if>
+		<if test="zt != null">
+			and dh.zt=#{zt}
+		</if>
+		<if test="tdxz !=null and tdxz !=''">
+			and dh.tdxz like concat ('%',#{tdxz},'%')
+		</if>
+		group by zt
+		<if test="day != null ">
+			,day
+		</if>
+		<if test="month != null ">
+		 	,month
+		</if>
+		<if test="year != null ">
+			,year
+		</if>
+
+		<if test="jznd != null and jznd !=''">
+			,jznd
+		</if>
+		<if test="zflb != null and zflb !=''">
+			,zflb
+		</if>
+		<if test="cs != null and cs != ''">
+			,cs
+		</if>
+		<if test="jzmj != null">
+			,jzmj
+		</if>
+		<if test="js != null">
+			,js
+		</if>
+		<if test="zdmj != null">
+			,zdmj
+		</if>
+		<if test="zfsyqk != null and zfsyqk != ''">
+			,zfsyqk
+		</if>
+		<if test="jglx != null and jglx != ''">
+			,jglx
+		</if>
+		<if test="xzjd != null and xzjd !=''">
+			,xzjd
+		</if>
+		<if test="ssc != null and ssc !=''">
+			,ssc
+		</if>
+		<if test="dangerLevel !=null and dangerLevel !=''">
+			,dangerLevel
+		</if>
+
+		<if test="reform_timeday !=null and reform_timeday !=''">
+			,reform_timeday
+		</if>
+		<if test="reform_timemonth !=null and reform_timemonth !=''">
+			,reform_timemonth
+		</if>
+		<if test="reform_timeyear !=null and reform_timeyear !=''">
+			,reform_timeyear
+		</if>
+
+
+		<if test="dismantle_timeday !=null and dismantle_timeday !=''">
+			,dismantle_timeday
+		</if>
+		<if test="dismantle_timemonth !=null and dismantle_timemonth !=''">
+			,dismantle_timemonth
+		</if>
+		<if test="dismantle_timeyear !=null and dismantle_timeyear !=''">
+			,dismantle_timeyear
+		</if>
+
+		<if test="complete_timeday !=null and complete_timeday !=''">
+			,complete_timeday
+		</if>
+		<if test="complete_timemonth !=null and complete_timemonth !=''">
+			,complete_timemonth
+		</if>
+		<if test="complete_timeyear !=null and complete_timeyear !=''">
+			,complete_timeyear
+		</if>
+
+		<if test="reform_type !=null and reform_type !=''">
+			,reform_type
+		</if>
+	</select>
+	
+		<!-- 综合统计 -->
+	<select id="countIntegrative" parameterType="com.wdkj.wf.house.entity.HouseEntity"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		from decrepithouse.house dh
+		left join
+		decrepithouse.house_identification jd
+		on
+		dh.bh=jd.house_code
+		left join
+		decrepithouse.house_disposes hd
+		on
+		dh.bh=hd.house_code
+		where
+		 1=1
+		<if test="Startime != null and zt !=null and zt==1">
+			and date(jd.date) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==1">
+			and date(jd.date)&lt;= #{Endtime}
+		</if>
+		<if test="Startime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time) &gt;= #{Startime}
+		</if>
+		<if test="Endtime != null and zt !=null and zt==2">
+			and date(hd.dismantle_time)&lt;= #{Endtime}
+		</if>
+		<if test="zt != null">
+			and dh.zt=#{zt}
+		</if>
+		<if test="tdxz !=null and tdxz !=''">
+			and dh.tdxz like concat ('%',#{tdxz},'%')
+		</if>
+		
+	</select>
+ 
+
+</mapper>

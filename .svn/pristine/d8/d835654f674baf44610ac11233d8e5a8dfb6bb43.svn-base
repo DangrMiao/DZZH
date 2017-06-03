@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseIdentificationMapper">
+    <!--表名 -->
+    <sql id="tableName">
+        house_identification
+    </sql>
+
+    <sql id="fields">
+        date, company, identifier, level, house_code,file,photos
+    </sql>
+
+    <resultMap id="resultMap" type="com.wdkj.wf.entity.house.HouseIdentifyEntity">
+        <id column="id" property="id"></id>
+        <result column="date" property="date"></result>
+        <result column="company" property="company"></result>
+        <result column="identifier" property="identifier"></result>
+        <result column="level" property="level"></result>
+        <result column="house_code" property="houseCode"></result>
+    </resultMap>
+
+    <select id="list" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM <include refid="tableName"></include>
+        where 1
+
+    </select>
+
+    <select id="getOne" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM <include refid="tableName"></include>
+        where 1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="houseCode != null">
+            and house_code = #{houseCode}
+        </if>
+    </select>
+    <!-- 新增 -->
+    <insert id="save" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity">
+        INSERT INTO <include refid="tableName"></include>
+        (
+        <include refid="fields"></include>
+        )
+        VALUES(
+            #{date},
+            #{company},
+            #{identifier},
+            #{level},
+            #{houseCode},
+            #{file},
+            #{photos}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity">
+        UPDATE decrepithouse.house_identification
+        SET
+            `date`=#{date},
+            company=#{company},
+            identifier=#{identifier},
+            `level`=#{level},
+            house_code=#{houseCode},
+            file=#{file},
+            photos=#{photos}
+        WHERE id=#{id};
+
+    </update>
+    
+       <update id="update1" parameterType="com.wdkj.wf.house.entity.HouseEntity">
+        UPDATE house
+         SET
+            zt=#{zt}
+        WHERE 
+         bh=#{houseCode}
+    </update>
+
+    <select id="page" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity" resultMap="resultMap">
+
+    </select>
+
+    <select id="count" parameterType="com.wdkj.wf.entity.house.HouseIdentifyEntity" resultType="java.lang.Integer">
+
+
+    </select>
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SettlementHistoryMapper">
+
+    <resultMap id="resultMap" type="com.wdkj.wf.entity.monitor.SettlementObHistory">
+        <id column="id" property="id"/>
+        <result column="point_id" property="pointId"/>
+        <result column="position_x" property="positionX"/>
+        <result column="position_y" property="positionY"/>
+        <result column="elevation" property="elevation"/>
+        <result column="user_id" property="userId"/>
+        <result column="record_time" property="recordTime"/>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
+        monitor_settlement_ob_history
+    </sql>
+
+    <!-- 字段 -->
+    <sql id="Field">
+        id, point_id, position_x, position_y, elevation, user_id, record_time
+    </sql>
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
+        #{pointId}, #{positionX}, #{positionY}, #{elevation}, #{userId}, #{recordTime}
+    </sql>
+
+    <!--插入数据-->
+    <insert id="insert" parameterType="com.wdkj.wf.entity.monitor.SettlementObHistory">
+        INSERT INTO decrepithouse.monitor_settlement_ob_history
+        (point_id, position_x, position_y, elevation, user_id, record_time)
+        VALUES(
+            <include refid="FieldValue"></include>
+        );
+    </insert>
+
+    <select id="list" parameterType="com.wdkj.wf.entity.monitor.SettlementObHistory" resultMap="resultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where  1=1
+        <if test="pointId != null">
+            and point_id = #{pointId}
+        </if>
+    </select>
+
+<select id="countHistories" parameterType="com.wdkj.wf.entity.monitor.SettlementObHistory" resultType="java.lang.Integer">
+		SELECT count(*)
+		from monitor_settlement_ob_history
+		where
+		1=1
+        <if test="pointId != null">
+            and point_id = #{pointId}
+        </if>
+	</select>
+
+    <select id="getOne" parameterType="com.wdkj.wf.entity.monitor.SettlementObHistory" resultMap="resultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where  1=1
+        and id = #{id}
+    </select>
+
+    <select id="getLastTimeOne" parameterType="com.wdkj.wf.entity.monitor.SettlementObHistory" resultMap="resultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where  1=1
+        and  point_id = #{pointId}
+        order by record_time desc
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,97 @@
+<div style="width:100%;height:100%">
+    <form role="form" id="add-settlement-form" class="form-horizontal">
+        <!-- #section:elements.form -->
+        <div class="form-group">
+            <label class="col-xs-4 control-label no-padding-right" for="form-field-1">房屋编号</label>
+            <div class="col-xs-8">
+                <label class="form-control-static" id="house-info-no">0</label>
+                <input type="hidden" name="houseId" id="add-settlement-form-houseId"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label no-padding-right" for="form-field-1">名称</label>
+            <div class="col-xs-8">
+                <input type="text" id="house-info-houseNo" placeholder="请输入观察点名称" class="col-xs-10 form-control" name="name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label no-padding-right" for="form-field-1">观测点横坐标(m)</label>
+            <div class="col-xs-8">
+                <input type="number" id="house-info-houseNo" placeholder="请输入横坐标" class="col-xs-10 form-control" name="positionX" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label no-padding-right" for="form-field-1">观测点纵坐标(m)</label>
+            <div class="col-xs-8">
+                <input type="number" id="house-info-houseNo" placeholder="请输入纵坐标" class="col-xs-10 form-control" name="positionY" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-xs-4 control-label no-padding-right" for="form-field-1">高程(m)</label>
+            <div class="col-xs-8">
+                <input type="number" id="house-info-houseNo" placeholder="请输入高程" class="col-xs-10 form-control" name="elevation" />
+            </div>
+        </div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-12" style="display: flex;justify-content: space-around;">
+                <button class="btn btn-info btn-sm" type="submit" id="settlement-add-points-btn">
+                    <i class="ace-icon fa fa-check bigger-110"></i>
+                    确定
+                </button>
+                <button class="btn btn-sm" type="reset">
+                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                    重置
+                </button>
+            </div>
+        </div>	
+    </form>
+</div>
+<script>
+    //debugger;
+    $(function(){
+        $('#add-settlement-form').validate({
+            showErrors: function(errorMap,errorList){
+                console.log("errorlist", errorList);
+                if(errorList && errorList.length && errorList.length > 0){
+                    var error = errorList[0];
+                    //debugger;
+                    //$('#house-info-panel .validate-tips-label').text(error.message);
+                }
+            },
+            submitHandler: function(form){
+                savePoint();
+            },
+            rules: {
+                // jzmj: "required",
+                // zdmj: "required",
+                // js: "required",
+                // cs: "required"
+            },
+            messages: {
+                // jzmj: "请输入建筑面积",
+                // zdmj: "请输入占地面积",
+                // js: "请输入间数",
+                // cs: "请输入层数"
+            }
+        });
+    });
+
+    //保存监测点
+    function savePoint(){
+        var params = FormUtils.getData("add-settlement-form");
+        var select = $('#map-search-data').bootstrapTable('getSelections')[0];
+        params.houseId = select.id;
+        Ajax.postJson("settlementMonitor/point/save", params, function(data){
+            if(data.code > 0){
+                alert("保存成功！")
+            }else{
+               alert("保存失败！")
+            }
+        });
+    }
+</script>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+ <head>
+   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/> 
+   <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+   <script src='jquery.js' type="text/javascript" ></script>
+   <script src='../common/commonUtils.js' type="text/javascript" ></script>
+   <title>天地图</title>
+   <style>
+      *{
+	    padding:0;margin:30
+	 }
+   </style>
+   <script type="text/javascript" src="http://api.tianditu.com/api?v=4.0"></script>
+   <script>
+   var baseUrl = CommonUtils.getBasePath();
+   $().ready(function(){
+	   var id = getparam("id");
+
+         $.ajax({
+             type: "GET",
+             url: baseUrl + "house/directory/list_location.do?task_id="+id,//task_id关联task表中的id；
+             dataType: "json",
+             success: function(data){ 	 
+            	    var map;
+            		var zoom = 16;
+            		//初始化地图对象
+            		map = new T.Map('mapDiv');
+            		//设置显示地图的中心点和级别
+            		map.centerAndZoom(new T.LngLat(data.rows[0].x,data.rows[0].y), zoom);
+            		//创建标注对象 
+            	    var marker = new T.Marker(new T.LngLat(data.rows[0].x,data.rows[0].y)); 
+            	    //向地图上添加标注 
+            	    map.addOverLay(marker); 		            
+               }
+          });
+     }); 
+
+    function getparam(name) {
+	   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	    var r = this.location.search.substr(1).match(reg);
+	    if (r != null) {
+	        return unescape(r[2]);
+	    }
+	    return null;
+	}
+   </script>
+ </head>
+ <body>
+    <div id="content" style="position:absolute;width:100%; height:100%"></div>
+    <div id="mapDiv" style="position:absolute;width:100%; height:100%"></div>
+ </body>
+</html>  
+

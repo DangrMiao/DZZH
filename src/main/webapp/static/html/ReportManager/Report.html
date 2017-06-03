@@ -1,0 +1,148 @@
+
+<!-- 报表html -->
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script type="text/javascript" src="../../ace/js/jquery.js"></script>
+<link rel="stylesheet" href="../../ace/css/bootstrap.css">
+<link rel="stylesheet" href="../../ace/css/bootstrap-table.min.css">
+<!-- 表单 -->
+<link rel="stylesheet" href="../../css/form.css">
+<!-- 日期框 -->
+<script src="../../ace/js/bootbox.js"></script>
+<!-- <script type="text/javascript" src="../../ace/js/jquery.js"></script> -->	
+<script src="../../ace/js/bootstrap.js"></script>
+<!-- <script src="../../ace/js/ace/ace.js"></script> -->
+<script src="../../ace/js/date-time/bootstrap-datepicker.js"></script>
+<script src="../../ace/js/date-time/daterangepicker.js"></script>
+<link rel="stylesheet" href="../../ace/css/datepicker.css" />
+<link rel="stylesheet" href="../../ace/css/daterangepicker.css" />
+<!-- 表格 -->	
+<script src="../../ace/js/dataTables/bootstrap-table.js"></script>
+<script src="../../ace/js/dataTables/bootstrap-table-zh-CN.js"></script>
+	
+<script src="../../js/common/commonUtils.js" type="text/javascript"></script>
+<script type="text/javascript" src="../../js/dist/echarts.js"></script>
+<script type="text/javascript" src="../../js/ReportManager/Config.js"></script>	
+<script type="text/javascript" src="../../js/ReportManager/Report.js"></script>
+<body>
+<div class="">
+	<div class="well" style="position: absolute;left: 5px;right: 0px;top: 10px;background-color: #6fb3e0;">		
+	    <form class="form-inline" id="report-form" role="form">
+	    	<label>起止时间：</label>
+	    	<div class="input-group" >
+				<input class="form-control date-picker" name="Startime" style="width: 160px;" type="text" placeholder="起始时间" data-date-format="yyyy-mm-dd" />							
+			</div>
+			<span>--</span>
+			<div class="input-group" style="padding-right: 20px;">
+				<input class="form-control date-picker" name="Endtime" style="width: 160px;" type="text" placeholder="结束时间" data-date-format="yyyy-mm-dd" />							
+			</div>
+			<div style="padding-right: 20px;" class="input-group">
+				<label>报表类型：</label>	
+				<div class="radio">
+					<label>
+						<input id="Report-radio-yb" checked="checked" name="ybnb" value="yb" type="radio" class="ace">
+						<span class="lbl">月报</span>
+					</label>
+				</div>	
+				<div class="radio">
+					<label>
+						<input id="Report-radio-nb" name="ybnb" value="nb" type="radio" class="ace">
+						<span class="lbl">年报</span>
+					</label>
+				</div>
+			</div>
+	    	<div style="padding-right: 20px;" class="input-group">
+				<label>土地性质：</label>
+				<div class="radio">
+					<label>
+						<input checked="checked" name="tdxz" value="" type="radio" class="ace">
+						<span class="lbl">全部</span>
+					</label>
+				</div>		
+				<div class="radio">
+					<label>
+						<input name="tdxz" type="radio" value="国有" class="ace">
+						<span class="lbl">国有</span>
+					</label>
+				</div>		
+				<div class="radio">
+					<label>
+						<input name="tdxz" type="radio" value="集体" class="ace">
+						<span class="lbl">集体</span>
+					</label>
+				</div>
+			</div>
+	    	<div class="input-group" style="display:inline;padding-right: 20px;">
+				<label>依据字段：</label>
+				<div class="checkbox" style="display:inline">
+					<label>
+						<input id="Report-checkbox-xz" name="xzjd" value="乡镇" type="checkbox" class="ace">
+						<span class="lbl">乡镇</span>
+					</label>
+				</div>
+				<div class="checkbox" style="display:inline">
+					<label>
+						<input id="Report-checkbox-dj" name="dangerLevel" value="等级" type="checkbox" class="ace">
+						<span class="lbl">等级</span>
+					</label>
+				</div>
+			</div>
+			<!-- <div class="input-group" style="padding-right: 20px;">
+				<div class="radio" style="display:inline">
+					<label>
+						<input id="Report-xsxq" name="xsxq" type="checkbox" class="ace">
+						<span class="lbl">显示详情</span>
+					</label>
+				</div>	
+			</div> -->
+			<div style="display:inline;padding-right: 20px;" class="">
+				<button id="Report-xztj-btn" type="button" style="margin-top: 5px;" class="btn btn-sm btn-success">新增统计</button>  
+		        <button id="Report-gztj-btn" type="button" style="margin-top: 5px;" class="btn btn-sm btn-success">改造统计</button>  
+			</div>
+	    </form>															
+	</div>
+	
+	<div id="Report-tb-div" style="position: absolute;top: 90px;left: 0px;right: 0px;bottom: 0px;">		
+		<div class="tj-And-chart Report-tj-div" id="Report-xztj-div" style="display: none;">						
+			<table id="Report-xztj" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">			
+			</table>
+			<div class="heading" id="Report-xztj-toorbar">  
+		        <button id="Report-xztj-toorbar-tb" type="button" class="btn btn-sm btn-success">查看图表</button>   	           
+	        </div>
+			<div id="Report-xztj-detail-div">
+				<table id="Report-xztj-detail" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
+				</table>
+			</div>
+			<div class="heading" id="Report-xztj-detail-toorbar" style="display: none;">  
+		        <button id="Report-xztj-detail-excel" type="button" class="btn btn-sm btn-success">导出详情</button>   	           
+	        </div>
+		</div>
+		<div class="tj-And-chart Report-tj-div" id="Report-gztj-div" style="display: none;">
+			<table id="Report-gztj" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
+			</table>
+			<div class="heading" id="Report-gztj-toorbar">  
+		        <button id="Report-gztj-toorbar-tb" type="button" class="btn btn-sm btn-success">查看图表</button>   	           
+	        </div>
+			<div id="Report-gztj-detail-div">
+				<table id="Report-gztj-detail" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
+				</table>
+			</div>
+			<div class="heading" id="Report-gztj-detail-toorbar" style="display: none;">  
+		        <button id="Report-gztj-detail-excel" type="button" class="btn btn-sm btn-success">导出详情</button>   	           
+	        </div>
+		</div>
+		<div class="heading tj-And-chart" id="Report-MyChart-btns" style="display: none;margin-top: 10px;">  
+	        <button id="Report-MyChart-bar" type="button" value="" class="btn btn-sm btn-success">柱状图</button>
+	        <button id="Report-MyChart-pie" type="button" value="" class="btn btn-sm btn-success">饼图</button>
+	        <!-- <button id="Report-MyChart-back" type="button" class="btn btn-sm btn-success">返回表格</button> -->
+        </div>
+		<div class="tj-And-chart" style="position: absolute;top: 40px;left: 0px;right: 0px;bottom: 0px;" id="Report-MyChart">
+			
+		</div>
+	</div>
+</div>
+			
+<script type="text/javascript">
+$(top.hangge());
+</script>
+</body>

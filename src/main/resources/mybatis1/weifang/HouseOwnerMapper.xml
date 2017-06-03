@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseOwnerMapper">
+    <!--表名 -->
+    <sql id="tableName">
+        decrepithouse.house_owner
+    </sql>
+
+    <sql id="fields">
+        id, name, `identity`, phonenum, house_code
+    </sql>
+
+    <resultMap id="resultMap" type="com.wdkj.wf.entity.house.HouseOwner">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="identity" property="identity"></result>
+        <result column="phonenum" property="phoneNum"></result>
+    </resultMap>
+
+    <select id="list" parameterType="com.wdkj.wf.entity.house.HouseOwner" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM <include refid="tableName"></include>
+        where 1
+
+    </select>
+
+    <select id="getOne" parameterType="com.wdkj.wf.entity.house.HouseOwner" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM decrepithouse.house_owner
+        where 1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+        <if test="houseCode != null and houseCode != '' ">
+            and house_code = #{houseCode}
+        </if>
+    </select>
+    <!-- 新增 -->
+    <insert id="save" parameterType="com.wdkj.wf.entity.house.HouseOwner">
+        INSERT INTO decrepithouse.house_owner
+        (
+            <include refid="fields"></include>
+        )
+        VALUES(
+            0,
+            #{name},
+            #{identity},
+            #{phoneNum},
+            #{houseCode}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.wdkj.wf.entity.house.HouseOwner">
+        UPDATE decrepithouse.house_owner
+        SET
+            name=#{name},
+            `identity`=#{identity},
+            phonenum=#{phoneNum}
+        WHERE id=#{id}
+
+    </update>
+
+    <select id="page" parameterType="com.wdkj.wf.entity.house.HouseOwner" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM decrepithouse.house_owner
+        where 1
+
+        <if test="start != null and rows != null">
+            limit #{rows} offset #{start}
+        </if>
+    </select>
+
+    <select id="count" parameterType="com.wdkj.wf.entity.house.HouseOwner" resultType="java.lang.Integer">
+        select count(*)
+        from
+        <include refid="tableName"></include>
+        where 1 = 1
+
+    </select>
+</mapper>

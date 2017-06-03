@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DepartMentMapper">
+	<!--表名 -->
+	<sql id="tableName">
+		OA_DEPARTMENT
+	</sql>
+	<!-- 字段 -->
+	<sql id="Field">
+		NAME,
+		NAME_EN,
+		BIANMA,
+		PARENT_ID,
+		HEADMAN,
+		TEL,
+		FUNCTIONS,
+		ADDRESS,
+		BZ,
+		DEPARTMENT_ID
+	</sql>
+	<!-- 字段值 -->
+	<sql id="FieldValue">
+		#{NAME},
+		#{NAME_EN},
+		#{BIANMA},
+		#{PARENT_ID},
+		#{HEADMAN},
+		#{TEL},
+		#{FUNCTIONS},
+		#{ADDRESS},
+		#{BZ},
+		#{DEPARTMENT_ID}
+	</sql>
+	<!-- 获取部门列表 -->
+	<select id="listdepartment" parameterType="com.wdkj.wf.house.entity.DepartMentEntity"
+		resultType="pd">
+		SELECT o.*,
+		s.NAME
+		as PARENT_NAME
+		FROM
+		oa_department o,sys_user
+		s WHERE
+		o.PARENT_ID=s.USER_ID
+		<if test="PARENT_ID != null and PARENT_ID != '' ">
+			and o.PARENT_ID = #{PARENT_ID}
+		</if>
+	</select>
+	<select id="listdpm" parameterType="pd" resultType="pd">
+	select DEPARTMENT_ID,NAME from oa_department where 1=1
+	</select>
+	<!-- 修改 -->
+	<update id="edit" parameterType="pd">
+		#{NAME},
+		update
+		<include refid="tableName"></include>
+		set
+		NAME = #{NAME},
+		NAME_EN = #{NAME_EN},
+		HEADMAN = #{HEADMAN},
+		BZ =
+		#{BZ},
+		TEL = #{TEL},
+		FUNCTIONS = #{FUNCTIONS},
+		ADDRESS = #{ADDRESS},
+		PARENT_ID=#{PARENT_ID},
+		BIANMA=#{BIANMA}
+		where
+		DEPARTMENT_ID =
+		#{DEPARTMENT_ID}
+	</update>
+	<!-- 部门任务统计 -->
+	<select id="listdptask" parameterType="com.wdkj.wf.house.entity.DepartMentEntity"
+		resultType="pd">
+		select
+		o.NAME,count(*) as count
+		from
+		oa_department o LEFT JOIN
+		sys_user s on s.DEPARTMENT_ID = o.DEPARTMENT_ID
+		LEFT join task t on
+		t.creator_id=s.USER_ID
+		where 1=1 GROUP BY o.NAME
+	</select>
+</mapper>

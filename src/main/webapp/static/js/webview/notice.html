@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/> 
+	<meta http-equiv=Content-Type content="text/html;charset=utf-8">
+	<script src='./jquery.js' type="text/javascript" ></script>
+	<script src='../common/commonUtils.js' type="text/javascript" ></script>
+	<style>
+    *{
+	    padding:0;margin:10
+	 }
+    body{
+		font:14px/24px "宋体";
+		color:#000
+	}
+	.tit{ 
+		font:normal 22px/35px "黑体";
+		color:#000;
+		text-align:center;
+	}
+	.con{ 
+		text-indent:2em;
+	}
+	p{
+	text-indent:2em;
+	}
+	.bz{
+	font-size:12px;
+	text-align:center
+	}
+	</style>
+<script>
+
+   var baseUrl = CommonUtils.getBasePath();
+   $(function(){
+	   var id = getparam("id");
+         $.ajax({
+             type: "GET",
+             url: baseUrl + "house/directory/list_content.do?bid="+id,
+            // data: data,
+             dataType: "json",
+             success: function(data){
+            	 //debugger; 
+                     $("#content").append(
+                             "<div class='tit'>" + data.rows[0].title+ "</div>" + 
+                             "<p class='bz'>发布时间:<em>"+data.rows[0].fbtime+"</em>;发布人:<em>"+ data.rows[0].name +"</em></p><hr/>" +
+                             "<div class='con'>" + data.rows[0].fblr + "</div>");         
+             }
+       });
+   }); 
+ 
+   function getparam(name) {
+	   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	    var r = this.location.search.substr(1).match(reg);
+	    if (r != null) {
+	        return unescape(r[2]);
+	    }
+	    return null;
+	}
+   
+   
+ /*
+  $().ready(
+		    function(){
+		        var json = {"title":"西兴街道","content":"3301004"};       
+		        	$("#content").append(
+                            "<div class='tit'>" + json.title+ "</div><hr/>" + 
+                            "<div class='con'>" + json.content + "</div>"); 
+		    }
+		    
+	); 
+   */
+</script>
+</head>
+<body>
+<div id="content" ></div>
+
+</body>
+
+</html>

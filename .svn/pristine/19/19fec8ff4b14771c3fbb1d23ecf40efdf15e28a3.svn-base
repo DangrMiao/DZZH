@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SettlementPointMapper">
+
+    <resultMap id="resultMap" type="com.wdkj.wf.entity.monitor.SettlementObPoint">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="house_id" property="houseId"/>
+    </resultMap>
+
+    <!--表名 -->
+    <sql id="tableName">
+        monitor_settlement_ob_point
+    </sql>
+
+    <!-- 字段 -->
+    <sql id="Field">
+        id, house_id, name,status
+    </sql>
+
+    <!-- 字段值 -->
+    <sql id="FieldValue">
+        #{houseId},#{name},#{status}
+    </sql>
+
+    <!--插入数据-->
+    <insert id="insert" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO decrepithouse.monitor_settlement_ob_point
+        (
+            <include refid="Field"></include>
+        )
+        VALUES(
+            0, <include refid="FieldValue"></include>
+        );
+    </insert>
+
+    <select id="list" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint" resultMap="resultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where  1=1
+        <if test="houseId != null">
+            and house_id = #{houseId}
+        </if>
+    </select>
+    <select id="countPoints" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint" resultType="java.lang.Integer">
+		SELECT count(*)
+		 from monitor_settlement_ob_point
+		where
+		1=1
+       <if test="houseId != null">
+            and house_id = #{houseId}
+        </if>
+	</select>
+	
+    <select id="getOne" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint" resultMap="resultMap">
+        select
+        <include refid="Field"></include>
+        from
+        <include refid="tableName"></include>
+        where  1=1
+        
+        and id = #{id}
+    </select>
+
+    <!--更新-->
+    <update id="update" parameterType="com.wdkj.wf.entity.monitor.SettlementObPoint">
+        UPDATE decrepithouse.monitor_settlement_ob_point
+        SET
+            name=#{name},
+            status=#{status},
+            slipspeed=#{slipSpeed, jdbcType=DOUBLE},
+            sedimentationspeed=#{sedimentationSpeed, jdbcType=DOUBLE}
+        WHERE id=#{id};
+    </update>
+</mapper>

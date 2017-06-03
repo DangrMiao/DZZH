@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HouseDisposesMapper">
+    <!--表名 -->
+    <sql id="tableName">
+        house_disposes
+    </sql>
+
+    <sql id="fields">
+        id, file, dismantle_time, reform_time, complete_time, reform_type, house_code
+    </sql>
+
+    <resultMap id="resultMap" type="com.wdkj.wf.entity.house.HouseDisposes">
+        <id column="id" property="id"></id>
+        <result column="file" property="file"></result>
+        <result column="dismantle_time" property="dismantleTime"></result>
+        <result column="reform_time" property="reformTime"></result>
+        <result column="complete_time" property="completeTime"></result>
+        <result column="reform_type" property="reformType"></result>
+        <result column="house_code" property="houseCode"></result>
+    </resultMap>
+
+    <select id="list" parameterType="com.wdkj.wf.entity.house.HouseDisposes" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM <include refid="tableName"></include>
+        where 1
+
+    </select>
+
+    <select id="getOne" parameterType="com.wdkj.wf.entity.house.HouseDisposes" resultMap="resultMap">
+        SELECT
+        <include refid="fields"></include>
+        FROM <include refid="tableName"></include>
+        where 1
+        <if test="id != null">
+            and id = #{id}
+        </if>
+    </select>
+    <!-- 新增 -->
+    <insert id="save" parameterType="com.wdkj.wf.entity.house.HouseDisposes">
+        INSERT INTO <include refid="tableName"></include>
+        (
+            <include refid="fields"></include>
+        )
+        VALUES(
+            0,
+            #{file},
+            #{dismantleTime},
+            #{reformTime},
+            #{completeTime},
+            #{reformType},
+            #{houseCode}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.wdkj.wf.entity.house.HouseDisposes">
+        UPDATE <include refid="tableName"></include>
+        SET
+        file = #{file},
+        dismantle_time = #{dismantleTime},
+        reform_time = #{reformTime},
+        complete_time = #{completeTime},
+        reform_type = #{reformType},
+        house_code = #{houseCode}
+        WHERE id=#{id}
+    </update>
+
+    
+</mapper>

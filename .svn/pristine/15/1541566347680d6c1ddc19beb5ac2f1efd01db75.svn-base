@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="WarnMapper">
+	<!--表名 -->
+<!-- 	<sql id="tableName">
+		bulltetin
+	</sql> -->
+	<!-- 阀值设定 -->
+    <select id="listWarn" parameterType="com.wdkj.wf.house.entity.WarnEntity" resultType="pd">
+    SELECT
+		 id,
+		 thresholdvalue,
+		 type
+
+    FROM monitor_warn_threshold
+    WHERE 1=1
+    </select>
+    		<!-- 综合统计 -->
+	<select id="countWarn" parameterType="com.wdkj.wf.house.entity.WarnEntity"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		from monitor_warn_threshold
+		where
+		 1=1
+
+		
+	</select>
+    
+   <update id="save" parameterType="com.wdkj.wf.house.entity.WarnEntity">
+		UPDATE monitor_warn_threshold AS a
+		SET 
+			a.thresholdvalue           =#{thresholdvalue},
+			a.type           		   =#{type}
+		WHERE 
+			a.id 		 			   =#{id}
+	</update>
+    
+    <!-- 预警危房 -->
+    <select id="listWarnHouse" parameterType="com.wdkj.wf.house.entity.WarnEntity" resultType="pd">
+		SELECT h.*,
+		(select thresholdvalue from monitor_warn_threshold where type = '沉降') as settlementValue,
+		(select thresholdvalue from monitor_warn_threshold where type = '滑移') as slipValue,
+		(SELECT sedimentationspeed FROM monitor_settlement_ob_point WHERE h.id = house_id order by sedimentationspeed desc limit 1) as sedimentationspeed,
+		(SELECT slipspeed FROM monitor_settlement_ob_point WHERE h.id = house_id order by slipspeed desc limit 1) as slipspeed,
+		(SELECT record_time
+		from monitor_settlement_ob_point point
+		left join monitor_settlement_ob_history history on history.point_id = point.id
+		WHERE h.id = house_id order by record_time desc limit 1) as record_time
+		FROM house h
+		WHERE
+		id in (select DISTINCT(house_id) from monitor_settlement_ob_point WHERE `status` = 1 )
+    </select>
+
+	<select id="countForWarnHouse" parameterType="com.wdkj.wf.house.entity.WarnEntity" resultType="java.lang.Integer">
+		select count(DISTINCT(house_id)) from monitor_settlement_ob_point WHERE `status` = 1
+	</select>
+</mapper>

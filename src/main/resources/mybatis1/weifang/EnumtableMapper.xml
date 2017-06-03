@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EnumtableMapper">
+
+	<!--表名 -->
+	<sql id="tableName">
+		enumtable
+	</sql>	
+	<!--获取街道信息 -->
+	<select id="findById" parameterType="com.wdkj.wf.house.entity.EnumtableEntity" resultType="com.wdkj.wf.house.entity.EnumtableEntity">
+		select
+	       *
+		   from
+		<include refid="tableName"></include>
+		where  1=1
+		<if test="areacode !=null and areacode !=''">
+ 			and	areacode   like  concat(  concat('%', #{areacode,jdbcType=VARCHAR}) , '%')
+ 		</if> 	
+	<if test="name !=null and name !=''">
+ 			and	name   like  concat(  concat('%', #{name,jdbcType=VARCHAR}) , '%')
+ 		</if> 	
+ 		<if test="maxrecord !=null and maxrecord !=''">
+ 			and	maxrecord   like  concat(  concat('%', #{maxrecord,jdbcType=INTEGER}) , '%')
+ 		</if> 	
+	</select>
+	
+	<!-- 查询枚举常量 -->
+	<select id="listAll" parameterType="com.wdkj.wf.house.entity.EnumtableEntity" resultType="pd">
+		select
+	      fieldName,enumvalue
+		   from
+		<include refid="tableName"></include>
+		where  1=1
+		 <if test="fieldName !=null and fieldName !=''">
+ 			and	fieldName   like  concat(  concat('%', #{fieldName,jdbcType=VARCHAR}) , '%')
+ 		</if> 	
+	<if test="tbName !=null and tbName !=''">
+ 			and	tbName   like  concat(  concat('%', #{tbName,jdbcType=VARCHAR}) , '%')
+ 		</if> 
+ 		order by fieldName desc			
+	</select>
+
+	<!-- 查询枚举常量 -->
+	<select id="list" parameterType="com.wdkj.wf.house.entity.EnumtableEntity" resultType="com.wdkj.wf.house.entity.EnumtableEntity">
+		select
+		fieldName,enumvalue
+		from
+		<include refid="tableName"></include>
+		where  1=1
+		<if test="fieldName !=null and fieldName !=''">
+			and	fieldName  = #{fieldName,jdbcType=VARCHAR}
+		</if>
+		<if test="tbName !=null and tbName !=''">
+			and	tbName   like  concat(  concat('%', #{tbName,jdbcType=VARCHAR}) , '%')
+		</if>
+	</select>
+</mapper>
