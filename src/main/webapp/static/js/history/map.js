@@ -3,11 +3,11 @@ var map = new T.Map("mapDiv");
 
 $(function() {
 	var iconMarkers=[];
-	var data = {zt:"2"};
+	//var data = {zt:"2"};
     $.ajax({
         type: "POST",
-        url: "house/history_list",
-        data:data,
+        url: "map/list_map",
+        //data:data,
         dataType: "json",
         success: function(data){ 
        		loadMap();
@@ -39,16 +39,16 @@ $(function() {
             });  
         	
         for (var i = 0; i < lnglats.length; i = i + 1) {
-    	    if (lnglats[i].reform_type == 0) {  
-	        	marker = new T.Marker(new T.LngLat(lnglats[i].x, lnglats[i].y), {icon: iconA});
+    	    if (lnglats[i].color == -1) {  
+	        	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconA});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);  
-            } else if (lnglats[i].reform_type == 1) {
-            	marker = new T.Marker(new T.LngLat(lnglats[i].x, lnglats[i].y), {icon: iconB});
+            } else if (lnglats[i].color == 1) {
+            	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconB});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);
-			} else if (lnglats[i].reform_type == 2) {
-            	marker = new T.Marker(new T.LngLat(lnglats[i].x, lnglats[i].y), {icon: iconC});
+			} else if (lnglats[i].color == 0) {
+            	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconC});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);
 			} 
@@ -56,10 +56,10 @@ $(function() {
     	    iconMarkers[i].id=i;
     	    iconMarkers[i].reform_type=lnglats[i].reform_type;
         } 
-        map.centerAndZoom(new T.LngLat(120.149920, 30.274190), 18);        
+        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 18);        
         var markers = new T.MarkerClusterer(map, {markers: iconMarkers}); 
         markers.setGridSize(150);
-        map.centerAndZoom(new T.LngLat(120.149920, 30.274190), 12);
+        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 12);
         markers.setMaxZoom(15);
        }    
         //console.log(iconMarkers); 

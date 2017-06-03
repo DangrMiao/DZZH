@@ -58,10 +58,10 @@
 	        <button id="map-search-data-toorbar-fwcz" type="button" class="btn btn-sm map-search-data-type">房屋处置</button>
 	          -->
 	          
-	        <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">房屋概况</button>  
-	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">属性更新</button>  
-	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">权利人</button> 
-	        <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  
+	        <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>  
+	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
+	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button> 
+	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
 	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
         </div>  
@@ -93,21 +93,21 @@
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelA.png"></img>
-			   <label class="col-xs-6 col-sm-6">原拆原建</label>
+			   <label class="col-xs-6 col-sm-6">治理中</label>
 		   </div>
 		   
 		   <%--修缮加固--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			 
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelB.png"></img>
-			   <label class="col-xs-6 col-sm-6">修缮加固</label>
+			   <label class="col-xs-6 col-sm-6">治理完成</label>
 		   </div>
 
 		   <%--拆除--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 		
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelC.png"></img>
-			   <label class="col-xs-6 col-sm-6">拆除</label>
+			   <label class="col-xs-6 col-sm-6">治理超时</label>
 		   </div>
 
 		</div><!-- .sidebar -->
@@ -119,66 +119,46 @@
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="fwgk-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">房屋概况</h5>
+				<h5 class="modal-title" id="">信息概况</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-test">
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">编号:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "bh" class="form-control" readonly="readonly"> 
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "strplancompletiontime" class="form-control" readonly="readonly"> 
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">住房类型:</label>
-						<input class="col-sm-6" style="height:26px" name = "zflb" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">层数:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "cs" class="form-control" readonly="readonly">
+						<label class="col-sm-5">地址:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">建筑面积（㎡）:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "jzmj" class="form-control" readonly="readonly">
+						<label class="col-sm-5">灾害类型:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" readonly="readonly">
 					</div>
 				  
 				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">间数:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "js" class="form-control" readonly="readonly">
+						<label class="col-sm-5">规模:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">占地面积（㎡）:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "zdmj" class="form-control" readonly="readonly">
+						<label class="col-sm-5">规模等级:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">住房使用情况:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "zfsyqk" class="form-control" readonly="readonly"> 
+						<label class="col-sm-5">稳定性:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" readonly="readonly"> 
 					</div>
 					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">乡镇街道:</label>
-						<input class="col-sm-6" style="height:26px" name = "xzjd" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">治理进度:</label>
+						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" readonly="readonly">
 					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">所属村:</label>
-						<input class="col-sm-6" style="height:26px" name = "ssc" type="text" class="form-control" readonly="readonly">
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">门牌号:</label>
-						<input class="col-sm-6" style="height:26px" name = "mph" type="text" class="form-control" readonly="readonly">
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">拆除时间:</label>
-						<input class="col-sm-6" style="height:26px" name = "dismantle_time" type="text" class="form-control" readonly="readonly">
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">改造时间:</label>
-						<input class="col-sm-6" style="height:26px" name = "reform_time" type="text" class="form-control" readonly="readonly">
-					</div>
+
 				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" id="history-photo-display" >房屋照片</button>	
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
@@ -190,64 +170,43 @@
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="sxgx-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">房屋概况</h5>
+				<h5 class="modal-title" id="">信息更新</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-sxgx">
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">编号:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "bh" class="form-control" readonly="readonly"> 
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "strplancompletiontime" class="form-control" > 
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">住房类型:</label>
-						<input class="col-sm-6" style="height:26px" name = "zflb" type="text" class="form-control">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">层数:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "cs" class="form-control" >
+						<label class="col-sm-5">地址:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control"  >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">建筑面积（㎡）:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "jzmj" class="form-control">
+						<label class="col-sm-5">灾害类型:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" >
 					</div>
 				  
 				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">间数:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "js" class="form-control" >
+						<label class="col-sm-5">规模:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">占地面积（㎡）:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "zdmj" class="form-control" >
+						<label class="col-sm-5">规模等级:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">住房使用情况:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "zfsyqk" class="form-control" > 
+						<label class="col-sm-5">稳定性:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
 					</div>
 					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">乡镇街道:</label>
-						<input class="col-sm-6" style="height:26px" name = "xzjd" type="text" class="form-control" >
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">所属村:</label>
-						<input class="col-sm-6" style="height:26px" name = "ssc" type="text" class="form-control" >
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">门牌号:</label>
-						<input class="col-sm-6" style="height:26px" name = "mph" type="text" class="form-control" >
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">拆除时间:</label>
-						<input class="col-sm-6 date-picker" name="dismantle_time" id="dismantle_time" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入拆除时间" />
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">改造时间:</label>
-						<input class="col-sm-6 date-picker" name="reform_time" id="reform_time" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入改造时间" />
-					</div>
-					<div class="modal-footer" style="text-align: center;margin-left:30px;background:white;">
-				     <button type="button" id="slhs-sxgx-submit" class="btn btn-primary ">更新</button>
+						<label class="col-sm-5">治理进度:</label>
+						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
 				</form>
 			</div>
@@ -287,7 +246,6 @@
 					</div>
 				</form>
 			</div>
-
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
@@ -514,79 +472,25 @@
 	<div id="search-form-group" class="row" style="position:absolute;height:70px;z-index:999;left:0px;right:0px;top:0px;display: block;">					
 		<form id="search-form-group-condition" class="form-inline search-form" role="form">
 			<div class="well" style="margin-top: -10px;">
-			  <!--  <div style="padding-right: 20px;" class="input-group">
-					<label class="search-label">建造年代:</label>
+			    <div style="padding-right: 20px;" class="input-group">
+					<label class="search-label">治理类型:</label>
 					<select name="jznd" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
-					    <option>40年代及之前</option>
-					    <option>50年代</option>
-					    <option>60年代</option>
-					    <option>70年代</option>
-					    <option>80年代</option>
-					    <option>90年代</option>
+					    <option>暂无</option>
+					    <option>搬迁避让</option>
+					    <option>工程治理</option>
+					  
 				    </select>
-		 	   </div> -->
+		 	   </div> 
 		 	   <div style="padding-right: 20px;" class="input-group">
-		 	    	<label class="search-label">住房类别:</label>
-					<select name="zflb" style="height: 25px;" class="selectpicker show-tick search-content">
-					    <option></option>
-					    <option>独门独院式</option>
-					    <option>其他</option>
-					    <option>联排式</option>
-					    <option>公寓式</option>
-				    </select>
-		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group number-group">
-		 	  	   <label class="search-label">层数:</label>
-		 	  	   <select name="cs" style="height: 25px;" class="selectpicker show-tick search-content">
-					    <option></option>
-					    <option>一层</option>
-					    <option>两层</option>
-					    <option>三层及以上</option>
-				    </select>
-		 	   </div>
-		 	   
-		 	   <div style="padding-right: 20px;" class="input-group number-group">
-		 	   	   <label class="search-label">间数:</label>
-		 	  	   <input type="number" style="height: 25px;" class="number" name="js1">
-		 	  	   <span>--</span>
-		 	  	   <input type="number" style="height: 25px;" class="number" name="js2">
-		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group number-group">
-		 	   	   <label class="search-label">占地面积(㎡):</label>
-		 	  	   <input type="number" style="height: 25px;" class="number" name="zdmj1">
-		 	  	   <span>--</span>
-		 	  	   <input type="number" style="height: 25px;" class="number" name="zdmj2">
-		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group">
-		 	   	   <label class="search-label">乡镇街道:</label>
+		 	   	   <label class="search-label">名称:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="xzjd">
 		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group">
+		 	  <!--  <div style="padding-right: 20px;" class="input-group">
 		 	   	   <label class="search-label">所属村:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="ssc">
-		 	   </div>		 	   		 	   
-
-		 	   <div style="padding-right: 20px;" class="input-group">
-		 	   		<label class="search-label">门牌号:</label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="mph">
-		 	   </div>
-		 	   
-		 	   <div style="padding-right: 20px;" class="input-group">
-		 	   	   <label class="search-label">改造情况:</label>
-					<select name="reform_type" style="height: 25px;" class="selectpicker show-tick search-content">
-					    <option></option>
-					    <option value="0">原拆原建</option>
-					    <option value="1">修缮加固</option>
-					    <option value="2">拆除</option>
-				    </select>
-		 	   </div>
-		 	   
-  		 	   <div style="padding-left: 20px;margin-left:30px" class="input-group"> 	  
-		 	   		<input class="date-picker" name="Startime" id="Startime" type="text" data-date-format="yyyy-mm-dd"  style="width:84px;height:24px;margin-left:8px;" placeholder="起始时间" title="开始" />
-                    <span class="">---</span>
-                    <input class="date-picker" name="Endtime" id="Endtime" type="text" data-date-format="yyyy-mm-dd"  style="width:84px;height:24px;margin-left:1px" placeholder="结束时间" title="结束"/>
-               </div>  		    
+		 	   </div>	 -->	 	   		 	   
+		    
 			    
 		 	   <div style="padding-right: 20px;margin-top: 5px;margin-left:-26px" class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">

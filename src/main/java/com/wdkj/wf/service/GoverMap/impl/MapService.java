@@ -91,5 +91,12 @@ public class MapService implements MapManager{
 		return datalist;
 	}
 
+
+	@Override
+	public Integer countList(hiddendanger params) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.getOne("goverMapDao.countList", params);
+	}
+
 	
 }

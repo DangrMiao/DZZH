@@ -1,8 +1,11 @@
 package com.wdkj.dzzh.entity.GoverMap;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class  hiddendanger {
+import com.weidekeji.common.entity.PagedEntity;
+
+public class  hiddendanger extends PagedEntity implements Serializable{
 	
 	public int id;
 	public String name;

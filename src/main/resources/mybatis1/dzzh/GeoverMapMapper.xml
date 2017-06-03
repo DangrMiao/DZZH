@@ -3,9 +3,24 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goverMapDao">
     <select id="list" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
-		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,g.`name` as governancetype ,h.thisstage,h.`completion`,h.plancompletiontime   as plancompletiontime ,h.plancompletiontime  as strplancompletiontime,h.x,h.y,h.govertype,h.scale,h.scalegrad
+		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,
+		g.`name` as governancetype ,h.thisstage,h.`completion`,
+		h.plancompletiontime   as plancompletiontime ,
+		h.plancompletiontime  as strplancompletiontime,
+		h.x,h.y,h.govertype,h.scale,h.scalegrad
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
     </select>
+    
+    <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		from hiddendanger h ,governancetype g  
+		where h.governancetype=g.id 
+	</select>
+    
     
 </mapper>

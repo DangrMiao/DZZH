@@ -14,7 +14,7 @@ var type = function(value,row){
 
 //初始化Table
 $('#map-search-data').bootstrapTable({
-    url: 'house/history_search',         //请求后台的URL（*）
+    url: 'map/list_map',         //请求后台的URL（*）
     method: 'get',                      //请求方式（*）
     toolbar: '#map-search-data-toorbar',                //工具按钮用哪个容器
     striped: true,                      //是否显示行间隔色
@@ -53,35 +53,35 @@ $('#map-search-data').bootstrapTable({
     },*/
     columns: [
     	{checkbox: true},
-    	{field: 'id',title: 'ID'}, 
-        {field: 'bh',title: '编号'}, 
-        {field: 'xzjd',title: '乡镇街道'}, 
-        {field: 'ssc',title: '所属村'},
-        {field: 'mph',title: '门牌号'}, 
-        {field: 'name',title: '户主'}, 
-        {field: 'identity',title: '身份证号'}, 
-        {field: 'phonenum',title: '联系电话'}, 
-        {field: 'date',title: '鉴定时间'},
-        {field: 'level',title: '鉴定等级'},
+    	{field: 'id',title: 'id'}, 
+        {field: 'name',title: '名称'}, 
+        {field: 'location',title: '地址'}, 
+        {field: 'governancetype',title: '治理类型'},
+        {field: 'govertype',title: '灾害类型'}, 
+        {field: 'scale',title: '规模'}, 
+        {field: 'scalegrad',title: '规模等级'}, 
+        {field: 'thisstage',title: '稳定性'}, 
+        {field: 'strplancompletiontime',title: '计划时间'},
+        //{field: 'level',title: '鉴定等级'},
         //{field: 'jznd',title: '建造年代'},
-        {field: 'zflb',title: '住房类别'}, 
-        {field: 'cs',title: '层数'}, 
-        {field: 'jzmj',title: '建筑面积'},
-        {field: 'js',title: '间数'}, 
-        {field: 'zdmj',title: '占地面积'}, 
-        {field: 'zfsyqk',title: '房屋使用情况'}, 
+        //{field: 'zflb',title: '住房类别'}, 
+        //{field: 'cs',title: '层数'}, 
+        //{field: 'jzmj',title: '建筑面积'},
+        //{field: 'js',title: '间数'}, 
+        //{field: 'zdmj',title: '占地面积'}, 
+        //{field: 'zfsyqk',title: '房屋使用情况'}, 
         //{field: 'wxdj',title: '危险性等级'}, 
        // {field: 'zt',title: '状态'},
-        {field: 'fcz',title: '房产证'}, 
-        {field: 'dismantle_time',title: '拆除时间'},
-        {field: 'reform_time',title: '改造时间'},  
-        {field: 'complete_time',title: '验收时间'},
-        {field: 'reform_type',title: '改造类型',formatter:type},
+        //{field: 'fcz',title: '房产证'}, 
+        //{field: 'dismantle_time',title: '拆除时间'},
+        //{field: 'reform_time',title: '改造时间'},  
+        //{field: 'complete_time',title: '验收时间'},
+        //{field: 'reform_type',title: '改造类型',formatter:type},
         
         //{field: 'tdxz',title: '土地性质'}, 
        
-        {field: 'x',title: 'X'},
-        {field: 'y',title: 'Y'}
+        //{field: 'x',title: 'X'},
+        //{field: 'y',title: 'Y'}
 
     ],
     dataType: 'json',
@@ -135,7 +135,7 @@ $(function(){
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
 		}
-		map.centerAndZoom(new T.LngLat(selections[0].x, selections[0].y), 16);
+		map.centerAndZoom(new T.LngLat(selections[0].x, selections[0].y), 12);
     	var icon1 = new T.Icon({ 
             iconUrl: "static/images/location.gif", 
             iconSize: new T.Point(40, 40), 
