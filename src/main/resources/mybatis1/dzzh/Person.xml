@@ -11,5 +11,22 @@
 			limit #{rows} offset #{start}
 		</if>
 	</select>
+	<select id="get_countperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="Integer">
+  		select count(1)
+  		from person
+		where `project_id` = #{id}
+	</select>
+	<insert id="add_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
+  		insert into person(`name`, `family`, `relocate_flag`, `relocate_time`, `project_id`, `level`)
+  		value(#{name}, #{family}, #{relocate_flag}, #{relocate_time}, #{project_id}, #{level})
+  	</insert>
+  	<update id="update_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
+  		update person set `name` = #{name}, `family` = #{family}, `relocate_flag` = #{relocate_flag}, `project_id` = #{project_id}, `level` = #l{evel} , `relocate_time` = #{relocate_time}
+		where `id` = #{id}
+  	</update>
+  	<delete id="delete_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
+  		delete from person
+		where `id` = #{id}
+  	</delete>
   	
 </mapper>
