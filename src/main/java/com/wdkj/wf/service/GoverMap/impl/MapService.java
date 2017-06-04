@@ -49,7 +49,58 @@ public class MapService implements MapManager{
 	  //}
 	  return degree + (minute*60+second)/3600.0;
 	 }
+	 /**
+	  * data表示形式转换为数值格式("yyyy-MM-dd");
+	  * 
+	  */
+	 public static void convertTodata(hiddendanger h)
+	 {
+		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 try {
+				h.setStrplancompletiontime(fmt.format(fmt.parse(h.getStrplancompletiontime())));//最小单位为秒
+			} catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
 	
+	 }
+	 
+	 /**
+	  * coordinate表示形式转换为数值格式120.22222;
+	  * 
+	  */
+	 public static void convertcoordinate(hiddendanger c)
+	 {
+		 String x=c.getX();
+		 if(x.contains("°"))
+		 {
+			 c.setXcoordinate(convertToAngle(x,c));
+		 }else{
+			 c.setXcoordinate(Double.parseDouble(x)/10000);
+		 }
+		 String y=c.getY();
+		 if(y.contains("°"))
+		 {
+			 c.setYcoordinate(convertToAngle(y,c));
+		 }else{
+			 c.setYcoordinate(Double.parseDouble(y)/10000);
+		 }
+		 
+	 }
+	 
+	 /**
+	  * coordinate表示形式转换为数值格式120.22222;
+	  * 
+	  */
+	 public static void setcolor(hiddendanger c)
+	 {
+		 int color =c.getPlancompletiontime().compareTo(new Date());
+		 if(c.getCompletion()>=100){c.setColor(1);}////蓝色代表任务已完成1
+		 else{
+			 if(color<=0){c.setColor(-1);}//红色代表任务未完成，期限已到-1
+			 else{c.setColor(0); }//黑色代表任务未完成，但期限未到0
+		 }
+		 
+	 }
 	
 	@Override
 	public List<hiddendanger> list(hiddendanger params) throws Exception {
@@ -58,36 +109,10 @@ public class MapService implements MapManager{
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		 for(int i=0;i<datalist.size();i++){
 			 c=datalist.get(i);
-			 try {
-					c.setStrplancompletiontime(fmt.format(fmt.parse(c.getStrplancompletiontime())));//最小单位为秒
-				} catch (java.text.ParseException e) {
-					e.printStackTrace();
-				}
-			 String x=c.getX();
-			 if(x.contains("°"))
-			 {
-				 c.setXcoordinate(convertToAngle(x,c));
-			 }else{
-				 c.setXcoordinate(Double.parseDouble(x)/10000);
-			 }
-			 String y=c.getY();
-			 if(y.contains("°"))
-			 {
-				 c.setYcoordinate(convertToAngle(y,c));
-			 }else{
-				 c.setYcoordinate(Double.parseDouble(y)/10000);
-			 }
-			 
-			 
-			 int color =c.getPlancompletiontime().compareTo(new Date());
-			 if(c.getCompletion()>=100){c.setColor(1);}////蓝色代表任务已完成1
-			 else{
-				 if(color<=0){c.setColor(-1);}//红色代表任务未完成，期限已到-1
-				 else{c.setColor(0); }//黑色代表任务未完成，但期限未到0
-			 }
+			 convertTodata(c);//日期转换为数值格式("yyyy-MM-dd");
+			 convertcoordinate(c);//坐标转换为数值格式，如120.222;
+			 setcolor(c);//设置颜色; 1蓝色已完成，    -1红色未完成，   ，0黑色正常
 			 } 
-		
-		
 		return datalist;
 	}
 

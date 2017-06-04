@@ -17,7 +17,7 @@
     
     <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
 		resultType="java.lang.Integer">
-		SELECT count(*)
+		SELECT count(*)  
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
 	</select>
