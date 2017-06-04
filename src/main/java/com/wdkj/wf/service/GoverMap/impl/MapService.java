@@ -106,7 +106,6 @@ public class MapService implements MapManager{
 	public List<hiddendanger> list(hiddendanger params) throws Exception {
 		List<hiddendanger> datalist= (List<hiddendanger> )dao.findForList("goverMapDao.list", params);		
 		hiddendanger c=new hiddendanger();
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		 for(int i=0;i<datalist.size();i++){
 			 c=datalist.get(i);
 			 convertTodata(c);//日期转换为数值格式("yyyy-MM-dd");
@@ -119,7 +118,6 @@ public class MapService implements MapManager{
 
 	@Override
 	public Integer countList(hiddendanger params) throws Exception {
-		// TODO Auto-generated method stub
 		return dao.getOne("goverMapDao.countList", params);
 	}
 

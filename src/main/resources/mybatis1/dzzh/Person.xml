@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PersonDao">
+<!--表名 -->
+	<select id="get_allperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.person">
+  		select `id`, `name`, `family`, `relocate_flag`, `relocate_time`, `project_id`, `level`
+		from person
+		where `project_id` = #{id}
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
+	</select>
+  	
+</mapper>

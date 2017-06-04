@@ -30,7 +30,6 @@
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
-		order by h.id
     </select>
     <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
 		resultType="java.lang.Integer">
