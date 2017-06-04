@@ -208,6 +208,9 @@
 						<label class="col-sm-5">治理进度:</label>
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
+					<div class="modal-footer" style="text-align:center;background:white;">
+ 						<button type="submit" class="btn btn-sm btn-info" id="save-submit">保存</button>	
+			        </div>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->

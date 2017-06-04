@@ -10,4 +10,6 @@ public interface MapManager {
 
 	Integer countList(hiddendanger params) throws Exception;
 
+	List<hiddendanger> listSearch(hiddendanger params) throws Exception;
+
 }

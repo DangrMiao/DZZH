@@ -39,12 +39,27 @@ public class GoverMapController extends BaseController {
 	@ResponseBody
 	public String map(hiddendanger params){
 		try {
-		System.out.println(params.getRows());
-		System.out.println(params.getStart());
-			List<hiddendanger> houseList = mapService.list(params);
-			
+
+			List<hiddendanger> mapList = mapService.list(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "成功", mapList));
+		} catch (Exception e) {
+			logger.error("查询发生错误", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
+	
+	/**
+	 *搜索和展示功能
+	 * @Param params
+	 * @return
+	 */
+	@RequestMapping(value = "/search_map", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String mapSearch(hiddendanger params){
+		try {
+			List<hiddendanger> List = mapService.listSearch(params);
 			int count = mapService.countList(params);
-			return JSONUtil.toJsonString(new PagedJsonResult(houseList, 1, "成功", count, params.getRows()));
+			return JSONUtil.toJsonString(new PagedJsonResult(List, 1, "成功", count, params.getRows()));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));

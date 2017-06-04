@@ -122,6 +122,20 @@ public class MapService implements MapManager{
 		// TODO Auto-generated method stub
 		return dao.getOne("goverMapDao.countList", params);
 	}
+	@Override
+	public List<hiddendanger> listSearch(hiddendanger params) throws Exception {
+		// TODO Auto-generated method stub
+		List<hiddendanger> datalist= (List<hiddendanger> )dao.findForList("goverMapDao.selectlist", params);		
+		hiddendanger c=new hiddendanger();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 for(int i=0;i<datalist.size();i++){
+			 c=datalist.get(i);
+			 convertTodata(c);//日期转换为数值格式("yyyy-MM-dd");
+			 convertcoordinate(c);//坐标转换为数值格式，如120.222;
+			 setcolor(c);//设置颜色; 1蓝色已完成，    -1红色未完成，   ，0黑色正常
+			 } 
+		return datalist;
+	}
 
 	
 }
