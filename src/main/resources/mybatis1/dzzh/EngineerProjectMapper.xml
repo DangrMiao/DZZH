@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EngineerprojectDao">
+<!--表名 -->
+	<select id="get_all_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject" resultType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
+  		select e.`id`, e.`name`, e.`progress`,e.`basicInfo`, e.`governanceInfo`, e.`remark`, e.`create_time`,e.hiddendanger_id,h.`name` as hiddendanger_name
+		from engineerproject e,hiddendanger h
+		where e.hiddendanger_id=h.id
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
+	</select>
+  	<select id="get_eng_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject" resultType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
+  		select e.`id`, e.`name`, e.`progress`,  e.`basicInfo`, e.`governanceInfo`, e.`remark`,  e.`create_time`,e.hiddendanger_id,h.`name` as hiddendanger_name
+		from engineerproject e,hiddendanger h 
+		where e.`id` = #{id} and e.hiddendanger_id=h.id
+  	</select>
+  	<insert id="add_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
+  		insert into engineerproject(`name`, `progress`, `basicInfo`, `governanceInfo`, `remark`, `create_time`,hiddendanger_id)
+  		value(#{name}, #{progress}, #{basicInfo}, #{governanceInfo}, #{remark}, #{create_time},#{hiddendanger_id})
+  	</insert>
+  	<update id="update_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
+  		update engineerproject
+  		set `name` = #{name}, `basicInfo` = #{basicInfo}, `governanceInfo` = #{governanceInfo}, `progress` = #{progress}, `remark` = #{remark},create_time=#{create_time}
+		where `id` = #{id}
+  	</update>
+  	<delete id="delete_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
+  		delete from engineerproject
+		where `id` = #{id}
+  	</delete>
+  	<!--表名 -->
+  	<select id="get_all_engcount" resultType="Integer">
+  		select count(1)
+  		from engineerproject e,hiddendanger h
+		where e.hiddendanger_id=h.id 
+  	</select>
+  	<!--得到没有治理项目的所有隐患点 -->
+  	<select id="getBlankHD" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+  		select *
+		from hiddendanger h
+		where h.id not in 
+		(select r.hiddendanger_id
+		from relocationproject r
+		)and  h.id not in 
+		(select e.hiddendanger_id
+		from engineerproject e
+		)
+  	</select>
+    
+</mapper>
