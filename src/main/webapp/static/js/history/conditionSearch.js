@@ -94,7 +94,7 @@ $('#map-search-data').bootstrapTable({
             params.rows = params.limit;
            
 			// 查询条件		
-			params.zdmj1 = (res.zdmj1 == '') ? "" : res.zdmj1;
+			/*params.zdmj1 = (res.zdmj1 == '') ? "" : res.zdmj1;
 			params.zdmj2 = (res.zdmj2 == '') ? "" : res.zdmj2;
 			params.cs= res.cs;
 			params.js1 = (res.js1 == '') ? "" : res.js1;
@@ -106,11 +106,13 @@ $('#map-search-data').bootstrapTable({
 			params.zflb = res.zflb;
 			params.Startime=res.Startime;
 			params.Endtime=res.Endtime;
-			params.zt=res.zt;
+			params.zt=res.zt;*/
 			 
             //params.bh = $("#bh").val();
             //params.startime = $("#Startime").val();
             //params.endtime = $("#Endtime").val();
+            params.jznd = res.jznd;
+			params.name=res.name;
            
         }
 

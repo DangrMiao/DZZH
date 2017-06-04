@@ -13,10 +13,11 @@
 		h.plancompletiontime  as strplancompletiontime,
 		h.x,h.y,h.govertype,h.scale,h.scalegrad
 		from hiddendanger h ,governancetype g  
-		where h.governancetype=g.id  and and h.name like concat('%', #name#, '%') and h.governancetype like concat('%', #governancetype#, '%')
+		where h.governancetype=g.id 
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
+		order by  h.id
     </select>
     
     <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
@@ -25,7 +26,7 @@
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
 	</select>
-	<select id="get_hd_by_id" parameterType="hiddendanger" resultType="hiddendanger">
+	<select id="get_hd_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		select id ,`name`, `location`,coordinate, `governancetype` as governancetypeid, `thisstage`, completion, `plancompletiontime` as strplancompletiontime
 		from hiddendanger 
 		where `id` = #{id}

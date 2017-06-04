@@ -476,15 +476,15 @@
 					<label class="search-label">治理类型:</label>
 					<select name="jznd" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
-					    <option>暂无</option>
-					    <option>搬迁避让</option>
-					    <option>工程治理</option>
+					    <option value="0">暂无</option>
+					    <option value="1">搬迁避让</option>
+					    <option value="2">工程治理</option>
 					  
 				    </select>
 		 	   </div> 
 		 	   <div style="padding-right: 20px;" class="input-group">
 		 	   	   <label class="search-label">名称:</label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="xzjd">
+		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
 		 	   </div>
 		 	  <!--  <div style="padding-right: 20px;" class="input-group">
 		 	   	   <label class="search-label">所属村:</label>
