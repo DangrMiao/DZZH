@@ -3,11 +3,11 @@ var map = new T.Map("mapDiv");
 
 $(function() {
 	var iconMarkers=[];
-	//var data = {zt:"2"};
+	//var data = {name:"",governancetype:""};
     $.ajax({
         type: "POST",
         url: "map/list_map",
-        //data:data,
+       // data:data,
         dataType: "json",
         success: function(data){ 
        		loadMap();

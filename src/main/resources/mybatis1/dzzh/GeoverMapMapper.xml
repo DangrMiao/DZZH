@@ -13,19 +13,32 @@
 		h.plancompletiontime  as strplancompletiontime,
 		h.x,h.y,h.govertype,h.scale,h.scalegrad
 		from hiddendanger h ,governancetype g  
-		where h.governancetype=g.id  and and h.name like concat('%', #name#, '%') and h.governancetype like concat('%', #governancetype#, '%')
+		where h.governancetype=g.id
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
+		order by h.id
     </select>
-    
+    <select id="selectlist" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,
+		g.`name` as governancetype ,h.thisstage,h.`completion`,
+		h.plancompletiontime   as plancompletiontime ,
+		h.plancompletiontime  as strplancompletiontime,
+		h.x,h.y,h.govertype,h.scale,h.scalegrad
+		from hiddendanger h ,governancetype g  
+		where h.governancetype=g.id and h.name like concat(concat('%', #{name}),'%') and h.governancetype like concat(concat('%', #{governancetype}),'%') 
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
+		order by h.id
+    </select>
     <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
 		resultType="java.lang.Integer">
 		SELECT count(*)  
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
 	</select>
-	<select id="get_hd_by_id" parameterType="hiddendanger" resultType="hiddendanger">
+	<select id="get_hd_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		select id ,`name`, `location`,coordinate, `governancetype` as governancetypeid, `thisstage`, completion, `plancompletiontime` as strplancompletiontime
 		from hiddendanger 
 		where `id` = #{id}

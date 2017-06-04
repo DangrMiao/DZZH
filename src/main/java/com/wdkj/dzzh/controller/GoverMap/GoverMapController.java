@@ -41,6 +41,8 @@ public class GoverMapController extends BaseController {
 		try {
 		System.out.println(params.getRows());
 		System.out.println(params.getStart());
+		//params.setName("");
+		//params.setGovernancetype("");
 			List<hiddendanger> houseList = mapService.list(params);
 			
 			int count = mapService.countList(params);
