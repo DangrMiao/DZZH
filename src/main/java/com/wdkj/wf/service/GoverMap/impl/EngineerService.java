@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.fh.dao.DaoSupport;
 import com.wdkj.dzzh.entity.GoverMap.engineerproject;
+import com.wdkj.dzzh.entity.GoverMap.hiddendanger;
 import com.wdkj.dzzh.service.GoverMap.EngineerManager;
 @Service("EngineerService")
 @SuppressWarnings("all")
@@ -43,6 +44,19 @@ public class EngineerService implements EngineerManager{
 	@Override
 	public Integer countList(engineerproject params) throws Exception {
 		return dao.getOne("EngineerprojectDao.get_all_engcount", params);
+	}
+
+
+	@Override
+	public void addEngineer(engineerproject params) throws Exception {
+		dao.insert("EngineerprojectDao.add_eng", params);
+		
+	}
+
+
+	@Override
+	public void updatehdgovertype(hiddendanger params) throws Exception {
+		dao.update("goverMapDao.updateHDgid", params);
 	}
 
 }

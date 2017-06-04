@@ -46,4 +46,17 @@ public class RelocationService  implements RelocationManager{
 		return dao.getOne("RelocationProjectDao.get_all_rpcount", params);
 	}
 
+
+	@Override
+	public void addRelocation(relocationProject params) throws Exception {
+		dao.insert("RelocationProjectDao.add_rp", params);
+		
+	}
+
+
+	@Override
+	public void updatehdgovertype(hiddendanger params) throws Exception {
+		dao.update("goverMapDao.updateHDgid", params);
+	}
+
 }

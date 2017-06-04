@@ -40,5 +40,22 @@ public class RelocationController  extends BaseController {
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
 		}
 	}
+	
+	@RequestMapping(value = "/add_relocationProject", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add_relocationProject(relocationProject params){
+		try {
+		
+			RelocationService.addRelocation(params);
+			hiddendanger h=new hiddendanger();
+			h.setId(params.getHiddendanger_id());
+			h.setGovernancetypeid(1);
+			RelocationService.updatehdgovertype(h);
+			return JSONUtil.toJsonString(new PagedJsonResult(params, 1, "成功", 1, params.getRows()));
+		} catch (Exception e) {
+			logger.error("查询发生错误", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
 
 }

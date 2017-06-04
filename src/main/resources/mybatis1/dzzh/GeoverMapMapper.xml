@@ -38,6 +38,10 @@
 		from hiddendanger 
 		where `id` = #{id}
   	</select>
+  	<update id="updateHDgid" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+  		update hiddendanger set  `governancetype` = #{governancetypeid}
+		where `id` = #{id}
+  	</update>
     <insert id="addhiddendanger" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		insert into hiddendanger(`name`, `location`,coordinate, `governancetype`, `thisstage`, completion, `plancompletiontime`,govertype,scale,scalegrad)
   		value(#{name}, #{location}, #{coordinate},#{governancetypeid}, #{thisstage},#{completion},#{strplancompletiontime},#{govertype},#{scale},#{scalegrad})
