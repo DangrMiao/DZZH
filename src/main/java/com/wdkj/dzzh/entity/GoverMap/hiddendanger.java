@@ -7,13 +7,13 @@ import com.weidekeji.common.entity.PagedEntity;
 
 public class  hiddendanger extends PagedEntity implements Serializable{
 	
-	public int id;
-	public String name;
+	public int id;////////////////
+	public String name;///////////////
 	public String coordinate;
 	private double xcoordinate;
 	private double ycoordinate;
-	public String location;
-	public String governancetype;
+	public String location;///////////////////
+	public String governancetype;/////////////////
 	public int governancetypeid;
 	public int getGovernancetypeid() {
 		return governancetypeid;
@@ -21,19 +21,19 @@ public class  hiddendanger extends PagedEntity implements Serializable{
 	public void setGovernancetypeid(int governancetypeid) {
 		this.governancetypeid = governancetypeid;
 	}
-	public String thisstage;
-	public int completion;
+	public String thisstage;//////////////////
+	public int completion;///////////////////
 	public Date plancompletiontime;
-	public String  strplancompletiontime;
+	public String  strplancompletiontime;///////////
 	public String  type;
 	
 	public String  x;
 	public String  y;
-	public String  govertype;
-	public String  scale;
-	public String  scalegrad;
-	public String  district;
-	public String  Township;
+	public String  govertype;///////////////////
+	public String  scale;////////////////////
+	public String  scalegrad;/////////////////////
+	public String  district;////////////////////
+	public String  Township;////////////////////////
 	
 	
 	public String getDistrict() {

@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goverMapDao">
+<!--表名 -->
+	<sql id="tableName">
+		hiddendanger
+	</sql>
     <select id="list" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
 		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,
 		g.`name` as governancetype ,h.thisstage,h.`completion`,
@@ -9,7 +13,7 @@
 		h.plancompletiontime  as strplancompletiontime,
 		h.x,h.y,h.govertype,h.scale,h.scalegrad
 		from hiddendanger h ,governancetype g  
-		where h.governancetype=g.id 
+		where h.governancetype=g.id  and and h.name like concat('%', #name#, '%') and h.governancetype like concat('%', #governancetype#, '%')
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
@@ -21,6 +25,21 @@
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
 	</select>
-    
+	<select id="get_hd_by_id" parameterType="hiddendanger" resultType="hiddendanger">
+  		select id ,`name`, `location`,coordinate, `governancetype` as governancetypeid, `thisstage`, completion, `plancompletiontime` as strplancompletiontime
+		from hiddendanger 
+		where `id` = #{id}
+  	</select>
+    <insert id="addhiddendanger" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+  		insert into hiddendanger(`name`, `location`,coordinate, `governancetype`, `thisstage`, completion, `plancompletiontime`,govertype,scale,scalegrad)
+  		value(#{name}, #{location}, #{coordinate},#{governancetypeid}, #{thisstage},#{completion},#{strplancompletiontime},#{govertype},#{scale},#{scalegrad})
+  	</insert>
+  	
+<!--   	 <delete id="deleteList_hiddendanger" parameterType="java.util.List">
+  		delete from
+  		<include refid="tableName"></include>
+  		where id in
+		
+  	</delete> -->
     
 </mapper>
