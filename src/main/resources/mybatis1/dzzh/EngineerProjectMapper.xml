@@ -4,13 +4,26 @@
 <mapper namespace="EngineerprojectDao">
 <!--表名 -->
 	<select id="get_all_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject" resultType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
-  		select e.`id`, e.`name`, e.`progress`,e.`basicInfo`, e.`governanceInfo`, e.`remark`, e.`create_time`,e.hiddendanger_id,h.`name` as hiddendanger_name
+  		select e.`id`, e.`name`, e.`progress`,e.`basicInfo`, e.`governanceInfo`, e.`remark`, e.`create_time`,e.hiddendanger_id, h.`completion`,h.plancompletiontime  as plancompletiontime ,h.plancompletiontime  as strplancompletiontime,h.x,h.y,h.`name` as hiddendanger_name
 		from engineerproject e,hiddendanger h
 		where e.hiddendanger_id=h.id
+		<if test="name!=null and name!=''">
+			AND e.name like concat('%', #{name},'%')
+		</if>
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
 	</select>
+	  	<!--表名 -->
+  	<select id="get_all_engcount" resultType="Integer">
+  		select count(1)
+  		from engineerproject e,hiddendanger h
+		where e.hiddendanger_id=h.id 
+		<if test="name!=null and name!=''">
+			AND e.name like concat('%', #{name},'%')
+		</if>
+  	</select>
+  	
   	<select id="get_eng_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject" resultType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		select e.`id`, e.`name`, e.`progress`,  e.`basicInfo`, e.`governanceInfo`, e.`remark`,  e.`create_time`,e.hiddendanger_id,h.`name` as hiddendanger_name
 		from engineerproject e,hiddendanger h 
@@ -23,18 +36,13 @@
   	<update id="update_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		update engineerproject
   		set `name` = #{name}, `basicInfo` = #{basicInfo}, `governanceInfo` = #{governanceInfo}, `progress` = #{progress}, `remark` = #{remark},create_time=#{create_time}
-		where `id` = #{id}
+		where id = #{id}
   	</update>
   	<delete id="delete_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		delete from engineerproject
 		where `id` = #{id}
   	</delete>
-  	<!--表名 -->
-  	<select id="get_all_engcount" resultType="Integer">
-  		select count(1)
-  		from engineerproject e,hiddendanger h
-		where e.hiddendanger_id=h.id 
-  	</select>
+
   	<!--得到没有治理项目的所有隐患点 -->
   	<select id="getBlankHD" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		select *

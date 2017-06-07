@@ -5,13 +5,27 @@
 <!--表名 -->
 	<!--得到所有搬迁项目 -->
 	<select id="get_all_rp" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
-  		select r.`id`, r.`name`, r.`progress`,r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`,r.`create_time`,r.hiddendanger_id,h.`name` as hiddendanger_name
+  		select r.`id`, r.`name`, h.`completion`,h.plancompletiontime  as plancompletiontime ,h.plancompletiontime  as strplancompletiontime,r.`progress`,r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`,r.`create_time`,r.hiddendanger_id,h.x,h.y,h.`name` as hiddendanger_name
 		from relocationproject r,hiddendanger h
 		where r.hiddendanger_id=h.id   
+		<if test="name!=null and name!=''">
+			AND r.name like concat('%', #{name},'%')
+		</if>
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
 	</select>
+	  	<!--得到搬迁项目总数 -->
+    <select id="get_all_rpcount" resultType="Integer">
+  		select count(1)
+  		from relocationproject r,hiddendanger h
+		where r.hiddendanger_id=h.id
+		<if test="name!=null and name!=''">
+			AND r.name like concat('%', #{name},'%')
+		</if>
+  	</select>
+  	
+  	
 	<!--根据id得到搬迁项目 -->
   	<select id="get_rp_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
   		select r.`id`, r.`name`, r.`progress`,  r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`, r.`create_time`,r.hiddendanger_id,h.`name` as hiddendanger_name
@@ -20,25 +34,20 @@
   	</select>
  	<!--增加搬迁项目 -->
   	<insert id="add_rp" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
-  		insert into relocationproject(`name`, `progress`, `basicInfo`, `governanceInfo`, `remark`, `headcount`, `create_time`,hiddendanger_id)
-  		value(#{name}, #{progress}, #{basicInfo}, #{governanceInfo}, #{remark}, #{headcount}, #{create_time},#{hiddendanger_id})
+  		insert into relocationproject(`name`, `progress`, `basicInfo`, `governanceInfo`, `remark`, `create_time`,hiddendanger_id)
+  		value(#{name}, #{progress}, #{basicInfo}, #{governanceInfo}, #{remark},#{create_time},#{hiddendanger_id})
   	</insert>
   	<!--根据id更新搬迁项目 -->
   	<update id="update_rp" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
-  		update relocationproject set `name` = #{name}, `basicInfo` = #{basicInfo}, `governanceInfo` = #{governanceInfo}, `remark` = #{remark},create_time=#{create_time}
-		where `id` = #{id}
+  		update relocationproject set `name` = #{name}, `basicInfo` = #{basicInfo}, `governanceInfo` = #{governanceInfo}, `progress` = #{progress},`remark` = #{remark},create_time=#{create_time}
+		where id= #{id}
   	</update>
   		<!--根据id删除搬迁项目 -->
   	<delete id="delete_rp" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
   		delete from relocationproject
 		where `id` = #{id}
   	</delete>
-  		<!--得到搬迁项目总数 -->
-    <select id="get_all_rpcount" resultType="Integer">
-  		select count(1)
-  		from relocationproject r,hiddendanger h
-		where r.hiddendanger_id=h.id
-  	</select>
+
   	<!--得到没有治理项目的所有隐患点 -->
   	<select id="getBlankHD" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		select *

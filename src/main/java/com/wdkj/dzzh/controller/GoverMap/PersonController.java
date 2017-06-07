@@ -53,5 +53,16 @@ public class PersonController extends BaseController {
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
 		}
 	}
-
+	
+	@RequestMapping(value = "/update_person", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String update_person(person params){
+		try {
+			PersonService.updatePerson(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
+		} catch (Exception e) {
+			logger.error("查询发生错误", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
 }

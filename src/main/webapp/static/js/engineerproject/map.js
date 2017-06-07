@@ -6,7 +6,7 @@ $(function() {
 	//var data = {name:"",governancetype:""};
     $.ajax({
         type: "POST",
-        url: "map/list_map",
+        url: "engineer/list_engineerproject",
        // data:data,
         dataType: "json",
         success: function(data){ 

@@ -98,8 +98,7 @@ public class MapService implements MapManager{
 		 else{
 			 if(color<=0){c.setColor(-1);}//红色代表任务未完成，期限已到-1
 			 else{c.setColor(0); }//黑色代表任务未完成，但期限未到0
-		 }
-		 
+		 } 
 	 }
 	
 	@Override
@@ -134,6 +133,11 @@ public class MapService implements MapManager{
 			 } 
 		return datalist;
 	}
-
-	
+	//更新信息
+	@Override
+	public void updateMap(hiddendanger params) throws Exception{
+		// TODO Auto-generated method stub
+		dao.update("goverMapDao.updateMap", params);
+	}
+		
 }

@@ -176,7 +176,7 @@
 				<form class="form-horizontal" role="form" id ="form-sxgx">
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">计划时间:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "strplancompletiontime" class="form-control" > 
+						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">名称:</label>
@@ -209,7 +209,7 @@
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
 					<div class="modal-footer" style="text-align:center;background:white;">
- 						<button type="submit" class="btn btn-sm btn-info" id="save-submit">保存</button>	
+ 						<button type="button" class="btn btn-sm btn-info" id="save-submit">保存</button>	
 			        </div>
 				</form>
 			</div>
@@ -217,36 +217,52 @@
 	</div><!-- /.modal -->
 </div>
 
-<!-- 添加的模态框(鉴定结果) -->
+<!-- 添加的模态框(治理方案) -->
   <div class="modal fade" id="account-Manager-add-dialog-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="ckjdjg-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">房屋鉴定结果</h5>
+				<h5 class="modal-title" id="">添加治理方案</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-test-result">
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">编号:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "bh" class="form-control" readonly="readonly"> 
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">鉴定日期:</label>
-						<input class="col-sm-6" style="height:26px" name = "date" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+					</div>
+					
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">鉴定机构:</label>
-						<input class="col-sm-6" style="height:26px" name = "company" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+					</div>
+				  
+				    <div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">治理方式:</label>
+						<select style="height: 26px;width:171px" id="" name="governancetype" class="form-control" >
+				 	   		<option value="1">搬迁避让</option>
+				 	   		<option value="2">工程治理</option>
+		 	   		    </select>
+					</div>
+				 <div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">进度:</label>
+						<input class="col-sm-6" style="height:26px" name = "progress" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">鉴定人:</label>
-						<input class="col-sm-6" style="height:26px" name = "identifier" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
 					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">鉴定等级:</label>
-						<input class="col-sm-6" style="height:26px" name = "level" type="text" class="form-control" readonly="readonly">
-					</div>
+					<div class="modal-footer" style="text-align:center;background:white;">
+ 						<button type="button" class="btn btn-sm btn-info" id="add-save-submit">添加</button>	
+			        </div>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->
@@ -254,7 +270,7 @@
 </div>
 
 <!-- 添加的模态框(权利人) -->
-  <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--   <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
@@ -283,9 +299,9 @@
 				</form>
 			</div>
 
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
+		</div>/.modal-content
+	</div>/.modal
+</div> -->
  
  
  <!-- 添加的模态框(照片展示) -->
@@ -477,12 +493,11 @@
 			<div class="well" style="margin-top: -10px;">
 			    <div style="padding-right: 20px;" class="input-group">
 					<label class="search-label">治理类型:</label>
-					<select name="jznd" style="height: 25px;" class="selectpicker show-tick search-content">
+					<select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
 					    <option value="0">暂无</option>
 					    <option value="1">搬迁避让</option>
 					    <option value="2">工程治理</option>
-					  
 				    </select>
 		 	   </div> 
 		 	   <div style="padding-right: 20px;" class="input-group">
@@ -709,9 +724,9 @@
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../index/foot.jsp"%>
-
+<script type="text/javascript" src="static/ace/js/jquery.js"></script>
 	<!-- 删除时确认窗口 -->
-	<script src="static/ace/js/jquery.form.min.js"></script>
+ 	<!-- <script src="static/ace/js/jquery.form.min.js"></script>   -->
 	<script src="static/ace/js/bootbox.js"></script>
 	<script src="static/ace/js/bootstrap.js"></script>
 	<!-- ace scripts -->
@@ -736,6 +751,7 @@
 
 	<!-- 弹出提示消息 -->
 	<script src="static/html_UI/assets/js/jquery.gritter.js"></script>
+	<script src="static/bootstrap-growl/jquery.bootstrap-growl.js"></script>
 	<!-- jquery验证 -->
 	<script src="static/ace/js/jquery.validate.js"></script>
 	<!-- 表格 -->	

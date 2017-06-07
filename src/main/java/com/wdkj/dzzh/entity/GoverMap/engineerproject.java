@@ -1,6 +1,7 @@
 package com.wdkj.dzzh.entity.GoverMap;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.weidekeji.common.entity.PagedEntity;
 
@@ -17,7 +18,56 @@ public class engineerproject extends PagedEntity implements Serializable{
 	public String type;
 	public int hiddendanger_id;
 	public String hiddendanger_name;
+	public String  x;
+	public String  y;
+	private double xcoordinate;
+	private double ycoordinate;
+	public Date plancompletiontime;
+	public int completion;
+	public int color;
 	
+	public String getX() {
+		return x;
+	}
+	public void setX(String x) {
+		this.x = x;
+	}
+	public String getY() {
+		return y;
+	}
+	public void setY(String y) {
+		this.y = y;
+	}
+	public double getXcoordinate() {
+		return xcoordinate;
+	}
+	public void setXcoordinate(double xcoordinate) {
+		this.xcoordinate = xcoordinate;
+	}
+	public double getYcoordinate() {
+		return ycoordinate;
+	}
+	public void setYcoordinate(double ycoordinate) {
+		this.ycoordinate = ycoordinate;
+	}
+	public Date getPlancompletiontime() {
+		return plancompletiontime;
+	}
+	public void setPlancompletiontime(Date plancompletiontime) {
+		this.plancompletiontime = plancompletiontime;
+	}
+	public int getCompletion() {
+		return completion;
+	}
+	public void setCompletion(int completion) {
+		this.completion = completion;
+	}
+	public int getColor() {
+		return color;
+	}
+	public void setColor(int color) {
+		this.color = color;
+	}
 	public String getHiddendanger_name() {
 		return hiddendanger_name;
 	}

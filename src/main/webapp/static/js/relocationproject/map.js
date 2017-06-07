@@ -6,7 +6,7 @@ $(function() {
 	//var data = {name:"",governancetype:""};
     $.ajax({
         type: "POST",
-        url: "map/list_map",
+        url: "relocation/list_relocationProject",
        // data:data,
         dataType: "json",
         success: function(data){ 
@@ -39,11 +39,11 @@ $(function() {
             });  
         	
         for (var i = 0; i < lnglats.length; i = i + 1) {
-    	    if (lnglats[i].color == -1) {  
+    	   if (lnglats[i].color == -1) {  
 	        	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconA});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);  
-            } else if (lnglats[i].color == 1) {
+           } else if (lnglats[i].color == 1) {
             	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconB});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);

@@ -58,9 +58,9 @@
 	        <button id="map-search-data-toorbar-fwcz" type="button" class="btn btn-sm map-search-data-type">房屋处置</button>
 	          -->
 	          
-	        <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>  
+	        <!-- <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>   -->
 	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
-	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button> 
+	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">资料管理</button> 
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
 	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
@@ -176,40 +176,34 @@
 				<form class="form-horizontal" role="form" id ="form-sxgx">
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">计划时间:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "strplancompletiontime" class="form-control" > 
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">名称:</label>
 						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">地址:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control"  >
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">灾害类型:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" >
-					</div>
-				  
-				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" >
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模等级:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" >
+						<label class="col-sm-5">进度:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="progress" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">稳定性:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度:</label>
-						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
 					</div>
 					<div class="modal-footer" style="text-align:center;background:white;">
- 						<button type="submit" class="btn btn-sm btn-info" id="save-submit">保存</button>	
+ 						<button type="button" class="btn btn-sm btn-info" id="eng-save-submit">保存</button>	
 			        </div>
 				</form>
 			</div>
@@ -259,26 +253,29 @@
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="qlr-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">权利人</h5>
+				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-test-qlr">
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">编号:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "bh" class="form-control" readonly="readonly"> 
+						<label class="col-sm-4">灾害点名称:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "hiddendanger_name" class="form-control" readonly="readonly"> 
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">户主:</label>
-						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-4">基本文件:</label>
+						<input class="col-sm-6" style="height:26px" id="fileupload1" name="fileupload1" size="30"  multiple="multiple" type="file" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">身份证号:</label>
-						<input class="col-sm-6" style="height:26px" name = "identity" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-4">防治文件:</label>
+						<input class="col-sm-6" style="height:26px" id="fileupload2" name="fileupload2" size="30"  multiple="multiple" type="file" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">联系电话:</label>
-						<input class="col-sm-6" style="height:26px" name = "phonenum" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-4">进展文件:</label>
+						<input class="col-sm-6" style="height:26px" id="fileupload3" name="fileupload3" size="30"  multiple="multiple" type="file" class="form-control">
 					</div>
+				    <div class="modal-footer" style="text-align:center;background:white;">
+ 						<button type="button" class="btn btn-sm btn-info" id="eng-file-submit">保存</button>	
+			        </div>
 				 
 				</form>
 			</div>
@@ -475,16 +472,6 @@
 	<div id="search-form-group" class="row" style="position:absolute;height:70px;z-index:999;left:0px;right:0px;top:0px;display: block;">					
 		<form id="search-form-group-condition" class="form-inline search-form" role="form">
 			<div class="well" style="margin-top: -10px;">
-			    <div style="padding-right: 20px;" class="input-group">
-					<label class="search-label">治理类型:</label>
-					<select name="jznd" style="height: 25px;" class="selectpicker show-tick search-content">
-					    <option></option>
-					    <option value="0">暂无</option>
-					    <option value="1">搬迁避让</option>
-					    <option value="2">工程治理</option>
-					  
-				    </select>
-		 	   </div> 
 		 	   <div style="padding-right: 20px;" class="input-group">
 		 	   	   <label class="search-label">名称:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
@@ -497,7 +484,7 @@
 			    
 		 	   <div style="padding-right: 20px;margin-top: 5px;margin-left:-26px" class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">
-						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+						<span class="ace-icon fa fa-search icon-on-right bigger-100"></span>
 						搜索
 				   </button>	 
 			   </div>
@@ -709,9 +696,9 @@
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../index/foot.jsp"%>
-
+	<script type="text/javascript" src="static/ace/js/jquery.js"></script>
 	<!-- 删除时确认窗口 -->
-	<script src="static/ace/js/jquery.form.min.js"></script>
+	<!-- <script src="static/ace/js/jquery.form.min.js"></script> -->
 	<script src="static/ace/js/bootbox.js"></script>
 	<script src="static/ace/js/bootstrap.js"></script>
 	<!-- ace scripts -->
@@ -747,10 +734,10 @@
 	<script src="static/js/common/commonUtils.js" type="text/javascript"></script>
 
 	<%--js文件--%>
-    <script src="static/js/history/map.js" type="text/javascript"></script>
-	<script src="static/js/history/addHouse.js" type="text/javascript"></script> 
-	<script src="static/js/history/conditionSearch.js" type="text/javascript"></script>
-	<script src="static/js/history/monitor.js" type="text/javascript"></script>
+    <script src="static/js/engineerproject/map.js" type="text/javascript"></script>
+	<script src="static/js/engineerproject/addHouse.js" type="text/javascript"></script> 
+	<script src="static/js/engineerproject/conditionSearch.js" type="text/javascript"></script>
+	<script src="static/js/engineerproject/monitor.js" type="text/javascript"></script>
 	</body>
 
  	<script type="text/javascript">

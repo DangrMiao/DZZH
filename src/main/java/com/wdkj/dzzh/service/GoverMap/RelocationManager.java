@@ -12,7 +12,9 @@ public interface RelocationManager {
 	
 	void addRelocation(relocationProject params) throws Exception;
 	
-	void updatehdgovertype(hiddendanger params) throws Exception;
+	void updatehdgovertype(hiddendanger h) throws Exception;
+
+	void updateRelocation(relocationProject params) throws Exception;
 
 
 }

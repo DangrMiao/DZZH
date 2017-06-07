@@ -21,7 +21,7 @@
   		value(#{name}, #{family}, #{relocate_flag}, #{relocate_time}, #{project_id}, #{level})
   	</insert>
   	<update id="update_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
-  		update person set `name` = #{name}, `family` = #{family}, `relocate_flag` = #{relocate_flag}, `project_id` = #{project_id}, `level` = #l{evel} , `relocate_time` = #{relocate_time}
+  		update person set `name` = #{name}, `family` = #{family}, `relocate_flag` = #{relocate_flag}, `relocate_time` = #{relocate_time}
 		where `id` = #{id}
   	</update>
   	<delete id="delete_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">

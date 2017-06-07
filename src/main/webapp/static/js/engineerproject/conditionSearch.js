@@ -1,20 +1,12 @@
 //初始化路径
 var baseUrl = CommonUtils.getBasePath();
 var type = function(value,row){
-	 switch (value)
-	 {
-	 case "0":
-	 	return "原拆原建";
-	 case "1":
-		return "修缮加固";
-	 case "2":
-		 return "拆除";
-	 }
+	 return row.hiddendanger_id+"-"+row.hiddendanger_name;
 }
 
 //初始化Table
 $('#map-search-data').bootstrapTable({
-    url: 'map/list_map',         //请求后台的URL（*）
+    url: 'engineer/list_engineerproject',         //请求后台的URL（*）
     method: 'get',                      //请求方式（*）
     toolbar: '#map-search-data-toorbar',                //工具按钮用哪个容器
     striped: true,                      //是否显示行间隔色
@@ -54,14 +46,13 @@ $('#map-search-data').bootstrapTable({
     columns: [
     	{checkbox: true},
     	{field: 'id',title: 'id'}, 
-        {field: 'name',title: '名称'}, 
-        {field: 'location',title: '地址'}, 
-        {field: 'governancetype',title: '治理类型'},
-        {field: 'govertype',title: '灾害类型'}, 
-        {field: 'scale',title: '规模'}, 
-        {field: 'scalegrad',title: '规模等级'}, 
-        {field: 'thisstage',title: '稳定性'}, 
-        {field: 'strplancompletiontime',title: '计划时间'},
+        {field: 'name',title: '项目名称'}, 
+        {field: 'hiddendanger_name',title: '隐患点名称',formatter:type}, 
+        {field: 'basicInfo',title: '基本情况'},
+        {field: 'governanceInfo',title: '防治情况'}, 
+        {field: 'progress',title: '搬迁进度（普通）'}, 
+        {field: 'create_time',title: '计划时间'},
+        {field: 'remark',title: '备注'}
         //{field: 'level',title: '鉴定等级'},
         //{field: 'jznd',title: '建造年代'},
         //{field: 'zflb',title: '住房类别'}, 
@@ -111,7 +102,7 @@ $('#map-search-data').bootstrapTable({
             //params.bh = $("#bh").val();
             //params.startime = $("#Startime").val();
             //params.endtime = $("#Endtime").val();
-            params.jznd = res.jznd;
+           // params.jznd = res.jznd;
 			params.name=res.name;
            
         }
@@ -137,14 +128,14 @@ $(function(){
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
 		}
-		map.centerAndZoom(new T.LngLat(selections[0].x, selections[0].y), 12);
+		map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 12);
     	var icon1 = new T.Icon({ 
             iconUrl: "static/images/location.gif", 
             iconSize: new T.Point(40, 40), 
             iconAnchor: new T.Point(20, 32) 
         }); 
         //向地图上添加自定义标注 
-    	Mmarker = new T.Marker(new T.LngLat(selections[0].x, selections[0].y), {icon: icon1}); 
+    	Mmarker = new T.Marker(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), {icon: icon1}); 
         map.addOverLay(Mmarker); 
 	    
     	$('#account-Manager-add-dialog-result').modal({
@@ -177,16 +168,33 @@ $(function(){
 	        	
 
         });
-        //房屋鉴定结果
-        $("#map-search-data-toorbar-ckjdjg").on("click",function(){
-        	//$('#form-test').form('load',selections[0]); 
-        	$('#account-Manager-add-dialog-result').modal('show');
-        	FormUtils.loadForm('form-test-result', selections[0]);
-        	$('#map-search-data-div').css('display','none');
-	        	$("#ckjdjg-close").on("click",function(){
-	        		$('#map-search-data-div').css('display','block');
-	        	})
-        });
+        //上传文件
+        $("#eng-file-submit").on("click",function(){
+        	var params = FormUtils.getData("form-test-qlr"); 
+        	params.id = selections[0].id;
+        	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
+        		if(data.code > 0){ 
+                    $.gritter.add({
+    	                title: '提示',
+    	                text: '保存成功',
+    	                time: 1000,	                
+
+                    }); 
+                }else{                
+                    	$.gritter.add({
+                     title: '提示',
+                            text: '保存失败:' + data.message,
+                            time: 1000,
+                    });
+                 }
+        	});
+        	//刷新有问题
+        	$('#map-search-data').bootstrapTable('refresh');
+        	$('#account-Manager-add-dialog-sxgx').modal('hide');
+        	$('#map-search-data-div').css('display','block');
+        	 
+    	});
+        
 	});
 
     //搜索栏关闭
@@ -388,9 +396,11 @@ $(function(){
     });
     
     //属性更新提交
-    $("#slhs-sxgx-submit").on("click",function(){
+    $("#eng-save-submit").on("click",function(){
     	var params = FormUtils.getData("form-sxgx"); 
-    	Ajax.postJson(baseUrl+'house/history_update', params, function(data){
+    	//console.log(selections[0].id)
+    	params.id = selections[0].id;
+    	Ajax.postJson(baseUrl+'engineer/update_engineerproject', params, function(data){
     		if(data.code > 0){ 
                 $.gritter.add({
 	                title: '提示',
@@ -412,7 +422,7 @@ $(function(){
     	$('#map-search-data-div').css('display','block');
     	 
 	});
-    
+	
 	// 导表
 	$("#map-search-data-toorbar-hdcbg").on("click",function() {
 		var params = FormUtils.getData("search-form-group-condition");

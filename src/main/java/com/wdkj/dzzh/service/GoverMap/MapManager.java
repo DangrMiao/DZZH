@@ -13,4 +13,6 @@ public interface MapManager {
 
 	List<hiddendanger> listSearch(hiddendanger params) throws Exception;
 
+	void updateMap(hiddendanger params) throws Exception;
+
 }

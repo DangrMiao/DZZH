@@ -7,15 +7,50 @@
 		hiddendanger
 	</sql>
     <select id="list" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
-		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,
+		select h.id,h.name,h.coordinate,h.location ,g.id as governancetypeid ,
 		g.`name` as governancetype ,h.thisstage,h.`completion`,
 		h.plancompletiontime   as plancompletiontime ,
 		h.plancompletiontime  as strplancompletiontime,
 		h.x,h.y,h.govertype,h.scale,h.scalegrad
 		from hiddendanger h ,governancetype g  
-		where h.governancetype=g.id 
+		where h.governancetype=g.id
+		<if test="governancetype!=null and governancetype!=''">
+			AND h.governancetype = #{governancetype}
+		</if>	
+		<if test="name!=null and name!=''">
+			AND h.name like concat('%', #{name},'%')
+		</if>
+		<if test="rows != null and start != null">
+			limit #{rows} offset #{start}
+		</if>
     </select>
-    <select id="selectlist" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+    <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
+		resultType="java.lang.Integer">
+		SELECT count(*)  
+		from hiddendanger h ,governancetype g  
+		where h.governancetype=g.id 
+		<if test="governancetype!=null and governancetype!=''">
+			AND h.governancetype = #{governancetype}
+		</if>	
+		<if test="name!=null and name!=''">
+			AND h.name like concat('%', #{name},'%')
+		</if>
+	</select>
+	
+	<update id="updateMap" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+  		update hiddendanger set
+				plancompletiontime =#{plancompletiontime},
+				name = #{name},
+				location = #{location},
+				govertype = #{govertype},
+				scale =#{scale},
+				scalegrad =#{scalegrad},
+				thisstage = #{thisstage},
+				completion = #{completion}
+		where `id` = #{id}
+  	</update>
+  	
+	 <select id="selectlist" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
 		select h.id,h.`name`,h.coordinate,h.location ,g.id as governancetypeid ,
 		g.`name` as governancetype ,h.thisstage,h.`completion`,
 		h.plancompletiontime   as plancompletiontime ,
@@ -27,21 +62,13 @@
 			limit #{rows} offset #{start}
 		</if>
     </select>
-    <select id="countList" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger"
-		resultType="java.lang.Integer">
-		SELECT count(*)  
-		from hiddendanger h ,governancetype g  
-		where h.governancetype=g.id and h.name like concat(concat('%', #{name}),'%') and h.governancetype like concat(concat('%', #{governancetype}),'%') 
-	</select>
+	
 	<select id="get_hd_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger" resultType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		select id ,`name`, `location`,coordinate, `governancetype` as governancetypeid, `thisstage`, completion, `plancompletiontime` as strplancompletiontime
 		from hiddendanger 
 		where `id` = #{id}
   	</select>
-  	<update id="updateHDgid" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
-  		update hiddendanger set  `governancetype` = #{governancetypeid}
-		where `id` = #{id}
-  	</update>
+ 
     <insert id="addhiddendanger" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		insert into hiddendanger(`name`, `location`,coordinate, `governancetype`, `thisstage`, completion, `plancompletiontime`,govertype,scale,scalegrad)
   		value(#{name}, #{location}, #{coordinate},#{governancetypeid}, #{thisstage},#{completion},#{strplancompletiontime},#{govertype},#{scale},#{scalegrad})
@@ -53,5 +80,11 @@
   		where id in
 		
   	</delete> -->
+  	
+  		<update id="updateHDgid" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
+  		update hiddendanger set
+				governancetype = #{governancetype}	
+		 where id = #{id}
+  	</update>
     
 </mapper>

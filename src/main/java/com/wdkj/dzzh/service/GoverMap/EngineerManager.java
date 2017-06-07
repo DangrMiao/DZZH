@@ -13,6 +13,8 @@ public interface EngineerManager {
 	
 	void addEngineer(engineerproject params) throws Exception;
 	
-	void updatehdgovertype(hiddendanger params) throws Exception;
+	void updatehdgovertype(hiddendanger h) throws Exception;
+
+	void updateEngineer(engineerproject params) throws Exception;
 
 }

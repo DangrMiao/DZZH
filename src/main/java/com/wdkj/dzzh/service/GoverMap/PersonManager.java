@@ -14,4 +14,6 @@ public interface PersonManager {
 	
 	void addPerson(person params) throws Exception;
 
+	void updatePerson(person params) throws Exception;
+
 }

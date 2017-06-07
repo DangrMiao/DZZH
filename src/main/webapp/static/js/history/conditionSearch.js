@@ -1,17 +1,5 @@
 //初始化路径
 var baseUrl = CommonUtils.getBasePath();
-var type = function(value,row){
-	 switch (value)
-	 {
-	 case "0":
-	 	return "原拆原建";
-	 case "1":
-		return "修缮加固";
-	 case "2":
-		 return "拆除";
-	 }
-}
-
 //初始化Table
 $('#map-search-data').bootstrapTable({
     url: 'map/list_map',         //请求后台的URL（*）
@@ -89,7 +77,7 @@ $('#map-search-data').bootstrapTable({
     queryParams: function(params){
         if(params){
         	var res = FormUtils.getData("search-form-group-condition");
-    		console.log(res)
+    		//console.log(res)
             params.start = params.offset;
             params.rows = params.limit;
            
@@ -111,7 +99,7 @@ $('#map-search-data').bootstrapTable({
             //params.bh = $("#bh").val();
             //params.startime = $("#Startime").val();
             //params.endtime = $("#Endtime").val();
-            params.jznd = res.jznd;
+            params.governancetype = res.governancetype;
 			params.name=res.name;
            
         }
@@ -137,14 +125,14 @@ $(function(){
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
 		}
-		map.centerAndZoom(new T.LngLat(selections[0].x, selections[0].y), 12);
+		map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 16);
     	var icon1 = new T.Icon({ 
             iconUrl: "static/images/location.gif", 
             iconSize: new T.Point(40, 40), 
             iconAnchor: new T.Point(20, 32) 
         }); 
         //向地图上添加自定义标注 
-    	Mmarker = new T.Marker(new T.LngLat(selections[0].x, selections[0].y), {icon: icon1}); 
+    	Mmarker = new T.Marker(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), {icon: icon1}); 
         map.addOverLay(Mmarker); 
 	    
     	$('#account-Manager-add-dialog-result').modal({
@@ -168,25 +156,14 @@ $(function(){
         $("#map-search-data-toorbar-qlr").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
         	$('#account-Manager-add-dialog-qlr').modal('show');
-        	 console.log(selections[0])
+        	 //console.log(selections[0])
         	FormUtils.loadForm('form-test-qlr', selections[0]);
         	$('#map-search-data-div').css('display','none');
 	        	$("#qlr-close").on("click",function(){
 	        		$('#map-search-data-div').css('display','block');
 	        	})
-	        	
+        });
 
-        });
-        //房屋鉴定结果
-        $("#map-search-data-toorbar-ckjdjg").on("click",function(){
-        	//$('#form-test').form('load',selections[0]); 
-        	$('#account-Manager-add-dialog-result').modal('show');
-        	FormUtils.loadForm('form-test-result', selections[0]);
-        	$('#map-search-data-div').css('display','none');
-	        	$("#ckjdjg-close").on("click",function(){
-	        		$('#map-search-data-div').css('display','block');
-	        	})
-        });
 	});
 
     //搜索栏关闭
@@ -201,30 +178,18 @@ $(function(){
     	$('#map-search-data-div').css('display','block');
         $('#map-search-data').bootstrapTable('refresh');
     });
-
-    
     //table关闭
     $('#map-search-data-toorbar-close').on("click", function(){
     	$('#map-search-data-div').css('display','none');
     
     });
-    
-    
     var zoom = 12; 
-//    map = new T.Map("mapDiv");
     var circle;
     var circleTool,PolylineTool,PolygonTool,RectangleTool,handler;
     var NO=0,le;
     function ToolClose() {   	
-        //设置显示地图的中心点和级别 
-//        map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
         var config = {  
-//                strokeColor:"blue", //折线颜色  
-//                fillColor:"#FFFFFF",    //填充颜色。当参数为空时，折线覆盖物将没有填充效果  
         		weight:3, //折线的宽度，以像素为单位  
-//                strokeOpacity:0.5,  //折线的透明度，取值范围0 - 1  
-//                fillOpacity:0.5,        //填充的透明度，取值范围0 - 1  
-//                showLabel:false             //是否显示页面，默认为true.  
             };
         
         circleTool = new T.CircleTool(map);
@@ -234,11 +199,7 @@ $(function(){
         handler = new T.PaintBrushTool(map, { 
             keepdrawing: false, 
             style: { 
-//                color: "red", 
                 weight: 3, 
-//                opacity: 0.5, 
-//                lineStyle: 'dashed' 
-
             } 
         }); 
 
@@ -248,19 +209,15 @@ $(function(){
     		map.removeLayer(circle);
 		}
         circleTool.clear();
-//      PolylineTool.clear();
-//      PolygonTool.clear();
         RectangleTool.clear();
         handler.clear();
         
-//        circleTool.close();
 		PolylineTool.close();
 		PolygonTool.close();
 		RectangleTool.close();
 		handler.close();
 		
 		var allLays = map.getOverlays();
-//		console.log(allLays);
 		if (NO==0) {
 			le = allLays.length;
 		}
@@ -268,7 +225,6 @@ $(function(){
 		if(allLays.length>le) {
 			map.removeOverLay(allLays[le]);
 		}		
-//        map.clearOverLays();
         map.removeEventListener("click",MapClick);
 	}
 
@@ -281,46 +237,7 @@ $(function(){
 		//向地图上添加小圆点
         map.addOverLay(circle);
 	} 
-    //点选
-    $('#pointChoose').on("click", function(){
-        ToolClose();
-        map.addEventListener("click",MapClick);        
-    });
-    
-    //线选
-    $('#lineChoose').on("click", function(){
-//    	PolylineTool = new T.PolylineTool(map);
-    	ToolClose();
-        PolylineTool.open();
-    });
-    
-    //多边形选
-    $('#polygonChoose').on("click", function(){
-//		PolygonTool = new T.PolygonTool(map);
-		ToolClose();
-        PolygonTool.open();
-        
-    });
-
-    //矩形选
-    $('#rectangleChoose').on("click", function(){            	   	
-//    	RectangleTool = new T.RectangleTool(map); 
-    	ToolClose();
-        RectangleTool.open();
-    });
-    
-    //曲线选
-    $('#curveChoose').on("click", function(){
-//    	handler = new T.PaintBrushTool(map);
-    	ToolClose();
-        handler.open(); 
-    });
-    
-    //清除选择
-    $('#cancel').on("click", function(){
-    	ToolClose();
-    	map.enableDrag();
-    });
+ 
     
 	$('#account-Manager-add-dialog').modal({
         keyboard: true,
@@ -338,42 +255,6 @@ $(function(){
         		$('#map-search-data-div').css('display','block');
         	})
     });
-	 //图片展示
-    $("#history-photo-display").on("click",function(){
-    	//console.log(selections[0].bh);
-    	var params = selections[0].bh; 
-    	Ajax.postJson(baseUrl+"house/getOne?bh="+params,{},function(data){
-    		//console.log(data);
-		       	 if(data.rows.photoArray.length>0 ){
-		     		$('#account-Manager-add-dialog-photo').modal('show');
-		              var interval = 3000;
-		              var viewer = document.getElementById('viewer');
-		              var current = 0;
-		              var len = data.rows.photoArray.length;
-		              var setImage = function(){
-		                  viewer.src = data.rows.photoArray[current];
-		                  current = ++current>len-1? 0 : current;
-		              };
-		              setImage();
-		              setInterval(setImage,interval);
-		     	}
-		     	 else{
-		     		 $.gritter.add({
-		                  title: '提示',
-		                         text: '没有照片',
-		                         time: 1000,
-		                 });
-		     	 }
-    	});
-
-
-    	//刷新有问题
-    	//$('#map-search-data').bootstrapTable('refresh');
-    	//$('#account-Manager-add-dialog-sxgx').modal('hide');
-    	//$('#map-search-data-div').css('display','block');
-    	 
-	});
-    
     //属性更新
     $("#map-search-data-toorbar-sxgx").on("click",function(){
     	//$('#form-test').form('load',selections[0]); 
@@ -388,9 +269,12 @@ $(function(){
     });
     
     //属性更新提交
-    $("#slhs-sxgx-submit").on("click",function(){
-    	var params = FormUtils.getData("form-sxgx"); 
-    	Ajax.postJson(baseUrl+'house/history_update', params, function(data){
+    $("#save-submit").on("click",function(){
+    	var params = FormUtils.getData("form-sxgx");
+    	params.plancompletiontime=params.strplancompletiontime;
+    	params.id=selections[0].id;
+    	//console.log(params)
+    	Ajax.postJson(baseUrl+'map/update_map', params, function(data){
     		if(data.code > 0){ 
                 $.gritter.add({
 	                title: '提示',
@@ -409,9 +293,68 @@ $(function(){
     	//刷新有问题
     	$('#map-search-data').bootstrapTable('refresh');
     	$('#account-Manager-add-dialog-sxgx').modal('hide');
-    	$('#map-search-data-div').css('display','block');
-    	 
+    	$('#map-search-data-div').css('display','block');	 
 	});
+    
+    //添加治理方案
+    $("#map-search-data-toorbar-qlr").on("click",function(){
+    	//$('#form-test').form('load',selections[0]); 
+    	$('#account-Manager-add-dialog-result').modal('show');
+    	//FormUtils.loadForm('form-test-result', selections[0]);
+    	$('#map-search-data-div').css('display','none');
+        	$("#ckjdjg-close").on("click",function(){
+        		$('#map-search-data-div').css('display','block');
+        	})
+    });
+    
+    //添加治理方案提交
+    $("#add-save-submit").on("click",function(){
+    	var params = FormUtils.getData("form-test-result");
+    	//params.plancompletiontime=params.strplancompletiontime;
+    	params.hiddendanger_id=selections[0].id;
+    	console.log(params)
+    	if(params.governancetype=="1"){
+	    		Ajax.postJson(baseUrl+'relocation/add_relocationProject', params, function(data){
+	    		if(data.code > 0){ 
+	                $.gritter.add({
+		                title: '提示',
+		                text: '保存成功',
+		                time: 1000,	                
+	
+	                }); 
+	            }else{                
+	                	$.gritter.add({
+	                 title: '提示',
+	                        text: '保存失败:' + data.message,
+	                        time: 1000,
+	                });
+	             }
+	    	});
+    	}
+	    else if(params.governancetype=="2"){
+	    	Ajax.postJson(baseUrl+'engineer/add_engineerproject', params, function(data){
+	    		if(data.code > 0){ 
+	                $.gritter.add({
+		                title: '提示',
+		                text: '保存成功',
+		                time: 1000,	                
+	
+	                }); 
+	            }else{                
+	                	$.gritter.add({
+	                 title: '提示',
+	                        text: '保存失败:' + data.message,
+	                        time: 1000,
+	                });
+	             }
+	    	});
+	    }
+    	//刷新有问题
+    	$('#map-search-data').bootstrapTable('refresh');
+    	$('#account-Manager-add-dialog-sxgx').modal('hide');
+    	$('#map-search-data-div').css('display','block');	 
+	});
+    
     
 	// 导表
 	$("#map-search-data-toorbar-hdcbg").on("click",function() {

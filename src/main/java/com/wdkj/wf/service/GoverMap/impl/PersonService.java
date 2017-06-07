@@ -49,6 +49,11 @@ public class PersonService implements PersonManager{
 		dao.insert("PersonDao.add_person", params);
 		
 	}
+	@Override
+	public void updatePerson(person params) throws Exception {
+		// TODO Auto-generated method stub
+		dao.update("PersonDao.update_person", params);
+	}
 
 	
 

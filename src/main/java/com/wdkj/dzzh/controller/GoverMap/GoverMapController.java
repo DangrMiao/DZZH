@@ -10,6 +10,7 @@ import com.fh.controller.base.BaseController;
 import com.fh.util.PageData;
 import com.wdkj.dzzh.entity.GoverMap.hiddendanger;
 import com.wdkj.dzzh.service.GoverMap.MapManager;
+import com.wdkj.wf.house.entity.DepartMentEntity;
 import com.wdkj.wf.house.entity.HouseEntity;
 import com.wdkj.wf.service.house.HouseManager;
 import com.weidekeji.common.constraint.ResConst;
@@ -39,9 +40,9 @@ public class GoverMapController extends BaseController {
 	@ResponseBody
 	public String map(hiddendanger params){
 		try {
-
 			List<hiddendanger> mapList = mapService.list(params);
-			return JSONUtil.toJsonString(new JsonResult(1, "成功", mapList));
+			int count = mapService.countList(params);
+			return JSONUtil.toJsonString(new PagedJsonResult(mapList, 1, "成功", count, params.getRows()));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
@@ -66,4 +67,46 @@ public class GoverMapController extends BaseController {
 		}
 	}
 
+	
+	/**
+	 * 信息更新
+	 * 
+	 * @param params
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/update_map", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String mapUpdate(hiddendanger params) {
+		//System.out.println(params);
+		try {
+			mapService.updateMap(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("错误：" + e.toString(), e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "修改失败!", null));
+			
+		}
+	}
+
+	/**
+	 * 添加治理方案
+	 * 
+	 * @param params
+	 * @throws Exception
+	 */
+/*	@RequestMapping(value = "/add_map", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String mapAdd(hiddendanger params) {
+		 
+		try {
+			mapService.updateMap(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("错误：" + e.toString(), e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "修改失败!", null));
+			
+		}
+	}*/
 }

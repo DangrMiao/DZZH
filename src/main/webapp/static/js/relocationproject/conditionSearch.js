@@ -1,20 +1,13 @@
 //初始化路径
 var baseUrl = CommonUtils.getBasePath();
+
 var type = function(value,row){
-	 switch (value)
-	 {
-	 case "0":
-	 	return "原拆原建";
-	 case "1":
-		return "修缮加固";
-	 case "2":
-		 return "拆除";
-	 }
+		 return row.hiddendanger_id+"-"+row.hiddendanger_name;
 }
 
 //初始化Table
 $('#map-search-data').bootstrapTable({
-    url: 'map/list_map',         //请求后台的URL（*）
+    url: 'relocation/list_relocationProject',         //请求后台的URL（*）
     method: 'get',                      //请求方式（*）
     toolbar: '#map-search-data-toorbar',                //工具按钮用哪个容器
     striped: true,                      //是否显示行间隔色
@@ -54,14 +47,14 @@ $('#map-search-data').bootstrapTable({
     columns: [
     	{checkbox: true},
     	{field: 'id',title: 'id'}, 
-        {field: 'name',title: '名称'}, 
-        {field: 'location',title: '地址'}, 
-        {field: 'governancetype',title: '治理类型'},
-        {field: 'govertype',title: '灾害类型'}, 
-        {field: 'scale',title: '规模'}, 
-        {field: 'scalegrad',title: '规模等级'}, 
-        {field: 'thisstage',title: '稳定性'}, 
-        {field: 'strplancompletiontime',title: '计划时间'},
+        {field: 'name',title: '项目名称'}, 
+        {field: 'hiddendanger_name',title: 'ID-隐患点名称',formatter:type}, 
+        {field: 'basicInfo',title: '基本情况'},
+        {field: 'governanceInfo',title: '防治情况'}, 
+        {field: 'headcount',title: '户数'}, 
+        {field: 'progress',title: '搬迁进度（普通）'}, 
+        {field: 'create_time',title: '计划时间'},
+        {field: 'remark',title: '备注'}
         //{field: 'level',title: '鉴定等级'},
         //{field: 'jznd',title: '建造年代'},
         //{field: 'zflb',title: '住房类别'}, 
@@ -111,7 +104,7 @@ $('#map-search-data').bootstrapTable({
             //params.bh = $("#bh").val();
             //params.startime = $("#Startime").val();
             //params.endtime = $("#Endtime").val();
-            params.jznd = res.jznd;
+            //params.jznd = res.jznd;
 			params.name=res.name;
            
         }
@@ -129,22 +122,23 @@ $('#map-search-data').bootstrapTable({
 
 $(function(){  
 	var Mmarker;
-	var selections
+	var selections;
+	var row ;
 	$("#map-search-data").on("click",function(){
 		selections = $('#map-search-data').bootstrapTable('getSelections');
-		//console.log(selections[0]);
+		console.log(selections[0]);
 		//console.log(Mmarker);
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
 		}
-		map.centerAndZoom(new T.LngLat(selections[0].x, selections[0].y), 12);
+		map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 16);
     	var icon1 = new T.Icon({ 
             iconUrl: "static/images/location.gif", 
             iconSize: new T.Point(40, 40), 
             iconAnchor: new T.Point(20, 32) 
         }); 
         //向地图上添加自定义标注 
-    	Mmarker = new T.Marker(new T.LngLat(selections[0].x, selections[0].y), {icon: icon1}); 
+    	Mmarker = new T.Marker(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), {icon: icon1}); 
         map.addOverLay(Mmarker); 
 	    
     	$('#account-Manager-add-dialog-result').modal({
@@ -177,16 +171,32 @@ $(function(){
 	        	
 
         });
-        //房屋鉴定结果
-        $("#map-search-data-toorbar-ckjdjg").on("click",function(){
-        	//$('#form-test').form('load',selections[0]); 
-        	$('#account-Manager-add-dialog-result').modal('show');
-        	FormUtils.loadForm('form-test-result', selections[0]);
-        	$('#map-search-data-div').css('display','none');
-	        	$("#ckjdjg-close").on("click",function(){
-	        		$('#map-search-data-div').css('display','block');
-	        	})
-        });
+        //上传文件
+        $("#rp-file-submit").on("click",function(){
+        	var params = FormUtils.getData("form-test-qlr"); 
+        	params.id = selections[0].id;
+        	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
+        		if(data.code > 0){ 
+                    $.gritter.add({
+    	                title: '提示',
+    	                text: '保存成功',
+    	                time: 1000,	                
+
+                    }); 
+                }else{                
+                    	$.gritter.add({
+                     title: '提示',
+                            text: '保存失败:' + data.message,
+                            time: 1000,
+                    });
+                 }
+        	});
+        	//刷新有问题
+        	$('#map-search-data').bootstrapTable('refresh');
+        	$('#account-Manager-add-dialog-sxgx').modal('hide');
+        	$('#map-search-data-div').css('display','block');
+        	 
+    	});
 	});
 
     //搜索栏关闭
@@ -338,41 +348,7 @@ $(function(){
         		$('#map-search-data-div').css('display','block');
         	})
     });
-	 //图片展示
-    $("#history-photo-display").on("click",function(){
-    	//console.log(selections[0].bh);
-    	var params = selections[0].bh; 
-    	Ajax.postJson(baseUrl+"house/getOne?bh="+params,{},function(data){
-    		//console.log(data);
-		       	 if(data.rows.photoArray.length>0 ){
-		     		$('#account-Manager-add-dialog-photo').modal('show');
-		              var interval = 3000;
-		              var viewer = document.getElementById('viewer');
-		              var current = 0;
-		              var len = data.rows.photoArray.length;
-		              var setImage = function(){
-		                  viewer.src = data.rows.photoArray[current];
-		                  current = ++current>len-1? 0 : current;
-		              };
-		              setImage();
-		              setInterval(setImage,interval);
-		     	}
-		     	 else{
-		     		 $.gritter.add({
-		                  title: '提示',
-		                         text: '没有照片',
-		                         time: 1000,
-		                 });
-		     	 }
-    	});
-
-
-    	//刷新有问题
-    	//$('#map-search-data').bootstrapTable('refresh');
-    	//$('#account-Manager-add-dialog-sxgx').modal('hide');
-    	//$('#map-search-data-div').css('display','block');
-    	 
-	});
+ 
     
     //属性更新
     $("#map-search-data-toorbar-sxgx").on("click",function(){
@@ -388,9 +364,10 @@ $(function(){
     });
     
     //属性更新提交
-    $("#slhs-sxgx-submit").on("click",function(){
+    $("#rp-save-submit").on("click",function(){
     	var params = FormUtils.getData("form-sxgx"); 
-    	Ajax.postJson(baseUrl+'house/history_update', params, function(data){
+    	params.id = selections[0].id;
+    	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
     		if(data.code > 0){ 
                 $.gritter.add({
 	                title: '提示',
@@ -411,6 +388,110 @@ $(function(){
     	$('#account-Manager-add-dialog-sxgx').modal('hide');
     	$('#map-search-data-div').css('display','block');
     	 
+	});
+    
+    var bg = function(value,row){
+     	 switch (value)
+     	 {
+     	 case 0:
+     	 	return "未搬迁";
+     	 case 1:
+     		return "已搬迁";
+     	 }
+     }
+    var Edit = function(value,row){
+    	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>';
+    	return html;
+    }
+	//搬迁人员
+	$("#map-search-data-toorbar-bqry").on("click",function() {
+		selections= $('#map-search-data').bootstrapTable('getSelections');
+		// $('#form-test').form('load',selections[0]);
+		/*var params = FormUtils.getData("form-ckjdjg");*/
+		$('#House-Manager-bqry-dialog').modal('show');
+
+		$('#House-bqry-data').bootstrapTable({
+			url : 'person/list_person', // 请求后台的URL（*）
+			method : 'get', // 请求方式（*）
+			striped : true, // 是否显示行间隔色
+			cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			pagination : false, // 是否显示分页（*）
+			sortable : false, // 是否启用排序
+			sortOrder : "asc", // 排序方式
+			sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
+			pageNumber : 1, // 初始化加载第一页，默认第一页
+			pageSize : 8, // 每页的记录行数（*）
+			paginationHAlign : 'left',
+			paginationDetailHAlign : "right",
+			// pageList: [10, 20, 50], //可供选择的每页的行数（*）
+			// showPaginationSwitch: true,
+			height : 300,
+			singleSelect : true,
+			minimumCountColumns : 2, // 最少允许的列数
+			clickToSelect : true, // 是否启用点击选中行
+			uniqueId : "id", // 每一行的唯一标识，一般为主键列
+			cardView : false, // 是否显示详细视图
+			detailView : false, // 是否显示父子表
+			columns: [
+				{checkbox : true},
+				{field : 'id',title : '序号'}, 
+				{field : 'name',title : '项目名称'}, 
+				{field : 'family',title : '人口'}, 
+				{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
+				{field : 'relocate_time',title : '搬迁时间'},
+				{field: 'cz',title: '操作', formatter:Edit},   
+		    ],
+			dataType : 'json',
+			queryParams : function(params) {
+				if (params) {
+					//var data = FormUtils.getData("form-ckjdjg");
+					params.start = params.offset;
+					params.rows = params.limit;
+					//params.house_code=data.bh;
+				}
+				return params;
+			},
+			responseHandler : function(res) {
+				if (res.code > 0) {
+					return res;
+				} else {
+					return [];
+				}
+			},
+		});	
+	
+	});
+	
+	//搬迁人员修改
+    $("#House-bqry-data-div").on("click",".Edit-edit",function(){
+    	row = $('#House-bqry-data').bootstrapTable('getSelections');
+    	$('#settlement-monitor-bq-dialog').modal('show');
+    	FormUtils.clearForm("add-settlement-form");
+    	FormUtils.loadForm("add-settlement-form",row[0]);
+	}); 
+    //保存
+    $("#settlement-add-dq-btn").on("click",function(){
+    	var params = FormUtils.getData("add-settlement-form");
+    	params.id = row[0].id;
+    	Ajax.postJson(baseUrl+'person/update_person', params, function(data){
+    		if(data.code > 0){ 
+                $.gritter.add({
+	                title: '提示',
+	                text: '保存成功',
+	                time: 1000,	                
+
+                }); 
+            }else{                
+                	$.gritter.add({
+                 title: '提示',
+                        text: '保存失败:' + data.message,
+                        time: 1000,
+                });
+             }
+        	 $('#House-bqry-data').bootstrapTable('refresh');
+             $('#settlement-monitor-bq-dialog').modal('hide');
+    	});
+
 	});
     
 	// 导表
