@@ -126,6 +126,9 @@ $(function() {
     			FormUtils.loadForm('form-test',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
+    			$("#fwgk-close").on("click",function(){
+            		$('#search-form-group').css('display','block');	 
+            	})
 			}
         	
         });

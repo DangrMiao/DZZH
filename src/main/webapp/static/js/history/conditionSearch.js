@@ -77,7 +77,7 @@ $('#map-search-data').bootstrapTable({
     queryParams: function(params){
         if(params){
         	var res = FormUtils.getData("search-form-group-condition");
-    		//console.log(res)
+    		console.log(res)
             params.start = params.offset;
             params.rows = params.limit;
            
@@ -99,8 +99,9 @@ $('#map-search-data').bootstrapTable({
             //params.bh = $("#bh").val();
             //params.startime = $("#Startime").val();
             //params.endtime = $("#Endtime").val();
-            params.governancetype = res.governancetype;
+            params.district = res.district;
 			params.name=res.name;
+			params.governancetype=res.governancetype;
            
         }
 
@@ -252,7 +253,7 @@ $(function(){
     	FormUtils.loadForm('form-test', selections[0]);
     	$('#map-search-data-div').css('display','none');
         	$("#fwgk-close").on("click",function(){
-        		$('#map-search-data-div').css('display','block');
+        		$('#map-search-data-div').css('display','block');	 
         	})
     });
     //属性更新

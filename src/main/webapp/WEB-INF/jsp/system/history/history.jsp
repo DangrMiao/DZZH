@@ -113,7 +113,7 @@
 		</div><!-- .sidebar -->
 	</div>
 	
-<!-- 添加的模态框(房屋概况) -->
+<!-- 添加的模态框(灾害点概况) -->
   <div class="modal fade" id="account-Manager-add-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
@@ -492,12 +492,14 @@
 		<form id="search-form-group-condition" class="form-inline search-form" role="form">
 			<div class="well" style="margin-top: -10px;">
 			    <div style="padding-right: 20px;" class="input-group">
-					<label class="search-label">治理类型:</label>
-					<select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
+					<label class="search-label">选择区域:</label>
+					<select name="district" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
-					    <option value="0">暂无</option>
-					    <option value="1">搬迁避让</option>
-					    <option value="2">工程治理</option>
+					    <option>柯城区</option>
+					    <option>衢江区</option>
+					    <option>龙游县</option>
+					    <option>江山市</option>
+					    <option>开化县</option>
 				    </select>
 		 	   </div> 
 		 	   <div style="padding-right: 20px;" class="input-group">
@@ -518,7 +520,7 @@
 			   </div>
 			   	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="zt" value="2">
+		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
 		 	   </div>
 	 	  </div> 																		
 		</form>	 
