@@ -166,6 +166,9 @@ $(function(){
         });
         $("#map-search-data-toorbar-qlr").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
+        	
+        	fileConframe.window.goto_uploadfile_by_projectid(selections[0].id,2);
+        	
         	$('#account-Manager-add-dialog-qlr').modal('show');
         	 console.log(selections[0])
         	FormUtils.loadForm('form-test-qlr', selections[0]);
@@ -175,6 +178,16 @@ $(function(){
 	        	})
 	        	
 
+        });
+        //8888888888888888888888
+        $("#map-search-data-toorbar-zlxz").on("click",function(){ 	
+        	$('#account-Manager-add-dialog-zlxz').modal('show');
+       	    console.log(selections[0])
+     	    FormUtils.loadForm('form-test-qlr', selections[0]);
+     	    $('#map-search-data-div').css('display','none');
+	        	$("#zlxz-close").on("click",function(){
+	        		$('#map-search-data-div').css('display','block');
+	        	})
         });
         //上传文件
         $("#eng-file-submit").on("click",function(){

@@ -62,7 +62,8 @@
 	          
 	        <!-- <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>   -->
 	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
-	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">资料管理</button> 
+	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">资料上传</button>
+	        <button id="map-search-data-toorbar-zlxz" type="button" class="btn btn-sm">资料下载</button>  
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
 	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
@@ -293,40 +294,31 @@
 		</div>/.modal-content
 	</div>/.modal
 </div> -->
-    <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+<div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:600px;height:500px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="qlr-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="height: 100%;margin-right:10px">
-				<form class="form-horizontal" role="form" id ="form-test-qlr">
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">灾害点名称:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "hiddendanger_name" class="form-control" readonly="readonly"> 
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">基本文件:</label>
-						<input class="col-sm-6" style="height:26px" id="fileupload1" name="fileupload1" size="30"  multiple="multiple" type="file" class="form-control">
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">防治文件:</label>
-						<input class="col-sm-6" style="height:26px" id="fileupload2" name="fileupload2" size="30"  multiple="multiple" type="file" class="form-control">
-					</div>
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">进展文件:</label>
-						<input class="col-sm-6" style="height:26px" id="fileupload3" name="fileupload3" size="30"  multiple="multiple" type="file" class="form-control">
-					</div>
-				    <div class="modal-footer" style="text-align:center;background:white;">
- 						<button type="button" class="btn btn-sm btn-info" id="eng-file-submit">保存</button>	
-			        </div>
-				 
-				</form>
+			<div class="modal-body" style="width:100%;height:450px;">
+				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
 			</div>
 
-		</div>/.modal-content
-	</div>/.modal
+		</div>
+	</div>
+</div>
+<!-- //8888888888888888888888 -->
+<div class="modal fade" id="account-Manager-add-dialog-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:600px;height:500px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="zlxz-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">下载文件</h5>
+			</div>
+		</div>
+	</div>
 </div>
   
  

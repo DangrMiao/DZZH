@@ -250,13 +250,17 @@
 
 <!-- 添加的模态框(资料管理) -->
   <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:600px;height:500;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="qlr-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="height: 100%;margin-right:10px">
+			<div class="modal-body" style="width:100%;height:450px;">
+				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
+			</div>
+			<!-- <div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-test-qlr">
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">灾害点名称:</label>
@@ -278,7 +282,7 @@
  						<button type="button" class="btn btn-sm btn-info" id="rp-file-submit">保存</button>	
 			        </div>
 				</form>
-			</div>
+			</div> -->
 
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
