@@ -3,18 +3,18 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PersonDao">
 <!--表名 -->
-	<select id="get_allperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.person">
-  		select `id`, `name`, `family`, `relocate_flag`, `relocate_time`, `project_id`, `level`
+	<select id="get_allperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.person" resultType="com.wdkj.dzzh.entity.GoverMap.person">
+  		select `id`, `name`, `family`, `relocate_flag`, `relocate_time`
 		from person
-		where `project_id` = #{id}
+		where `project_id` = #{project_id}
 		<if test="rows != null and start != null">
 			limit #{rows} offset #{start}
 		</if>
 	</select>
-	<select id="get_countperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="Integer">
+	<select id="get_countperson_by_project_id" parameterType="com.wdkj.dzzh.entity.GoverMap.person" resultType="Integer">
   		select count(1)
   		from person
-		where `project_id` = #{id}
+		where project_id = #{project_id}
 	</select>
 	<insert id="add_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
   		insert into person(`name`, `family`, `relocate_flag`, `relocate_time`, `project_id`, `level`)

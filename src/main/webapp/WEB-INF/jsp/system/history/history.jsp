@@ -62,7 +62,7 @@
 	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
 	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button> 
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
-	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
+	      <!--   <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button>  -->
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
         </div>  
 		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: none;">										
@@ -92,22 +92,22 @@
 		   <%--原拆原建--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			
-			   <img class="col-xs-6 col-sm-3" src="static/images/levelA.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理中</label>
+			   <img class="col-xs-6 col-sm-3" src="static/images/levelD.png"></img>
+			   <label class="col-xs-6 col-sm-6">暂无</label>
 		   </div>
 		   
 		   <%--修缮加固--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			 
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelB.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理完成</label>
+			   <label class="col-xs-6 col-sm-6">搬迁避让</label>
 		   </div>
 
 		   <%--拆除--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 		
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelC.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理超时</label>
+			   <label class="col-xs-6 col-sm-6">工程治理</label>
 		   </div>
 
 		</div><!-- .sidebar -->
@@ -152,9 +152,8 @@
 						<label class="col-sm-5">稳定性:</label>
 						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" readonly="readonly"> 
 					</div>
-					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度:</label>
+						<label class="col-sm-5">治理进度(%):</label>
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" readonly="readonly">
 					</div>
 
@@ -174,6 +173,10 @@
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-sxgx">
+					<div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">计划时间:</label>
 						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
@@ -203,14 +206,14 @@
 						<label class="col-sm-5">稳定性:</label>
 						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
 					</div>
-					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度:</label>
+						<label class="col-sm-5">治理进度(%):</label>
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
-					<div class="modal-footer" style="text-align:center;background:white;">
- 						<button type="button" class="btn btn-sm btn-info" id="save-submit">保存</button>	
-			        </div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="save-submit">更新</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="add-submit" style="margin-left:0px">添加治理方案</button>
+				   </div>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->
@@ -506,22 +509,48 @@
 		 	   	   <label class="search-label">名称:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
 		 	   </div>
-		 	  <!--  <div style="padding-right: 20px;" class="input-group">
-		 	   	   <label class="search-label">所属村:</label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="ssc">
-		 	   </div>	 -->	 	   		 	   
-		    
-			    
+		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">治理类型:</label>
+		 	  	   <select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option value="0">暂无</option>
+					    <option value="1">拆迁避让</option>
+					    <option value="2">工程治理</option>
+				    </select>
+		 	   </div>	
+		
+		 	    <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">规模等级:</label>
+		 	  	   <select name="scalegrad" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option>小型</option>
+					    <option>中型</option>
+					    <option>大型</option>
+				    </select>
+		 	   </div>
+		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">稳定性:</label>
+		 	  	   <select name="thisstage" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option>好</option>
+					    <option>较好</option>
+					    <option>差</option>
+					    <option>较差</option>
+					    <option>低易发</option>
+					    <option>中易发</option>
+					    <option>稳定</option>
+				    </select>
+		 	   </div>  
 		 	   <div style="padding-right: 20px;margin-top: 5px;margin-left:-26px" class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
 				   </button>	 
 			   </div>
-			   	<div style="padding-right: 20px;display: none;" class="input-group" >
+			   <!-- 	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
-		 	   </div>
+		 	   </div> -->
 	 	  </div> 																		
 		</form>	 
 	</div>

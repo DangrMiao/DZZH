@@ -82,11 +82,7 @@ $(function(){
         UI.loadBootstrapTable('#settlement-monitor-data', monitorConfig.monitor,'#settlement-monitor-data-toorbar');
         Ajax.postJson("settlementMonitor/points/list",{houseId:houseId}, function(data){
             if(data.code > 0){
-            	$('#settlement-monitor-data').bootstrapTable('load', data);
-//            	$('#settlement-monitor-data').bootstrapTable('removeAll');
-//            	$('#settlement-monitor-data').bootstrapTable('refresh');
-//            	$('#settlement-monitor-data').bootstrapTable('append', data.rows);
-            	 
+            	$('#settlement-monitor-data').bootstrapTable('load', data); 
             }else{                
             	$.bootstrapGrowl(data.message, {
                     type: 'info',

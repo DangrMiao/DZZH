@@ -5,6 +5,31 @@ var type = function(value,row){
 		 return row.hiddendanger_id+"-"+row.hiddendanger_name;
 }
 
+
+var type1 = function(value,row){
+	var a="<div class='progress'  style=' margin-top: 5px;margin-bottom: 5px;' >"
+           +"<div  class='progress-bar progress-bar-info' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' style='width:"+row.progress+"%;'>"
+             +"<span>"+row.progress+"%</span></div></div>";
+	 return a;
+}
+/*var monitorConfig = {
+		monitor:{ 
+			//height:150,	
+//			toolbarAlign:'right',
+//			data:[{"bh":20,"mc":"adgf","js":"0"}],
+			columns: [
+				{checkbox : true},
+				{field : 'id',title : '序号'}, 
+				{field : 'name',title : '项目名称'}, 
+				{field : 'family',title : '人口'}, 
+				{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
+				{field : 'relocate_time',title : '搬迁时间'},
+				{field: 'cz',title: '操作', formatter:Edit},
+		    ],
+		    url:'',
+		},
+
+}*/
 //初始化Table
 $('#map-search-data').bootstrapTable({
     url: 'relocation/list_relocationProject',         //请求后台的URL（*）
@@ -52,7 +77,7 @@ $('#map-search-data').bootstrapTable({
         {field: 'basicInfo',title: '基本情况'},
         {field: 'governanceInfo',title: '防治情况'}, 
         {field: 'headcount',title: '户数'}, 
-        {field: 'progress',title: '搬迁进度（普通）'}, 
+        {field: 'progress',title: '搬迁进度（普通）',formatter:type1}, 
         {field: 'create_time',title: '计划时间'},
         {field: 'remark',title: '备注'}
         //{field: 'level',title: '鉴定等级'},
@@ -126,7 +151,7 @@ $(function(){
 	var row ;
 	$("#map-search-data").on("click",function(){
 		selections = $('#map-search-data').bootstrapTable('getSelections');
-		console.log(selections[0]);
+		//console.log(selections[0]);
 		//console.log(Mmarker);
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
@@ -340,6 +365,7 @@ $(function(){
     //房屋概况信息
     $("#map-search-data-toorbar-fwgk").on("click",function(){
     	selections = $('#map-search-data').bootstrapTable('getSelections');
+    	//console.log(selections[0]);
     	//$('#form-test').form('load',selections[0]); 
     	$('#account-Manager-add-dialog').modal('show');
     	FormUtils.loadForm('form-test', selections[0]);
@@ -406,61 +432,87 @@ $(function(){
 	//搬迁人员
 	$("#map-search-data-toorbar-bqry").on("click",function() {
 		selections= $('#map-search-data').bootstrapTable('getSelections');
+		//console.log(selections[0])
 		// $('#form-test').form('load',selections[0]);
 		/*var params = FormUtils.getData("form-ckjdjg");*/
 		$('#House-Manager-bqry-dialog').modal('show');
-
-		$('#House-bqry-data').bootstrapTable({
-			url : 'person/list_person', // 请求后台的URL（*）
-			method : 'get', // 请求方式（*）
-			striped : true, // 是否显示行间隔色
-			cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-			pagination : false, // 是否显示分页（*）
-			sortable : false, // 是否启用排序
-			sortOrder : "asc", // 排序方式
-			sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
-			pageNumber : 1, // 初始化加载第一页，默认第一页
-			pageSize : 8, // 每页的记录行数（*）
-			paginationHAlign : 'left',
-			paginationDetailHAlign : "right",
-			// pageList: [10, 20, 50], //可供选择的每页的行数（*）
-			// showPaginationSwitch: true,
-			height : 300,
-			singleSelect : true,
-			minimumCountColumns : 2, // 最少允许的列数
-			clickToSelect : true, // 是否启用点击选中行
-			uniqueId : "id", // 每一行的唯一标识，一般为主键列
-			cardView : false, // 是否显示详细视图
-			detailView : false, // 是否显示父子表
-			columns: [
-				{checkbox : true},
-				{field : 'id',title : '序号'}, 
-				{field : 'name',title : '项目名称'}, 
-				{field : 'family',title : '人口'}, 
-				{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
-				{field : 'relocate_time',title : '搬迁时间'},
-				{field: 'cz',title: '操作', formatter:Edit},   
-		    ],
-			dataType : 'json',
-			queryParams : function(params) {
-				if (params) {
-					//var data = FormUtils.getData("form-ckjdjg");
-					params.start = params.offset;
-					params.rows = params.limit;
-					//params.house_code=data.bh;
-				}
-				return params;
-			},
-			responseHandler : function(res) {
-				if (res.code > 0) {
-					return res;
-				} else {
-					return [];
-				}
-			},
-		});	
-	
+/*        UI.loadBootstrapTable('#House-bqry-data', monitorConfig.monitor,'#settlement-monitor-data-toorbar');
+        Ajax.postJson("person/list_person",{project_id:selections[0].id}, function(data){
+            if(data.code > 0){
+            	$('#House-bqry-data').bootstrapTable('load', data); 	 
+            }else{                
+            	$.bootstrapGrowl(data.message, {
+                    type: 'info',
+                    align: 'center',
+                    delay: 3000,
+                    width: 'auto',
+                });
+            }
+        });*/
+		 Ajax.postJson("person/list_person",{project_id:selections[0].id}, function(data){
+	            if(data.code > 0){
+	            	$('#House-bqry-data').bootstrapTable('load', data);
+	            	  
+	            }else{                
+	            	$.bootstrapGrowl(data.message, {
+	                    type: 'info',
+	                    align: 'center',
+	                    delay: 3000,
+	                    width: 'auto',
+	                });
+	            }
+	        });	   	
 	});
+
+   	$('#House-bqry-data').bootstrapTable({
+		url : 'person/list_person', // 请求后台的URL（*）
+		method : 'get', // 请求方式（*）
+		striped : true, // 是否显示行间隔色
+		cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		pagination : false, // 是否显示分页（*）
+		sortable : false, // 是否启用排序
+		sortOrder : "asc", // 排序方式
+		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
+		pageNumber : 1, // 初始化加载第一页，默认第一页
+		pageSize : 8, // 每页的记录行数（*）
+		paginationHAlign : 'left',
+		paginationDetailHAlign : "right",
+		// pageList: [10, 20, 50], //可供选择的每页的行数（*）
+		// showPaginationSwitch: true,
+		height : 300,
+		singleSelect : true,
+		minimumCountColumns : 2, // 最少允许的列数
+		clickToSelect : true, // 是否启用点击选中行
+		uniqueId : "id", // 每一行的唯一标识，一般为主键列
+		cardView : false, // 是否显示详细视图
+		detailView : false, // 是否显示父子表
+		columns: [
+			{checkbox : true},
+			{field : 'id',title : '序号'}, 
+			{field : 'name',title : '项目名称'}, 
+			{field : 'family',title : '人口'}, 
+			{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
+			{field : 'relocate_time',title : '搬迁时间'},
+			{field: 'cz',title: '操作', formatter:Edit},   
+	    ],
+		dataType : 'json',
+		queryParams : function(params) {
+			if (params) {
+				params.start = params.offset;
+				params.rows = params.limit;				
+			}
+			return params;
+		},
+		responseHandler : function(res) {
+			if (res.code > 0) {
+				return res;
+			} else {
+				return [];
+			}
+		},
+		
+	});	
+	
 	
 	//搬迁人员修改
     $("#House-bqry-data-div").on("click",".Edit-edit",function(){
@@ -480,7 +532,8 @@ $(function(){
 	                text: '保存成功',
 	                time: 1000,	                
 
-                }); 
+                });
+     	       
             }else{                
                 	$.gritter.add({
                  title: '提示',
@@ -488,36 +541,10 @@ $(function(){
                         time: 1000,
                 });
              }
-        	 $('#House-bqry-data').bootstrapTable('refresh');
+    		
              $('#settlement-monitor-bq-dialog').modal('hide');
+             //$('#House-bqry-data').bootstrapTable('refresh'); 
     	});
-
+    	 
 	});
-    
-	// 导表
-	$("#map-search-data-toorbar-hdcbg").on("click",function() {
-		var params = FormUtils.getData("search-form-group-condition");
-		// 导表条件条件
-		var zdmj1 = (params.zdmj1 == '') ? "" : params.zdmj1;
-		var zdmj2 = (params.zdmj2 == '') ? "" : params.zdmj2;
-		var cs = params.cs;
-		var js1 = (params.js1 == '') ? "" : params.js1;
-		var js2 = (params.js2 == '') ? "" : params.js2;
-		var reform_type = params.reform_type;
-		var xzjd = params.xzjd;
-		var ssc = params.ssc;
-		var mph = params.mph;
-		var zflb = params.zflb;
-		var Startime=params.Startime;
-		var Endtime=params.Endtime;
-		var zt=params.zt;
-		window.location.href= baseUrl + 'history/excel?zdmj1='+zdmj1+'&zdmj2='+zdmj2+'&cs='+cs+'&js1='+js1+'&js2='+js2+'&reform_type='+reform_type+'&xzjd='+xzjd+'&ssc='+ssc+'&mph='+mph+'&zflb='+zflb+'&Startime='+Startime+'&Endtime='+Endtime+'&zt='+zt;
-		$.gritter.add({
-			title : '提示',
-			text : '导出成功',
-			time : 1000,
-			speed: 2000, 
-		});
-	});
-
 });

@@ -28,7 +28,7 @@ public class PersonController extends BaseController {
 	 */
 	@RequestMapping(value = "/list_person", produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String map(relocationProject params){
+	public String map(person params){
 		params.setId(1);
 		try {
 			List<person> houseList = PersonService.list(params);

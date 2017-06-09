@@ -4,6 +4,14 @@ var type = function(value,row){
 	 return row.hiddendanger_id+"-"+row.hiddendanger_name;
 }
 
+
+var type1 = function(value,row){
+	var a="<div class='progress'  style=' margin-top: 5px;margin-bottom: 5px;' >"
+           +"<div  class='progress-bar progress-bar-info' role='progressbar' aria-valuenow='60' aria-valuemin='0' aria-valuemax='100' style='width:"+row.progress+"%;'>"
+             +"<span>"+row.progress+"%</span></div></div>";
+	 return a;
+}
+
 //初始化Table
 $('#map-search-data').bootstrapTable({
     url: 'engineer/list_engineerproject',         //请求后台的URL（*）
@@ -50,7 +58,7 @@ $('#map-search-data').bootstrapTable({
         {field: 'hiddendanger_name',title: '隐患点名称',formatter:type}, 
         {field: 'basicInfo',title: '基本情况'},
         {field: 'governanceInfo',title: '防治情况'}, 
-        {field: 'progress',title: '搬迁进度（普通）'}, 
+        {field: 'progress',title: '搬迁进度（普通）',formatter:type1}, 
         {field: 'create_time',title: '计划时间'},
         {field: 'remark',title: '备注'}
         //{field: 'level',title: '鉴定等级'},

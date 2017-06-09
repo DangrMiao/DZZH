@@ -8,9 +8,9 @@ import com.wdkj.dzzh.entity.GoverMap.person;
 import com.wdkj.dzzh.entity.GoverMap.relocationProject;
 
 public interface PersonManager {
-	List<person> list(relocationProject params) throws Exception;
+	List<person> list(person params) throws Exception;
 
-	Integer countList(relocationProject params) throws Exception;
+	Integer countList(person params) throws Exception;
 	
 	void addPerson(person params) throws Exception;
 

@@ -59,8 +59,7 @@ public class GoverMapController extends BaseController {
 	public String mapSearch(hiddendanger params){
 		try {
 			List<hiddendanger> List = mapService.listSearch(params);
-			int count = mapService.countList(params);
-			return JSONUtil.toJsonString(new PagedJsonResult(List, 1, "成功", count, params.getRows()));
+			return JSONUtil.toJsonString(new JsonResult(1, "成功", List));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));

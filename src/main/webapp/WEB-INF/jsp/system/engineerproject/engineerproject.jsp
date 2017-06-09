@@ -13,6 +13,8 @@
 <html lang="en">
 <head>
 	<base href="<%=basePath%>">
+	<link href="static/lkk/bootstrap.min.css" rel="stylesheet">
+	<link href="static/lkk/fileinput.min.css" rel="stylesheet" />
 	<!-- 下拉框 -->
 	<link rel="stylesheet" href="static/ace/css/chosen.css" />
 	<!-- jsp文件头和头部 -->
@@ -248,7 +250,50 @@
 </div>
 
 <!-- 添加的模态框(权利人) -->
-  <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 添加的模态框(666) -->
+ <!--  <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:800px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+		
+		<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="qlr-close" aria-hidden="true">&times;<tton> 
+				<h5 class="modal-title" id="">上传文件</h5>
+		</div>
+
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-test-qlr">
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">灾害点名称:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "hiddendanger_name" class="form-control" readonly="readonly"> 
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">阶段:</label>
+						<select class="col-sm-6" style="height:26px"  size="30" class="form-control"onchange="changegoverstage()"id="goverstage">
+    					<option  value="1">基本情况</option> 
+						<option  value="2">防止情况</option> 
+						<option  value="3">进展情况</option> 					
+						<lect>
+					</div>
+					<div style="text-align: right;" class="form-group" id="basic" >
+						<label class="col-sm-4">基本文件:</label>
+						<input class="col-sm-6 file-loading" style="height:26px" id="preventSituation" name="preventSituation" size="30"  multiple="multiple" type="file" class="form-control">
+					</div>
+					<div style="text-align: right;" class="form-group" id="prevent">
+						<label class="col-sm-4">防治文件:</label>
+						<input class="col-sm-6 file-loading" style="height:26px" id="preventSituation" name="preventSituation" size="30"  multiple="multiple" type="file" class="form-control">
+					</div>
+					<div style="text-align: right;" class="form-group" id="progress">
+						<label class="col-sm-4">进展文件:</label>
+						<input class="col-sm-6 file-loading" style="height:26px" id="progressSituation" name="progressSituation" size="30"  multiple="multiple" type="file" class="form-control">
+					</div>
+				    
+				</form>
+			</div>
+
+		</div>/.modal-content
+	</div>/.modal
+</div> -->
+    <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
@@ -280,10 +325,10 @@
 				</form>
 			</div>
 
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
+		</div>/.modal-content
+	</div>/.modal
 </div>
- 
+  
  
  <!-- 添加的模态框(照片展示) -->
   <div class="modal fade" id="account-Manager-add-dialog-photo"  aria-hidden="true" >
@@ -696,11 +741,17 @@
 	<!-- basic scripts -->
 	<!-- 页面底部js¨ -->
 	<%@ include file="../index/foot.jsp"%>
-	<script type="text/javascript" src="static/ace/js/jquery.js"></script>
+	
+	 <script type="text/javascript" src="static/ace/js/jquery.js"></script>
+	
+	
+	
 	<!-- 删除时确认窗口 -->
-	<!-- <script src="static/ace/js/jquery.form.min.js"></script> -->
+	 <!-- <script src="static/ace/js/jquery.form.min.js"></script> -->
 	<script src="static/ace/js/bootbox.js"></script>
+	
 	<script src="static/ace/js/bootstrap.js"></script>
+	
 	<!-- ace scripts -->
 	<script src="static/ace/js/ace/ace.js"></script>
 	<!-- 日期框 -->
@@ -735,9 +786,12 @@
 
 	<%--js文件--%>
     <script src="static/js/engineerproject/map.js" type="text/javascript"></script>
-	<script src="static/js/engineerproject/addHouse.js" type="text/javascript"></script> 
 	<script src="static/js/engineerproject/conditionSearch.js" type="text/javascript"></script>
-	<script src="static/js/engineerproject/monitor.js" type="text/javascript"></script>
+	
+	<!-- <script src="static/lkk/jquery-2.1.1.min.js"></script> 
+	<script src="static/lkk/fileinput.min.js"></script>
+	<script src="static/lkk/bootstrap.min.js"></script> 
+	<script src="static/lkk/zh.js"></script> -->
 	</body>
 
  	<script type="text/javascript">
@@ -791,4 +845,96 @@
 			window.location.href='<%=basePath%>history/excel';
 		} --%>
 	</script>
+<!-- 	<script type="text/javascript">
+$('#prevent').hide();
+$('#progress').hide();
+</script> -->
+<!-- <script> 
+function changegoverstage(){
+	var goverstage=$("#goverstage").val();
+	if(goverstage==1){
+	$('#prevent').hide();
+	$('#progress').hide();
+	$('#basic').show();
+	}
+	if(goverstage==2){
+		$('#progress').hide();
+		$('#basic').hide();
+		$('#prevent').show();
+		}
+	if(goverstage==3){
+		$('#prevent').hide();
+		$('#basic').hide();
+		$('#progress').show();
+		}
+	console.log(goverstage);
+
+}
+$(document).on('ready',function() { 
+	var geotype=$("#geotype").val();
+	var id=$("#id").val();
+	var url=encodeURI("id="+id+"&geotype="+geotype);
+	//console.log( 'UpLoadFile/upload'+goverstage+'?'+url+"&goverstage="+goverstage);
+		$("#basicSituation").fileinput({
+			language : 'zh',  
+			uploadUrl : 'UpLoadFile/upload1?'+url+"&goverstage="+1,  
+			showCaption : true,//是否显示标题  
+			browseClass : "btn btn-primary", //按钮样式 
+			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			enctype : 'multipart/form-data',  
+			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
+			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
+			allowedFileExtensions : [ ]  
+			}).on("fileuploaded", function(e, data) {
+		       alert("件上传成功");
+		       reloadtree();
+		       
+		});  
+
+   }); 
+$(document).on('ready',function() { 
+	var geotype=$("#geotype").val();
+	var id=$("#id").val();
+	var url=encodeURI("id="+id+"&geotype="+geotype);
+	//console.log( 'UpLoadFile/upload'+goverstage+'?'+url+"&goverstage="+goverstage);
+		$("#preventSituation").fileinput({
+			language : 'zh',  
+			uploadUrl : 'UpLoadFile/upload2?'+url+"&goverstage="+2,  
+			showCaption : true,//是否显示标题  
+			browseClass : "btn btn-primary", //按钮样式 
+			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			enctype : 'multipart/form-data',  
+			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
+			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
+			allowedFileExtensions : [ ]  
+			}).on("fileuploaded", function(e, data) {
+		       alert("件上传成功");
+		       reloadtree();
+		       
+		});  
+
+   }); 
+$(document).on('ready',function() { 
+	var geotype=$("#geotype").val();
+	var id=$("#id").val();
+	var url=encodeURI("id="+id+"&geotype="+geotype);
+	//console.log( 'UpLoadFile/upload'+goverstage+'?'+url+"&goverstage="+goverstage);
+		$("#progressSituation").fileinput({
+			language : 'zh',  
+			uploadUrl : 'UpLoadFile/upload3?'+url+"&goverstage="+3,  
+			showCaption : true,//是否显示标题  
+			browseClass : "btn btn-primary", //按钮样式 
+			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			enctype : 'multipart/form-data',  
+			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
+			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
+			allowedFileExtensions : [ ]  
+			}).on("fileuploaded", function(e, data) {
+		       alert("件上传成功");
+		       reloadtree();
+		       
+		});  
+
+   });
+</script>  -->
 </html>

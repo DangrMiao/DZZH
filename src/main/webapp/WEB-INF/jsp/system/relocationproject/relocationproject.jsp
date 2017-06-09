@@ -63,7 +63,7 @@
 	        <button id="map-search-data-toorbar-bqry" type="button" class="btn btn-sm">搬迁人员</button>  
 	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">资料管理</button> 
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
-	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
+	       <!--  <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button>  -->
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
         </div>  
 		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: none;">										
@@ -282,6 +282,8 @@
 
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
+	
+	
 </div>
  
  
@@ -308,11 +310,18 @@
 				<button type="button" class="close" data-dismiss="modal" id="bqry-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">搬迁人员一览表</h5>
 			</div>
-				<div id="House-bqry-data-div" class="settlemrnt-ob-data">
+			<div class="modal-body" style="hieght:800px;">
+			 <div id="settlement-monitor-table" style="margin-top: -30px;">
+			     <div class="heading btn-group" id="settlement-monitor-data-toorbar">				         
+					 <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-sm">添加人员</button> 							    
+				 </div>
+				 <div id="House-bqry-data-div" class="settlemrnt-ob-data">
 					<table id="House-bqry-data"  style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top scrolltable">
 					</table>
-				</div>
+				 </div>
+			 </div>
 			</div>
+		</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>

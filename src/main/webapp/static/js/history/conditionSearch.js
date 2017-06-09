@@ -101,6 +101,8 @@ $('#map-search-data').bootstrapTable({
             //params.endtime = $("#Endtime").val();
             params.district = res.district;
 			params.name=res.name;
+			params.scalegrad=res.scalegrad;
+			params.thisstage=res.thisstage;
 			params.governancetype=res.governancetype;
            
         }
@@ -269,36 +271,9 @@ $(function(){
         	})   	
     });
     
-    //属性更新提交
-    $("#save-submit").on("click",function(){
-    	var params = FormUtils.getData("form-sxgx");
-    	params.plancompletiontime=params.strplancompletiontime;
-    	params.id=selections[0].id;
-    	//console.log(params)
-    	Ajax.postJson(baseUrl+'map/update_map', params, function(data){
-    		if(data.code > 0){ 
-                $.gritter.add({
-	                title: '提示',
-	                text: '保存成功',
-	                time: 1000,	                
-
-                }); 
-            }else{                
-                	$.gritter.add({
-                 title: '提示',
-                        text: '保存失败:' + data.message,
-                        time: 1000,
-                });
-             }
-    	});
-    	//刷新有问题
-    	$('#map-search-data').bootstrapTable('refresh');
-    	$('#account-Manager-add-dialog-sxgx').modal('hide');
-    	$('#map-search-data-div').css('display','block');	 
-	});
-    
+ 
     //添加治理方案
-    $("#map-search-data-toorbar-qlr").on("click",function(){
+ /*   $("#map-search-data-toorbar-qlr").on("click",function(){
     	//$('#form-test').form('load',selections[0]); 
     	$('#account-Manager-add-dialog-result').modal('show');
     	//FormUtils.loadForm('form-test-result', selections[0]);
@@ -306,57 +281,8 @@ $(function(){
         	$("#ckjdjg-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})
-    });
-    
-    //添加治理方案提交
-    $("#add-save-submit").on("click",function(){
-    	var params = FormUtils.getData("form-test-result");
-    	//params.plancompletiontime=params.strplancompletiontime;
-    	params.hiddendanger_id=selections[0].id;
-    	console.log(params)
-    	if(params.governancetype=="1"){
-	    		Ajax.postJson(baseUrl+'relocation/add_relocationProject', params, function(data){
-	    		if(data.code > 0){ 
-	                $.gritter.add({
-		                title: '提示',
-		                text: '保存成功',
-		                time: 1000,	                
-	
-	                }); 
-	            }else{                
-	                	$.gritter.add({
-	                 title: '提示',
-	                        text: '保存失败:' + data.message,
-	                        time: 1000,
-	                });
-	             }
-	    	});
-    	}
-	    else if(params.governancetype=="2"){
-	    	Ajax.postJson(baseUrl+'engineer/add_engineerproject', params, function(data){
-	    		if(data.code > 0){ 
-	                $.gritter.add({
-		                title: '提示',
-		                text: '保存成功',
-		                time: 1000,	                
-	
-	                }); 
-	            }else{                
-	                	$.gritter.add({
-	                 title: '提示',
-	                        text: '保存失败:' + data.message,
-	                        time: 1000,
-	                });
-	             }
-	    	});
-	    }
-    	//刷新有问题
-    	$('#map-search-data').bootstrapTable('refresh');
-    	$('#account-Manager-add-dialog-sxgx').modal('hide');
-    	$('#map-search-data-div').css('display','block');	 
-	});
-    
-    
+    });*/
+       
 	// 导表
 	$("#map-search-data-toorbar-hdcbg").on("click",function() {
 		var params = FormUtils.getData("search-form-group-condition");

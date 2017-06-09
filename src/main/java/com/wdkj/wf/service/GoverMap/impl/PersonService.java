@@ -30,7 +30,7 @@ public class PersonService implements PersonManager{
 	
 	 }
 	@Override
-	public List<person> list(relocationProject params) throws Exception {
+	public List<person> list(person params) throws Exception {
 		List<person> datalist= (List<person> )dao.findForList("PersonDao.get_allperson_by_project_id", params);		
 		person c=new person();
 		 for(int i=0;i<datalist.size();i++){
@@ -40,7 +40,7 @@ public class PersonService implements PersonManager{
 		return datalist;
 	}
 	@Override
-	public Integer countList(relocationProject params) throws Exception {
+	public Integer countList(person params) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.getOne("PersonDao.get_countperson_by_project_id", params);
 	}

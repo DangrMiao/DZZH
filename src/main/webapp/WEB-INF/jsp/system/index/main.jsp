@@ -41,8 +41,8 @@
 
 			<!-- #section:basics/sidebar -->
 			<!-- 左侧菜单 -->
-			<%@ include file="left.jsp"%>
-
+			  <%@ include file="left.jsp"%>
+ 
 			<!-- /section:basics/sidebar -->
 			<div class="main-content">
 				<div class="main-content-inner">

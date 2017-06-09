@@ -11,7 +11,7 @@ $(function() {
         success: function(data){ 
        		loadMap();
        	    drawTMakers(data.rows);  
-       	    //console.log(data.rows);
+       	    //console.log(data.rows)
        	    addTEvent(iconMarkers,data.rows);  		            
           }
      });
@@ -21,8 +21,8 @@ $(function() {
     var marker;
     function drawTMakers(lnglats){    	   	
         if (lnglats.length != 0) {  
-        	var iconA = new T.Icon({ 
-                iconUrl: "static/images/levelA.png", 
+        	var iconD = new T.Icon({ 
+                iconUrl: "static/images/levelD.png", 
                 iconSize: new T.Point(12, 12), 
                 iconAnchor: new T.Point(6, 18) 
             });
@@ -38,22 +38,22 @@ $(function() {
             });  
         	
         for (var i = 0; i < lnglats.length; i = i + 1) {
-    	    if (lnglats[i].color == -1) {  
-	        	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconA});
+    	    if (lnglats[i].governancetypeid == 0) {  
+	        	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconD});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);  
-            } else if (lnglats[i].color == 1) {
+            } else if (lnglats[i].governancetypeid == 1) {
+            	
             	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconB});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);
-			} else if (lnglats[i].color == 0) {
+			} else if (lnglats[i].governancetypeid == 2) {
             	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconC});
 	        	map.addOverLay(marker);
 	        	iconMarkers.push(marker);
 			} 
-    	    
     	    if (iconMarkers[i]) {
-    	    	iconMarkers[i].id=lnglats[i].id;
+    	    	iconMarkers[i].id=lnglats[i].id;	 
 			}
     	    iconMarkers[i].reform_type=lnglats[i].reform_type;
         } 
@@ -66,7 +66,7 @@ $(function() {
         //console.log(iconMarkers); 
     }  
      
-    function onMouseOver(m) {    
+   function onMouseOver(m) {    
         label = new T.Label({
             text: "待定",
             position: new T.LngLat(m.wr.lng, m.wr.lat),
@@ -113,24 +113,27 @@ $(function() {
         map.removeOverLay(labelB);
         map.removeOverLay(labelC);
         map.removeOverLay(labelD);
-    }  
-    function PointClick(e) 
-	{
+    } 
+    function PointClick(e){
     	var params={};
     	params.id=e.target.id;
-    	console.log(params)
     	//获取房屋信息 
-        Ajax.getJson("map/list_map",params, function(data){
-        	if (data.rows[0]!=undefined) {
-        		$('#account-Manager-add-dialog').modal('show');
-    			FormUtils.loadForm('form-test',data.rows[0]);
+        Ajax.getJson("map/search_map",params, function(data){
+        	if (data.rows[0].governancetypeid ==0){ 
+        		$('#account-Manager-add-dialog-sxgx').modal('show');
+    			FormUtils.loadForm('form-sxgx',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
-    			$("#fwgk-close").on("click",function(){
+    			$("#sxgx-close").on("click",function(){
             		$('#search-form-group').css('display','block');	 
             	})
 			}
-        	
+        	else if(data.rows[0].governancetypeid ==1){
+        		console.log(data.rows[0]);
+        	}
+        	else if(data.rows[0].governancetypeid ==2){
+        		console.log(data.rows[0]);
+        	} 	
         });
 	}
     
@@ -142,11 +145,11 @@ $(function() {
         var arrLen = lnglats.length;  
         var i,eventFn = eventFn || onMouseOver;  
         for (var i = 0;  i<arrLen; i++) {  
-            iconMakers[i].id=i; 
+            //iconMakers[i].id=i; 
             // 绑定事件  
             (function() {  
                 var m = iconMakers[i];
-//                m.addEventListener("click",f_wave);
+//              m.addEventListener("click",f_wave);
                 m.addEventListener("click",PointClick);
             	m.addEventListener("mouseover",function() {  
 		        	
@@ -282,6 +285,95 @@ $(function() {
         //杭州市 120.149920,30.274190
         map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
     }
+    
+    //属性更新提交
+    $("#save-submit").on("click",function(){
+     	var params = FormUtils.getData("form-sxgx");
+     	console.log(params)
+     	//params.plancompletiontime=params.strplancompletiontime;
+     	//params.id=selections[0].id;
+     	//console.log(params)
+     	Ajax.postJson(baseUrl+'map/update_map', params, function(data){
+     		if(data.code > 0){ 
+                 $.gritter.add({
+ 	                title: '提示',
+ 	                text: '保存成功',
+ 	                time: 1000,	                
+
+                 }); 
+             }else{                
+                 	$.gritter.add({
+                  title: '提示',
+                         text: '保存失败:' + data.message,
+                         time: 1000,
+                 });
+              }
+     	});
+     	//刷新有问题
+     	$('#map-search-data').bootstrapTable('refresh');
+     	$('#account-Manager-add-dialog-sxgx').modal('hide');
+     	$('#search-form-group').css('display','block');	
+     	//$('#map-search-data-div').css('display','block');	 
+ 	});
+       //添加治理方案
+        $("#add-submit").on("click",function(){
+        	//$('#form-test').form('load',selections[0]); 
+        	$('#account-Manager-add-dialog-result').modal('show');
+        	//FormUtils.loadForm('form-test-result', selections[0]);
+        	$('#map-search-data-div').css('display','none');
+            	$("#ckjdjg-close").on("click",function(){
+            		$('#map-search-data-div').css('display','block');
+            	})
+        });
+       //添加治理方案提交
+        $("#add-save-submit").on("click",function(){
+        	var add = FormUtils.getData("form-sxgx");
+        	var params = FormUtils.getData("form-test-result");
+        	params.plancompletiontime=params.strplancompletiontime;
+        	params.hiddendanger_id=add.id;
+        	console.log(params)
+        	if(params.governancetype=="1"){
+    	    		Ajax.postJson(baseUrl+'relocation/add_relocationProject', params, function(data){
+    	    		if(data.code > 0){ 
+    	                $.gritter.add({
+    		                title: '提示',
+    		                text: '保存成功',
+    		                time: 1000,	                
+    	
+    	                }); 
+    	            }else{                
+    	                	$.gritter.add({
+    	                 title: '提示',
+    	                        text: '保存失败:' + data.message,
+    	                        time: 1000,
+    	                });
+    	             }
+    	    	});
+        	}
+    	    else if(params.governancetype=="2"){
+    	    	Ajax.postJson(baseUrl+'engineer/add_engineerproject', params, function(data){
+    	    		if(data.code > 0){ 
+    	                $.gritter.add({
+    		                title: '提示',
+    		                text: '保存成功',
+    		                time: 1000,	                
+    	
+    	                }); 
+    	            }else{                
+    	                	$.gritter.add({
+    	                 title: '提示',
+    	                        text: '保存失败:' + data.message,
+    	                        time: 1000,
+    	                });
+    	             }
+    	    	});
+    	    }
+        	//刷新有问题
+        	$('#map-search-data').bootstrapTable('refresh');
+        	$('#account-Manager-add-dialog-result').modal('hide');
+        	$('#account-Manager-add-dialog-sxgx').modal('hide');
+        	$('#map-search-data-div').css('display','block');	 
+    	});
 });
 
 /**
