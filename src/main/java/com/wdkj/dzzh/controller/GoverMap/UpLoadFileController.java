@@ -44,7 +44,6 @@ public class UpLoadFileController {
 	
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("dzzh/fileupload_route");
-	
 		return mv;
 	}
 	

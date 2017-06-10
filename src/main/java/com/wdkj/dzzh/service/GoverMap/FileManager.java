@@ -8,6 +8,6 @@ import com.wdkj.dzzh.entity.GoverMap.file;
 
 public interface FileManager {
 	public boolean F_add_file(file f);
-	List<TreeRoot> F_list_by_goverid(file f);
-	public void deletelist(ArrayList<Integer> nodeids) ;
+	List<TreeRoot> F_list_by_goverid(file f)throws Exception ;
+	public void deletelist(ArrayList<Integer> nodeids)throws Exception  ;
 }

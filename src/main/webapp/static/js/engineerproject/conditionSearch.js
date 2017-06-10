@@ -182,7 +182,8 @@ $(function(){
         //8888888888888888888888
         $("#map-search-data-toorbar-zlxz").on("click",function(){ 	
         	$('#account-Manager-add-dialog-zlxz').modal('show');
-       	    console.log(selections[0])
+       	    //console.log(selections[0])
+        	treeConframe.window.goto_treenode_by_projectid(selections[0].id,2);
      	    FormUtils.loadForm('form-test-qlr', selections[0]);
      	    $('#map-search-data-div').css('display','none');
 	        	$("#zlxz-close").on("click",function(){

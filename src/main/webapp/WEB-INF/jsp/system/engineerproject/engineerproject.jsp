@@ -311,11 +311,15 @@
 </div>
 <!-- //8888888888888888888888 -->
 <div class="modal fade" id="account-Manager-add-dialog-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:600px;height:500px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:1000px;height:600px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="zlxz-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">下载文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:450px;">
+				<iframe name="treeConframe"  style="width:100%;height:100%;"class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
+				 </iframe>
 			</div>
 		</div>
 	</div>

@@ -7,5 +7,20 @@
   	insert into file  (text,realname,location,virtuallocation,type,govertype,goverid,goverstage )
 		value (#{text},#{realname},#{location},#{virtuallocation},#{type},#{govertype}, #{goverid},#{goverstage})
   	</insert>
+  	
+  	<select id="filelist" parameterType="com.wdkj.dzzh.entity.GoverMap.file" resultType="com.wdkj.dzzh.entity.GoverMap.file">
+  		select *
+		FROM file f
+		where f.goverid=#{goverid} and f.govertype=#{govertype} and f.type=#{type} and f.goverstage=#{goverstage}
+  	</select>
+  	
+  	<delete id="deletelist" parameterType="java.util.List">
+  		delete from file
+  		where id in
+	<foreach item="item" index="index" collection="list" open="("
+            separator="," close=")">
+            #{item}  
+      </foreach>
+  	</delete>
 
 </mapper>

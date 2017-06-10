@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fh.dao.DaoSupport;
 import com.wdkj.dzzh.entity.GoverMap.TreeRoot;
 import com.wdkj.dzzh.entity.GoverMap.file;
+import com.wdkj.dzzh.entity.GoverMap.hiddendanger;
 import com.wdkj.dzzh.service.GoverMap.FileManager;
 
 @Service("FileService")
@@ -25,14 +26,14 @@ public class FileService  implements FileManager{
 	}
 
 	@Override
-	public List<TreeRoot> F_list_by_goverid(file f) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TreeRoot> F_list_by_goverid(file f) throws Exception {
+		List<TreeRoot> datalist= (List<TreeRoot> )dao.findForList("FileDao.filelist", f);
+		return datalist;
 	}
 
 	@Override
-	public void deletelist(ArrayList<Integer> nodeids) {
-		// TODO Auto-generated method stub
+	public void deletelist(ArrayList<Integer> list) throws Exception {
+		dao.delete("FileDao.deletelist", list);
 		
 	}
 
