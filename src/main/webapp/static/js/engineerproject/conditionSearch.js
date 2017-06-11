@@ -176,8 +176,6 @@ $(function(){
 	        	$("#qlr-close").on("click",function(){
 	        		$('#map-search-data-div').css('display','block');
 	        	})
-	        	
-
         });
         //8888888888888888888888
         $("#map-search-data-toorbar-zlxz").on("click",function(){ 	

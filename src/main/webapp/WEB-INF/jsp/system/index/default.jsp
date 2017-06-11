@@ -62,7 +62,7 @@
 	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
 	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button> 
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
-	        <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button> 
+	      <!--   <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button>  -->
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
         </div>  
 		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: none;">										
@@ -92,22 +92,22 @@
 		   <%--原拆原建--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			
-			   <img class="col-xs-6 col-sm-3" src="static/images/levelA.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理中</label>
+			   <img class="col-xs-6 col-sm-3" src="static/images/levelD.png"></img>
+			   <label class="col-xs-6 col-sm-6">暂无</label>
 		   </div>
 		   
 		   <%--修缮加固--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			 
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelB.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理完成</label>
+			   <label class="col-xs-6 col-sm-6">搬迁避让</label>
 		   </div>
 
 		   <%--拆除--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 		
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelC.png"></img>
-			   <label class="col-xs-6 col-sm-6">治理超时</label>
+			   <label class="col-xs-6 col-sm-6">工程治理</label>
 		   </div>
 
 		</div><!-- .sidebar -->
@@ -152,9 +152,8 @@
 						<label class="col-sm-5">稳定性:</label>
 						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" readonly="readonly"> 
 					</div>
-					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度:</label>
+						<label class="col-sm-5">治理进度(%):</label>
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" readonly="readonly">
 					</div>
 
@@ -174,6 +173,10 @@
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-sxgx">
+					<div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">计划时间:</label>
 						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
@@ -203,14 +206,14 @@
 						<label class="col-sm-5">稳定性:</label>
 						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
 					</div>
-					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度:</label>
+						<label class="col-sm-5">治理进度(%):</label>
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
-					<div class="modal-footer" style="text-align:center;background:white;">
- 						<button type="button" class="btn btn-sm btn-info" id="save-submit">保存</button>	
-			        </div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="save-submit">更新</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="add-submit" style="margin-left:0px">添加治理方案</button>
+				   </div>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->
@@ -253,7 +256,7 @@
 		 	   		    </select>
 					</div>
 				 <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">进度:</label>
+						<label class="col-sm-5">进度(%):</label>
 						<input class="col-sm-6" style="height:26px" name = "progress" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
@@ -269,41 +272,245 @@
 	</div><!-- /.modal -->
 </div>
 
-<!-- 添加的模态框(权利人) -->
-<!--   <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- 搬迁避让模态框 -->
+   <div class="modal fade" id="account-Manager-add-dialog-bqbr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:420px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息更新</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-bqbr">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">进度(%):</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="progress" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
+					</div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="bqbr-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button>
+				   </div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+	 <!-- 查看搬迁人员的模态框 -->
+<div class="modal fade" id="House-Manager-bqry-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+		<div class="modal-dialog" style="width: 550px;margin-top:68px;margin-left:0px; ">
+				<div class="modal-content" id="House-bqry-data-div">
+				<div class="modal-header" style="text-align:center;font-size:14px">
+				<button type="button" class="close" data-dismiss="modal" id="bqry-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">搬迁人员一览表</h5>
+			</div>
+			<div class="modal-body" style="hieght:800px;">
+			 <div id="settlement-monitor-table" style="margin-top: -30px;">
+			     <div class="heading btn-group" id="settlement-monitor-data-toorbar">				         
+					 <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-sm">添加人员</button> 							    
+				 </div>
+				 <div id="House-bqry-data-div" class="settlemrnt-ob-data">
+					<table id="House-bqry-data"  style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top scrolltable">
+					</table>
+				 </div>
+			 </div>
+			</div>
+		</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+	<!-- 修改搬迁人员 -->
+	<div class="modal fade" id="settlement-monitor-bq-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 450px;margin-top:68px;margin-left:0px;">
+			<div class="modal-content">
+				<div class="modal-header" style="text-align:center;font-size:14px">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h5 class="modal-title" id="myModalLabel">编辑搬迁人员</h5>
+				</div>
+				<div class="modal-body">
+					<form role="form" id="add-settlement-form" class="form-horizontal" style="hieght:800px;">
+				        <div style="text-align:right;" class="form-group">
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-4 date-picker" name="relocate_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+						</div>
+						<div style="text-align:right;" class="form-group">
+							<label class="col-sm-4">姓名:</label>
+							<input class="col-sm-4" style="height:26px" name = "name" type="text" class="form-control">
+						</div>
+						<div style="text-align: right;" class="form-group">
+							<label class="col-sm-4">人数:</label>
+							<input class="col-sm-4" style="height:26px" name = "family" type="text" class="form-control" >
+						</div>
+						<div style="text-align: right;" class="form-group">
+							<label class="col-sm-4">是否搬迁:</label>
+							<select name="relocate_flag" id="relocate_flag" style="height: 26px;width:151px;" class="form-control" required>
+							    <option value="0">未搬迁</option>
+							    <option value="1">已搬迁</option>
+				   		    </select>
+						</div>
+						 
+				    </form>
+				</div>
+				<div class="modal-footer" style="text-align: center;">
+					<button class="btn btn-info btn-sm" type="submit" id="settlement-add-dq-btn">
+	                    <i class="ace-icon fa fa-check bigger-110"></i> 确定
+	                </button>
+	                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
+	                	<i class="ace-icon fa fa-times bigger-110"></i> 关闭
+	                </button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	
+	
+<!-- 资料上传(搬迁避让) -->
+  <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:600px;height:600px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlsc-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">上传文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:600px;">
+				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 资料下载(搬迁避让) -->
+<div class="modal fade" id="account-Manager-add-dialog-bqbr-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlxz-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">下载文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:700px;">
+				<iframe name="treeConframe"  style="width:100%;height:100%;"class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
+				 </iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 工程治理模态框 -->
+  <div class="modal fade" id="account-Manager-add-dialog-gczl-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
-				<button type="button" class="close" data-dismiss="modal" id="qlr-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">权利人</h5>
+				<button type="button" class="close" data-dismiss="modal" id="gczl-sxgx-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息更新</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
-				<form class="form-horizontal" role="form" id ="form-test-qlr">
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">编号:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "bh" class="form-control" readonly="readonly"> 
+				<form class="form-horizontal" role="form" id ="form-gczl">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">户主:</label>
-						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">身份证号:</label>
-						<input class="col-sm-6" style="height:26px" name = "identity" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">联系电话:</label>
-						<input class="col-sm-6" style="height:26px" name = "phonenum" type="text" class="form-control" readonly="readonly">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
 					</div>
-				 
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">进度(%):</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="progress" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
+					</div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="gczl-save-submit">信息更新</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="gczl-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="gczl-download-submit">资料下载</button>
+				   </div>
 				</form>
 			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+ 
+ 
+ <!-- 资料上传(工程治理) -->
+  <div class="modal fade" id="account-Manager-add-dialog-gczl-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:600px;height:600px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="gczl-zlsc-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">上传文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:600px;">
+				<iframe name="fileConframe1"  style="width:100%;height:100%;"class="Conframe" id="fileConframe1" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 资料下载(工程治理) -->
+<div class="modal fade" id="account-Manager-add-dialog-gczl-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="gczl-zlxz-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">下载文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:700px;">
+				<iframe name="treeConframe1"  style="width:100%;height:100%;"class="Conframe" id="treeConframe1" frameborder=0 src="<%=basePath%>TreeNode">
+				 </iframe>
+			</div>
+		</div>
+	</div>
+</div>
 
-		</div>/.modal-content
-	</div>/.modal
-</div> -->
- 
- 
  <!-- 添加的模态框(照片展示) -->
   <div class="modal fade" id="account-Manager-add-dialog-photo"  aria-hidden="true" >
 	<div class="modal-dialog" style="margin-right:4px;">
@@ -506,22 +713,48 @@
 		 	   	   <label class="search-label">名称:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
 		 	   </div>
-		 	  <!--  <div style="padding-right: 20px;" class="input-group">
-		 	   	   <label class="search-label">所属村:</label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="ssc">
-		 	   </div>	 -->	 	   		 	   
-		    
-			    
+		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">治理类型:</label>
+		 	  	   <select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option value="0">暂无</option>
+					    <option value="1">拆迁避让</option>
+					    <option value="2">工程治理</option>
+				    </select>
+		 	   </div>	
+		
+		 	    <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">规模等级:</label>
+		 	  	   <select name="scalegrad" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option>小型</option>
+					    <option>中型</option>
+					    <option>大型</option>
+				    </select>
+		 	   </div>
+		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   	   <label class="search-label">稳定性:</label>
+		 	  	   <select name="thisstage" style="height: 25px;" class="selectpicker show-tick search-content">
+					    <option></option>
+					    <option>好</option>
+					    <option>较好</option>
+					    <option>差</option>
+					    <option>较差</option>
+					    <option>低易发</option>
+					    <option>中易发</option>
+					    <option>稳定</option>
+				    </select>
+		 	   </div>  
 		 	   <div style="padding-right: 20px;margin-top: 5px;margin-left:-26px" class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
 				   </button>	 
 			   </div>
-			   	<div style="padding-right: 20px;display: none;" class="input-group" >
+			   <!-- 	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
-		 	   </div>
+		 	   </div> -->
 	 	  </div> 																		
 		</form>	 
 	</div>

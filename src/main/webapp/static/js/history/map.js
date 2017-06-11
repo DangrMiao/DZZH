@@ -144,7 +144,7 @@ $(function() {
         		Ajax.getJson("engineer/search_engineer",params, function(data){
         			console.log(data)
         		$('#account-Manager-add-dialog-gczl-sxgx').modal('show');
-    			//FormUtils.loadForm('form-bqbr',data.rows[0]);
+    			FormUtils.loadForm('form-gczl',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
     			$("#gczl-sxgx-close").on("click",function(){
@@ -253,7 +253,7 @@ $(function() {
         	//FormUtils.loadForm('form-test-result', selections[0]);
         	$('#map-search-data-div').css('display','none');
             	$("#ckjdjg-close").on("click",function(){
-            		$('#map-search-data-div').css('display','block');
+            		//$('#search-form-group').css('display','block');	
             	})
         });
        //添加治理方案提交
@@ -303,7 +303,7 @@ $(function() {
         	$('#map-search-data').bootstrapTable('refresh');
         	$('#account-Manager-add-dialog-result').modal('hide');
         	$('#account-Manager-add-dialog-sxgx').modal('hide');
-        	$('#map-search-data-div').css('display','block');	 
+        	$('#search-form-group').css('display','block'); 
     	});
         
         //“搬迁避让”属性更新提交
@@ -335,17 +335,136 @@ $(function() {
          	$('#search-form-group').css('display','block');	
          	//$('#map-search-data-div').css('display','block');	 
      	});
+ var bg = function(value,row){
+        	 switch (value)
+        	 {
+        	 case 0:
+        	 	return "未搬迁";
+        	 case 1:
+        		return "已搬迁";
+        	 }
+        }
+var Edit = function(value,row){
+       	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>';
+       	return html;
+       }
+   	//搬迁人员
+   	$("#bqbr-person-submit").on("click",function() {
+   		var params = FormUtils.getData("form-bqbr");
+   		console.log(params)  		
+   		$('#House-Manager-bqry-dialog').modal('show');
+   		 Ajax.postJson("person/list_person",{project_id:params.id}, function(data){
+   	            if(data.code > 0){
+   	            	$('#House-bqry-data').bootstrapTable('load', data);
+   	            	  
+   	            }else{                
+   	            	$.bootstrapGrowl(data.message, {
+   	                    type: 'info',
+   	                    align: 'center',
+   	                    delay: 3000,
+   	                    width: 'auto',
+   	                });
+   	            }
+   	        });	   	
+   	});
+   	
+   	$('#House-bqry-data').bootstrapTable({
+		url : 'person/list_person', // 请求后台的URL（*）
+		method : 'get', // 请求方式（*）
+		striped : true, // 是否显示行间隔色
+		cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+		pagination : false, // 是否显示分页（*）
+		sortable : false, // 是否启用排序
+		sortOrder : "asc", // 排序方式
+		sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
+		pageNumber : 1, // 初始化加载第一页，默认第一页
+		pageSize : 8, // 每页的记录行数（*）
+		paginationHAlign : 'left',
+		paginationDetailHAlign : "right",
+		// pageList: [10, 20, 50], //可供选择的每页的行数（*）
+		// showPaginationSwitch: true,
+		height : 300,
+		singleSelect : true,
+		minimumCountColumns : 2, // 最少允许的列数
+		clickToSelect : true, // 是否启用点击选中行
+		uniqueId : "id", // 每一行的唯一标识，一般为主键列
+		cardView : false, // 是否显示详细视图
+		detailView : false, // 是否显示父子表
+		columns: [
+			{checkbox : true},
+			{field : 'id',title : '序号'}, 
+			{field : 'name',title : '项目名称'}, 
+			{field : 'family',title : '人口'}, 
+			{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
+			{field : 'relocate_time',title : '搬迁时间'},
+			{field: 'cz',title: '操作', formatter:Edit},   
+	    ],
+		dataType : 'json',
+		queryParams : function(params) {
+			if (params) {
+				params.start = params.offset;
+				params.rows = params.limit;				
+			}
+			return params;
+		},
+		responseHandler : function(res) {
+			if (res.code > 0) {
+				return res;
+			} else {
+				return [];
+			}
+		},
+		
+	});	
+	//搬迁人员修改
+    $("#House-bqry-data-div").on("click",".Edit-edit",function(){
+    	row = $('#House-bqry-data').bootstrapTable('getSelections');
+    	$('#settlement-monitor-bq-dialog').modal('show');
+    	FormUtils.clearForm("add-settlement-form");
+    	FormUtils.loadForm("add-settlement-form",row[0]);
+	}); 
+    //保存
+    $("#settlement-add-dq-btn").on("click",function(){
+    	var params = FormUtils.getData("add-settlement-form");
+    	params.id = row[0].id;
+    	Ajax.postJson(baseUrl+'person/update_person', params, function(data){
+    		if(data.code > 0){ 
+                $.gritter.add({
+	                title: '提示',
+	                text: '保存成功',
+	                time: 1000,	                
+
+                });
+     	       
+            }else{                
+                	$.gritter.add({
+                 title: '提示',
+                        text: '保存失败:' + data.message,
+                        time: 1000,
+                });
+             }
+    		
+             $('#settlement-monitor-bq-dialog').modal('hide');
+             $('#House-Manager-bqry-dialog').modal('hide');
+             //$('#House-bqry-data').bootstrapTable('refresh'); 
+    	});
+    	 
+	});
+    
+    
+   	
+   	
       //资料上传(搬迁避让)
         $("#bqbr-add-submit").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
         	var params = FormUtils.getData("form-bqbr");
-        	console.log(params.id)
+        	//console.log(params.id)
         	fileConframe.window.goto_uploadfile_by_projectid(params.id,1);
         	$('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
         	//FormUtils.loadForm('form-test-qlr', selections[0]);
         	$('#map-search-data-div').css('display','none');
 	        	$("#bqbr-zlsc-close").on("click",function(){
-	        		$('#map-search-data-div').css('display','block');
+	        		//$('#map-search-data-div').css('display','block');
 	        	})
         });
       //资料下载(搬迁避让)
@@ -357,7 +476,63 @@ $(function() {
      	    //FormUtils.loadForm('form-test-qlr', selections[0]);
      	    $('#map-search-data-div').css('display','none');
 	        	$("#bqbr-zlxz-close").on("click",function(){
-	        		$('#map-search-data-div').css('display','block');
+	        		//$('#map-search-data-div').css('display','block');
+	        	})
+        });
+        
+        
+        //“工程治理”属性更新提交
+        $("#gczl-save-submit").on("click",function(){
+         	var params = FormUtils.getData("form-gczl");
+         	//console.log(params)
+         	//params.plancompletiontime=params.strplancompletiontime;
+         	//params.id=selections[0].id;
+         	//console.log(params)
+         	Ajax.postJson(baseUrl+'engineer/update_engineerproject', params, function(data){
+         		if(data.code > 0){ 
+                     $.gritter.add({
+     	                title: '提示',
+     	                text: '保存成功',
+     	                time: 1000,	                
+
+                     }); 
+                 }else{                
+                     	$.gritter.add({
+                      title: '提示',
+                             text: '保存失败:' + data.message,
+                             time: 1000,
+                     });
+                  }
+         	});
+         	//刷新有问题
+         	$('#map-search-data').bootstrapTable('refresh');
+         	$('#account-Manager-add-dialog-gczl-sxgx').modal('hide');
+         	$('#search-form-group').css('display','block');	
+         	//$('#map-search-data-div').css('display','block');	 
+     	});
+      //资料上传(工程治理)
+        $("#gczl-add-submit").on("click",function(){
+        	//$('#form-test').form('load',selections[0]); 
+        	var params = FormUtils.getData("form-gczl");
+        	console.log(params.id)
+        	fileConframe1.window.goto_uploadfile_by_projectid(params.id,2);
+        	$('#account-Manager-add-dialog-gczl-zlsc').modal('show');
+        	//FormUtils.loadForm('form-test-qlr', selections[0]);
+        	$('#map-search-data-div').css('display','none');
+	        	$("#gczl-zlsc-close").on("click",function(){
+	        		//$('#map-search-data-div').css('display','block');
+	        	})
+        });
+      //资料下载(工程治理)
+        $("#gczl-download-submit").on("click",function(){ 
+        	var params = FormUtils.getData("form-gczl");
+        	$('#account-Manager-add-dialog-gczl-zlxz').modal('show');
+       	    //console.log(selections[0])
+        	treeConframe1.window.goto_treenode_by_projectid(params.id,2);
+     	    //FormUtils.loadForm('form-test-qlr', selections[0]);
+     	    $('#map-search-data-div').css('display','none');
+	        	$("#gczl-zlxz-close").on("click",function(){
+	        		//$('#map-search-data-div').css('display','block');
 	        	})
         });
 });
