@@ -16,5 +16,6 @@ public interface EngineerManager {
 	void updatehdgovertype(hiddendanger h) throws Exception;
 
 	void updateEngineer(engineerproject params) throws Exception;
-
+	
+	List<engineerproject> listEngineer(engineerproject params) throws Exception;
 }

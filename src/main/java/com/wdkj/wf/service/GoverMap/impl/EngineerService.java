@@ -135,7 +135,18 @@ public class EngineerService implements EngineerManager{
 		// TODO Auto-generated method stub
 		dao.update("EngineerprojectDao.update_eng", params);
 	}
-	
+
+	@Override
+	public List<engineerproject> listEngineer(engineerproject params) throws Exception {
+		// TODO Auto-generated method stub
+		List<engineerproject> datalist= (List<engineerproject> )dao.findForList("EngineerprojectDao.get_eng_by_id", params);		
+		engineerproject c=new engineerproject();
+		 for(int i=0;i<datalist.size();i++){
+			 c=datalist.get(i);
+			 convertTodata(c);//鏃ユ湡杞崲涓烘暟鍊兼牸寮�("yyyy-MM-dd");
+			 } 
+		return datalist;
+	}
 
 }
 

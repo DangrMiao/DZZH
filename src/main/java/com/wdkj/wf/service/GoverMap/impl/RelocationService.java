@@ -133,5 +133,17 @@ public class RelocationService  implements RelocationManager{
 		dao.update("RelocationProjectDao.update_rp", params);
 	}
 	
+	@Override
+	public List<relocationProject> listRelocation(relocationProject params) throws Exception {
+		// TODO Auto-generated method stub
+		List<relocationProject> datalist= (List<relocationProject> )dao.findForList("RelocationProjectDao.get_rp_by_id", params);		
+		relocationProject c=new relocationProject();
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+		 for(int i=0;i<datalist.size();i++){
+			 c=datalist.get(i);
+			 convertTodata(c);//鏃ユ湡杞崲涓烘暟鍊兼牸寮�("yyyy-MM-dd");
+			 } 
+		return datalist;
+	}
 
 }

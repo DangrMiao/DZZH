@@ -30,7 +30,7 @@
   	<select id="get_rp_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
   		select r.`id`, r.`name`, r.`progress`,  r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`, r.`create_time`,r.hiddendanger_id,h.`name` as hiddendanger_name
 		from relocationproject r,hiddendanger h
-		where r.`id` = #{id} and r.hiddendanger_id=h.id
+		where r.hiddendanger_id = #{id} and r.hiddendanger_id=h.id
   	</select>
  	<!--增加搬迁项目 -->
   	<insert id="add_rp" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject">

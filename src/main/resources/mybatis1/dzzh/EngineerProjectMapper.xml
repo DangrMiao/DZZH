@@ -27,7 +27,7 @@
   	<select id="get_eng_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject" resultType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		select e.`id`, e.`name`, e.`progress`,  e.`basicInfo`, e.`governanceInfo`, e.`remark`,  e.`create_time`,e.hiddendanger_id,h.`name` as hiddendanger_name
 		from engineerproject e,hiddendanger h 
-		where e.`id` = #{id} and e.hiddendanger_id=h.id
+		where e.hiddendanger_id = #{id} and e.hiddendanger_id=h.id
   	</select>
   	<insert id="add_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		insert into engineerproject(`name`, `progress`, `basicInfo`, `governanceInfo`, `remark`, `create_time`,hiddendanger_id)

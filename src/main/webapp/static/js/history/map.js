@@ -129,10 +129,28 @@ $(function() {
             	})
 			}
         	else if(data.rows[0].governancetypeid ==1){
-        		console.log(data.rows[0]);
+        		Ajax.getJson("relocation/search_relocation",params, function(data){
+        			console.log(data)
+        		$('#account-Manager-add-dialog-bqbr').modal('show');
+    			FormUtils.loadForm('form-bqbr',data.rows[0]);
+    			$('#map-search-data-div').css('display','none');
+    			$('#search-form-group').css('display','none');
+    			$("#bqbr-close").on("click",function(){
+            		$('#search-form-group').css('display','block');	 
+            	  });
+        	   })
         	}
         	else if(data.rows[0].governancetypeid ==2){
-        		console.log(data.rows[0]);
+        		Ajax.getJson("engineer/search_engineer",params, function(data){
+        			console.log(data)
+        		$('#account-Manager-add-dialog-gczl-sxgx').modal('show');
+    			//FormUtils.loadForm('form-bqbr',data.rows[0]);
+    			$('#map-search-data-div').css('display','none');
+    			$('#search-form-group').css('display','none');
+    			$("#gczl-sxgx-close").on("click",function(){
+            		$('#search-form-group').css('display','block');	 
+            	  });
+        	   })
         	} 	
         });
 	}
@@ -286,7 +304,7 @@ $(function() {
         map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
     }
     
-    //属性更新提交
+    //暂无”属性更新提交
     $("#save-submit").on("click",function(){
      	var params = FormUtils.getData("form-sxgx");
      	console.log(params)
@@ -374,6 +392,61 @@ $(function() {
         	$('#account-Manager-add-dialog-sxgx').modal('hide');
         	$('#map-search-data-div').css('display','block');	 
     	});
+        
+        //“搬迁避让”属性更新提交
+        $("#bqbr-save-submit").on("click",function(){
+         	var params = FormUtils.getData("form-bqbr");
+         	//console.log(params)
+         	//params.plancompletiontime=params.strplancompletiontime;
+         	//params.id=selections[0].id;
+         	//console.log(params)
+         	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
+         		if(data.code > 0){ 
+                     $.gritter.add({
+     	                title: '提示',
+     	                text: '保存成功',
+     	                time: 1000,	                
+
+                     }); 
+                 }else{                
+                     	$.gritter.add({
+                      title: '提示',
+                             text: '保存失败:' + data.message,
+                             time: 1000,
+                     });
+                  }
+         	});
+         	//刷新有问题
+         	$('#map-search-data').bootstrapTable('refresh');
+         	$('#account-Manager-add-dialog-bqbr').modal('hide');
+         	$('#search-form-group').css('display','block');	
+         	//$('#map-search-data-div').css('display','block');	 
+     	});
+      //资料上传(搬迁避让)
+        $("#bqbr-add-submit").on("click",function(){
+        	//$('#form-test').form('load',selections[0]); 
+        	var params = FormUtils.getData("form-bqbr");
+        	console.log(params.id)
+        	fileConframe.window.goto_uploadfile_by_projectid(params.id,1);
+        	$('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
+        	//FormUtils.loadForm('form-test-qlr', selections[0]);
+        	$('#map-search-data-div').css('display','none');
+	        	$("#bqbr-zlsc-close").on("click",function(){
+	        		$('#map-search-data-div').css('display','block');
+	        	})
+        });
+      //资料下载(搬迁避让)
+        $("#bqbr-download-submit").on("click",function(){ 
+        	var params = FormUtils.getData("form-bqbr");
+        	$('#account-Manager-add-dialog-bqbr-zlxz').modal('show');
+       	    //console.log(selections[0])
+        	treeConframe.window.goto_treenode_by_projectid(params.id,1);
+     	    //FormUtils.loadForm('form-test-qlr', selections[0]);
+     	    $('#map-search-data-div').css('display','none');
+	        	$("#bqbr-zlxz-close").on("click",function(){
+	        		$('#map-search-data-div').css('display','block');
+	        	})
+        });
 });
 
 /**

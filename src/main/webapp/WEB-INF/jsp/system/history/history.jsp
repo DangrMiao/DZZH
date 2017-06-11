@@ -272,6 +272,146 @@
 	</div><!-- /.modal -->
 </div>
 
+<!-- 搬迁避让模态框 -->
+   <div class="modal fade" id="account-Manager-add-dialog-bqbr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:420px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息更新</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-bqbr">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">进度（%）:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="progress" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
+					</div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="bqbr-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button>
+				   </div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 资料上传(搬迁避让) -->
+  <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:600px;height:600px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlsc-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">上传文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:600px;">
+				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<!-- 资料下载(搬迁避让) -->
+<div class="modal fade" id="account-Manager-add-dialog-bqbr-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlxz-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">下载文件</h5>
+			</div>
+			<div class="modal-body" style="width:100%;height:700px;">
+				<iframe name="treeConframe"  style="width:100%;height:100%;"class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
+				 </iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 工程治理模态框 -->
+  <div class="modal fade" id="account-Manager-add-dialog-gczl-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="gczl-sxgx-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息更新</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-gczl">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">基本情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">防治情况:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">进度（）(%):</label>
+						<input class="col-sm-6" style="height:26px" type="text" name ="progress" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">备注:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
+					</div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="gczl-save-submit">信息更新</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="gczl-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="gczl-download-submit">资料下载</button>
+				   </div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+ 
+ 
 <!-- 添加的模态框(权利人) -->
 <!--   <div class="modal fade" id="account-Manager-add-dialog-qlr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">

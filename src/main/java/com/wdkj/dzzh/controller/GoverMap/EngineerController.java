@@ -70,6 +70,23 @@ public class EngineerController  extends BaseController {
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
 		}
 	}
+	
+	/**
+	 *搜索
+	 * @Param params
+	 * @return
+	 */
+	@RequestMapping(value = "/search_engineer", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String engineerSearch(engineerproject params){
+		try {
+			List<engineerproject> List = EngineerService.listEngineer(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "鎴愬姛", List));
+		} catch (Exception e) {
+			logger.error("鏌ヨ鍙戠敓閿欒", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "澶辫触锛氭湇鍔″櫒鍐呴儴閿欒!", null));
+		}
+	}
 
 }
 
