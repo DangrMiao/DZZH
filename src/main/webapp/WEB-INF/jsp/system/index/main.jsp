@@ -31,7 +31,7 @@
 		<!-- #section:basics/navbar.layout -->
 		
 		<!-- 页面顶部¨ -->
-		<%@ include file="head.jsp"%>
+		 <%@ include file="head.jsp"%>
 		<div id="websocket_button"></div><!-- 少了此处，聊天窗口就无法关闭 -->
 		<!-- /section:basics/navbar.layout -->
 		<div class="main-container" id="main-container"">
@@ -41,7 +41,7 @@
 
 			<!-- #section:basics/sidebar -->
 			<!-- 左侧菜单 -->
-			  <%@ include file="left.jsp"%>
+			 <%--  <%@ include file="left.jsp"%> --%>
  
 			<!-- /section:basics/sidebar -->
 			<div class="main-content">
@@ -129,7 +129,7 @@
 
 		<!-- basic scripts -->
 		<!-- 页面底部js¨ -->
-		<%@ include file="foot.jsp"%>
+		<%@ include file="foot.jsp"%> 
 		
 		<!-- page specific plugin scripts -->
 

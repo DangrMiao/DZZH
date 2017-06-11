@@ -16,7 +16,7 @@
 	<script type="text/javascript" charset="utf-8" src="plugins/tab/js/tab.js"></script>
 	</head>
 <body>
-<div id="tab_menu"></div>
+<!-- <div id="tab_menu"></div> -->
 <div style="width:100%;">
 	<div id="page" style="width:100%;height:100%;"></div>
 </div>		
