@@ -76,7 +76,7 @@
 						</li> -->
 
 						<!-- #section:basics/navbar.user_menu -->
-						<!-- <li class="light-blue">
+						 <li class="light-blue">
 							<a data-toggle="dropdown"  class="dropdown-toggle" href="#">
 								<img class="nav-user-photo" src="static/ace/avatars/user.jpg" alt="Jason's Photo" id="userPhoto" />
 								<span class="user-info" id="user_info">
@@ -86,20 +86,20 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a onclick="editPhoto();" style="cursor:pointer;"><i class="ace-icon glyphicon glyphicon-picture"></i>修改头像</a>editUserH()在 WebRoot\static\js\myjs\head.js中
+									<a onclick="editPhoto();" style="cursor:pointer;"><i class="ace-icon glyphicon glyphicon-picture"></i>修改头像</a>
 								</li>
 								<li>
-									<a onclick="editUserH();" style="cursor:pointer;"><i class="ace-icon fa fa-user"></i>修改资料</a>editUserH()在 WebRoot\static\js\myjs\head.js中
+									<a onclick="editUserH();" style="cursor:pointer;"><i class="ace-icon fa fa-user"></i>修改资料</a>
 								</li>
 								<li id="systemset">
-									<a onclick="editSys();" style="cursor:pointer;"><i class="ace-icon fa fa-cog"></i>系统设置</a>editSys()在 WebRoot\static\js\myjs\head.js中
+									<a onclick="editSys();" style="cursor:pointer;"><i class="ace-icon fa fa-cog"></i>系统设置</a>
 								</li>
 								<li class="divider"></li>
 								<li>
 									<a href="logout"><i class="ace-icon fa fa-power-off"></i>退出登录</a>
 								</li>
 							</ul>
-						</li> -->
+						</li> 
 
 						<!-- /section:basics/navbar.user_menu -->
 					</ul>

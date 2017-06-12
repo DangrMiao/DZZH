@@ -59,8 +59,8 @@
 	          -->
 	          
 	        <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>  
-	        <button id="map-search-data-toorbar-sxgx" type="button" class="btn btn-sm">信息更新</button>  
-	        <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button> 
+	        <button id="map-search-data-toorbar-start-sxgx" type="button" class="btn btn-sm">信息更新</button>  
+	        <!-- <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button>  -->
 	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
 	      <!--   <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button>  -->
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
@@ -112,7 +112,61 @@
 
 		</div><!-- .sidebar -->
 	</div>
-	
+	<!-- 添加的模态框(最初的属性更新) -->
+  <div class="modal fade" id="account-Manager-add-dialog-start-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="start-sxgx-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息更新</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-start-sxgx">
+					<div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-5">ID:</label>
+						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">计划时间:</label>
+						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">地址:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control"  >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">灾害类型:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" >
+					</div>
+				  
+				    <div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">规模:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">规模等级:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">稳定性:</label>
+						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">治理进度(%):</label>
+						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
+					</div>
+					<div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="start-save-submit">更新</button>
+				   </div>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <!-- 添加的模态框(灾害点概况) -->
   <div class="modal fade" id="account-Manager-add-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">

@@ -259,18 +259,46 @@ $(function(){
         	})
     });
     //属性更新
-    $("#map-search-data-toorbar-sxgx").on("click",function(){
+    $("#map-search-data-toorbar-start-sxgx").on("click",function(){
     	//$('#form-test').form('load',selections[0]); 
     	//console.log(selections[0]);
     	selections = $('#map-search-data').bootstrapTable('getSelections');
-    	$('#account-Manager-add-dialog-sxgx').modal('show');
-    	FormUtils.loadForm('form-sxgx', selections[0]);
+    	$('#account-Manager-add-dialog-start-sxgx').modal('show');
+    	FormUtils.loadForm('form-start-sxgx', selections[0]);
     	$('#map-search-data-div').css('display','none');
-        	$("#sxgx-close").on("click",function(){
+        	$("#start-sxgx-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})   	
     });
-    
+    //最开始的属性更新提交
+    $("#start-save-submit").on("click",function(){
+     	var params = FormUtils.getData("form-start-sxgx");
+     	//console.log(selections[0])
+     	//params.plancompletiontime=params.strplancompletiontime;
+     	params.id=selections[0].id;
+     	console.log(params)
+     	Ajax.postJson(baseUrl+'map/update_map', params, function(data){
+     		if(data.code > 0){ 
+                 $.gritter.add({
+ 	                title: '提示',
+ 	                text: '保存成功',
+ 	                time: 1000,	                
+
+                 }); 
+             }else{                
+                 	$.gritter.add({
+                  title: '提示',
+                         text: '保存失败:' + data.message,
+                         time: 1000,
+                 });
+              }
+     	});
+     	//刷新有问题
+     	$('#map-search-data').bootstrapTable('refresh');
+     	$('#account-Manager-add-dialog-start-sxgx').modal('hide');
+     	$('#search-form-group').css('display','block');	
+     	$('#map-search-data-div').css('display','block');	 
+ 	});
  
     //添加治理方案
  /*   $("#map-search-data-toorbar-qlr").on("click",function(){
