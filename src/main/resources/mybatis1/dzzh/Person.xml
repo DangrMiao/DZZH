@@ -17,8 +17,8 @@
 		where project_id = #{project_id}
 	</select>
 	<insert id="add_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
-  		insert into person(`name`, `family`, `relocate_flag`, `relocate_time`, `project_id`, `level`)
-  		value(#{name}, #{family}, #{relocate_flag}, #{relocate_time}, #{project_id}, #{level})
+  		insert into person(`name`, `family`, `relocate_flag`, `relocate_time`, `project_id`)
+  		value(#{name}, #{family}, #{relocate_flag}, #{relocate_time}, #{id})
   	</insert>
   	<update id="update_person" parameterType="com.wdkj.dzzh.entity.GoverMap.person">
   		update person set `name` = #{name}, `family` = #{family}, `relocate_flag` = #{relocate_flag}, `relocate_time` = #{relocate_time}

@@ -450,8 +450,39 @@ var Edit = function(value,row){
     	});
     	 
 	});
-    
-    
+	//添加搬迁人员
+    $("#settlement-monitor-toorbar-add").on("click",function(){
+    	$('#settlement-monitor-bq-add-dialog').modal('show');
+    	 
+	}); 
+    //添加搬迁人员保存
+    $("#settlement-add-dq-btn-add").on("click",function(){
+    	var canshu = FormUtils.getData("form-bqbr");
+    	var params = FormUtils.getData("add-bq-settlement-form");
+    	params.id = canshu.id;
+    	console.log(params)
+    	Ajax.postJson(baseUrl+'person/add_person', params, function(data){
+    		if(data.code > 0){ 
+                $.gritter.add({
+	                title: '提示',
+	                text: '保存成功',
+	                time: 1000,	                
+                });
+     	       
+            }else{                
+                	$.gritter.add({
+                 title: '提示',
+                        text: '保存失败:' + data.message,
+                        time: 1000,
+                });
+             }
+    		
+             $('#settlement-monitor-bq-add-dialog').modal('hide');
+             $('#House-Manager-bqry-dialog').modal('hide');
+             //$('#House-bqry-data').bootstrapTable('refresh'); 
+    	});
+    	 
+	});
    	
    	
       //资料上传(搬迁避让)

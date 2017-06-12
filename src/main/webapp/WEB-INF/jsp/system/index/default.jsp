@@ -388,9 +388,9 @@
 				<h5 class="modal-title" id="">搬迁人员一览表</h5>
 			</div>
 			<div class="modal-body" style="hieght:800px;">
-			 <div id="settlement-monitor-table" style="margin-top: -30px;">
+			 <div id="settlement-monitor-table" style="margin-top: -12px;">
 			     <div class="heading btn-group" id="settlement-monitor-data-toorbar">				         
-					<!--  <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-sm">添加人员</button>  -->							    
+					 <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-sm">添加人员</button> 						    
 				 </div> 
 				 <div id="House-bqry-data-div" class="settlemrnt-ob-data">
 					<table id="House-bqry-data"  style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top scrolltable">
@@ -402,7 +402,50 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
-
+	<!-- 添加搬迁人员 -->
+	<div class="modal fade" id="settlement-monitor-bq-add-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width: 450px;margin-top:68px;margin-left:0px;">
+			<div class="modal-content">
+				<div class="modal-header" style="text-align:center;font-size:14px">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h5 class="modal-title" id="myModalLabel">添加搬迁人员</h5>
+				</div>
+				<div class="modal-body">
+					<form role="form" id="add-bq-settlement-form" class="form-horizontal" style="hieght:800px;">
+				        <div style="text-align:right;" class="form-group">
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-4 date-picker" name="relocate_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+						</div>
+						<div style="text-align:right;" class="form-group">
+							<label class="col-sm-4">姓名:</label>
+							<input class="col-sm-4" style="height:26px" name = "name" type="text" class="form-control">
+						</div>
+						<div style="text-align: right;" class="form-group">
+							<label class="col-sm-4">人数:</label>
+							<input class="col-sm-4" style="height:26px" name = "family" type="text" class="form-control" >
+						</div>
+						<div style="text-align: right;" class="form-group">
+							<label class="col-sm-4">是否搬迁:</label>
+							<select name="relocate_flag" id="relocate_flag" style="height: 26px;width:151px;" class="form-control" required>
+							    <option value="0">未搬迁</option>
+							    <option value="1">已搬迁</option>
+				   		    </select>
+						</div>
+						 
+				    </form>
+				</div>
+				<div class="modal-footer" style="text-align: center;">
+					<button class="btn btn-info btn-sm" type="submit" id="settlement-add-dq-btn-add">
+	                    <i class="ace-icon fa fa-check bigger-110"></i> 确定
+	                </button>
+	                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
+	                	<i class="ace-icon fa fa-times bigger-110"></i> 关闭
+	                </button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	
 	<!-- 修改搬迁人员 -->
 	<div class="modal fade" id="settlement-monitor-bq-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" style="width: 450px;margin-top:68px;margin-left:0px;">
