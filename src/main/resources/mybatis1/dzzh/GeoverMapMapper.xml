@@ -14,9 +14,7 @@
 		h.x,h.y,h.govertype,h.scale,h.scalegrad,h.district 
 		from hiddendanger h ,governancetype g 
 		where h.governancetype=g.id
-		<!-- <if test="id!= null">
-			and h.id=#{id}
-		</if> -->
+		
 		<if test="district!=null and district!=''">
 			AND h.district = #{district}
 		</if>	
@@ -41,9 +39,6 @@
 		SELECT count(*)  
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id 
-		 <!-- <if test="id!= null">
-			and h.id=#{id}
-		</if> -->
 		 <if test="district!=null and district!=''">
 			AND h.district = #{district}
 		</if>	
@@ -94,13 +89,6 @@
   		insert into hiddendanger(`name`, `location`,coordinate, `governancetype`, `thisstage`, completion, `plancompletiontime`,govertype,scale,scalegrad)
   		value(#{name}, #{location}, #{coordinate},#{governancetypeid}, #{thisstage},#{completion},#{strplancompletiontime},#{govertype},#{scale},#{scalegrad})
   	</insert>
-  	
-<!--   	 <delete id="deleteList_hiddendanger" parameterType="java.util.List">
-  		delete from
-  		<include refid="tableName"></include>
-  		where id in
-		
-  	</delete> -->
   	
   		<update id="updateHDgid" parameterType="com.wdkj.dzzh.entity.GoverMap.hiddendanger">
   		update hiddendanger set

@@ -54,6 +54,11 @@ public class PersonService implements PersonManager{
 		// TODO Auto-generated method stub
 		dao.update("PersonDao.update_person", params);
 	}
+	@Override
+	public void deluser(person params) throws Exception {
+		// TODO Auto-generated method stub
+		dao.update("PersonDao.delete_person", params);
+	}
 
 	
 

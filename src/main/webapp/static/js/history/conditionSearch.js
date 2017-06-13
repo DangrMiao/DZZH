@@ -77,7 +77,7 @@ $('#map-search-data').bootstrapTable({
     queryParams: function(params){
         if(params){
         	var res = FormUtils.getData("search-form-group-condition");
-    		console.log(res)
+    		
             params.start = params.offset;
             params.rows = params.limit;
            
@@ -104,6 +104,7 @@ $('#map-search-data').bootstrapTable({
 			params.scalegrad=res.scalegrad;
 			params.thisstage=res.thisstage;
 			params.governancetype=res.governancetype;
+			console.log(params)
            
         }
 

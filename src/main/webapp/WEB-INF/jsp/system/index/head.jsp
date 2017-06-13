@@ -17,7 +17,7 @@
 
 				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
-				<a class="navbar-brand" style="margin-top: 5px;" href="#"> <span style="color: white; font-size: 20px;">衢江区"除险安居"三年行动综合管理平台</span>
+				<a class="navbar-brand" style="margin-top: 5px;"> <span style="color: white; font-size: 20px;">衢江区"除险安居"三年行动综合管理平台</span>
 					</a>
 					<!-- #section:basics/navbar.layout.brand -->
 					<%-- <a class="navbar-brand">

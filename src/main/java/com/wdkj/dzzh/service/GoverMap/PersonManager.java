@@ -16,4 +16,6 @@ public interface PersonManager {
 
 	void updatePerson(person params) throws Exception;
 
+	void deluser(person params) throws Exception;
+
 }

@@ -109,7 +109,7 @@ $(function() {
     //删除
     $("#account-Manager-delete-dialog-comfirm").on("click",function(){
     	var row = $('#account-Manager-data').bootstrapTable('getSelections');
-    	Ajax.postJson(baseUrl+'sys/deluser', {bh:row[0].bh}, function(data){
+    	Ajax.postJson(baseUrl+'sys/deluser', {id:row[0].id}, function(data){
     		console.log(data);
     		if(data.code > 0){
                 $.gritter.add({

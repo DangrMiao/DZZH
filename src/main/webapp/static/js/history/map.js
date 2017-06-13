@@ -345,7 +345,9 @@ $(function() {
         	 }
         }
 var Edit = function(value,row){
-       	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>';
+       	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>'
+       	+	'&nbsp;<a href="javascript:void(0)"  class="delete" data-id="'+ row.id + '"  >删除</a>' ;
+       	
        	return html;
        }
    	//搬迁人员
@@ -484,7 +486,36 @@ var Edit = function(value,row){
     	 
 	});
    	
-   	
+	//搬迁人员删除
+    $("#House-bqry-data-div").on("click",".delete",function(){
+    	$('#account-Manager-delete-dialog').modal('show');
+	});
+    //删除
+    $("#account-Manager-delete-dialog-comfirm").on("click",function(){
+    	var del = $('#House-bqry-data').bootstrapTable('getSelections');
+    	console.log(del[0])
+    	Ajax.postJson(baseUrl+'person/deluser', {id:del[0].id}, function(data){
+    		console.log(data);
+    		if(data.code > 0){
+                $.gritter.add({
+	                title: '提示',
+	                text: '成功',
+	                time: 1000,	                
+                });
+            }else{                
+            	$.bootstrapGrowl(""+ data.message, {
+                    type: 'info',
+                    align: 'center',
+                    delay: 3000,
+                    width: 'auto',
+                });
+            }
+    	});
+		$('#account-Manager-delete-dialog').modal('hide');
+		$('#House-Manager-bqry-dialog').modal('hide');
+    	$('#House-bqry-data').bootstrapTable('refresh'); 
+	});
+    
       //资料上传(搬迁避让)
         $("#bqbr-add-submit").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 

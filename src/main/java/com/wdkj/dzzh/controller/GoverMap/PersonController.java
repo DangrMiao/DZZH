@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fh.controller.base.BaseController;
+import com.fh.util.PageData;
 import com.wdkj.dzzh.entity.GoverMap.engineerproject;
 import com.wdkj.dzzh.entity.GoverMap.hiddendanger;
 import com.wdkj.dzzh.entity.GoverMap.person;
@@ -63,6 +64,22 @@ public class PersonController extends BaseController {
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
+	
+	/**数据删除
+	 * @return
+	 */
+	@RequestMapping(value = "/deluser", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String deluser(person params) {
+		try {
+			PersonService.deluser(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "成功",null));
+		} catch (Exception e) {
+			logger.error("错误：" + e.toString(), e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+
 		}
 	}
 }

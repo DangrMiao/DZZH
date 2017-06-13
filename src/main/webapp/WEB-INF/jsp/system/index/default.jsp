@@ -489,7 +489,29 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-	
+	<!-- 确认删除的模态框 -->
+<div class="modal fade" id="account-Manager-delete-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:300px;">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:left">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h5 class="modal-title" id="">确认删除</h5>
+			</div>
+			<div class="modal-body" style="height: 45px;">
+				<form id="" class="form-horizontal" role="form">
+					<div style="text-align: center;" class="form-group">
+						<label>确认要删除这组数据吗？</label>
+					</div>					
+				</form>
+			</div>
+			<div class="modal-footer" style="text-align: center;">
+				<button id="account-Manager-delete-dialog-comfirm" type="button" class="btn btn-primary ">确认</button>
+				<button type="button" class="btn btn-default " data-dismiss="modal">关闭</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
 	
 <!-- 资料上传(搬迁避让) -->
   <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
