@@ -66,7 +66,7 @@ $(document).on('ready',function() {
 			uploadUrl : '<%=basePath%>UpLoadFile/upload1?'+url+"&goverstage="+1,  
 			showCaption : true,//是否显示标题  
 			browseClass : "btn btn-primary", //按钮样式 
-			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			maxFileCount : 3, //表示允许同时上传的最大文件个数  
 			enctype : 'multipart/form-data',  
 			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
 			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
@@ -94,7 +94,7 @@ $(document).on('ready',function() {
 			uploadUrl : '<%=basePath%>UpLoadFile/upload2?'+url+"&goverstage="+2,  
 			showCaption : true,//是否显示标题  
 			browseClass : "btn btn-primary", //按钮样式 
-			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			maxFileCount : 3, //表示允许同时上传的最大文件个数  
 			enctype : 'multipart/form-data',  
 			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
 			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
@@ -120,7 +120,7 @@ $(document).on('ready',function() {
 			uploadUrl : '<%=basePath%>UpLoadFile/upload3?'+url+"&goverstage="+3,  
 			showCaption : true,//是否显示标题  
 			browseClass : "btn btn-primary", //按钮样式 
-			maxFileCount : 1, //表示允许同时上传的最大文件个数  
+			maxFileCount : 3, //表示允许同时上传的最大文件个数  
 			enctype : 'multipart/form-data',  
 			previewFileIcon : "<i class='glyphicon glyphicon-king'></i>",  
 			msgFilesTooMany : "选择上传的文件数量({n}) 超过允许的最大数值{m}！",  
@@ -144,21 +144,21 @@ $(document).on('ready',function() {
 	<div style="text-align: left;" class="form-group">
 		<label class="col-sm-2">编号:</label>
 		<select class="col-sm-10 form-control"  onchange="changegoverstage()"id="goverstage">
-	    	<option  value="1">基本情况</option> 
-			<option  value="2">防止情况</option> 
-			<option  value="3">进展情况</option> 					
+	    	<option  value="1">治理前</option> 
+			<option  value="2">治理中</option> 
+			<option  value="3">治理后</option> 					
 		</select>
 	</div>
 	<div style="text-align: left;" class="form-group"  id="basic">
-		<label class="col-sm-2">基本情况:</label>
+		<label class="col-sm-2">治理前文件:</label>
 		<input type="file" class="col-sm-10 file-loading" id="basicSituation"  name="basicSituation"  multiple>    
 	</div>
 	<div style="text-align: left;" class="form-group" id="prevent">
-		<label class="col-sm-2">防治文件:</label>
+		<label class="col-sm-2">治理中文件:</label>
 		<input type="file" class="col-sm-10 file-loading" id="preventSituation"  name="preventSituation"  multiple>    
 	</div>
 	<div style="text-align: left;" class="form-group" id="progress">
-		<label class="col-sm-2">进展文件:</label>
+		<label class="col-sm-2">治理后文件:</label>
 		<input type="file" class="col-sm-10 file-loading" id="progressSituation"  name="progressSituation"  multiple>    
 	</div>
 </form>

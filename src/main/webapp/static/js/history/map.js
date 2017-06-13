@@ -311,7 +311,7 @@ $(function() {
     	});*/
         
         //“搬迁避让”属性更新提交
-        $("#bqbr-save-submit").on("click",function(){
+/*        $("#bqbr-save-submit").on("click",function(){
          	var params = FormUtils.getData("form-bqbr");
          	//console.log(params)
          	//params.plancompletiontime=params.strplancompletiontime;
@@ -338,8 +338,8 @@ $(function() {
          	$('#account-Manager-add-dialog-bqbr').modal('hide');
          	$('#search-form-group').css('display','block');	
          	//$('#map-search-data-div').css('display','block');	 
-     	});
- var bg = function(value,row){
+     	});*/
+/* var bg = function(value,row){
         	 switch (value)
         	 {
         	 case 0:
@@ -518,13 +518,13 @@ var Edit = function(value,row){
 		$('#account-Manager-delete-dialog').modal('hide');
 		$('#House-Manager-bqry-dialog').modal('hide');
     	$('#House-bqry-data').bootstrapTable('refresh'); 
-	});
+	});*/
     
       //资料上传(搬迁避让)
-        $("#bqbr-add-submit").on("click",function(){
+/*        $("#bqbr-add-submit").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
         	var params = FormUtils.getData("form-bqbr");
-        	//console.log(params.id)
+        	console.log(params.id)
         	fileConframe.window.goto_uploadfile_by_projectid(params.id,1);
         	$('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
         	//FormUtils.loadForm('form-test-qlr', selections[0]);
@@ -532,9 +532,9 @@ var Edit = function(value,row){
 	        	$("#bqbr-zlsc-close").on("click",function(){
 	        		//$('#map-search-data-div').css('display','block');
 	        	})
-        });
+        });*/
       //资料下载(搬迁避让)
-        $("#bqbr-download-submit").on("click",function(){ 
+  /*      $("#bqbr-download-submit").on("click",function(){ 
         	var params = FormUtils.getData("form-bqbr");
         	$('#account-Manager-add-dialog-bqbr-zlxz').modal('show');
        	    //console.log(selections[0])
@@ -544,11 +544,11 @@ var Edit = function(value,row){
 	        	$("#bqbr-zlxz-close").on("click",function(){
 	        		//$('#map-search-data-div').css('display','block');
 	        	})
-        });
+        });*/
         
         
         //“工程治理”属性更新提交
-        $("#gczl-save-submit").on("click",function(){
+/*        $("#gczl-save-submit").on("click",function(){
          	var params = FormUtils.getData("form-gczl");
          	//console.log(params)
          	//params.plancompletiontime=params.strplancompletiontime;
@@ -575,9 +575,9 @@ var Edit = function(value,row){
          	$('#account-Manager-add-dialog-gczl-sxgx').modal('hide');
          	$('#search-form-group').css('display','block');	
          	//$('#map-search-data-div').css('display','block');	 
-     	});
+     	});*/
       //资料上传(工程治理)
-        $("#gczl-add-submit").on("click",function(){
+/*        $("#gczl-add-submit").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
         	var params = FormUtils.getData("form-gczl");
         	console.log(params.id)
@@ -588,9 +588,9 @@ var Edit = function(value,row){
 	        	$("#gczl-zlsc-close").on("click",function(){
 	        		//$('#map-search-data-div').css('display','block');
 	        	})
-        });
+        });*/
       //资料下载(工程治理)
-        $("#gczl-download-submit").on("click",function(){ 
+   /*     $("#gczl-download-submit").on("click",function(){ 
         	var params = FormUtils.getData("form-gczl");
         	$('#account-Manager-add-dialog-gczl-zlxz').modal('show');
        	    //console.log(selections[0])
@@ -600,7 +600,7 @@ var Edit = function(value,row){
 	        	$("#gczl-zlxz-close").on("click",function(){
 	        		//$('#map-search-data-div').css('display','block');
 	        	})
-        });
+        });*/
 });
 
 /**

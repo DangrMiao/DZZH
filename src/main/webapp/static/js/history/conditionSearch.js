@@ -422,8 +422,8 @@ $(function(){
    	BqbrSxgxs.id = selections[0].id;
 	    Ajax.getJson("relocation/search_relocation",BqbrSxgxs, function(data){
 			console.log(data)
-		$('#account-Manager-add-dialog-bqbr').modal('show');
-		//FormUtils.loadForm('form-bqbr',data.rows[0]);
+	 	$('#account-Manager-add-dialog-bqbr').modal('show');
+		FormUtils.loadForm('form-bqbr',data.rows[0]);
 		$('#map-search-data-div').css('display','none');
 		$('#search-form-group').css('display','none');
 		$("#bqbr-close").on("click",function(){
@@ -432,4 +432,335 @@ $(function(){
 		  });
 	   })
    });
+   
+   //“搬迁避让”属性更新提交
+   $("#bqbr-save-submit").on("click",function(){
+    	var params = FormUtils.getData("form-bqbr");
+    	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
+    		if(data.code > 0){ 
+                $.gritter.add({
+	                title: '提示',
+	                text: '保存成功',
+	                time: 1000,	                
+
+                }); 
+            }else{                
+                $.gritter.add({
+                   title: '提示',
+                   text: '保存失败:' + data.message,
+                   time: 1000,
+                });
+             }
+    	});
+    	//刷新有问题
+    	$('#map-search-data').bootstrapTable('refresh');
+    	$('#account-Manager-add-dialog-bqbr').modal('hide');
+    	$('#search-form-group').css('display','block');	
+    	$('#map-search-data-div').css('display','block');	 
+	});
+  
+   
+   
+   
+   
+   
+   var bg = function(value,row){
+  	 switch (value)
+  	 {
+  	 case 0:
+  	 	return "未搬迁";
+  	 case 1:
+  		return "已搬迁";
+  	 }
+  }
+var Edit = function(value,row){
+ 	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>'
+ 	+	'&nbsp;<a href="javascript:void(0)"  class="delete" data-id="'+ row.id + '"  >删除</a>' ;
+ 	
+ 	return html;
+ }
+	//搬迁人员
+	$("#map-search-data-toorbar-bqry").on("click",function() {
+	   	selections = $('#map-search-data').bootstrapTable('getSelections');
+	   	var BqbrBqry={};
+	   	BqbrBqry.id = selections[0].id;
+	    Ajax.getJson("relocation/search_relocation",BqbrBqry, function(data){
+		//console.log(data)
+		
+		$('#House-Manager-bqry-dialog').modal('show');
+		 Ajax.postJson("person/list_person",{project_id:data.rows[0].id}, function(data){
+	            if(data.code > 0){
+	            	$('#House-bqry-data').bootstrapTable('load', data);
+	            	  
+	            }else{                
+	            	$.bootstrapGrowl(data.message, {
+	                    type: 'info',
+	                    align: 'center',
+	                    delay: 3000,
+	                    width: 'auto',
+	                });
+	            }
+	        });	 
+         })
+	});
+	
+	$('#House-bqry-data').bootstrapTable({
+	url : 'person/list_person', // 请求后台的URL（*）
+	method : 'get', // 请求方式（*）
+	striped : true, // 是否显示行间隔色
+	cache : false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+	pagination : false, // 是否显示分页（*）
+	sortable : false, // 是否启用排序
+	sortOrder : "asc", // 排序方式
+	sidePagination : "server", // 分页方式：client客户端分页，server服务端分页（*）
+	pageNumber : 1, // 初始化加载第一页，默认第一页
+	pageSize : 8, // 每页的记录行数（*）
+	paginationHAlign : 'left',
+	paginationDetailHAlign : "right",
+	// pageList: [10, 20, 50], //可供选择的每页的行数（*）
+	// showPaginationSwitch: true,
+	height : 300,
+	singleSelect : true,
+	minimumCountColumns : 2, // 最少允许的列数
+	clickToSelect : true, // 是否启用点击选中行
+	uniqueId : "id", // 每一行的唯一标识，一般为主键列
+	cardView : false, // 是否显示详细视图
+	detailView : false, // 是否显示父子表
+	columns: [
+		{checkbox : true},
+		{field : 'id',title : '序号'}, 
+		{field : 'name',title : '项目名称'}, 
+		{field : 'family',title : '人口'}, 
+		{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
+		{field : 'relocate_time',title : '搬迁时间'},
+		{field: 'cz',title: '操作', formatter:Edit},   
+  ],
+	dataType : 'json',
+	queryParams : function(params) {
+		if (params) {
+			params.start = params.offset;
+			params.rows = params.limit;				
+		}
+		return params;
+	},
+	responseHandler : function(res) {
+		if (res.code > 0) {
+			return res;
+		} else {
+			return [];
+		}
+	},
+	
+});	
+//搬迁人员修改
+$("#House-bqry-data-div").on("click",".Edit-edit",function(){
+	row = $('#House-bqry-data').bootstrapTable('getSelections');
+	$('#settlement-monitor-bq-dialog').modal('show');
+	FormUtils.clearForm("add-settlement-form");
+	FormUtils.loadForm("add-settlement-form",row[0]);
+}); 
+//保存
+$("#settlement-add-dq-btn").on("click",function(){
+	var params = FormUtils.getData("add-settlement-form");
+	params.id = row[0].id;
+	Ajax.postJson(baseUrl+'person/update_person', params, function(data){
+		if(data.code > 0){ 
+          $.gritter.add({
+              title: '提示',
+              text: '保存成功',
+              time: 1000,	                
+
+          });
+	       
+      }else{                
+          	$.gritter.add({
+           title: '提示',
+                  text: '保存失败:' + data.message,
+                  time: 1000,
+          });
+       }
+		
+       $('#settlement-monitor-bq-dialog').modal('hide');
+       $('#House-Manager-bqry-dialog').modal('hide');
+       //$('#House-bqry-data').bootstrapTable('refresh'); 
+	});
+	 
+});
+
+//添加搬迁人员
+$("#settlement-monitor-toorbar-add").on("click",function(){
+	$('#settlement-monitor-bq-add-dialog').modal('show');
+	 
+}); 
+//添加搬迁人员保存
+$("#settlement-add-dq-btn-add").on("click",function(){
+	selections = $('#map-search-data').bootstrapTable('getSelections');
+   	var BqbrBqrybc={};
+   	BqbrBqrybc.id = selections[0].id;
+    Ajax.getJson("relocation/search_relocation",BqbrBqrybc, function(data){
+	var params = FormUtils.getData("add-bq-settlement-form");
+	params.id = data.rows[0].id;
+	console.log(params)
+	Ajax.postJson(baseUrl+'person/add_person', params, function(data){
+		if(data.code > 0){ 
+          $.gritter.add({
+              title: '提示',
+              text: '保存成功',
+              time: 1000,	                
+          });
+	       
+      }else{                
+          	$.gritter.add({
+           title: '提示',
+                  text: '保存失败:' + data.message,
+                  time: 1000,
+          });
+       }
+		
+       $('#settlement-monitor-bq-add-dialog').modal('hide');
+       $('#House-Manager-bqry-dialog').modal('hide');
+       $('#House-bqry-data').bootstrapTable('refresh'); 
+	 });
+    });
+	 
+});
+	
+//搬迁人员删除
+$("#House-bqry-data-div").on("click",".delete",function(){
+	$('#account-Manager-delete-dialog').modal('show');
+});
+//删除
+$("#account-Manager-delete-dialog-comfirm").on("click",function(){
+   	var del = $('#House-bqry-data').bootstrapTable('getSelections');
+	Ajax.postJson(baseUrl+'person/deluser', {id:del[0].id}, function(data){
+		if(data.code > 0){
+          $.gritter.add({
+              title: '提示',
+              text: '成功',
+              time: 1000,	                
+          });
+      }else{                
+      	$.bootstrapGrowl(""+ data.message, {
+              type: 'info',
+              align: 'center',
+              delay: 3000,
+              width: 'auto',
+          });
+      }
+	});
+ 
+	$('#account-Manager-delete-dialog').modal('hide');
+	$('#House-Manager-bqry-dialog').modal('hide');
+	$('#House-bqry-data').bootstrapTable('refresh'); 
+});
+   //资料上传(搬迁避让)
+   $("#map-search-data-toorbar-bqbr-zlsc").on("click",function(){
+	selections = $('#map-search-data').bootstrapTable('getSelections');
+   	var BqbrZlsc={};
+   	BqbrZlsc.id = selections[0].id;
+	    Ajax.getJson("relocation/search_relocation",BqbrZlsc, function(data){
+			//console.log(data.rows[0].id)
+	    fileConframe.window.goto_uploadfile_by_projectid(data.rows[0].id,1);
+   	   $('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
+   	   //FormUtils.loadForm('form-test-qlr', selections[0]);
+   	   $('#map-search-data-div').css('display','none');
+		$("#bqbr-zlsc-close").on("click",function(){
+			$('#search-form-group').css('display','block');	
+			$('#map-search-data-div').css('display','block');
+		  });
+	   })    	
+   });
+ //资料下载(搬迁避让)
+  $("#map-search-data-toorbar-bqbr-zlxz").on("click",function(){       	
+    	selections = $('#map-search-data').bootstrapTable('getSelections');
+       	var BqbrZlxz={};
+       	BqbrZlxz.id = selections[0].id;
+    	 Ajax.getJson("relocation/search_relocation",BqbrZlxz, function(data){
+    	    treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
+       	   $('#account-Manager-add-dialog-bqbr-zlxz').modal('show');
+       	   //FormUtils.loadForm('form-test-qlr', selections[0]);
+       	   $('#map-search-data-div').css('display','none');
+    		$("#bqbr-zlxz-close").on("click",function(){
+    			$('#search-form-group').css('display','block');	
+    			$('#map-search-data-div').css('display','block');
+    		  });
+    	   })  
+   });
+//“工程治理”属性更新
+  $("#map-search-data-toorbar-gczl-sxgx").on("click",function(){
+	  selections = $('#map-search-data').bootstrapTable('getSelections');
+	   	var GczlSxgxs={};
+	   	GczlSxgxs.id = selections[0].id;
+	  Ajax.getJson("engineer/search_engineer",GczlSxgxs, function(data){
+	  $('#account-Manager-add-dialog-gczl-sxgx').modal('show');
+	  FormUtils.loadForm('form-gczl',data.rows[0]);
+	  $('#map-search-data-div').css('display','none');
+	  $('#search-form-group').css('display','none');
+	  $("#gczl-sxgx-close").on("click",function(){
+		 $('#search-form-group').css('display','block');	 
+		 $('#map-search-data-div').css('display','block');
+	     });
+	  })	   
+   });
+  //“工程治理”属性更新提交
+  $("#gczl-save-submit").on("click",function(){
+   	var params = FormUtils.getData("form-gczl");
+   	Ajax.postJson(baseUrl+'engineer/update_engineerproject', params, function(data){
+   		if(data.code > 0){ 
+               $.gritter.add({
+	                title: '提示',
+	                text: '保存成功',
+	                time: 1000,	                
+
+               }); 
+           }else{                
+               	$.gritter.add({
+                title: '提示',
+                       text: '保存失败:' + data.message,
+                       time: 1000,
+               });
+            }
+   	  });
+   	//刷新有问题
+   	$('#map-search-data').bootstrapTable('refresh');
+   	$('#account-Manager-add-dialog-gczl-sxgx').modal('hide');
+   	$('#search-form-group').css('display','block');	
+   	$('#map-search-data-div').css('display','block');	 
+  }); 
+ 
+  //资料上传(工程治理)
+  $("#map-search-data-toorbar-gczl-zlsc").on("click",function(){
+	selections = $('#map-search-data').bootstrapTable('getSelections');
+  	var GczlZlsc={};
+  	GczlZlsc.id = selections[0].id;
+	    Ajax.getJson("engineer/search_engineer",GczlZlsc, function(data){
+			//console.log(data.rows[0].id)
+	    fileConframe1.window.goto_uploadfile_by_projectid(data.rows[0].id,2);
+  	   $('#account-Manager-add-dialog-gczl-zlsc').modal('show');
+  	   //FormUtils.loadForm('form-test-qlr', selections[0]);
+  	   $('#map-search-data-div').css('display','none');
+		$("#gczl-zlsc-close").on("click",function(){
+			$('#search-form-group').css('display','block');	
+			$('#map-search-data-div').css('display','block');
+		  });
+	   })    	
+  });
+//资料下载(工程治理)
+ $("#map-search-data-toorbar-gczl-zlxz").on("click",function(){       	
+   	selections = $('#map-search-data').bootstrapTable('getSelections');
+      	var GczlZlxz={};
+      	GczlZlxz.id = selections[0].id;
+   	 Ajax.getJson("engineer/search_engineer",GczlZlxz, function(data){
+   	    treeConframe1.window.goto_treenode_by_projectid(data.rows[0].id,2);
+      	   $('#account-Manager-add-dialog-gczl-zlxz').modal('show');
+      	   //FormUtils.loadForm('form-test-qlr', selections[0]);
+      	   $('#map-search-data-div').css('display','none');
+   		$("#gczl-zlxz-close").on("click",function(){
+   			$('#search-form-group').css('display','block');	
+   			$('#map-search-data-div').css('display','block');
+   		  });
+   	   })  
+  });
+   
+   
 });

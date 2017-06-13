@@ -48,16 +48,16 @@ public class TreeNodeController {
 		ArrayList<String> tags1=new ArrayList<String>();
 		ArrayList<String> tags2=new ArrayList<String>();
 		ArrayList<String> tags3=new ArrayList<String>();
-		basic.setText("基本情況");
+		basic.setText("治理前");
 		basic.setNodes(basicfile);
 		tags.add("3");
 		basic.setTags(tags);
 		TreeRoot prevent=new TreeRoot();
-		prevent.setText("防治情況");
+		prevent.setText("治理中");
 		prevent.setNodes(preventfile);
 		prevent.setTags(tags);
 		TreeRoot progress=new TreeRoot();
-		progress.setText("进展情况");
+		progress.setText("治理后");
 		progress.setNodes(progressfile);
 		progress.setTags(tags);
 		
