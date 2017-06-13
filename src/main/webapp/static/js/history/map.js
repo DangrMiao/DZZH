@@ -120,28 +120,31 @@ $(function() {
     	//获取房屋信息 
         Ajax.getJson("map/search_map",params, function(data){
         	if (data.rows[0].governancetypeid ==0){ 
-        		$('#account-Manager-add-dialog-sxgx').modal('show');
+        		/*$('#account-Manager-add-dialog-sxgx').modal('show');
     			FormUtils.loadForm('form-sxgx',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
     			$("#sxgx-close").on("click",function(){
-            		$('#search-form-group').css('display','block');	 
-            	})
+            		$('#search-form-group').css('display','block');	
+            		$('#map-search-data-div').css('display','block');
+            	})*/
 			}
         	else if(data.rows[0].governancetypeid ==1){
-        		Ajax.getJson("relocation/search_relocation",params, function(data){
+        		/*Ajax.getJson("relocation/search_relocation",params, function(data){
         			console.log(data)
         		$('#account-Manager-add-dialog-bqbr').modal('show');
     			FormUtils.loadForm('form-bqbr',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
     			$("#bqbr-close").on("click",function(){
-            		$('#search-form-group').css('display','block');	 
+            		$('#search-form-group').css('display','block');	
+            		$('#map-search-data-div').css('display','block');
+            		
             	  });
-        	   })
+        	   })*/
         	}
         	else if(data.rows[0].governancetypeid ==2){
-        		Ajax.getJson("engineer/search_engineer",params, function(data){
+        		/*Ajax.getJson("engineer/search_engineer",params, function(data){
         			console.log(data)
         		$('#account-Manager-add-dialog-gczl-sxgx').modal('show');
     			FormUtils.loadForm('form-gczl',data.rows[0]);
@@ -149,8 +152,9 @@ $(function() {
     			$('#search-form-group').css('display','none');
     			$("#gczl-sxgx-close").on("click",function(){
             		$('#search-form-group').css('display','block');	 
+            		$('#map-search-data-div').css('display','block');
             	  });
-        	   })
+        	   })*/
         	} 	
         });
 	}
@@ -218,7 +222,7 @@ $(function() {
     }
     
     //暂无”属性更新提交
-    $("#save-submit").on("click",function(){
+ /*   $("#save-submit").on("click",function(){
      	var params = FormUtils.getData("form-sxgx");
      	console.log(params)
      	//params.plancompletiontime=params.strplancompletiontime;
@@ -245,9 +249,9 @@ $(function() {
      	$('#account-Manager-add-dialog-sxgx').modal('hide');
      	$('#search-form-group').css('display','block');	
      	//$('#map-search-data-div').css('display','block');	 
- 	});
+ 	});*/
        //添加治理方案
-        $("#add-submit").on("click",function(){
+        /*$("#add-submit").on("click",function(){
         	//$('#form-test').form('load',selections[0]); 
         	$('#account-Manager-add-dialog-result').modal('show');
         	//FormUtils.loadForm('form-test-result', selections[0]);
@@ -255,8 +259,8 @@ $(function() {
             	$("#ckjdjg-close").on("click",function(){
             		//$('#search-form-group').css('display','block');	
             	})
-        });
-       //添加治理方案提交
+        });*/
+/*       //添加治理方案提交
         $("#add-save-submit").on("click",function(){
         	var add = FormUtils.getData("form-sxgx");
         	var params = FormUtils.getData("form-test-result");
@@ -304,7 +308,7 @@ $(function() {
         	$('#account-Manager-add-dialog-result').modal('hide');
         	$('#account-Manager-add-dialog-sxgx').modal('hide');
         	$('#search-form-group').css('display','block'); 
-    	});
+    	});*/
         
         //“搬迁避让”属性更新提交
         $("#bqbr-save-submit").on("click",function(){

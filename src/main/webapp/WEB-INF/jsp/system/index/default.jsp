@@ -49,22 +49,25 @@
 		</div>
 		<!-- /.main-content -->	
 		
-		<div class="heading" id="map-search-data-toorbar">
-		
+		<div class="heading" id="map-search-data-toorbar">		
 			<!--  缪秀诚删除
 			<button id="map-search-data-toorbar-djjc" type="button" class="btn btn-sm map-search-data-type">地基监测</button>  
 	        <button id="map-search-data-toorbar-gjjc" type="button" class="btn btn-sm map-search-data-type">构件监测</button> 
 	        <button id="map-search-data-toorbar-wfjd" type="button" class="btn btn-sm map-search-data-type">危房鉴定</button>
 	        <button id="map-search-data-toorbar-fwcz" type="button" class="btn btn-sm map-search-data-type">房屋处置</button>
 	          -->
-	          
-	        <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button>  
-	        <button id="map-search-data-toorbar-start-sxgx" type="button" class="btn btn-sm">信息更新</button>  
-	        <!-- <button id="map-search-data-toorbar-qlr" type="button" class="btn btn-sm">添加治理方案</button>  -->
-	        <!-- <button id="map-search-data-toorbar-ckjdjg" type="button" class="btn btn-sm">查看鉴定结果</button>  --> 
-	      <!--   <button id="map-search-data-toorbar-hdcbg" type="button" class="btn btn-sm" >导出表格</button>  -->
-	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>   
-        </div>  
+	        <!-- <button id="map-search-data-toorbar-fwgk" type="button" class="btn btn-sm">信息概况</button> -->
+	        <button id="map-search-data-toorbar-zd-sxgx" type="button" class="btn btn-sm">信息更新</button> 
+	        <button id="map-search-data-toorbar-bqbr-sxgx" type="button" class="btn btn-sm" style="display: none;">信息更新</button> 
+	        <button id="map-search-data-toorbar-gczl-sxgx" type="button" class="btn btn-sm" style="display: none;">信息更新</button> 
+	        <button id="map-search-data-toorbar-tjzlfa" type="button" class="btn btn-sm">添加治理方案</button>
+	        <button id="map-search-data-toorbar-bqry" type="button" class="btn btn-sm">搬迁人员</button>
+	        <button id="map-search-data-toorbar-bqbr-zlsc" type="button" class="btn btn-sm">资料上传</button>
+	        <button id="map-search-data-toorbar-gczl-zlsc" type="button" class="btn btn-sm" style="display: none;">资料上传</button>
+	        <button id="map-search-data-toorbar-bqbr-zlxz" type="button" class="btn btn-sm">资料下载</button>
+	        <button id="map-search-data-toorbar-gczl-zlxz" type="button" class="btn btn-sm" style="display: none;">资料下载</button>  
+	         <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>
+        </div>          
 		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: none;">										
 			<table id="map-search-data" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
 			</table>						
@@ -114,7 +117,7 @@
 	</div>
 	<!-- 添加的模态框(最初的属性更新) -->
   <div class="modal fade" id="account-Manager-add-dialog-start-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="start-sxgx-close" aria-hidden="true">&times;</button> 
@@ -123,44 +126,44 @@
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-start-sxgx">
 					<div style="text-align: right;display: none" class="form-group" >
-						<label class="col-sm-5">ID:</label>
-						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+						<label class="col-sm-4">ID:</label>
+						<input class="col-sm-7" style="height:26px" name = "id" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">计划时间:</label>
-						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-7 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">名称:</label>
-						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+						<label class="col-sm-4">名称:</label>
+						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">地址:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control"  >
+						<label class="col-sm-4">地址:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "location" class="form-control"  >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">灾害类型:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" >
+						<label class="col-sm-4">灾害类型:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "govertype" class="form-control" >
 					</div>
 				  
 				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" >
+						<label class="col-sm-4">规模:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "scale" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模等级:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" >
+						<label class="col-sm-4">规模等级:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "scalegrad" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">稳定性:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
+						<label class="col-sm-4">稳定性:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "thisstage" class="form-control" > 
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度(%):</label>
-						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
+						<label class="col-sm-4">治理进度(%):</label>
+						<input class="col-sm-7" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
 					<div class="modal-footer" style="text-align: center;background:white;">
-						<button type="button" class="btn btn-info btn-sm"  id="start-save-submit">更新</button>
+						<button type="button" class="btn btn-info btn-sm"  id="start-save-submit">信息更新</button>
 				   </div>
 				</form>
 			</div>
@@ -265,7 +268,7 @@
 						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
 					</div>
 					<div class="modal-footer" style="text-align: center;background:white;">
-						<button type="button" class="btn btn-info btn-sm"  id="save-submit">更新</button>
+						<button type="button" class="btn btn-info btn-sm"  id="save-submit">信息更新</button>
 		                <button type="button" class="btn btn-info btn-sm"  id="add-submit" style="margin-left:0px">添加治理方案</button>
 				   </div>
 				</form>
@@ -276,7 +279,7 @@
 
 <!-- 添加的模态框(治理方案) -->
   <div class="modal fade" id="account-Manager-add-dialog-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="ckjdjg-close" aria-hidden="true">&times;</button> 
@@ -285,37 +288,37 @@
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-test-result">
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">计划时间:</label>
-						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-7 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
-					<div style="text-align: right;" class="form-group">
+					<!-- <div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">名称:</label>
 						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
-					</div>
+					</div> -->
 					
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">基本情况:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
+						<label class="col-sm-4">基本情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="basicInfo" class="form-control"  >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">防治情况:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
+						<label class="col-sm-4">防治情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="governanceInfo" class="form-control" >
 					</div>
 				  
 				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理方式:</label>
-						<select style="height: 26px;width:171px" id="" name="governancetype" class="form-control" >
+						<label class="col-sm-4">治理方式:</label>
+						<select style="height: 26px;width:234px" id="" name="governancetype" class="form-control" >
 				 	   		<option value="1">搬迁避让</option>
 				 	   		<option value="2">工程治理</option>
 		 	   		    </select>
 					</div>
 				 <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">进度(%):</label>
-						<input class="col-sm-6" style="height:26px" name = "progress" type="text" class="form-control" >
+						<label class="col-sm-4">进度(%):</label>
+						<input class="col-sm-7" style="height:26px" name = "progress" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">备注:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "remark" class="form-control" > 
+						<label class="col-sm-4">备注:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control" > 
 					</div>
 					<div class="modal-footer" style="text-align:center;background:white;">
  						<button type="button" class="btn btn-sm btn-info" id="add-save-submit">添加</button>	
@@ -344,10 +347,10 @@
 						<label class="col-sm-5">计划时间:</label>
 						<input class="col-sm-6 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
 					</div>
-					<div style="text-align: right;" class="form-group">
+					<!-- <div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">隐患点名称:</label>
 						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
-					</div>
+					</div> -->
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">名称:</label>
 						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
@@ -370,9 +373,9 @@
 					</div>
 					<div class="modal-footer" style="text-align: center;background:white;">
 						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
-						<button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
+						<!-- <button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
 		                <button type="button" class="btn btn-info btn-sm"  id="bqbr-add-submit" style="margin-left:0px">资料上传</button>
-				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button> -->
 				   </div>
 				</form>
 			</div>
@@ -682,12 +685,17 @@
 					    <option>稳定</option>
 				    </select>
 		 	   </div>  
-		 	   <div style="padding-right: 20px;margin-top: 5px;margin-left:-26px" class="input-group">
+		 	   <div style="padding-right: 10px;margin-top: 0px; " class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
-				   </button>	 
+				   </button>	
+				   <button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
+						地图影像
+				   </button> 
 			   </div>
+			   
+			    
 			   <!-- 	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
@@ -696,7 +704,7 @@
 		</form>	 
 	</div>
 	
-
+ 
 	
 	<%--添加房屋的面板--%>
 	<div class="widget-box widget-color-pink" id="house-info-panel" style="position:absolute;width:400px; height:100%;z-index:999; right:-400px;top:0px;display:none;">

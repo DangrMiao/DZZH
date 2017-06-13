@@ -28,7 +28,7 @@
   	
 	<!--根据id得到搬迁项目 -->
   	<select id="get_rp_by_id" parameterType="com.wdkj.dzzh.entity.GoverMap.relocationProject" resultType="com.wdkj.dzzh.entity.GoverMap.relocationProject">
-  		select r.`id`, r.`name`, r.`progress`,  r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`, r.`create_time`,r.hiddendanger_id,h.`name` as hiddendanger_name
+  		select r.`id`, r.`name`, r.`progress`,  r.`basicInfo`, r.`governanceInfo`, r.`remark`, r.`headcount`, r.`create_time`,r.hiddendanger_id
 		from relocationproject r,hiddendanger h
 		where r.hiddendanger_id = #{id} and r.hiddendanger_id=h.id
   	</select>

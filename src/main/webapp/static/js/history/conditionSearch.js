@@ -104,7 +104,7 @@ $('#map-search-data').bootstrapTable({
 			params.scalegrad=res.scalegrad;
 			params.thisstage=res.thisstage;
 			params.governancetype=res.governancetype;
-			console.log(params)
+			
            
         }
 
@@ -124,13 +124,47 @@ $(function(){
 	var selections
 	$("#map-search-data").on("click",function(){
 		selections = $('#map-search-data').bootstrapTable('getSelections');
-		//console.log(selections[0]);
+		//console.log(selections[0])
+        if (selections[0].governancetypeid ==0){
+    		$('#map-search-data-toorbar-zd-sxgx').css('display','inline-block');
+    		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-tjzlfa').css('display','inline-block');
+    		$('#map-search-data-toorbar-bqry').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');
+    		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
+    		$('#map-search-data-toorbar-gczl-zlxz').css('display','none');
+		}
+        else if(selections[0].governancetypeid ==1){   	
+        	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-sxgx').css('display','inline-block');
+    		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-tjzlfa').css('display','none');
+    		$('#map-search-data-toorbar-bqry').css('display','inline-block');
+    		$('#map-search-data-toorbar-bqbr-zlsc').css('display','inline-block');
+    		$('#map-search-data-toorbar-bqbr-zlxz').css('display','inline-block');
+    		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
+    		$('#map-search-data-toorbar-gczl-zlxz').css('display','none');
+        	}
+        else if(selections[0].governancetypeid ==2){
+        	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
+    		$('#map-search-data-toorbar-gczl-sxgx').css('display','inline-block');
+    		$('#map-search-data-toorbar-tjzlfa').css('display','none');
+    		$('#map-search-data-toorbar-bqry').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
+    		$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');
+    		$('#map-search-data-toorbar-gczl-zlsc').css('display','inline-block');
+    		$('#map-search-data-toorbar-gczl-zlxz').css('display','inline-block');
+        	} 
+		
 		//console.log(Mmarker);
 		if (Mmarker) {
     		map.removeOverLay(Mmarker);
 		}
 		map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 16);
-    	var icon1 = new T.Icon({ 
+    	var icon1 = new T.Icon({  
             iconUrl: "static/images/location.gif", 
             iconSize: new T.Point(40, 40), 
             iconAnchor: new T.Point(20, 32) 
@@ -169,16 +203,8 @@ $(function(){
         });
 
 	});
-
-    //搜索栏关闭
-    $('#search-form-group-close').on("click", function(){
-    	$('#search-form-group').css('display','none'); 
-    	$("#show-or-hide-toolbar-btn").trigger("click");
-    });
-    
     //搜索
     $('#search-form-group-search-btn').on("click", function(){
-
     	$('#map-search-data-div').css('display','block');
         $('#map-search-data').bootstrapTable('refresh');
     });
@@ -187,6 +213,30 @@ $(function(){
     	$('#map-search-data-div').css('display','none');
     
     });
+    //切换影像          待定
+/*    $('#search-form-group-btn').on("click", function(){
+    	  var map;
+          var zoom = 8;
+          var lay;
+          var onlyMapLay;
+              var imageURL = "http://t0.tianditu.cn/img_w/wmts?" +
+                      "SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles" +
+                      "&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}";
+              //创建自定义图层对象
+              lay = new T.TileLayer(imageURL,{minZoom:1,maxZoom:18});
+              var config = {layers: [lay]};
+              //初始化地图对象
+              map = new T.Map("mapDiv", config);
+              //设置显示地图的中心点和级别
+              map.centerAndZoom(new T.LngLat(116.40969, 39.89945), zoom);
+              //允许鼠标滚轮缩放地图
+              map.enableScrollWheelZoom();  
+    });
+    */
+    
+    
+    
+    
     var zoom = 12; 
     var circle;
     var circleTool,PolylineTool,PolygonTool,RectangleTool,handler;
@@ -259,19 +309,20 @@ $(function(){
         		$('#map-search-data-div').css('display','block');	 
         	})
     });
-    //属性更新
-    $("#map-search-data-toorbar-start-sxgx").on("click",function(){
+    //“暂定”的属性更新
+    $("#map-search-data-toorbar-zd-sxgx").on("click",function(){
     	//$('#form-test').form('load',selections[0]); 
     	//console.log(selections[0]);
     	selections = $('#map-search-data').bootstrapTable('getSelections');
-    	$('#account-Manager-add-dialog-start-sxgx').modal('show');
+    	//console.log(selections[0])
     	FormUtils.loadForm('form-start-sxgx', selections[0]);
+    	$('#account-Manager-add-dialog-start-sxgx').modal('show');
     	$('#map-search-data-div').css('display','none');
         	$("#start-sxgx-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})   	
     });
-    //最开始的属性更新提交
+    //“暂定”的属性更新提交
     $("#start-save-submit").on("click",function(){
      	var params = FormUtils.getData("form-start-sxgx");
      	//console.log(selections[0])
@@ -288,7 +339,7 @@ $(function(){
                  }); 
              }else{                
                  	$.gritter.add({
-                  title: '提示',
+                         title: '提示',
                          text: '保存失败:' + data.message,
                          time: 1000,
                  });
@@ -302,40 +353,83 @@ $(function(){
  	});
  
     //添加治理方案
- /*   $("#map-search-data-toorbar-qlr").on("click",function(){
+   $("#map-search-data-toorbar-tjzlfa").on("click",function(){
     	//$('#form-test').form('load',selections[0]); 
+	   selections = $('#map-search-data').bootstrapTable('getSelections');
     	$('#account-Manager-add-dialog-result').modal('show');
-    	//FormUtils.loadForm('form-test-result', selections[0]);
+    	//FormUtils.loadForm('form-test-result', selections[0].name);
     	$('#map-search-data-div').css('display','none');
         	$("#ckjdjg-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})
-    });*/
-       
-	// 导表
-	$("#map-search-data-toorbar-hdcbg").on("click",function() {
-		var params = FormUtils.getData("search-form-group-condition");
-		// 导表条件条件
-		var zdmj1 = (params.zdmj1 == '') ? "" : params.zdmj1;
-		var zdmj2 = (params.zdmj2 == '') ? "" : params.zdmj2;
-		var cs = params.cs;
-		var js1 = (params.js1 == '') ? "" : params.js1;
-		var js2 = (params.js2 == '') ? "" : params.js2;
-		var reform_type = params.reform_type;
-		var xzjd = params.xzjd;
-		var ssc = params.ssc;
-		var mph = params.mph;
-		var zflb = params.zflb;
-		var Startime=params.Startime;
-		var Endtime=params.Endtime;
-		var zt=params.zt;
-		window.location.href= baseUrl + 'history/excel?zdmj1='+zdmj1+'&zdmj2='+zdmj2+'&cs='+cs+'&js1='+js1+'&js2='+js2+'&reform_type='+reform_type+'&xzjd='+xzjd+'&ssc='+ssc+'&mph='+mph+'&zflb='+zflb+'&Startime='+Startime+'&Endtime='+Endtime+'&zt='+zt;
-		$.gritter.add({
-			title : '提示',
-			text : '导出成功',
-			time : 1000,
-			speed: 2000, 
-		});
+    });
+   
+   //添加治理方案提交
+   $("#add-save-submit").on("click",function(){
+	 selections = $('#map-search-data').bootstrapTable('getSelections');
+   	var params = FormUtils.getData("form-test-result");
+   	//params.plancompletiontime=params.strplancompletiontime;
+   	params.hiddendanger_id=selections[0].id;
+   	params.name = selections[0].name;
+   	console.log(params)
+   	if(params.governancetype=="1"){
+	    		Ajax.postJson(baseUrl+'relocation/add_relocationProject', params, function(data){
+	    		if(data.code > 0){ 
+	                $.gritter.add({
+		                title: '提示',
+		                text: '保存成功',
+		                time: 1000,	                
+	
+	                }); 
+	            }else{                
+	                	$.gritter.add({
+	                 title: '提示',
+	                        text: '保存失败:' + data.message,
+	                        time: 1000,
+	                });
+	             }
+	    	});
+   	}
+	    else if(params.governancetype=="2"){
+	    	Ajax.postJson(baseUrl+'engineer/add_engineerproject', params, function(data){
+	    		if(data.code > 0){ 
+	                $.gritter.add({
+		                title: '提示',
+		                text: '保存成功',
+		                time: 1000,	                
+	
+	                }); 
+	            }else{                
+	                	$.gritter.add({
+	                 title: '提示',
+	                        text: '保存失败:' + data.message,
+	                        time: 1000,
+	                });
+	             }
+	    	});
+	    }
+   	//刷新没问题
+   	$('#map-search-data').bootstrapTable('refresh');
+   	$('#account-Manager-add-dialog-result').modal('hide');
+   	$('#search-form-group').css('display','block'); 
+   	$('#map-search-data-div').css('display','block');
 	});
-
+   
+   //搬迁避让属性更新
+   $("#map-search-data-toorbar-bqbr-sxgx").on("click",function(){
+   	selections = $('#map-search-data').bootstrapTable('getSelections');
+   	var BqbrSxgxs={};
+   	BqbrSxgxs.id = selections[0].id;
+	    Ajax.getJson("relocation/search_relocation",BqbrSxgxs, function(data){
+			console.log(data)
+		$('#account-Manager-add-dialog-bqbr').modal('show');
+		//FormUtils.loadForm('form-bqbr',data.rows[0]);
+		$('#map-search-data-div').css('display','none');
+		$('#search-form-group').css('display','none');
+		$("#bqbr-close").on("click",function(){
+			$('#search-form-group').css('display','block');	
+			$('#map-search-data-div').css('display','block');
+		  });
+	   })
+   });
 });
