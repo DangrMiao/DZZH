@@ -1,7 +1,6 @@
 var map = new T.Map("mapDiv");
 $(function() {
 	var iconMarkers=[];
-
 	//var data = {name:"",governancetype:""};
     $.ajax({
         type: "POST",
@@ -15,7 +14,6 @@ $(function() {
        	    addTEvent(iconMarkers,data.rows);  		            
           }
      });
-    
     var label;
     //绘制多个marker。
     var marker;
@@ -57,11 +55,11 @@ $(function() {
 			}
     	    iconMarkers[i].reform_type=lnglats[i].reform_type;
         } 
-        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 12);        
-        var markers = new T.MarkerClusterer(map, {markers: iconMarkers}); 
-        markers.setGridSize(150);
-        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10);
-        markers.setMaxZoom(15);
+        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10);        
+//        var markers = new T.MarkerClusterer(map, {markers: iconMarkers}); 
+//        markers.setGridSize(150);
+//        map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10);
+//        markers.setMaxZoom(15);
        }    
         //console.log(iconMarkers); 
     }  
@@ -120,41 +118,41 @@ $(function() {
     	//获取房屋信息 
         Ajax.getJson("map/search_map",params, function(data){
         	if (data.rows[0].governancetypeid ==0){ 
-        		/*$('#account-Manager-add-dialog-sxgx').modal('show');
+        		$('#account-Manager-add-dialog-sxgx').modal('show');
     			FormUtils.loadForm('form-sxgx',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
     			$("#sxgx-close").on("click",function(){
             		$('#search-form-group').css('display','block');	
             		$('#map-search-data-div').css('display','block');
-            	})*/
+            	})
 			}
         	else if(data.rows[0].governancetypeid ==1){
-        		/*Ajax.getJson("relocation/search_relocation",params, function(data){
+        		Ajax.getJson("relocation/search_relocation",params, function(data){
         			console.log(data)
-        		$('#account-Manager-add-dialog-bqbr').modal('show');
-    			FormUtils.loadForm('form-bqbr',data.rows[0]);
+        		$('#account-Manager-add-dialog-bqbr-first').modal('show');
+    			FormUtils.loadForm('form-first-bqbr',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
-    			$("#bqbr-close").on("click",function(){
+    			$("#bqbr-first-close").on("click",function(){
             		$('#search-form-group').css('display','block');	
             		$('#map-search-data-div').css('display','block');
             		
             	  });
-        	   })*/
+        	   })
         	}
         	else if(data.rows[0].governancetypeid ==2){
-        		/*Ajax.getJson("engineer/search_engineer",params, function(data){
+        		Ajax.getJson("engineer/search_engineer",params, function(data){
         			console.log(data)
-        		$('#account-Manager-add-dialog-gczl-sxgx').modal('show');
-    			FormUtils.loadForm('form-gczl',data.rows[0]);
+        		$('#account-Manager-add-dialog-gczl-sxgx-first').modal('show');
+    			FormUtils.loadForm('form-first-gczl',data.rows[0]);
     			$('#map-search-data-div').css('display','none');
     			$('#search-form-group').css('display','none');
-    			$("#gczl-sxgx-close").on("click",function(){
+    			$("#gczl-sxgx-first-close").on("click",function(){
             		$('#search-form-group').css('display','block');	 
             		$('#map-search-data-div').css('display','block');
             	  });
-        	   })*/
+        	   })
         	} 	
         });
 	}

@@ -68,7 +68,7 @@
 	        <button id="map-search-data-toorbar-gczl-zlxz" type="button" class="btn btn-sm" style="display: none;">资料下载</button>  
 	         <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>
         </div>          
-		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: none;">										
+		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: block;">										
 			<table id="map-search-data" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
 			</table>						
 		</div>
@@ -222,55 +222,51 @@
 
 <!-- 添加的模态框(属性更新) -->
   <div class="modal fade" id="account-Manager-add-dialog-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="sxgx-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="">信息更新</h5>
+				<h5 class="modal-title" id="">信息展示</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-sxgx">
 					<div style="text-align: right;display: none" class="form-group" >
-						<label class="col-sm-5">ID:</label>
-						<input class="col-sm-6" style="height:26px" name = "id" type="text" class="form-control" >
+						<label class="col-sm-4">ID:</label>
+						<input class="col-sm-7" style="height:26px" name = "id" type="text" class="form-control" >
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">计划时间:</label>
-						<input class="col-sm-6 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/>
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-7 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" readonly="readonly" class="form-control"/>
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">名称:</label>
-						<input class="col-sm-6" style="height:26px" name = "name" type="text" class="form-control" >
+						<label class="col-sm-4">名称:</label>
+						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">地址:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "location" class="form-control"  >
+						<label class="col-sm-4">地址:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "location" class="form-control"  readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">灾害类型:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "govertype" class="form-control" >
+						<label class="col-sm-4">灾害类型:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "govertype" class="form-control" readonly="readonly">
 					</div>
 				  
 				    <div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scale" class="form-control" >
+						<label class="col-sm-4">规模:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "scale" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">规模等级:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "scalegrad" class="form-control" >
+						<label class="col-sm-4">规模等级:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "scalegrad" class="form-control" readonly="readonly">
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">稳定性:</label>
-						<input class="col-sm-6" style="height:26px" type="text" name = "thisstage" class="form-control" > 
+						<label class="col-sm-4">稳定性:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "thisstage" class="form-control" readonly="readonly"> 
 					</div>
 					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-5">治理进度(%):</label>
-						<input class="col-sm-6" style="height:26px" name = "completion" type="text" class="form-control" >
+						<label class="col-sm-4">治理进度(%):</label>
+						<input class="col-sm-7" style="height:26px" name = "completion" type="text" class="form-control" readonly="readonly">
 					</div>
-					<div class="modal-footer" style="text-align: center;background:white;">
-						<button type="button" class="btn btn-info btn-sm"  id="save-submit">信息更新</button>
-		                <button type="button" class="btn btn-info btn-sm"  id="add-submit" style="margin-left:0px">添加治理方案</button>
-				   </div>
 				</form>
 			</div>
 		</div><!-- /.modal-content -->
@@ -382,6 +378,60 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+<!-- 搬迁避让first模态框 -->
+   <div class="modal fade" id="account-Manager-add-dialog-bqbr-first" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-first-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息展示</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-first-bqbr">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-4">ID:</label>
+						<input class="col-sm-7" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-7 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" readonly="readonly" class="form-control"/>
+					</div>
+					<!-- <div style="text-align: right;" class="form-group">
+						<label class="col-sm-5">隐患点名称:</label>
+						<input class="col-sm-6" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
+					</div> -->
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">名称:</label>
+						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">基本情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="basicInfo" class="form-control"  readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">防治情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="governanceInfo" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">进度(%):</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="progress" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">备注:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control" readonly="readonly"> 
+					</div>
+					<!-- <div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="bqbr-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button>
+				   </div> -->
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
 	 <!-- 查看搬迁人员的模态框 -->
 <div class="modal fade" id="House-Manager-bqry-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 		<div class="modal-dialog" style="width: 800px;margin-top:60px;margin-left:0px; ">
@@ -485,6 +535,8 @@
 					<button class="btn btn-info btn-sm" type="submit" id="settlement-add-dq-btn">
 	                    <i class="ace-icon fa fa-check bigger-110"></i> 确定
 	                </button>
+	                
+	                
 	                <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">
 	                	<i class="ace-icon fa fa-times bigger-110"></i> 关闭
 	                </button>
@@ -601,7 +653,59 @@
 	</div><!-- /.modal -->
 </div>
  
- 
+ <!-- 工程治理first模态框 -->
+  <div class="modal fade" id="account-Manager-add-dialog-gczl-sxgx-first" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
+		<div class="modal-content">
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="gczl-sxgx-first-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">信息展示</h5>
+			</div>
+			<div class="modal-body" style="height: 100%;margin-right:10px">
+				<form class="form-horizontal" role="form" id ="form-first-gczl">
+				    <div style="text-align: right;display: none" class="form-group" >
+						<label class="col-sm-4">ID:</label>
+						<input class="col-sm-7" style="height:26px" name = "id" type="text" class="form-control" >
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">计划时间:</label>
+						<input class="col-sm-7 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" readonly="readonly" class="form-control"/>
+					</div>
+					<!-- <div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">隐患点名称:</label>
+						<input class="col-sm-7" style="height:26px" name = "hiddendanger_name" type="text" class="form-control" readonly="readonly">
+					</div> -->
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">名称:</label>
+						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">基本情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="basicInfo" class="form-control"  readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">防治情况:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="governanceInfo" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">进度(%):</label>
+						<input class="col-sm-7" style="height:26px" type="text" name ="progress" class="form-control" readonly="readonly">
+					</div>
+					<div style="text-align: right;" class="form-group">
+						<label class="col-sm-4">备注:</label>
+						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control" readonly="readonly"> 
+					</div>
+					<!-- <div class="modal-footer" style="text-align: center;background:white;">
+						<button type="button" class="btn btn-info btn-sm"  id="gczl-save-submit">信息更新</button>
+		                <button type="button" class="btn btn-info btn-sm"  id="gczl-add-submit" style="margin-left:0px">资料上传</button>
+				   		<button type="button" class="btn btn-info btn-sm"  id="gczl-download-submit">资料下载</button>
+				   </div> -->
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
  <!-- 资料上传(工程治理) -->
   <div class="modal fade" id="account-Manager-add-dialog-gczl-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:60px;margin-left:0px">
@@ -690,9 +794,9 @@
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
 				   </button>	
-				   <button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
+<!-- 				   <button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
 						地图影像
-				   </button> 
+				   </button>  -->
 			   </div>
 			   
 			    
