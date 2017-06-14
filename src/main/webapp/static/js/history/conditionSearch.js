@@ -109,9 +109,7 @@ $('#map-search-data').bootstrapTable({
 			params.name=res.name;
 			params.scalegrad=res.scalegrad;
 			params.thisstage=res.thisstage;
-			params.governancetype=res.governancetype;
-			
-           
+			params.governancetype=res.governancetype;  
         }
 
         return params;
@@ -126,7 +124,7 @@ $('#map-search-data').bootstrapTable({
 });
 
 
-$(function(){   	
+//$(function(){   	
 //	startLoad();
 	//搜索
 	$('#search-form-group-search-btn').on("click", function(){
@@ -139,7 +137,8 @@ $(function(){
 	         data:params,
 	         dataType: "json",
 	         success: function(data){	 
-	        	    drawTMakers(data.rows);  
+	        	    drawTMakers(data.rows);
+	        	    //console.log(iconMarkers)
 	        	    addTEvent(iconMarkers,data.rows);  		            
 	           }
 	      });
@@ -162,14 +161,14 @@ $(function(){
 	        $('#map-search-data').bootstrapTable('refresh');       
 	  });
 	    
-	});
+//	});
 
 //坐标点定位（注意：必须是先筛选，再定位，逻辑不能错）
 var Mmarker;
 var selections;
 $("#map-search-data").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
-	console.log(selections[0])
+	//console.log(selections[0])
     if (selections[0].governancetypeid ==0){
 		$('#map-search-data-toorbar-zd-sxgx').css('display','inline-block');
 		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
@@ -296,7 +295,7 @@ $("#map-search-data").on("click",function(){
     	//console.log(selections[0])
     	FormUtils.loadForm('form-start-sxgx', selections[0]);
     	$('#account-Manager-add-dialog-start-sxgx').modal('show');
-    	$('#map-search-data-div').css('display','none');
+    	//$('#map-search-data-div').css('display','none');
         	$("#start-sxgx-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})   	
@@ -337,7 +336,7 @@ $("#map-search-data").on("click",function(){
 	   selections = $('#map-search-data').bootstrapTable('getSelections');
     	$('#account-Manager-add-dialog-result').modal('show');
     	//FormUtils.loadForm('form-test-result', selections[0].name);
-    	$('#map-search-data-div').css('display','none');
+    	//$('#map-search-data-div').css('display','none');
         	$("#ckjdjg-close").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})
@@ -403,8 +402,8 @@ $("#map-search-data").on("click",function(){
 			console.log(data)
 	 	$('#account-Manager-add-dialog-bqbr').modal('show');
 		FormUtils.loadForm('form-bqbr',data.rows[0]);
-		$('#map-search-data-div').css('display','none');
-		$('#search-form-group').css('display','none');
+		//$('#map-search-data-div').css('display','none');
+		//$('#search-form-group').css('display','none');
 		$("#bqbr-close").on("click",function(){
 			$('#search-form-group').css('display','block');	
 			$('#map-search-data-div').css('display','block');
@@ -673,8 +672,8 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
 	  Ajax.getJson("engineer/search_engineer",GczlSxgxs, function(data){
 	  $('#account-Manager-add-dialog-gczl-sxgx').modal('show');
 	  FormUtils.loadForm('form-gczl',data.rows[0]);
-	  $('#map-search-data-div').css('display','none');
-	  $('#search-form-group').css('display','none');
+	  //$('#map-search-data-div').css('display','none');
+	  //$('#search-form-group').css('display','none');
 	  $("#gczl-sxgx-close").on("click",function(){
 		 $('#search-form-group').css('display','block');	 
 		 $('#map-search-data-div').css('display','block');
@@ -740,7 +739,7 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
    		  });
    	   })  
   });
-   
+/*   
  function drawTMakers(lnglats){    	   	
 	 if (lnglats.length != 0) {  
      	var iconD = new T.Icon({ 
@@ -900,16 +899,16 @@ Ajax.getJson("map/search_map",params, function(data){
 	   })
 	} 	
 });
-} 
+} */
 
 
-function loadMap() {
-//    map = new T.Map('mapDiv');
-	var zoom = 12;
-    //瑞安市 120.646360,27.776520
-    //杭州市 120.149920,30.274190
-    map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
-}
+//function loadMap() {
+////    map = new T.Map('mapDiv');
+//	var zoom = 12;
+//    //瑞安市 120.646360,27.776520
+//    //杭州市 120.149920,30.274190
+//    map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
+//}
 
 $('#account-Manager-add-dialog-result').modal({
     keyboard: true,
