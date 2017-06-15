@@ -739,192 +739,60 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
    		  });
    	   })  
   });
-/*   
- function drawTMakers(lnglats){    	   	
-	 if (lnglats.length != 0) {  
-     	var iconD = new T.Icon({ 
-             iconUrl: "static/images/levelD.png", 
-             iconSize: new T.Point(12, 12), 
-             iconAnchor: new T.Point(6, 18) 
-         });
-     	var iconB = new T.Icon({ 
-             iconUrl: "static/images/levelB.png", 
-             iconSize: new T.Point(12, 12), 
-             iconAnchor: new T.Point(6, 18) 
-         });
-     	var iconC = new T.Icon({ 
-             iconUrl: "static/images/levelC.png", 
-             iconSize: new T.Point(12, 12), 
-             iconAnchor: new T.Point(6, 18) 
-         });  
-     	
-     for (var i = 0; i < lnglats.length; i = i + 1) {
- 	    if (lnglats[i].governancetypeid == 0) {  
-	        	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconD});
-	        	map.addOverLay(marker);
-	        	iconMarkers.push(marker);  
-         } else if (lnglats[i].governancetypeid == 1) {
-         	
-         	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconB});
-	        	map.addOverLay(marker);
-	        	iconMarkers.push(marker);
-			} else if (lnglats[i].governancetypeid == 2) {
-         	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconC});
-	        	map.addOverLay(marker);
-	        	iconMarkers.push(marker);
-			} 
- 	    if (iconMarkers[i]) {
- 	    	iconMarkers[i].id=lnglats[i].id;	 
-			}
- 	    iconMarkers[i].reform_type=lnglats[i].reform_type;
-     } 
-     map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10); 
-     //聚合问题有待处理，这里先屏蔽掉，不然list会重复出现
-//     var markers = new T.MarkerClusterer(map, {markers: iconMarkers}); 
-//     markers.setGridSize(150);
-//     map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10);
-//     markers.setMaxZoom(15);
-    }    
- }
-function addTEvent(iconMakers,lnglats,eventFn){  
-var arrLen = lnglats.length;  
-var i,eventFn = eventFn || onMouseOver;  
-for (var i = 0;  i<arrLen; i++) {  
-    // 绑定事件  
-    (function() {  
-        var m = iconMakers[i];
-        m.addEventListener("click",PointClick);
-    	m.addEventListener("mouseover",function() {  
-        	
-        	timer = setTimeout(mover, 500);//setTimeout不能带参数，所以用下面的方法处理。  
-        	function mover() {  
-                eventFn(m);  
-               }                	
-           }); 
-    	 m.addEventListener("mouseout", onClose); 
-    })();  
-}  
-}
+ 
+ $('#account-Manager-add-dialog-bqbr-zlsc').modal({
+	    keyboard: true,
+	    backdrop: "static",
+	    show:false
+	});
+ $('#account-Manager-add-dialog-bqbr').modal({
+	    keyboard: true,
+	    backdrop: "static",
+	    show:false
+	});
 
-function onMouseOver(m) {    
-label = new T.Label({
-    text: "待定",
-    position: new T.LngLat(m.wr.lng, m.wr.lat),
-    offset: new T.Point(-10, 15)
-});
-labelA = new T.Label({
-    text: "A级",
-    position: new T.LngLat(m.wr.lng, m.wr.lat),
-    offset: new T.Point(-10, 15)
-});
-labelB = new T.Label({
-    text: "B级",
-    position: new T.LngLat(m.wr.lng, m.wr.lat),
-    offset: new T.Point(-10, 15)
-});
-labelC = new T.Label({
-    text: "C级",
-    position: new T.LngLat(m.wr.lng, m.wr.lat),
-    offset: new T.Point(-10, 15)
-});
-labelD = new T.Label({
-    text: "D级",
-    position: new T.LngLat(m.wr.lng, m.wr.lat),
-    offset: new T.Point(-10, 15)
-});
-if (m.wxdj==0) {        	
-    map.addOverLay(label);//创建文本对象
-}else if (m.wxdj==1) {
-	map.addOverLay(labelA);
-}else if (m.wxdj==2) {
-	map.addOverLay(labelB);
-}else if (m.wxdj==3) {
-	map.addOverLay(labelC);
-}else if (m.wxdj==4) {
-	map.addOverLay(labelD);
-}       
-} 
+ $('#account-Manager-add-dialog-bqbr-zlxz').modal({
+	    keyboard: true,
+	    backdrop: "static",
+	    show:false
+	});
 
-//鼠标从图标移动出去的时候执行  
-function onClose() {  
-clearTimeout(timer);//关闭定时器。  
-map.removeOverLay(label);//移除文本对象。
-map.removeOverLay(labelA);
-map.removeOverLay(labelB);
-map.removeOverLay(labelC);
-map.removeOverLay(labelD);
-} 
-
-function PointClick(e){
-var params={};
-params.id=e.target.id;
-console.log(params)
-//获取房屋信息 
-Ajax.getJson("map/search_map",params, function(data){
-	if (data.rows[0].governancetypeid ==0){ 
-		$('#account-Manager-add-dialog-sxgx').modal('show');
-		FormUtils.loadForm('form-sxgx',data.rows[0]);
-		$('#map-search-data-div').css('display','none');
-		$('#search-form-group').css('display','none');
-		$("#sxgx-close").on("click",function(){
-    		$('#search-form-group').css('display','block');	
-    		$('#map-search-data-div').css('display','block');
-    	})
-	}
-	else if(data.rows[0].governancetypeid ==1){
-		Ajax.getJson("relocation/search_relocation",params, function(data){
-			console.log(data)
-		$('#account-Manager-add-dialog-bqbr-first').modal('show');
-		FormUtils.loadForm('form-first-bqbr',data.rows[0]);
-		$('#map-search-data-div').css('display','none');
-		$('#search-form-group').css('display','none');
-		$("#bqbr-first-close").on("click",function(){
-    		$('#search-form-group').css('display','block');	
-    		$('#map-search-data-div').css('display','block');
-    		
-    	  });
-	   })
-	}
-	else if(data.rows[0].governancetypeid ==2){
-		Ajax.getJson("engineer/search_engineer",params, function(data){
-			console.log(data)
-		$('#account-Manager-add-dialog-gczl-sxgx-first').modal('show');
-		FormUtils.loadForm('form-first-gczl',data.rows[0]);
-		$('#map-search-data-div').css('display','none');
-		$('#search-form-group').css('display','none');
-		$("#gczl-sxgx-first-close").on("click",function(){
-    		$('#search-form-group').css('display','block');	 
-    		$('#map-search-data-div').css('display','block');
-    	  });
-	   })
-	} 	
+$('#account-Manager-add-dialog-gczl-zlsc').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false
 });
-} */
 
-
-//function loadMap() {
-////    map = new T.Map('mapDiv');
-//	var zoom = 12;
-//    //瑞安市 120.646360,27.776520
-//    //杭州市 120.149920,30.274190
-//    map.centerAndZoom(new T.LngLat(120.149920, 30.274190), zoom);
-//}
+$('#account-Manager-add-dialog-start-sxgx').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false
+}); 
+$('#account-Manager-add-dialog-gczl-sxgx').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false
+}); 
+$('#account-Manager-add-dialog-bqbr').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false
+}); 
 
 $('#account-Manager-add-dialog-result').modal({
     keyboard: true,
     backdrop: "static",
     show:false
 });
-
-$('#account-Manager-add-dialog-sxgx').modal({
-    keyboard: true,
-    backdrop: "static",
-    show:false
-});     
-//权利人
 //禁用空白处点击关闭
-$('#account-Manager-add-dialog-qlr').modal({
+$('#account-Manager-add-dialog-gczl-zlxz').modal({
     keyboard: true,
     backdrop: "static",
     show:false
 });
+$('#House-Manager-bqry-dialog').modal({
+    keyboard: true,
+    backdrop: "static",
+    show:false
+});
+
