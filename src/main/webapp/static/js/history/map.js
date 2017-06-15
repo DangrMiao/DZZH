@@ -28,7 +28,7 @@ $(function() {
         }
           //创建面对象
           var polygon = new T.Polygon(points,{
-              color: "blue", weight: 3, opacity: 0.5, fillColor: "#FFFFFF", fillOpacity: 0.5
+              color: "blue", weight: 3, opacity: 0.5, fillColor: "#FFFFFF", fillOpacity: 0
           });		
 	map.addOverLay(polygon);
 

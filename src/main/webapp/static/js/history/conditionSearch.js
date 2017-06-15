@@ -153,7 +153,7 @@ $('#map-search-data').bootstrapTable({
 	        }
 	          //创建面对象
 	          var polygon = new T.Polygon(points,{
-	              color: "blue", weight: 3, opacity: 0.5, fillColor: "#FFFFFF", fillOpacity: 0.5
+	              color: "blue", weight: 3, opacity: 0.5, fillColor: "#FFFFFF", fillOpacity: 0
 	          });		
 		    map.addOverLay(polygon);
 
@@ -507,7 +507,7 @@ var Edit = function(value,row){
 	columns: [
 		{checkbox : true},
 		{field : 'id',title : '序号'}, 
-		{field : 'name',title : '项目名称'}, 
+		{field : 'name',title : '姓名'}, 
 		{field : 'family',title : '人口'}, 
 		{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
 		{field : 'relocate_time',title : '搬迁时间'},

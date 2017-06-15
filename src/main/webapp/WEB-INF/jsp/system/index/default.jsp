@@ -88,7 +88,7 @@
 
 	
 		<!-- 图例 -->	
-	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:200px;z-index:900; right:0px;bottom:0px">
+	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:200px;z-index:900; right:0px;top:200px">
 		<button id="map-legend-btn" type="button" style="height: 35px;width: 120px;text-align: center;" class="btn">图例</button>						
 		<div id="" class="sidebar">						 				
 
@@ -474,7 +474,7 @@
 							<input class="col-sm-4" style="height:26px" name = "name" type="text" class="form-control">
 						</div>
 						<div style="text-align: right;" class="form-group">
-							<label class="col-sm-4">人数:</label>
+							<label class="col-sm-4">人口:</label>
 							<input class="col-sm-4" style="height:26px" name = "family" type="text" class="form-control" >
 						</div>
 						<div style="text-align: right;" class="form-group">
@@ -518,7 +518,7 @@
 							<input class="col-sm-4" style="height:26px" name = "name" type="text" class="form-control">
 						</div>
 						<div style="text-align: right;" class="form-group">
-							<label class="col-sm-4">人数:</label>
+							<label class="col-sm-4">人口:</label>
 							<input class="col-sm-4" style="height:26px" name = "family" type="text" class="form-control" >
 						</div>
 						<div style="text-align: right;" class="form-group">
@@ -570,13 +570,13 @@
 	
 <!-- 资料上传(搬迁避让) -->
   <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:700px;height:600px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlsc-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:700px;">
+			<div class="modal-body" style="width:100%;height:600px;">
 				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
 				 </iframe>
 			</div>
@@ -585,13 +585,13 @@
 </div>
 <!-- 资料下载(搬迁避让) -->
 <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:1400px;height:800px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:900px;height:600px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlxz-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">下载文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:800px;">
+			<div class="modal-body" style="width:100%;height:600px;">
 				<iframe name="treeConframe"  style="width:100%;height:100%;" class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
 				 </iframe>
 			</div>
@@ -708,13 +708,13 @@
 
  <!-- 资料上传(工程治理) -->
   <div class="modal fade" id="account-Manager-add-dialog-gczl-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:1000px;height:700px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:700px;height:600px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="gczl-zlsc-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:700px;">
+			<div class="modal-body" style="width:100%;height:600px;">
 				<iframe name="fileConframe1"  style="width:100%;height:100%;"class="Conframe" id="fileConframe1" frameborder=0 src="<%=basePath%>UpLoadFile">
 				 </iframe>
 			</div>
@@ -723,13 +723,13 @@
 </div>
 <!-- 资料下载(工程治理) -->
 <div class="modal fade" id="account-Manager-add-dialog-gczl-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:1400px;height:800px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:900px;height:600px;margin-top:60px;margin-left:0px">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="gczl-zlxz-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">下载文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:800px;">
+			<div class="modal-body" style="width:100%;height:600px;">
 				<iframe name="treeConframe1"  style="width:100%;height:100%;"class="Conframe" id="treeConframe1" frameborder=0 src="<%=basePath%>TreeNode">
 				 </iframe>
 			</div>
@@ -742,7 +742,7 @@
 	<div id="search-form-group" class="row" style="position:absolute;height:70px;z-index:999;left:0px;right:0px;top:0px;display: block;">					
 		<form id="search-form-group-condition" class="form-inline search-form" role="form">
 			<div class="well" style="margin-top: -10px;">
-			    <div style="padding-right: 20px;" class="input-group">
+			    <div style="padding-right: 0px;" class="input-group">
 					<label class="search-label">选择区域:</label>
 					<select name="district" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
@@ -753,11 +753,11 @@
 					    <option>开化县</option>
 				    </select>
 		 	   </div> 
-		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   <div style="padding-right: 0px;" class="input-group">
 		 	   	   <label class="search-label">名称:</label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
 		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   <div style="padding-right: 0px;" class="input-group">
 		 	   	   <label class="search-label">治理类型:</label>
 		 	  	   <select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
@@ -767,7 +767,7 @@
 				    </select>
 		 	   </div>	
 		
-		 	    <div style="padding-right: 20px;" class="input-group">
+		 	    <div style="padding-right: 0px;" class="input-group">
 		 	   	   <label class="search-label">规模等级:</label>
 		 	  	   <select name="scalegrad" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
@@ -776,7 +776,7 @@
 					    <option>大型</option>
 				    </select>
 		 	   </div>
-		 	   <div style="padding-right: 20px;" class="input-group">
+		 	   <div style="padding-right: 0px;" class="input-group">
 		 	   	   <label class="search-label">稳定性:</label>
 		 	  	   <select name="thisstage" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
@@ -789,21 +789,19 @@
 					    <option>稳定</option>
 				    </select>
 		 	   </div>  
-		 	   <div style="padding-right: 10px;margin-top: 0px; " class="input-group">
 			 	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
 				   </button>	
-<!-- 				   <button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
+			  <!-- 	<button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
 						地图影像
 				   </button>  -->
-			   </div>
-			   
-			    
+
 			   <!-- 	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
 		 	   </div> -->
+		 	   
 	 	  </div> 																		
 		</form>	 
 	</div>
