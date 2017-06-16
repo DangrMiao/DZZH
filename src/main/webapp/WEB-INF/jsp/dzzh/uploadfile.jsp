@@ -140,7 +140,7 @@ $(document).on('ready',function() {
 <input type="hidden" value="${geotype}" name="geotype" id="geotype" />
 
 
-<form class="form-horizontal" role="form" id ="form-test-result" style="width: 97%;height: 65%;">
+<form class="form-horizontal" role="form" id ="form-test-result" style="width: 92%;margin-left:15px;height: 65%;">
 	<div style="text-align: left;" class="form-group">
 		<label class="col-sm-2">编号:</label>
 		<select class="col-sm-10 form-control"  onchange="changegoverstage()"id="goverstage">

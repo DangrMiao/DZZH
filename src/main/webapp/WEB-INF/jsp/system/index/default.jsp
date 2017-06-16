@@ -570,14 +570,14 @@
 	
 <!-- 资料上传(搬迁避让) -->
   <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:700px;height:600px;margin-top:60px;margin-left:0px">
-		<div class="modal-content">
+	<div class="modal-dialog"  style="width:720px;height:620px;margin-top:60px;text-align:center">
+		<div class="modal-content" id="zlsc-bqbr-tz" >
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlsc-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:600px;">
-				<iframe name="fileConframe"  style="width:100%;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+			<div class="modal-body" style="width:720px;height:620px;">
+				<iframe name="fileConframe"  style="width:700px;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
 				 </iframe>
 			</div>
 		</div><!-- /.modal-content -->
@@ -585,14 +585,14 @@
 </div>
 <!-- 资料下载(搬迁避让) -->
 <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:900px;height:600px;margin-top:60px;margin-left:0px">
-		<div class="modal-content">
+	<div class="modal-dialog" style="width:920px;height:600px;margin-top:60px;text-align:center">
+		<div class="modal-content" id="zlxz-bqbr-tz">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlxz-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">下载文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:600px;">
-				<iframe name="treeConframe"  style="width:100%;height:100%;" class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
+			<div class="modal-body" style="width:920px;height:600px;">
+				<iframe name="treeConframe"  style="width:900px;height:100%;" class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
 				 </iframe>
 			</div>
 		</div>
@@ -708,14 +708,14 @@
 
  <!-- 资料上传(工程治理) -->
   <div class="modal fade" id="account-Manager-add-dialog-gczl-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:700px;height:600px;margin-top:60px;margin-left:0px">
-		<div class="modal-content">
+	<div class="modal-dialog" style="width:720px;height:620px;margin-top:60px;text-align:center">
+		<div class="modal-content" id="zlsc-gczl-tz">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="gczl-zlsc-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">上传文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:600px;">
-				<iframe name="fileConframe1"  style="width:100%;height:100%;"class="Conframe" id="fileConframe1" frameborder=0 src="<%=basePath%>UpLoadFile">
+			<div class="modal-body" style="width:720px;height:620px;">
+				<iframe name="fileConframe1"  style="width:700px;height:100%;"class="Conframe" id="fileConframe1" frameborder=0 src="<%=basePath%>UpLoadFile">
 				 </iframe>
 			</div>
 		</div><!-- /.modal-content -->
@@ -723,14 +723,14 @@
 </div>
 <!-- 资料下载(工程治理) -->
 <div class="modal fade" id="account-Manager-add-dialog-gczl-zlxz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:900px;height:600px;margin-top:60px;margin-left:0px">
-		<div class="modal-content">
+	<div class="modal-dialog" style="width:920px;height:600px;margin-top:60px;text-align:center">
+		<div class="modal-content" id="zlxz-gczl-tz">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="gczl-zlxz-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">下载文件</h5>
 			</div>
-			<div class="modal-body" style="width:100%;height:600px;">
-				<iframe name="treeConframe1"  style="width:100%;height:100%;"class="Conframe" id="treeConframe1" frameborder=0 src="<%=basePath%>TreeNode">
+			<div class="modal-body" style="width:920px;height:600px;">
+				<iframe name="treeConframe1"  style="width:900px;height:100%;"class="Conframe" id="treeConframe1" frameborder=0 src="<%=basePath%>TreeNode">
 				 </iframe>
 			</div>
 		</div>
@@ -1036,6 +1036,9 @@
 	<script src="static/bootstrap-growl/jquery.bootstrap-growl.js"></script>
 	<!-- jquery验证 -->
 	<script src="static/ace/js/jquery.validate.js"></script>
+	<script src="static/ace/js/jquery-ui.js"></script>
+	<script src="static/ace/js/jquery.easydrag.handler.beta2.js"></script>
+	
 	<!-- 表格 -->	
 	<script src="static/ace/js/dataTables/bootstrap-table.js"></script>
 	<script src="static/ace/js/dataTables/bootstrap-table-zh-CN.js"></script>
@@ -1101,5 +1104,13 @@
 <%-- 		function toExcel(){
 			window.location.href='<%=basePath%>history/excel';
 		} --%>
+		
+	   	   $('#zlsc-bqbr-tz').easydrag();
+	   	   $('#zlsc-gczl-tz').easydrag();
+	   	   $('#zlxz-bqbr-tz').easydrag();
+	   	   $('#zlxz-gczl-tz').easydrag();
+	   	
+	   	
+	    
 	</script>
 </html>

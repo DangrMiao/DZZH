@@ -640,6 +640,7 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
 			//console.log(data.rows[0].id)
 	    fileConframe.window.goto_uploadfile_by_projectid(data.rows[0].id,1);
    	   $('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
+
    	   //FormUtils.loadForm('form-test-qlr', selections[0]);
    	   $('#map-search-data-div').css('display','none');
 		$("#bqbr-zlsc-close").on("click",function(){
@@ -656,6 +657,7 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
     	 Ajax.getJson("relocation/search_relocation",BqbrZlxz, function(data){
     	    treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
        	   $('#account-Manager-add-dialog-bqbr-zlxz').modal('show');
+
        	   //FormUtils.loadForm('form-test-qlr', selections[0]);
        	   $('#map-search-data-div').css('display','none');
     		$("#bqbr-zlxz-close").on("click",function(){
