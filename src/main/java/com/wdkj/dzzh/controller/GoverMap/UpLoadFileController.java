@@ -40,8 +40,7 @@ public class UpLoadFileController {
 	private FileManager fileServiceImpl;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView gofileupload_route( HttpServletRequest request) throws UnsupportedEncodingException {
-	
+	public ModelAndView gofileupload_route( HttpServletRequest request) throws UnsupportedEncodingException {	
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("dzzh/fileupload_route");
 		return mv;

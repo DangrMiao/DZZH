@@ -34,7 +34,8 @@
   <input type="hidden" value="${id}" name="id" id="id" />
   <input type="hidden" value="${geotype}" name="geotype" id="geotype" />
  	<div class="form-group row">
-  		<div class="col-sm-12">
+  		<div class="col-sm-12"> 
+  		  <button type="button" class="btn btn-primary" onclick="upFile()">上传文件</button> 
           <button type="button" class="btn btn-primary" onclick="downloadFile()">下载文件</button> 
           <button type="button" class="btn btn-primary" onclick="deleteFile()">删除文件</button> 
   		</div>

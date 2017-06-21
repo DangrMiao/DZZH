@@ -72,11 +72,7 @@ public class TreeNodeController {
 		JSONArray datalist = JSONArray.fromObject(filelist);
 		mv.addObject("datalist", datalist);
 		return mv;
-		
-		
-		
-		
-		
+	
 	}
 	
 	

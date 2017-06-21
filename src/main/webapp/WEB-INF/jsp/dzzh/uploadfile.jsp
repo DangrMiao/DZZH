@@ -79,8 +79,6 @@ function changegoverstage(){
 		$("#fileType option[value='12']").remove();
 		$("#fileType option[value='13']").remove();
 		$("#fileType option[value='14']").remove();
-
- 
 		}
 	////console.log(goverstage);
 
@@ -106,7 +104,6 @@ $(document).on('ready',function() {
 					var id=$("#id").val();
 					//console.log(geotype);
 					//console.log(id);
-					
 				  /* //console.log("empty");
 				  $("#basicSituation").empty(); */
 		       
@@ -133,11 +130,8 @@ $(document).on('ready',function() {
 		       var geotype=$("#geotype").val();
 				var id=$("#id").val();
 				//console.log(geotype);
-				//console.log(id);
-				
-		       
+				//console.log(id);	       
 		});  
-
    }); 
 $(document).on('ready',function() { 
 	var geotype=$("#geotype").val();
