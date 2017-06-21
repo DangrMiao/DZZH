@@ -30,7 +30,7 @@
 
 </head>
 <body>
- <div class="row" style="margin-left: 10px;width: 97%;">
+ <div class="row" style="margin-left: 10px;width: 92%;">
   <input type="hidden" value="${id}" name="id" id="id" />
   <input type="hidden" value="${geotype}" name="geotype" id="geotype" />
  	<div class="form-group row">
@@ -66,17 +66,17 @@ function reloadtree(){
 
 }
 function downloadFile(){
- 	var photo=$('#treeview-checkable').treeview('search', [ '照片', {
+ 	var photo=$('#treeview-checkable').treeview('search', [ 'A文件', {
  		  ignoreCase: true,     // case insensitive
  		  exactMatch: true,    // like or equals
  		  revealResults: false,  // reveal matching nodes
  		}]);
- 	var doc=$('#treeview-checkable').treeview('search', [ '文件', {
+ 	var doc=$('#treeview-checkable').treeview('search', [ 'B文件', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	var other=$('#treeview-checkable').treeview('search', [ '其他', {
+ 	var other=$('#treeview-checkable').treeview('search', [ 'C文件', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
@@ -103,17 +103,17 @@ function downloadFile(){
 
 
 function deleteFile(){
- 	var photo=$('#treeview-checkable').treeview('search', [ '照片', {
+ 	var photo=$('#treeview-checkable').treeview('search', [ 'A文件', {
  		  ignoreCase: true,     // case insensitive
  		  exactMatch: true,    // like or equals
  		  revealResults: false,  // reveal matching nodes
  		}]);
- 	var doc=$('#treeview-checkable').treeview('search', [ '文件', {
+ 	var doc=$('#treeview-checkable').treeview('search', [ 'B文件', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	var other=$('#treeview-checkable').treeview('search', [ '其他', {
+ 	var other=$('#treeview-checkable').treeview('search', [ 'C文件', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes

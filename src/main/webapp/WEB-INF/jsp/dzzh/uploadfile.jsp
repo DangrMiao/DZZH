@@ -30,6 +30,7 @@ function goto_uploadfile_by_projectid(id,projecttype){
 	//console.log("----------------------------------------");
 	window.location.href="<%=basePath%>UpLoadFile/upfile?geotype="+2+"&id="+id;
 }
+
 function changegoverstage(){
 /* 	var geotype=$("#geotype").val();
 	var id=$("#id").val();
@@ -42,16 +43,44 @@ function changegoverstage(){
 	$('#prevent').hide();
 	$('#progress').hide();
 	$('#basic').show();
+	$("#fileType").append("<option value='10'>基本情况</option>");
+	$("#fileType option[value='11']").remove();
+	$("#fileType option[value='12']").remove();
+	$("#fileType option[value='13']").remove();
+	$("#fileType option[value='14']").remove();
+	$("#fileType option[value='15']").remove();
+	$("#fileType option[value='16']").remove();
+	$("#fileType option[value='17']").remove();
 	}
 	if(goverstage==2){
 		$('#progress').hide();
 		$('#basic').hide();
 		$('#prevent').show();
+		//$("#fileType").append("<option value='1'>文件A</option>");
+		$("#fileType").append("<option value='11'>搬迁协议</option>");
+		$("#fileType").append("<option value='12'>思想工作</option>");
+		$("#fileType").append("<option value='13'>腾空</option>");
+		$("#fileType").append("<option value='14'>拆迁</option>");
+		$("#fileType option[value='10']").remove();
+		$("#fileType option[value='15']").remove();
+		$("#fileType option[value='16']").remove();
+		$("#fileType option[value='17']").remove();
 		}
 	if(goverstage==3){
 		$('#prevent').hide();
 		$('#basic').hide();
 		$('#progress').show();
+ 
+		$("#fileType").append("<option value='15'>复垦</option>");
+		$("#fileType").append("<option value='16'>安置地</option>");
+		$("#fileType").append("<option value='17'>安置新房</option>");
+		$("#fileType option[value='10']").remove();
+		$("#fileType option[value='11']").remove();
+		$("#fileType option[value='12']").remove();
+		$("#fileType option[value='13']").remove();
+		$("#fileType option[value='14']").remove();
+
+ 
 		}
 	////console.log(goverstage);
 
@@ -132,7 +161,6 @@ $(document).on('ready',function() {
 					//console.log(geotype);
 					//console.log(id);
 		});  
-
    });
 </script> 
 <body>
@@ -149,6 +177,14 @@ $(document).on('ready',function() {
 			<option  value="3">治理后</option> 					
 		</select>
 	</div>
+	
+	<div style="text-align: left;" class="form-group">
+		<label class="col-sm-2">文件:</label>
+		<select class="col-sm-10 form-control"  onchange="" id="fileType">
+		<option  value="10">基本情况</option> 					
+		</select>
+	</div>
+	
 	<div style="text-align: left;" class="form-group"  id="basic">
 		<label class="col-sm-2">治理前文件:</label>
 		<input type="file" class="col-sm-10 file-loading" id="basicSituation"  name="basicSituation"  multiple>    
@@ -183,6 +219,7 @@ $(document).on('ready',function() {
 	<option  value="3">进展情况</option> 					
 	</select>
 	</div>
+	
 	</div>
 	<div class='form-group' id="basic">
 	<label class='col-sm-2 control-label'  for='inputSuccess'  style="margin-top: 150px;">基本文件:</label>

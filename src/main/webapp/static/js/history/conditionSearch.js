@@ -169,38 +169,49 @@ var selections;
 $("#map-search-data").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
 	//console.log(selections[0])
-    if (selections[0].governancetypeid ==0){
+    if (selections[0].governancetypeid ==0){   	
+        $('#map-search-data-toorbar-xxgk').css('display','inline-block');
+        $('#map-search-data-toorbar-bqbr-xxgk').css('display','none');
+        $('#map-search-data-toorbar-gczl-xxgk').css('display','none');
 		$('#map-search-data-toorbar-zd-sxgx').css('display','inline-block');
 		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
 		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
 		$('#map-search-data-toorbar-tjzlfa').css('display','inline-block');
 		$('#map-search-data-toorbar-bqry').css('display','none');
 		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
-		$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');
+		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');*/
 		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
-		$('#map-search-data-toorbar-gczl-zlxz').css('display','none');
+		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','none');*/
 	}
-    else if(selections[0].governancetypeid ==1){   	
+    else if(selections[0].governancetypeid ==1){  
+        $('#map-search-data-toorbar-xxgk').css('display','none');
+        $('#map-search-data-toorbar-bqbr-xxgk').css('display','inline-block');
+        $('#map-search-data-toorbar-gczl-xxgk').css('display','none');
+        
     	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
 		$('#map-search-data-toorbar-bqbr-sxgx').css('display','inline-block');
 		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
 		$('#map-search-data-toorbar-tjzlfa').css('display','none');
 		$('#map-search-data-toorbar-bqry').css('display','inline-block');
 		$('#map-search-data-toorbar-bqbr-zlsc').css('display','inline-block');
-		$('#map-search-data-toorbar-bqbr-zlxz').css('display','inline-block');
+		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','inline-block');*/
 		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
-		$('#map-search-data-toorbar-gczl-zlxz').css('display','none');
+		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','none');*/
     	}
     else if(selections[0].governancetypeid ==2){
+        $('#map-search-data-toorbar-xxgk').css('display','none');
+        $('#map-search-data-toorbar-bqbr-xxgk').css('display','none');
+        $('#map-search-data-toorbar-gczl-xxgk').css('display','inline-block');
+        
     	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
 		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
 		$('#map-search-data-toorbar-gczl-sxgx').css('display','inline-block');
 		$('#map-search-data-toorbar-tjzlfa').css('display','none');
 		$('#map-search-data-toorbar-bqry').css('display','none');
 		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
-		$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');
+		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');*/
 		$('#map-search-data-toorbar-gczl-zlsc').css('display','inline-block');
-		$('#map-search-data-toorbar-gczl-zlxz').css('display','inline-block');
+		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','inline-block');*/
     	} 
 	if (Mmarker) {
 		map.removeOverLay(Mmarker);
@@ -276,16 +287,50 @@ $("#map-search-data").on("click",function(){
         backdrop: "static",
         show:false
     });
-    //房屋概况信息
-    $("#map-search-data-toorbar-fwgk").on("click",function(){
+    //“暂定”的概况信息
+    $("#map-search-data-toorbar-xxgk").on("click",function(){
     	selections = $('#map-search-data').bootstrapTable('getSelections');
     	//$('#form-test').form('load',selections[0]); 
-    	$('#account-Manager-add-dialog').modal('show');
-    	FormUtils.loadForm('form-test', selections[0]);
-    	$('#map-search-data-div').css('display','none');
-        	$("#fwgk-close").on("click",function(){
-        		$('#map-search-data-div').css('display','block');	 
-        	})
+    	$('#account-Manager-add-dialog-sxgx').modal('show');
+    	FormUtils.loadForm('form-sxgx', selections[0]);
+    	$("#sxgx-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	
+    		$('#map-search-data-div').css('display','block');
+    	})
+    });
+    
+    //“搬迁避让”的概况信息
+    $("#map-search-data-toorbar-bqbr-xxgk").on("click",function(){
+    	selections = $('#map-search-data').bootstrapTable('getSelections');
+    	//$('#form-test').form('load',selections[0]); 
+	   	var BqbrXxgk={};
+	   	BqbrXxgk.id = selections[0].id;
+	    Ajax.getJson("relocation/search_relocation",BqbrXxgk, function(data){	 
+    	$('#account-Manager-add-dialog-bqbr-second').modal('show');
+    	treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
+    	FormUtils.loadForm('form-second-bqbr',data.rows[0]);
+    	$("#bqbr-second-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	
+    		$('#map-search-data-div').css('display','block');
+    	});
+	  })
+    });
+    
+    //“工程治理”的概况信息
+    $("#map-search-data-toorbar-gczl-xxgk").on("click",function(){
+    	selections = $('#map-search-data').bootstrapTable('getSelections');
+    	//$('#form-test').form('load',selections[0]); 
+	   	var GczlXxgk={};
+	   	GczlXxgk.id = selections[0].id;
+	  Ajax.getJson("engineer/search_engineer",GczlXxgk, function(data){	 
+    	$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+    	treeConframe1.window.goto_treenode_by_projectid(data.rows[0].id,2);
+    	FormUtils.loadForm('form-second-gczl',data.rows[0]);
+    	$("#gczl-sxgx-second-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	
+    		$('#map-search-data-div').css('display','block');
+    	});
+	  })
     });
     //“暂定”的属性更新
     $("#map-search-data-toorbar-zd-sxgx").on("click",function(){
@@ -300,6 +345,8 @@ $("#map-search-data").on("click",function(){
         		$('#map-search-data-div').css('display','block');
         	})   	
     });
+    
+    
     //“暂定”的属性更新提交
     $("#start-save-submit").on("click",function(){
      	var params = FormUtils.getData("form-start-sxgx");
