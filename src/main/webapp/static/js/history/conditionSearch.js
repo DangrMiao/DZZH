@@ -326,6 +326,7 @@ $("#map-search-data").on("click",function(){
 	   	GczlXxgk.id = selections[0].id;
 	  Ajax.getJson("engineer/search_engineer",GczlXxgk, function(data){	 
     	$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+    	//console.log(data.rows[0].id);
     	treeConframe1.window.goto_treenode_by_projectid(data.rows[0].id,2);
     	FormUtils.loadForm('form-second-gczl',data.rows[0]);
     	$("#gczl-sxgx-second-close").on("click",function(){

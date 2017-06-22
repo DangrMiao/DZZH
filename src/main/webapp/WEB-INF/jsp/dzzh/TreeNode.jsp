@@ -86,9 +86,6 @@ function reloadtree(){
 
 function uploadFile(){
 	console.log("--------------"+"uploadFile"+"----------------");
-	//getStageAndType();
-	//var stage=1;
-	//var type=1;
 	//治理前
  	var file1=$('#treeview-checkable').treeview('search', [ '治理前', {
  		  ignoreCase: true,     // case insensitive
@@ -123,9 +120,15 @@ function uploadFile(){
  		//console.log(file);
  		var stage=1;
 		var type=ids[0];
+		//搬迁避让
 		if(type==-1)stage=1;
 		if(type==-2||type==-3||type==-4||type==-5)stage=2;
 		if(type==-6||type==-7||type==-8)stage=3;
+		
+		//工程治理
+		if(type==-21)stage=1;
+		if(type==-22||type==-23||type==-24)stage=2;
+		if(type==-25||type==-26)stage=3;
 		
 		fileConframe.window.goto_uploadfile_by_projectid('${id}',"${geotype}",stage,type);
 		$('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
@@ -134,158 +137,272 @@ function uploadFile(){
 	
 }
 function downloadFile(){
+   var govertype="${geotype}";
+   if(govertype=="1"){
 	//治理前
- 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
- 		  ignoreCase: true,     // case insensitive
- 		  exactMatch: true,    // like or equals
- 		  revealResults: false,  // reveal matching nodes
- 		}]);
- 	
- 	
- 	
- 	//治理中
- 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
-		   ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	
- 	//治理后
- 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	
- 	var Location=[];
- 	getNodelocationArr(file1[0],Location);
- 	getNodelocationArr(file2[0],Location);
- 	getNodelocationArr(file3[0],Location);
- 	getNodelocationArr(file4[0],Location);
- 	getNodelocationArr(file5[0],Location);
- 	getNodelocationArr(file6[0],Location);
- 	getNodelocationArr(file7[0],Location);
- 	getNodelocationArr(file8[0],Location);
- 	if(Location.length>0){
-		window.location.href='<%=basePath%>DownloadFile/download?location='+Location;
- 	}else{
- 		alert("沒有选中任何选项");
- 	}
+	 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
+			   ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	//治理后
+	 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	var Location=[];
+	 	getNodelocationArr(file1[0],Location);
+	 	getNodelocationArr(file2[0],Location);
+	 	getNodelocationArr(file3[0],Location);
+	 	getNodelocationArr(file4[0],Location);
+	 	getNodelocationArr(file5[0],Location);
+	 	getNodelocationArr(file6[0],Location);
+	 	getNodelocationArr(file7[0],Location);
+	 	getNodelocationArr(file8[0],Location);
+	 	if(Location.length>0){
+			window.location.href='<%=basePath%>DownloadFile/download?location='+Location;
+	 	}else{
+	 		alert("沒有选中任何选项");
+	 	}
+   } 
+   if(govertype=="2"){//
+	   console.log("工程治理");
+		//治理前
+	 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '招投标', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '合同', {
+			   ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '进度', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	//治理后
+	 	var file5=$('#treeview-checkable').treeview('search', [ '竣工报告', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file6=$('#treeview-checkable').treeview('search', [ '验收意见', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	var Location=[];
+	 	getNodelocationArr(file1[0],Location);
+	 	getNodelocationArr(file2[0],Location);
+	 	getNodelocationArr(file3[0],Location);
+	 	getNodelocationArr(file4[0],Location);
+	 	getNodelocationArr(file5[0],Location);
+	 	getNodelocationArr(file6[0],Location);
+	 	if(Location.length>0){
+			window.location.href='<%=basePath%>DownloadFile/download?location='+Location;
+	 	}else{
+	 		alert("沒有选中任何选项");
+	 	}
+  }
 	
 }
 
 
 function deleteFile(){
-	//治理前
- 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
- 		  ignoreCase: true,     // case insensitive
- 		  exactMatch: true,    // like or equals
- 		  revealResults: false,  // reveal matching nodes
- 		}]);
-
- 	//治理中
- 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	
- 	//治理后
- 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	
- 	var ids=[];
- 	getNodeidArr(file1[0],ids);
- 	getNodeidArr(file2[0],ids);
- 	getNodeidArr(file3[0],ids);
- 	getNodeidArr(file4[0],ids);
- 	getNodeidArr(file5[0],ids);
- 	getNodeidArr(file6[0],ids);
- 	getNodeidArr(file7[0],ids);
- 	getNodeidArr(file8[0],ids);
- 	if(ids.length>0)
- 	{
- 		var geotype=$("#geotype").val();
-		var id=$("#id").val();
-		var url=encodeURI("id="+id+"&geotype="+geotype+"&ids="+ids);
-		$.ajax({
-			url : "<%=basePath%>TreeNode/deletenode",
-			type : "POST",
-			contentType : "application/json; charset=UTF-8",
-			data : JSON.stringify(ids),
-			dataType : "json",
-			success : function(data) {	
-				alert("删除成功");
-				window.location.reload('<%=basePath%>TreeNode?'+url);
-			},
-			error : function() {
-				alert("删除失败");
-			}
-
-		});
- 	}else{
- 		alert("沒有选中任何选项");
- 	}
- 	<%-- window.location.href='<%=basePath%>GovernanceAttr/ShowList'; --%>
+	var govertype="${geotype}";
+	if(govertype=="1"){
+		var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	//治理后
+	 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	var ids=[];
+	 	getNodeidArr(file1[0],ids);
+	 	getNodeidArr(file2[0],ids);
+	 	getNodeidArr(file3[0],ids);
+	 	getNodeidArr(file4[0],ids);
+	 	getNodeidArr(file5[0],ids);
+	 	getNodeidArr(file6[0],ids);
+	 	getNodeidArr(file7[0],ids);
+	 	getNodeidArr(file8[0],ids);
+	 	if(ids.length>0){
+	 		var geotype=$("#geotype").val();
+			var id=$("#id").val();
+			var url=encodeURI("id="+id+"&geotype="+geotype+"&ids="+ids);
+			$.ajax({
+				url : "<%=basePath%>TreeNode/deletenode",
+				type : "POST",
+				contentType : "application/json; charset=UTF-8",
+				data : JSON.stringify(ids),
+				dataType : "json",
+				success : function(data) {	
+					alert("删除成功");
+					window.location.reload('<%=basePath%>TreeNode?'+url);
+				},
+				error : function() {
+					alert("删除失败");
+				}
+			});	
+	 	}else{alert("沒有选中任何选项");}
+	}
+	if(govertype=="2"){
+		console.log("工程治理");
+		//治理前
+	 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '招投标', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '合同', {
+			   ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '进度', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	//治理后
+	 	var file5=$('#treeview-checkable').treeview('search', [ '竣工报告', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file6=$('#treeview-checkable').treeview('search', [ '验收意见', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	var ids=[];
+	 	getNodeidArr(file1[0],ids);
+	 	getNodeidArr(file2[0],ids);
+	 	getNodeidArr(file3[0],ids);
+	 	getNodeidArr(file4[0],ids);
+	 	getNodeidArr(file5[0],ids);
+	 	getNodeidArr(file6[0],ids);
+	 	if(ids.length>0)
+	 	{
+	 		var geotype=$("#geotype").val();
+			var id=$("#id").val();
+			var url=encodeURI("id="+id+"&geotype="+geotype+"&ids="+ids);
+			$.ajax({
+				url : "<%=basePath%>TreeNode/deletenode",
+				type : "POST",
+				contentType : "application/json; charset=UTF-8",
+				data : JSON.stringify(ids),
+				dataType : "json",
+				success : function(data) {	
+					alert("删除成功");
+					window.location.reload('<%=basePath%>TreeNode?'+url);
+				},
+				error : function() {
+					alert("删除失败");
+				}
+			});
+	 	}else{alert("沒有选中任何选项");}
+	}
 }
 
 
@@ -296,75 +413,135 @@ function deleteFile(){
 
 
 function showpicture(){	
-	//治理前
- 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
- 		  ignoreCase: true,     // case insensitive
- 		  exactMatch: true,    // like or equals
- 		  revealResults: false,  // reveal matching nodes
- 		}]);
- 	
- 	
- 	
- 	//治理中
- 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	
- 	//治理后
- 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
- 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
-		  ignoreCase: true,     // case insensitive
-		  exactMatch: true,    // like or equals
-		  revealResults: false,  // reveal matching nodes
-		}]);
- 	
-	var virLocation=[];
-	getNodevirLocationArr(file1[0],virLocation);
-	getNodevirLocationArr(file2[0],virLocation);
-	getNodevirLocationArr(file3[0],virLocation);
-	getNodevirLocationArr(file4[0],virLocation);
-	getNodevirLocationArr(file5[0],virLocation);
-	getNodevirLocationArr(file6[0],virLocation);
-	getNodevirLocationArr(file7[0],virLocation);
-	getNodevirLocationArr(file8[0],virLocation);
-
-	if(virLocation.length>0){
-		//console.log(virLocation);
-		$("#checkable-output").empty();
-		for(var i=0;i<virLocation.length;i++){
-			$("#checkable-output").append("<figure class='gallery-item'><img src=/"+virLocation[i]+" alt=''></figure>");	
+	var govertype="${geotype}";
+	if(govertype=="1"){
+		//治理前
+	 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	
+	 	
+	 	
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	//治理后
+	 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+		var virLocation=[];
+		getNodevirLocationArr(file1[0],virLocation);
+		getNodevirLocationArr(file2[0],virLocation);
+		getNodevirLocationArr(file3[0],virLocation);
+		getNodevirLocationArr(file4[0],virLocation);
+		getNodevirLocationArr(file5[0],virLocation);
+		getNodevirLocationArr(file6[0],virLocation);
+		getNodevirLocationArr(file7[0],virLocation);
+		getNodevirLocationArr(file8[0],virLocation);
+	
+		if(virLocation.length>0){
+			//console.log(virLocation);
+			$("#checkable-output").empty();
+			for(var i=0;i<virLocation.length;i++){
+				$("#checkable-output").append("<figure class='gallery-item'><img src=/"+virLocation[i]+" alt=''></figure>");	
+			}
+			 $('.gallery-item').ma5gallery({ preload:true,fullscreen:false});
+		}else{
+			$("#checkable-output").empty();
 		}
-		 $('.gallery-item').ma5gallery({ preload:true,fullscreen:false});
-	}else{
-		$("#checkable-output").empty();
+	}
+	if(govertype=="2"){
+		console.log("工程治理");
+		//治理前
+	 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	//治理中
+	 	var file2=$('#treeview-checkable').treeview('search', [ '招投标', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file3=$('#treeview-checkable').treeview('search', [ '合同', {
+			   ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file4=$('#treeview-checkable').treeview('search', [ '进度', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	//治理后
+	 	var file5=$('#treeview-checkable').treeview('search', [ '竣工报告', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	var file6=$('#treeview-checkable').treeview('search', [ '验收意见', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 	
+	 	
+	 	
+		var virLocation=[];
+		getNodevirLocationArr(file1[0],virLocation);
+		getNodevirLocationArr(file2[0],virLocation);
+		getNodevirLocationArr(file3[0],virLocation);
+		getNodevirLocationArr(file4[0],virLocation);
+		getNodevirLocationArr(file5[0],virLocation);
+		getNodevirLocationArr(file6[0],virLocation);
+		if(virLocation.length>0){
+			//console.log(virLocation);
+			$("#checkable-output").empty();
+			for(var i=0;i<virLocation.length;i++){
+				$("#checkable-output").append("<figure class='gallery-item'><img src=/"+virLocation[i]+" alt=''></figure>");	
+			}
+			 $('.gallery-item').ma5gallery({ preload:true,fullscreen:false});
+		}else{
+			$("#checkable-output").empty();
+		}
 	}
 	
 }
