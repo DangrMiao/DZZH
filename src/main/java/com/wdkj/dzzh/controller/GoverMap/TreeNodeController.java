@@ -97,6 +97,7 @@ public class TreeNodeController {
 		
 		ArrayList<TreeRoot> filelist=new ArrayList<TreeRoot>();
 		
+		if("1".equals(geotype)){//治理类型为搬迁避让
 		//治理前
 		if(1==goverstage){
 			filelist.clear();
@@ -211,6 +212,98 @@ public class TreeNodeController {
 			filelist.add(n8);
 			return filelist;
 			
+		}
+		}else if("2".equals(geotype)){//治理类型为工程治理
+			//治理前
+			if(1==goverstage){
+				filelist.clear();
+				f.setType("-21");//基本情况
+				ArrayList<TreeRoot> list1 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n1=new TreeRoot();
+				ArrayList<String> tags1=new ArrayList<String>();
+				n1.setText("基本情况");
+				n1.setId(-21);
+				n1.setNodes(list1);
+				tags1.add(String.valueOf(list1.size()));
+				n1.setTags(tags1);
+				filelist.add(n1);
+				return filelist;
+			}
+			//治理中
+			if(2==goverstage){
+				filelist.clear();
+				f.setType("-22");//招投标
+				ArrayList<TreeRoot> list2 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n2=new TreeRoot();
+				ArrayList<String> tags2=new ArrayList<String>();
+				n2.setText("招投标");
+				n2.setId(-22);
+				n2.setNodes(list2);
+				tags2.add(String.valueOf(list2.size()));
+				n2.setTags(tags2);
+				
+				
+				f.setType("-23");//合同
+				ArrayList<TreeRoot> list3 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n3=new TreeRoot();
+				ArrayList<String> tags3=new ArrayList<String>();
+				n3.setText("合同");
+				n3.setId(-23);
+				n3.setNodes(list3);
+				tags3.add(String.valueOf(list3.size()));
+				n3.setTags(tags3);
+				
+				
+				
+				f.setType("-24");//进度
+				ArrayList<TreeRoot> list4 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n4=new TreeRoot();
+				ArrayList<String> tags4=new ArrayList<String>();
+				n4.setText("进度");
+				n4.setId(-24);
+				n4.setNodes(list4);
+				tags4.add(String.valueOf(list4.size()));
+				n4.setTags(tags4);
+				
+				
+				filelist.add(n2);
+				filelist.add(n3);
+				filelist.add(n4);
+				return filelist;
+				
+			}
+			//治理后
+			if(3==goverstage){
+				filelist.clear();
+				f.setType("-25");//竣工报告
+				ArrayList<TreeRoot> list6 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n6=new TreeRoot();
+				ArrayList<String> tags6=new ArrayList<String>();
+				n6.setText("竣工报告");
+				n6.setId(-26);
+				n6.setNodes(list6);
+				tags6.add(String.valueOf(list6.size()));
+				n6.setTags(tags6);
+				
+				
+				
+				
+				f.setType("-26");//验收意见
+				ArrayList<TreeRoot> list7 =(ArrayList<TreeRoot>) fileService.F_list_by_goverid(f);
+				TreeRoot n7=new TreeRoot();
+				ArrayList<String> tags7=new ArrayList<String>();
+				n7.setText("验收意见");
+				n7.setId(-27);
+				n7.setNodes(list7);
+				tags7.add(String.valueOf(list7.size()));
+				n7.setTags(tags7);
+
+				
+				filelist.add(n6);
+				filelist.add(n7);
+				return filelist;
+			
+			}
 		}
 		return filelist;
 		
