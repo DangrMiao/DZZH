@@ -299,7 +299,7 @@ $("#map-search-data").on("click",function(){
     	})
     });
     
-    //“搬迁避让”的概况信息
+    //“搬迁避让”的概况信息1111
     $("#map-search-data-toorbar-bqbr-xxgk").on("click",function(){
     	selections = $('#map-search-data').bootstrapTable('getSelections');
     	//$('#form-test').form('load',selections[0]); 
@@ -317,7 +317,7 @@ $("#map-search-data").on("click",function(){
 	  })
     });
     
-    //“工程治理”的概况信息
+    //“工程治理”的概况信息1212121
     $("#map-search-data-toorbar-gczl-xxgk").on("click",function(){
     	selections = $('#map-search-data').bootstrapTable('getSelections');
     	//$('#form-test').form('load',selections[0]); 
