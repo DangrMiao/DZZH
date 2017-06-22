@@ -308,7 +308,6 @@ $("#map-search-data").on("click",function(){
 	    Ajax.getJson("relocation/search_relocation",BqbrXxgk, function(data){	 
     	$('#account-Manager-add-dialog-bqbr-second').modal('show');
     	console.log(data)
-    	
     	treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
     	FormUtils.loadForm('form-second-bqbr',data.rows[0]);
     	$("#bqbr-second-close").on("click",function(){
