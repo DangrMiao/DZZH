@@ -51,14 +51,9 @@
 	</div><!-- /.modal -->
   </div>
   
-  
-  
-  
-  
-  
  	<div class="form-group row">
   		<div class="col-sm-12">
-  		 <button type="button" class="btn btn-primary" onclick="uploadFile()">上传文件</button> 
+  		  <button type="button" class="btn btn-primary" onclick="uploadFile()">上传文件</button> 
           <button type="button" class="btn btn-primary" onclick="downloadFile()">下载文件</button> 
           <button type="button" class="btn btn-primary" onclick="deleteFile()">删除文件</button> 
   		</div>

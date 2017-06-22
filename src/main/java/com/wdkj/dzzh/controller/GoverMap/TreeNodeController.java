@@ -44,6 +44,9 @@ public class TreeNodeController {
 		ArrayList<TreeRoot> preventfile=getfilelist(geotype,id ,2);//治理中
 		ArrayList<TreeRoot> progressfile=getfilelist(geotype,id ,3);//治理后
 		
+		
+		
+		
 
 		ArrayList<String> tags=new ArrayList<String>();
 		tags.add("3");

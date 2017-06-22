@@ -69,7 +69,7 @@
 	        <button id="map-search-data-toorbar-gczl-zlsc" type="button" class="btn btn-sm" style="display: none;">资料上传</button> -->
 	        <!-- <button id="map-search-data-toorbar-bqbr-zlxz" type="button" class="btn btn-sm">资料下载</button> -->
 	        <!-- <button id="map-search-data-toorbar-gczl-zlxz" type="button" class="btn btn-sm" style="display: none;">资料下载</button>  -->
-	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>
+	        <!-- <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button> -->
         </div>          
 		<div id="map-search-data-div" class="" style="z-index:999;position: absolute;bottom: 0px;left: 0px;right: 0px;display: block;">										
 			<table id="map-search-data" style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top">
@@ -91,7 +91,7 @@
 
 	
 		<!-- 图例 -->	
-	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:200px;z-index:900; right:0px;top:200px">
+	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:200px;z-index:900; right:0px;top:486px">
 		<button id="map-legend-btn" type="button" style="height: 35px;width: 120px;text-align: center;" class="btn">图例</button>						
 		<div id="" class="sidebar">						 				
 
@@ -99,7 +99,7 @@
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
 			
 			   <img class="col-xs-6 col-sm-3" src="static/images/levelD.png"></img>
-			   <label class="col-xs-6 col-sm-6">暂无</label>
+			   <label class="col-xs-6 col-sm-6">隐患点</label>
 		   </div>
 		   
 		   <%--修缮加固--%>
@@ -910,199 +910,6 @@
 	 	  </div> 																		
 		</form>	 
 	</div>
-	
-	<%--添加房屋的面板--%>
-	<div class="widget-box widget-color-pink" id="house-info-panel" style="position:absolute;width:400px; height:100%;z-index:999; right:-400px;top:0px;display:none;">
-		<div class="widget-header widget-header-small">
-			<h6 class="widget-title">
-				添加房屋
-			</h6>
-
-			<div class="widget-toolbar">
-
-				<a href="javascript:void(0)" class="panel-close-icon">
-					<i class="ace-icon fa fa-times"></i>
-				</a>
-			</div>
-		</div>
-
-		<div class="widget-body" style="height:100%;">
-			<style>
-				#house-info-panel .form-group{
-					margin-bottom: 8px;
-				}
-			</style>
-			<div class="widget-main container" style="width:400px;overflow-y:scroll;height:100%;">
-				<div class="row">
-					<div class="col-xs-12">
-						<!-- PAGE CONTENT BEGINS -->
-						<form class="form-horizontal" role="form" id="house-info-form">
-							<!-- #section:elements.form -->
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="form-field-1">房屋编号</label>
-
-								<div class="col-xs-8">
-									<label class="form-control-static" id="house-info-no">0</label>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right">经纬度</label>
-
-								<div class="col-xs-8">
-									<label class="form-control-static" id="house-info-lat-lon"></label>
-									<input type="hidden" name="x" id="house-info-lon"/>
-									<input type="hidden" name="y" id="house-info-lat"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right field-required" for="house-info-build-year">建筑年代</label>
-
-								<div class="col-xs-8">
-									<select class="form-control" id="house-info-build-year" name="jznd">
-										
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-type">住房类别</label>
-
-								<div class="col-xs-8">
-									<select class="form-control" id="house-info-type" name="zflb">
-										
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right field-required" for="house-info-floor-num">层数</label>
-								<div class="col-xs-8">
-									<input type="number" id="house-info-floor-num" placeholder="请输入层数" class="col-xs-10 form-control" name="cs"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right field-required" for="form-field-1-1">间数</label>
-								<div class="col-xs-8">
-									<input type="number" id="house-info-rooms-num" placeholder="请输入间数" class="col-xs-10 form-control" name="js"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right field-required" for="house-info-and-area">占地面积(㎡)</label>
-								<div class="col-xs-8">
-									<input type="number" id="house-info-land-area" placeholder="请输入占地面积" class="col-xs-10 form-control" name="zdmj"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right field-required" for="house-info-build-area">建筑面积(㎡)</label>
-								<div class="col-xs-8">
-									<input type="number" id="house-info-build-area" placeholder="请输入建筑面积" class="col-xs-10 form-control" name="jzmj"/>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-use-situation">住房使用情况</label>
-
-								<div class="col-xs-8">
-									<select class="form-control" id="house-info-use-situation" name="zfsyqk">
-										<option value=""></option>
-										
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-land-nature">土地性质</label>
-								<div class="col-xs-8">
-									<select class="form-control" id="house-info-land-nature" name="tdxz">
-										<option value=""></option>
-										
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right">乡镇街道</label>
-								<div class="col-xs-8">
-									<label class="form-control-static" id="house-info-street"></label>
-									<input type="hidden" id="house-info-street-name" name="xzjd"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-village">所属村</label>
-								<div class="col-xs-8">
-									<label class="form-control-static" id="house-info-village"></label>
-									<input type="hidden" id="house-info-village-name" name="ssc"/>
-									<input type="hidden" id="house-info-village-id" name="villageId"/>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-houseNo">门牌号</label>
-
-								<div class="col-xs-8">
-									<input type="number" id="house-info-houseNo" placeholder="" class="col-xs-10 form-control" name="mph" />
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-structure-type">结构类型</label>
-
-								<div class="col-xs-8">
-									<select class="form-control" id="house-info-structure-type" name="jglx">
-										<option value=""></option>
-									</select>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="house-info-danger-level">危险性等级</label>
-
-								<div class="col-xs-8">
-									<label class="form-control-static" id="house-info-village">待定</label>
-								</div>
-							</div>
-
-							<div class="form-group">
-								<label class="col-xs-4 control-label no-padding-right" for="form-field-1-1">房产证</label>
-
-								<div class="col-xs-8">
-									<input type="text" id="house-info-certificates-no" placeholder="请输入房产证号" class="form-control col-xs-10" name="fcz"/>
-									
-								</div>
-							</div>
-							<div class="validate-tips">
-								<label class="validate-tips-label"></lebel>
-							</div>
-							<div class="clearfix form-actions">
-								<div class="col-md-12" style="display: flex;justify-content: space-around;">
-									<button class="btn btn-info save-house-btn" type="submit">
-										<i class="ace-icon fa fa-check bigger-110"></i>
-										确定
-									</button>
-									<button class="btn" type="reset">
-										<i class="ace-icon fa fa-undo bigger-110"></i>
-										重置
-									</button>
-									<button class="btn close-panel-btn" type="reset">
-										<i class="ace-icon fa fa-times"></i>
-										取消
-									</button>
-								</div>
-							</div>								
-						</form>
-					</div>
-				</div>
-			</div>
-		
-		
-		</div>
-	</div>
-
 
  </div>
 	 
@@ -1152,9 +959,9 @@
 
 	<%--js文件--%>
     <script src="static/js/history/map.js" type="text/javascript"></script>
-	<script src="static/js/history/addHouse.js" type="text/javascript"></script> 
+ 
 	<script src="static/js/history/conditionSearch.js" type="text/javascript"></script>
-	<script src="static/js/history/monitor.js" type="text/javascript"></script>
+ 
 	</body>
 
  	<script type="text/javascript">

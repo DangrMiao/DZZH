@@ -170,7 +170,7 @@ $("#map-search-data").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
 	//console.log(selections[0])
     if (selections[0].governancetypeid ==0){   	
-        $('#map-search-data-toorbar-xxgk').css('display','inline-block');
+        $('#map-search-data-toorbar-xxgk').css('display','none');
         $('#map-search-data-toorbar-bqbr-xxgk').css('display','none');
         $('#map-search-data-toorbar-gczl-xxgk').css('display','none');
 		$('#map-search-data-toorbar-zd-sxgx').css('display','inline-block');
