@@ -13,9 +13,9 @@
 </head>
 <script type="text/javascript">
 //window.parent.get_uploadfile_projectid();
-function goto_uploadfile_by_projectid(id,protype){
+function goto_uploadfile_by_projectid(id,protype,stage,type){
 	//console.log("fileupload_route");
-	window.location.href="<%=basePath%>UpLoadFile/upfile?geotype="+protype+"&id="+id;
+	window.location.href="<%=basePath%>UpLoadFile/upfile?geotype="+protype+"&id="+id+"&stage="+stage+"&type="+type;
 }
 </script>
 <script type="text/javascript">

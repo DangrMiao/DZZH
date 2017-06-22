@@ -193,7 +193,7 @@ $("#map-search-data").on("click",function(){
 		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
 		$('#map-search-data-toorbar-tjzlfa').css('display','none');
 		$('#map-search-data-toorbar-bqry').css('display','inline-block');
-		$('#map-search-data-toorbar-bqbr-zlsc').css('display','inline-block');
+		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
 		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','inline-block');*/
 		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
 		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','none');*/
@@ -210,7 +210,7 @@ $("#map-search-data").on("click",function(){
 		$('#map-search-data-toorbar-bqry').css('display','none');
 		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
 		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');*/
-		$('#map-search-data-toorbar-gczl-zlsc').css('display','inline-block');
+		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
 		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','inline-block');*/
     	} 
 	if (Mmarker) {

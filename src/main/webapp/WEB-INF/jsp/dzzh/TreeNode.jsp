@@ -33,9 +33,32 @@
  <div class="row" style="margin-left: 10px;width: 92%;">
   <input type="hidden" value="${id}" name="id" id="id" />
   <input type="hidden" value="${geotype}" name="geotype" id="geotype" />
+  
+  
+  <!-- 资料上传(搬迁避让) -->
+  <div class="modal fade" id="account-Manager-add-dialog-bqbr-zlsc" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog"  style="width:720px;height:150px;margin-top:60px;text-align:center">
+		<div class="modal-content" id="zlsc-bqbr-tz" >
+			<div class="modal-header" style="text-align:center;font-size:12px">
+				<button type="button" class="close" data-dismiss="modal" id="bqbr-zlsc-close" aria-hidden="true">&times;</button> 
+				<h5 class="modal-title" id="">上传文件</h5>
+			</div>
+			<div class="modal-body" style="width:720px;height:150px;">
+				<iframe name="fileConframe"  style="width:700px;height:100%;"class="Conframe" id="fileConframe" frameborder=0 src="<%=basePath%>UpLoadFile">
+				 </iframe>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+  </div>
+  
+  
+  
+  
+  
+  
  	<div class="form-group row">
-  		<div class="col-sm-12"> 
-  		  <button type="button" class="btn btn-primary" onclick="upFile()">上传文件</button> 
+  		<div class="col-sm-12">
+  		 <button type="button" class="btn btn-primary" onclick="uploadFile()">上传文件</button> 
           <button type="button" class="btn btn-primary" onclick="downloadFile()">下载文件</button> 
           <button type="button" class="btn btn-primary" onclick="deleteFile()">删除文件</button> 
   		</div>
@@ -64,37 +87,119 @@ function reloadtree(){
 	var id=$("#id").val();
 	var url=encodeURI("id="+id+"&geotype="+geotype);
 	window.location.reload('<%=basePath%>TreeNode?'+url);
-
 }
-function downloadFile(){
- 	var photo=$('#treeview-checkable').treeview('search', [ 'A文件', {
+
+function uploadFile(){
+	console.log("--------------"+"uploadFile"+"----------------");
+	//getStageAndType();
+	//var stage=1;
+	//var type=1;
+	//治理前
+ 	var file1=$('#treeview-checkable').treeview('search', [ '治理前', {
  		  ignoreCase: true,     // case insensitive
  		  exactMatch: true,    // like or equals
  		  revealResults: false,  // reveal matching nodes
  		}]);
- 	var doc=$('#treeview-checkable').treeview('search', [ 'B文件', {
+ 	//治理中
+ 	var file2=$('#treeview-checkable').treeview('search', [ '治理中', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	var other=$('#treeview-checkable').treeview('search', [ 'C文件', {
+
+ 	
+ 	
+ 	//治理后
+ 	var file3=$('#treeview-checkable').treeview('search', [ '治理后', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	//console.log(photo);
+ 
+	var ids=[];
+	getNodeidArr(file1[0],ids);
+	getNodeidArr(file2[0],ids);
+	getNodeidArr(file3[0],ids);
+ 	
+ 	console.log(ids);
+ 	if(ids.length==0){alert("请选择一个文件夹上传");}
+ 	if(ids.length>1){alert("最多选择一个文件夹上传");}
+ 	if(ids.length==1){
+ 		//console.log(file);
+ 		var stage=1;
+		var type=ids[0];
+		if(type==-1)stage=1;
+		if(type==-2||type==-3||type==-4||type==-5)stage=2;
+		if(type==-6||type==-7||type==-8)stage=3;
+		
+		fileConframe.window.goto_uploadfile_by_projectid('${id}',"${geotype}",stage,type);
+		$('#account-Manager-add-dialog-bqbr-zlsc').modal('show');
+ 	}
+
+	
+}
+function downloadFile(){
+	//治理前
+ 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+ 		  ignoreCase: true,     // case insensitive
+ 		  exactMatch: true,    // like or equals
+ 		  revealResults: false,  // reveal matching nodes
+ 		}]);
+ 	
+ 	
+ 	
+ 	//治理中
+ 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
+		   ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	
+ 	//治理后
+ 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	
  	var Location=[];
- 	getNodelocationArr(photo[0],Location);
- 	getNodelocationArr(doc[0],Location);
- 	getNodelocationArr(other[0],Location);
- 	getNodelocationArr(photo[1],Location);
- 	getNodelocationArr(doc[1],Location);
- 	getNodelocationArr(other[1],Location);
- 	getNodelocationArr(photo[2],Location);
- 	getNodelocationArr(doc[2],Location);
- 	getNodelocationArr(other[2],Location);
+ 	getNodelocationArr(file1[0],Location);
+ 	getNodelocationArr(file2[0],Location);
+ 	getNodelocationArr(file3[0],Location);
+ 	getNodelocationArr(file4[0],Location);
+ 	getNodelocationArr(file5[0],Location);
+ 	getNodelocationArr(file6[0],Location);
+ 	getNodelocationArr(file7[0],Location);
+ 	getNodelocationArr(file8[0],Location);
  	if(Location.length>0){
- 		//console.log(Location);
 		window.location.href='<%=basePath%>DownloadFile/download?location='+Location;
  	}else{
  		alert("沒有选中任何选项");
@@ -104,32 +209,64 @@ function downloadFile(){
 
 
 function deleteFile(){
- 	var photo=$('#treeview-checkable').treeview('search', [ 'A文件', {
+	//治理前
+ 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
  		  ignoreCase: true,     // case insensitive
  		  exactMatch: true,    // like or equals
  		  revealResults: false,  // reveal matching nodes
  		}]);
- 	var doc=$('#treeview-checkable').treeview('search', [ 'B文件', {
+
+ 	//治理中
+ 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	var other=$('#treeview-checkable').treeview('search', [ 'C文件', {
+ 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 	//console.log(photo);
+ 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	
+ 	//治理后
+ 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	
  	var ids=[];
- 	getNodeidArr(photo[0],ids);
- 	getNodeidArr(doc[0],ids);
- 	getNodeidArr(other[0],ids);
- 	getNodeidArr(photo[1],ids);
- 	getNodeidArr(doc[1],ids);
- 	getNodeidArr(other[1],ids);
- 	getNodeidArr(photo[2],ids);
- 	getNodeidArr(doc[2],ids);
- 	getNodeidArr(other[2],ids);
+ 	getNodeidArr(file1[0],ids);
+ 	getNodeidArr(file2[0],ids);
+ 	getNodeidArr(file3[0],ids);
+ 	getNodeidArr(file4[0],ids);
+ 	getNodeidArr(file5[0],ids);
+ 	getNodeidArr(file6[0],ids);
+ 	getNodeidArr(file7[0],ids);
+ 	getNodeidArr(file8[0],ids);
  	if(ids.length>0)
  	{
  		var geotype=$("#geotype").val();
@@ -163,17 +300,66 @@ function deleteFile(){
 
 
 
-function showpicture(){
-	
-	var photo=$('#treeview-checkable').treeview('search', [ '照片', {
+function showpicture(){	
+	//治理前
+ 	var file1=$('#treeview-checkable').treeview('search', [ '基本情况', {
+ 		  ignoreCase: true,     // case insensitive
+ 		  exactMatch: true,    // like or equals
+ 		  revealResults: false,  // reveal matching nodes
+ 		}]);
+ 	
+ 	
+ 	
+ 	//治理中
+ 	var file2=$('#treeview-checkable').treeview('search', [ '搬迁协议', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
+ 	var file3=$('#treeview-checkable').treeview('search', [ '思想工作', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file4=$('#treeview-checkable').treeview('search', [ '腾空', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file5=$('#treeview-checkable').treeview('search', [ '拆迁', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	
+ 	//治理后
+ 	var file6=$('#treeview-checkable').treeview('search', [ '复垦', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	var file7=$('#treeview-checkable').treeview('search', [ '安置地', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
+ 	var file8=$('#treeview-checkable').treeview('search', [ '安置新房', {
+		  ignoreCase: true,     // case insensitive
+		  exactMatch: true,    // like or equals
+		  revealResults: false,  // reveal matching nodes
+		}]);
+ 	
 	var virLocation=[];
-	getNodevirLocationArr(photo[0],virLocation);
-	getNodevirLocationArr(photo[1],virLocation);
-	getNodevirLocationArr(photo[2],virLocation);
+	getNodevirLocationArr(file1[0],virLocation);
+	getNodevirLocationArr(file2[0],virLocation);
+	getNodevirLocationArr(file3[0],virLocation);
+	getNodevirLocationArr(file4[0],virLocation);
+	getNodevirLocationArr(file5[0],virLocation);
+	getNodevirLocationArr(file6[0],virLocation);
+	getNodevirLocationArr(file7[0],virLocation);
+	getNodevirLocationArr(file8[0],virLocation);
 
 	if(virLocation.length>0){
 		//console.log(virLocation);
@@ -197,20 +383,24 @@ var $checkableTree = $('#treeview-checkable').treeview({
         highlightSearchResults:false,
         showCheckbox: true,
         onNodeChecked: function(event, node) { //选中节点
-        	var selectNodes = getNodeIdArr(node);//获取所有子节点
+        	 showpicture();
+        	
+        	/* var selectNodes = getNodeIdArr(node);//获取所有子节点
             if(selectNodes){ //子节点不为空，则选中所有子节点
-                $('#treeview-checkable').treeview('checkNode', [ selectNodes,{ silent: true }]);
+               // $('#treeview-checkable').treeview('checkNode', [ selectNodes,{ silent: true }]);
                 showpicture();
                 //$('#tree').treeview('getSelected', nodeId);
-            }
+            } */
         },
         onNodeUnchecked: function (event, node) { //取消选中节点
-            var selectNodes = getNodeIdArr(node);//获取所有子节点
+        	 showpicture();
+        	
+        	
+           /*  var selectNodes = getNodeIdArr(node);//获取所有子节点
             if(selectNodes){ //子节点不为空，则取消选中所有子节点
-                $('#treeview-checkable').treeview('uncheckNode', [ selectNodes,{ silent: true }]);
+               // $('#treeview-checkable').treeview('uncheckNode', [ selectNodes,{ silent: true }]);
                 showpicture();
-            }
-            
+            }*/
         }
 });
 //递归获取所有的子结点id
@@ -234,6 +424,8 @@ function getNodeIdArr( node ){
 return ts;
 }
 
+
+//得到所选节点的真实路径
 function getNodelocationArr( node ,Location){
         //var ts = [];
         if(node.nodes.length!=0){
@@ -247,7 +439,7 @@ function getNodelocationArr( node ,Location){
 }
 
 
-
+//得到所选节点的id
 function getNodeidArr( node ,ids){
     if(node.nodes.length!=0){
         for(var i=0;i<node.nodes.length;i++){
@@ -258,14 +450,13 @@ function getNodeidArr( node ,ids){
     }
 }
 
-
+//得到所选为图片的节点的虚拟路径
 function getNodevirLocationArr( node ,virLocation){
-    //var ts = [];
     if(node.nodes.length!=0){
         for(var i=0;i<node.nodes.length;i++){
         	var x=node.nodes[i];
         	//console.log(x);
-        	if(x.state.checked)
+        	if(x.state.checked&&(x.text.indexOf("jpg") >= 0||x.text.indexOf("png") >= 0||x.text.indexOf("gif") >= 0))
         		virLocation.push(x.virtuallocation)
         }
     }
@@ -280,5 +471,16 @@ function getNodevirLocationArr( node ,virLocation){
         fullscreen:false
     });
 }); 
+ $('#account-Manager-add-dialog-bqbr-zlsc').modal({
+	    keyboard: true,
+	    backdrop: "static",
+	    show:false
+	});
+ 
+  $(function () { $('#account-Manager-add-dialog-bqbr-zlsc').on('hidden.bs.modal', function () {
+	// console.log("hide");
+	 reloadtree();
+	 })
+});
 </script>
 </html>

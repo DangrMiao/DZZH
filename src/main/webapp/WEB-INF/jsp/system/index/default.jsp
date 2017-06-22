@@ -65,8 +65,8 @@
 	        <button id="map-search-data-toorbar-gczl-sxgx" type="button" class="btn btn-sm" style="display: none;">信息更新</button> 
 	        <button id="map-search-data-toorbar-tjzlfa" type="button" class="btn btn-sm">添加治理方案</button>
 	        <button id="map-search-data-toorbar-bqry" type="button" class="btn btn-sm">搬迁人员</button>
-	        <button id="map-search-data-toorbar-bqbr-zlsc" type="button" class="btn btn-sm">资料上传</button>
-	        <button id="map-search-data-toorbar-gczl-zlsc" type="button" class="btn btn-sm" style="display: none;">资料上传</button>
+	        <!-- <button id="map-search-data-toorbar-bqbr-zlsc" type="button" class="btn btn-sm">资料上传</button>
+	        <button id="map-search-data-toorbar-gczl-zlsc" type="button" class="btn btn-sm" style="display: none;">资料上传</button> -->
 	        <!-- <button id="map-search-data-toorbar-bqbr-zlxz" type="button" class="btn btn-sm">资料下载</button> -->
 	        <!-- <button id="map-search-data-toorbar-gczl-zlxz" type="button" class="btn btn-sm" style="display: none;">资料下载</button>  -->
 	        <button id="map-search-data-toorbar-close" type="button" class="btn btn-sm">关闭</button>
