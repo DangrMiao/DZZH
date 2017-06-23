@@ -443,7 +443,7 @@ $("#map-search-data").on("click",function(){
 	});
    
    //搬迁避让属性更新
-   $("#map-search-data-toorbar-bqbr-sxgx").on("click",function(){
+   /*$("#map-search-data-toorbar-bqbr-sxgx").on("click",function(){
    	selections = $('#map-search-data').bootstrapTable('getSelections');
    	var BqbrSxgxs={};
    	BqbrSxgxs.id = selections[0].id;
@@ -458,11 +458,12 @@ $("#map-search-data").on("click",function(){
 			$('#map-search-data-div').css('display','block');
 		  });
 	   })
-   });
+   });*/
    
    //“搬迁避让”属性更新提交
    $("#bqbr-save-submit").on("click",function(){
-    	var params = FormUtils.getData("form-bqbr");
+    	var params = FormUtils.getData("form-second-bqbr");
+    	console.log(params)
     	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
     		if(data.code > 0){ 
                 $.gritter.add({

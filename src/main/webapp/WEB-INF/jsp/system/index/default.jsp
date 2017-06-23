@@ -120,7 +120,7 @@
 	</div>
 	<!-- 添加的模态框(最初的属性更新) -->
   <div class="modal fade" id="account-Manager-add-dialog-start-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;text-align:center">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="start-sxgx-close" aria-hidden="true">&times;</button> 
@@ -175,7 +175,7 @@
 </div>
 <!-- 添加的模态框(灾害点概况) -->
   <div class="modal fade" id="account-Manager-add-dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:360px;margin-top:68px;margin-left:0px">
+	<div class="modal-dialog" style="width:360px;margin-top:68px;text-align:center">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="fwgk-close" aria-hidden="true">&times;</button> 
@@ -225,7 +225,7 @@
 <!-- 添加的模态框(属性更新) -->
   <div class="modal fade" id="account-Manager-add-dialog-sxgx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
-		<div class="modal-content">
+		<div class="modal-content" >
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="sxgx-close" aria-hidden="true">&times;</button> 
 				<h5 class="modal-title" id="">信息展示</h5>
@@ -277,7 +277,7 @@
 
 <!-- 添加的模态框(治理方案) -->
   <div class="modal fade" id="account-Manager-add-dialog-result" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="width:420px;margin-top:60px;margin-left:0px">
+	<div class="modal-dialog" style="width:420px;margin-top:60px;text-align:center">
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="ckjdjg-close" aria-hidden="true">&times;</button> 
@@ -370,7 +370,7 @@
 						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control" > 
 					</div>
 					<div class="modal-footer" style="text-align: center;background:white;">
-						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
+						<!-- <button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button> -->
 						<!-- <button type="button" class="btn btn-info btn-sm"  id="bqbr-person-submit">搬迁人员</button>
 		                <button type="button" class="btn btn-info btn-sm"  id="bqbr-add-submit" style="margin-left:0px">资料上传</button>
 				   		<button type="button" class="btn btn-info btn-sm"  id="bqbr-download-submit">资料下载</button> -->
@@ -586,7 +586,7 @@
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">计划时间:</label>
-						<input class="col-sm-7 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" readonly="readonly" class="form-control"/>
+						<input class="col-sm-7 date-picker" name="create_time" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间"  class="form-control"/>
 					</div>
 					<!-- <div style="text-align: right;" class="form-group">
 						<label class="col-sm-5">隐患点名称:</label>
@@ -594,26 +594,29 @@
 					</div> -->
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">名称:</label>
-						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control" readonly="readonly">
+						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">基本情况:</label>
-						<input class="col-sm-7" style="height:26px" type="text" name ="basicInfo" class="form-control"  readonly="readonly">
+						<input class="col-sm-7" style="height:26px" type="text" name ="basicInfo" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">防治情况:</label>
-						<input class="col-sm-7" style="height:26px" type="text" name ="governanceInfo" class="form-control" readonly="readonly">
+						<input class="col-sm-7" style="height:26px" type="text" name ="governanceInfo" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">进度(%):</label>
-						<input class="col-sm-7" style="height:26px" type="text" name ="progress" class="form-control" readonly="readonly">
+						<input class="col-sm-7" style="height:26px" type="text" name ="progress" class="form-control">
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">备注:</label>
-						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control" readonly="readonly"> 
+						<input class="col-sm-7" style="height:26px" type="text" name = "remark" class="form-control"> 
 					</div>
+					 
 				</form>
-				
+				<div style="text-align: center;">
+						<button type="button" class="btn btn-info btn-sm"  id="bqbr-save-submit">信息更新</button>
+				     </div> 
 				<iframe name="treeConframe"  style="width:840px;height:500px;" class="Conframe" id="treeConframe" frameborder=0 src="<%=basePath%>TreeNode">
 				 </iframe>
 			</div>
@@ -959,9 +962,9 @@
 
 	<%--js文件--%>
     <script src="static/js/history/map.js" type="text/javascript"></script>
- 
+    <script src="static/js/history/addHouse.js" type="text/javascript"></script> 
 	<script src="static/js/history/conditionSearch.js" type="text/javascript"></script>
- 
+    <script src="static/js/history/monitor.js" type="text/javascript"></script>
 	</body>
 
  	<script type="text/javascript">
@@ -1021,6 +1024,8 @@
 	   	   $('#zlxz-gczl-tz').easydrag();
 	   	   $('#xxzs-gczl').easydrag();
 	   	   $('#xxzs-bqbr').easydrag();
+	   	   $('#xxzs-ssgx').easydrag();
+	   	
 	   	
 	   	
 	    
