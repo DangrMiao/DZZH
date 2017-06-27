@@ -1,4 +1,4 @@
-﻿		<div id="navbar" class="navbar navbar-default">
+﻿		<div id="navbar" class="navbar navbar-default" style="background:blue">
 			<script type="text/javascript">
 				try{ace.settings.check('navbar' , 'fixed');}catch(e){}
 			</script>
@@ -78,7 +78,7 @@
 
 						<!-- #section:basics/navbar.user_menu -->
 						 <li class="light-blue">
-							<a data-toggle="dropdown"  class="dropdown-toggle" href="#">
+							<a data-toggle="dropdown" style="background:blue;margin-top:10px" class="dropdown-toggle" href="#">
 								<img class="nav-user-photo" src="static/ace/avatars/user.jpg" alt="Jason's Photo" id="userPhoto" />
 								<span class="user-info" id="user_info">
 								</span>
