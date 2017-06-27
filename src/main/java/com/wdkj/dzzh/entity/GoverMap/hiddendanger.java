@@ -15,12 +15,8 @@ public class  hiddendanger extends PagedEntity implements Serializable{
 	public String location;///////////////////
 	public String governancetype;/////////////////
 	public int governancetypeid;
-	public int getGovernancetypeid() {
-		return governancetypeid;
-	}
-	public void setGovernancetypeid(int governancetypeid) {
-		this.governancetypeid = governancetypeid;
-	}
+	public int Handle;
+
 	public String thisstage;//////////////////
 	public int completion;///////////////////
 	public Date plancompletiontime;
@@ -34,8 +30,19 @@ public class  hiddendanger extends PagedEntity implements Serializable{
 	public String  scalegrad;/////////////////////
 	public String  district;////////////////////
 	public String  Township;////////////////////////
-	
-	
+
+	public int getHandle() {
+		return Handle;
+	}
+	public void setHandle(int handle) {
+		Handle = handle;
+	}
+	public int getGovernancetypeid() {
+		return governancetypeid;
+	}
+	public void setGovernancetypeid(int governancetypeid) {
+		this.governancetypeid = governancetypeid;
+	}
 	public String getDistrict() {
 		return district;
 	}

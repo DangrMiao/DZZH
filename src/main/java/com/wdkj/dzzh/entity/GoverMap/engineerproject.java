@@ -25,7 +25,14 @@ public class engineerproject extends PagedEntity implements Serializable{
 	public Date plancompletiontime;
 	public int completion;
 	public int color;
+	public int Handle;
 	
+	public int getHandle() {
+		return Handle;
+	}
+	public void setHandle(int handle) {
+		Handle = handle;
+	}
 	public String getX() {
 		return x;
 	}

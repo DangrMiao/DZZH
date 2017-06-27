@@ -31,7 +31,7 @@
   	</select>
   	<insert id="add_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		insert into engineerproject(`name`, `progress`, `basicInfo`, `governanceInfo`, `remark`, `create_time`,hiddendanger_id)
-  		value(#{name}, #{progress}, #{basicInfo}, #{governanceInfo}, #{remark}, #{create_time},#{hiddendanger_id})
+  		value(#{name}, #{progress}, #{basicInfo}, #{governanceInfo}, #{remark}, #{create_time},#{id})
   	</insert>
   	<update id="update_eng" parameterType="com.wdkj.dzzh.entity.GoverMap.engineerproject">
   		update engineerproject

@@ -133,6 +133,14 @@ public class RelocationService  implements RelocationManager{
 		dao.update("RelocationProjectDao.update_rp", params);
 	}
 	
+	
+	//修改hiddendanger里面的Handle
+	@Override
+	public void updatehdRPhandle(hiddendanger h) throws Exception {
+		// TODO Auto-generated method stub
+		dao.update("goverMapDao.updateHDhandle", h);
+	}
+
 	@Override
 	public List<relocationProject> listRelocation(relocationProject params) throws Exception {
 		// TODO Auto-generated method stub
@@ -142,7 +150,7 @@ public class RelocationService  implements RelocationManager{
 		 for(int i=0;i<datalist.size();i++){
 			 c=datalist.get(i);
 			 convertTodata(c);//鏃ユ湡杞崲涓烘暟鍊兼牸寮�("yyyy-MM-dd");
-			 } 
+			 }
 		return datalist;
 	}
 

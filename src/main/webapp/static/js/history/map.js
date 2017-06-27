@@ -446,11 +446,11 @@ function drawTMakers(lnglats){
             iconSize: new T.Point(12, 12), 
             iconAnchor: new T.Point(6, 18) 
         });
-    	var iconB = new T.Icon({ 
+/*    	var iconB = new T.Icon({ 
             iconUrl: "static/images/levelB.png", 
             iconSize: new T.Point(12, 12), 
             iconAnchor: new T.Point(6, 18) 
-        });
+        });*/
     	var iconC = new T.Icon({ 
             iconUrl: "static/images/levelC.png", 
             iconSize: new T.Point(12, 12), 
@@ -458,16 +458,18 @@ function drawTMakers(lnglats){
         });  
     	
     for (var i = 0; i < lnglats.length; i = i + 1) {
-	    if (lnglats[i].governancetypeid == 0) {  
+	    if (lnglats[i].Handle == 0) {  
         	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconD});
         	map.addOverLay(marker);
         	iconMarkers.push(marker);  
-        } else if (lnglats[i].governancetypeid == 1) {
+        } 
+	    /*else if (lnglats[i].governancetypeid == 1) {
         	
         	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconB});
         	map.addOverLay(marker);
         	iconMarkers.push(marker);
-		} else if (lnglats[i].governancetypeid == 2) {
+		}*/ 
+	    else if (lnglats[i].Handle == 1) {
         	marker = new T.Marker(new T.LngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconC});
         	map.addOverLay(marker);
         	iconMarkers.push(marker);
@@ -542,38 +544,43 @@ function PointClick(e){
 	//debugger;
 	//获取房屋信息 
     Ajax.getJson("map/search_map",params, function(data){
+     
     	if (data.rows[0].governancetypeid ==0){ 
-    		$('#account-Manager-add-dialog-sxgx').modal('show');
-			FormUtils.loadForm('form-sxgx',data.rows[0]);
+    		$('#account-Manager-add-dialog-start-sxgx').modal('show');
+			FormUtils.loadForm('form-start-sxgx',data.rows[0]);
 			//$('#map-search-data-div').css('display','none');
 			//$('#search-form-group').css('display','none');
-			$("#sxgx-close").on("click",function(){
+			$("#start-sxgx-close").on("click",function(){
         		$('#search-form-group').css('display','block');	
         		$('#map-search-data-div').css('display','block');
         	})
 		}
     	else if(data.rows[0].governancetypeid ==1){
-    		Ajax.getJson("relocation/search_relocation",params, function(data){
-    			console.log(data)
-    		$('#account-Manager-add-dialog-bqbr-first').modal('show');
-			FormUtils.loadForm('form-first-bqbr',data.rows[0]);
+    		Ajax.getJson("relocation/search_relocation",params, function(datas){
+    			datas.rows[0].Handle = data.rows[0].Handle;;	
+    			console.log(datas)
+    		$('#account-Manager-add-dialog-bqbr-second').modal('show');
+    		treeConframe.window.goto_treenode_by_projectid(datas.rows[0].id,1);
+			FormUtils.loadForm('form-second-bqbr',datas.rows[0]);
 			//$('#map-search-data-div').css('display','none');
 			//$('#search-form-group').css('display','none');
-			$("#bqbr-first-close").on("click",function(){
+			$("#bqbr-second-close").on("click",function(){
         		$('#search-form-group').css('display','block');	
         		$('#map-search-data-div').css('display','block');
-        		
         	  });
     	   })
     	}
     	else if(data.rows[0].governancetypeid ==2){
-    		Ajax.getJson("engineer/search_engineer",params, function(data){
-    			console.log(data)
-    		$('#account-Manager-add-dialog-gczl-sxgx-first').modal('show');
-			FormUtils.loadForm('form-first-gczl',data.rows[0]);
+    		Ajax.getJson("engineer/search_engineer",params, function(datas){
+    			//
+    			datas.rows[0].Handle = data.rows[0].Handle;;	
+    			console.log(datas)
+    		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+    		treeConframe1.window.goto_treenode_by_projectid(datas.rows[0].id,2);
+			FormUtils.loadForm('form-second-gczl',datas.rows[0]);
 			//$('#map-search-data-div').css('display','none');
 			//$('#search-form-group').css('display','none');
-			$("#gczl-sxgx-first-close").on("click",function(){
+			$("#gczl-sxgx-second-close").on("click",function(){
         		$('#search-form-group').css('display','block');	 
         		$('#map-search-data-div').css('display','block');
         	  });

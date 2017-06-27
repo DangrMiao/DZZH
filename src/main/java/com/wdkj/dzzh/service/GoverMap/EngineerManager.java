@@ -18,4 +18,6 @@ public interface EngineerManager {
 	void updateEngineer(engineerproject params) throws Exception;
 	
 	List<engineerproject> listEngineer(engineerproject params) throws Exception;
+
+	void updatehdhandle(hiddendanger h) throws Exception;
 }

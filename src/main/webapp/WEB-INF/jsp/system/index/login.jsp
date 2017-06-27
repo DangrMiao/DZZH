@@ -32,9 +32,11 @@
       .cavs{
     	z-index:1;
     	position: fixed;
-    	width:95%;
-    	margin-left: 20px;
-    	margin-right: 20px;
+    	width:100%;
+    	margin-left: 0px;
+    	margin-right: 0px;
+    	background:url('static/login/images/banner_slide_05.jpg') no-repeat;
+    	 
     }
   </style>
   <script>
@@ -76,7 +78,11 @@
 	</div>	
 	</c:if>
 	<canvas class="cavs"></canvas>
+	
 	<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+		<div style="margin-top:2px,margin-bottom:2px">
+			<img src="" />
+		</div>
 		<!-- 登录 -->
 		<div id="windows1">
 		<div id="loginbox" >
@@ -230,9 +236,8 @@
 		</div>
 		#camera_wrap_3
 	</div> -->
-<div style="margin-top:2px,margin-bottom:2px">
-<img src="static/login/images/banner_slide_05.jpg" />
-</div>
+
+
 	<script type="text/javascript">
 		//服务器校验
 		function severCheck(){

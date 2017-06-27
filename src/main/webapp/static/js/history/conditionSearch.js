@@ -6,6 +6,11 @@ var label;
 var marker;
 var iconMarkers=[];
 
+/*var Xxxg = function(value,row){
+ 	var html1 = '<a href="javascript:void(0)" class="Xxxg-edit" data-id="'+ row.id + '"  >信息更新</a>';
+ 	return html1;
+ }*/
+
 //初始化Table
 $('#map-search-data').bootstrapTable({
     url: 'map/list_map',         //请求后台的URL（*）
@@ -56,6 +61,7 @@ $('#map-search-data').bootstrapTable({
         {field: 'scalegrad',title: '规模等级'}, 
         {field: 'thisstage',title: '稳定性'}, 
         {field: 'strplancompletiontime',title: '计划时间'},
+        /*{field: 'xxxg',title: '操作', formatter:Xxxg}, */
         //{field: 'level',title: '鉴定等级'},
         //{field: 'jznd',title: '建造年代'},
         //{field: 'zflb',title: '住房类别'}, 
@@ -168,51 +174,54 @@ var Mmarker;
 var selections;
 $("#map-search-data").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
-	//console.log(selections[0])
+	console.log(selections[0])
     if (selections[0].governancetypeid ==0){   	
-        $('#map-search-data-toorbar-xxgk').css('display','none');
-        $('#map-search-data-toorbar-bqbr-xxgk').css('display','none');
-        $('#map-search-data-toorbar-gczl-xxgk').css('display','none');
-		$('#map-search-data-toorbar-zd-sxgx').css('display','inline-block');
-		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
-		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
-		$('#map-search-data-toorbar-tjzlfa').css('display','inline-block');
-		$('#map-search-data-toorbar-bqry').css('display','none');
-		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');*/
-		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','none');*/
+    	$('#account-Manager-add-dialog-start-sxgx').modal('show');
+		FormUtils.loadForm('form-start-sxgx',selections[0]);
+		//$('#map-search-data-div').css('display','none');
+		//$('#search-form-group').css('display','none');
+		$("#start-sxgx-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	
+    		$('#map-search-data-div').css('display','block');
+    	})
 	}
     else if(selections[0].governancetypeid ==1){  
-        $('#map-search-data-toorbar-xxgk').css('display','none');
-        $('#map-search-data-toorbar-bqbr-xxgk').css('display','inline-block');
-        $('#map-search-data-toorbar-gczl-xxgk').css('display','none');
-        
-    	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
-		$('#map-search-data-toorbar-bqbr-sxgx').css('display','inline-block');
-		$('#map-search-data-toorbar-gczl-sxgx').css('display','none');
-		$('#map-search-data-toorbar-tjzlfa').css('display','none');
-		$('#map-search-data-toorbar-bqry').css('display','inline-block');
-		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','inline-block');*/
-		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','none');*/
-    	}
+    	var params={};
+		params.id=selections[0].id;
+		Ajax.getJson("relocation/search_relocation",params, function(data){
+			data.rows[0].Handle = selections[0].Handle;
+			console.log(data)
+		$('#account-Manager-add-dialog-bqbr-second').modal('show');
+		treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
+		FormUtils.loadForm('form-second-bqbr',data.rows[0]);
+		//$('#map-search-data-div').css('display','none');
+		//$('#search-form-group').css('display','none');
+		$("#bqbr-second-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	
+    		$('#map-search-data-div').css('display','block');
+    		
+    	  });
+	   })
+    }
     else if(selections[0].governancetypeid ==2){
-        $('#map-search-data-toorbar-xxgk').css('display','none');
-        $('#map-search-data-toorbar-bqbr-xxgk').css('display','none');
-        $('#map-search-data-toorbar-gczl-xxgk').css('display','inline-block');
-        
-    	$('#map-search-data-toorbar-zd-sxgx').css('display','none');
-		$('#map-search-data-toorbar-bqbr-sxgx').css('display','none');
-		$('#map-search-data-toorbar-gczl-sxgx').css('display','inline-block');
-		$('#map-search-data-toorbar-tjzlfa').css('display','none');
-		$('#map-search-data-toorbar-bqry').css('display','none');
-		$('#map-search-data-toorbar-bqbr-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-bqbr-zlxz').css('display','none');*/
-		$('#map-search-data-toorbar-gczl-zlsc').css('display','none');
-		/*$('#map-search-data-toorbar-gczl-zlxz').css('display','inline-block');*/
-    	} 
+    	var params={};
+		params.id=selections[0].id;
+		Ajax.getJson("engineer/search_engineer",params, function(data){
+			
+			data.rows[0].Handle = selections[0].Handle;
+			console.log(data)
+		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+		treeConframe1.window.goto_treenode_by_projectid(data.rows[0].id,2);
+		FormUtils.loadForm('form-second-gczl',data.rows[0]);
+		//$('#map-search-data-div').css('display','none');
+		//$('#search-form-group').css('display','none');
+		$("#gczl-sxgx-second-close").on("click",function(){
+    		$('#search-form-group').css('display','block');	 
+    		$('#map-search-data-div').css('display','block');
+    	  });
+	   })
+	   
+    } 
 	if (Mmarker) {
 		map.removeOverLay(Mmarker);
 	}
@@ -281,6 +290,56 @@ $("#map-search-data").on("click",function(){
               map.enableScrollWheelZoom();  
     });
     */
+     
+    
+  //最初的操作中的更新
+    $("#map-search-data").on("click",".Xxxg-edit",function(){
+    	selections = $('#map-search-data').bootstrapTable('getSelections');
+    	console.log(selections[0])
+    	if (selections[0].governancetypeid ==0){ 
+    		$('#account-Manager-add-dialog-start-sxgx').modal('show');
+			FormUtils.loadForm('form-start-sxgx',selections[0]);
+			//$('#map-search-data-div').css('display','none');
+			//$('#search-form-group').css('display','none');
+			$("#start-sxgx-close").on("click",function(){
+        		$('#search-form-group').css('display','block');	
+        		$('#map-search-data-div').css('display','block');
+        	})
+		}
+    	else if(selections[0].governancetypeid ==1){
+    		var params={};
+    		params.id=selections[0].id;
+    		Ajax.getJson("relocation/search_relocation",params, function(data){
+    		$('#account-Manager-add-dialog-bqbr-second').modal('show');
+    		treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
+			FormUtils.loadForm('form-second-bqbr',data.rows[0]);
+			//$('#map-search-data-div').css('display','none');
+			//$('#search-form-group').css('display','none');
+			$("#bqbr-second-close").on("click",function(){
+        		$('#search-form-group').css('display','block');	
+        		$('#map-search-data-div').css('display','block');
+        		
+        	  });
+    	   })
+    	}
+    	else if(selections[0].governancetypeid ==2){
+    		var params={};
+    		params.id=selections[0].id;
+    		Ajax.getJson("engineer/search_engineer",params, function(data){
+    			console.log(data)
+    		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+    		treeConframe1.window.goto_treenode_by_projectid(data.rows[0].id,2);
+			FormUtils.loadForm('form-second-gczl',data.rows[0]);
+			//$('#map-search-data-div').css('display','none');
+			//$('#search-form-group').css('display','none');
+			$("#gczl-sxgx-second-close").on("click",function(){
+        		$('#search-form-group').css('display','block');	 
+        		$('#map-search-data-div').css('display','block');
+        	  });
+    	   })
+    	} 
+}); 
+    
     
 	$('#account-Manager-add-dialog').modal({
         keyboard: true,
@@ -351,12 +410,15 @@ $("#map-search-data").on("click",function(){
     
     //“暂定”的属性更新提交
     $("#start-save-submit").on("click",function(){
+    	selections = $('#map-search-data').bootstrapTable('getSelections');
      	var params = FormUtils.getData("form-start-sxgx");
+     	 
      	//console.log(selections[0])
      	//params.plancompletiontime=params.strplancompletiontime;
-     	params.id=selections[0].id;
-     	console.log(params)
-     	Ajax.postJson(baseUrl+'map/update_map', params, function(data){
+     	//params.id=selections[0].id;
+     	//console.log(params)
+     	
+     	 Ajax.postJson(baseUrl+'map/update_map', params, function(data){
      		if(data.code > 0){ 
                  $.gritter.add({
  	                title: '提示',
@@ -371,12 +433,36 @@ $("#map-search-data").on("click",function(){
                          time: 1000,
                  });
               }
-     	});
-     	//刷新有问题
-     	$('#map-search-data').bootstrapTable('refresh');
-     	$('#account-Manager-add-dialog-start-sxgx').modal('hide');
-     	$('#search-form-group').css('display','block');	
-     	$('#map-search-data-div').css('display','block');	 
+     	}); 
+     	 
+      	//刷新
+      	$('#map-search-data').bootstrapTable('refresh');
+      	$('#account-Manager-add-dialog-start-sxgx').modal('hide');
+      	$('#search-form-group').css('display','block');	
+      	$('#map-search-data-div').css('display','block');  
+       	var monitors = {};
+       	monitors.id = params.id;
+       	monitors.name = params.name;
+       	monitors.create_time = params.strplancompletiontime;
+        if(params.governancetypeid=="1"){
+    	    		Ajax.postJson(baseUrl+'relocation/add_RP', monitors, function(data){
+    	    			if(data.code > 0){ 
+        	                console.log("成功")
+        	            }else{                
+        	                 console.log("失败")
+        	             }
+    	    	});
+       	}
+    	else if(params.governancetypeid=="2"){
+    	    	Ajax.postJson(baseUrl+'engineer/add_EP', monitors, function(data){
+    	    		if(data.code > 0){ 
+    	                console.log("成功")
+    	            }else{                
+    	                 console.log("失败")
+    	             }
+    	    	});
+    	}
+       	
  	});
  
     //添加治理方案
@@ -462,8 +548,10 @@ $("#map-search-data").on("click",function(){
    
    //“搬迁避让”属性更新提交
    $("#bqbr-save-submit").on("click",function(){
-    	var params = FormUtils.getData("form-second-bqbr");
-    	console.log(params)
+    	//selections = $('#map-search-data').bootstrapTable('getSelections');
+   	    var params = FormUtils.getData("form-second-bqbr");
+   	   // params.hiddendanger_id = $('#bqbr_id').val();
+   	    console.log(params)
     	Ajax.postJson(baseUrl+'relocation/update_relocationProject', params, function(data){
     		if(data.code > 0){ 
                 $.gritter.add({
@@ -482,15 +570,11 @@ $("#map-search-data").on("click",function(){
     	});
     	//刷新有问题
     	$('#map-search-data').bootstrapTable('refresh');
-    	$('#account-Manager-add-dialog-bqbr').modal('hide');
+    	$('#account-Manager-add-dialog-bqbr-second').modal('hide');
     	$('#search-form-group').css('display','block');	
     	$('#map-search-data-div').css('display','block');	 
 	});
-  
-   
-   
-   
-   
+
    
    var bg = function(value,row){
   	 switch (value)
@@ -504,14 +588,14 @@ $("#map-search-data").on("click",function(){
 var Edit = function(value,row){
  	var html = '<a href="javascript:void(0)" class="Edit-edit" data-id="'+ row.id + '"  >修改</a>'
  	+	'&nbsp;<a href="javascript:void(0)"  class="delete" data-id="'+ row.id + '"  >删除</a>' ;
- 	
  	return html;
  }
 	//搬迁人员
-	$("#map-search-data-toorbar-bqry").on("click",function() {
+	$("#bqbr-bqry-submit").on("click",function() {
 	   	selections = $('#map-search-data').bootstrapTable('getSelections');
 	   	var BqbrBqry={};
 	   	BqbrBqry.id = selections[0].id;
+	   	console.log(BqbrBqry)
 	    Ajax.getJson("relocation/search_relocation",BqbrBqry, function(data){
 		//console.log(data)
 		
@@ -732,10 +816,15 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
 	     });
 	  })	   
    });
+  
+  
   //“工程治理”属性更新提交
   $("#gczl-save-submit").on("click",function(){
-   	var params = FormUtils.getData("form-gczl");
-   	Ajax.postJson(baseUrl+'engineer/update_engineerproject', params, function(data){
+	 //selections = $('#map-search-data').bootstrapTable('getSelections');
+   	var params = FormUtils.getData("form-second-gczl");
+   	//params.hiddendanger_id = selections[0].id;
+   	console.log(params)
+    Ajax.postJson(baseUrl+'engineer/update_engineerproject', params, function(data){
    		if(data.code > 0){ 
                $.gritter.add({
 	                title: '提示',
@@ -751,9 +840,9 @@ $("#account-Manager-delete-dialog-comfirm").on("click",function(){
                });
             }
    	  });
-   	//刷新有问题
+   	//刷新
    	$('#map-search-data').bootstrapTable('refresh');
-   	$('#account-Manager-add-dialog-gczl-sxgx').modal('hide');
+   	$('#account-Manager-add-dialog-gczl-sxgx-second').modal('hide');
    	$('#search-form-group').css('display','block');	
    	$('#map-search-data-div').css('display','block');	 
   }); 

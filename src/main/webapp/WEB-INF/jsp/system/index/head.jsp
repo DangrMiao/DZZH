@@ -17,8 +17,9 @@
 
 				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
-				<a class="navbar-brand" style="margin-top: 5px;"> <span style="color: white; font-size: 20px;">衢江区"除险安居"三年行动综合管理平台</span>
-					</a>
+				<a class="navbar-brand" style="margin-top: 2px;">
+				  <img src="static/ace/avatars/logo.png" />
+				</a>
 					<!-- #section:basics/navbar.layout.brand -->
 					<%-- <a class="navbar-brand">
 						<small> <i class="fa fa-leaf"></i> ${pd.SYSNAME} </small>

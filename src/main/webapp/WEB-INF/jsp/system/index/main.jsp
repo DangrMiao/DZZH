@@ -16,7 +16,7 @@
 	<!-- jsp文件头和头部 -->
 	<%@ include file="top.jsp"%>
 	<style type="text/css">
-	.commitopacity{position:absolute; width:100%; height:100px; background:#7f7f7f; filter:alpha(opacity=50); -moz-opacity:0.8; -khtml-opacity: 0.5; opacity: 0.5; top:0px; z-index:99999;}
+	.commitopacity{position:absolute; width:100%; height:100%; background:#7f7f7f; filter:alpha(opacity=50); -moz-opacity:0.8; -khtml-opacity: 0.5; opacity: 0.5; top:0px; z-index:99999;}
 	</style>
 <%--	
 	<!-- 即时通讯 -->

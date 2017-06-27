@@ -17,4 +17,6 @@ public interface RelocationManager {
 	void updateRelocation(relocationProject params) throws Exception;
 
 	List<relocationProject> listRelocation(relocationProject params) throws Exception;
+
+	void updatehdRPhandle(hiddendanger h) throws Exception;
 }

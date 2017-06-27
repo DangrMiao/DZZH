@@ -59,12 +59,12 @@
   		</div>
  	</div>
   	<div class="form-group row">
-  		<div class="col-sm-6">
+  		<div class="col-sm-4">
           <h5>项目文件列表</h5>
           <div id="treeview-checkable" class=""></div>
           <!-- <div id="tree"></div>  -->
     	</div>
-    	<div class="col-sm-6">
+    	<div class="col-sm-8">
           <h5>图片预览</h5>
           <div id="checkable-output" class="ma5-gallery" style="margin-top: 0px;">           
           </div>

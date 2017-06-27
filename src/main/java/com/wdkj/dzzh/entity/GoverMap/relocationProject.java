@@ -26,6 +26,13 @@ public class relocationProject extends PagedEntity implements Serializable{
 	public Date plancompletiontime;
 	public int completion;
 	public int color;
+	public int Handle;
+	public int getHandle() {
+		return Handle;
+	}
+	public void setHandle(int handle) {
+		Handle = handle;
+	}
 	public int getColor() {
 		return color;
 	}

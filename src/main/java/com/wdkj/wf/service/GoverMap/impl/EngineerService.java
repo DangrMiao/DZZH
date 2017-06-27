@@ -148,5 +148,12 @@ public class EngineerService implements EngineerManager{
 		return datalist;
 	}
 
+
+	@Override
+	public void updatehdhandle(hiddendanger h) throws Exception {
+		// TODO Auto-generated method stub
+		dao.update("goverMapDao.updateHDhandle", h);
+	}
+
 }
 

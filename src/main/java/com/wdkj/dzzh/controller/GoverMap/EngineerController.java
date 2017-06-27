@@ -64,6 +64,12 @@ public class EngineerController  extends BaseController {
 	public String update_engineerproject(engineerproject params){
 		try {
 			EngineerService.updateEngineer(params);
+			
+			hiddendanger h = new hiddendanger();
+			h.setId(params.getHiddendanger_id());
+			h.setHandle(params.getHandle());
+			EngineerService.updatehdhandle(h);
+			
 			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
@@ -82,6 +88,24 @@ public class EngineerController  extends BaseController {
 		try {
 			List<engineerproject> List = EngineerService.listEngineer(params);
 			return JSONUtil.toJsonString(new JsonResult(1, "成功", List));
+		} catch (Exception e) {
+			logger.error("查询发生错误", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
+	
+	
+	/**
+	 *添加
+	 * @Param params
+	 * @return
+	 */
+	@RequestMapping(value = "/add_EP", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add_EP(engineerproject params){
+		try {
+			EngineerService.addEngineer(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "添加成功!", null));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));

@@ -66,6 +66,7 @@ public class RelocationController  extends BaseController {
 			h.setId(params.getHiddendanger_id());
 			h.setGovernancetype("1");
 			RelocationService.updatehdgovertype(h);
+			
 			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
@@ -78,7 +79,27 @@ public class RelocationController  extends BaseController {
 	public String update_relocationProject(relocationProject params){
 		try {
 			RelocationService.updateRelocation(params);
+			
+			hiddendanger h = new hiddendanger();
+			h.setId(params.getHiddendanger_id());
+			h.setHandle(params.getHandle());
+			RelocationService.updatehdRPhandle(h);
+			
+			
 			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
+		} catch (Exception e) {
+			logger.error("查询发生错误", e);
+			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
+		}
+	}
+	
+	
+	@RequestMapping(value = "/add_RP", produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String add_RP(relocationProject params){
+		try {
+			RelocationService.addRelocation(params);
+			return JSONUtil.toJsonString(new JsonResult(1, "添加成功!", null));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);
 			return JSONUtil.toJsonString(new JsonResult(-1, "失败：服务器内部错误!", null));
