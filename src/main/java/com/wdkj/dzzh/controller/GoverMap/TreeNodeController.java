@@ -54,19 +54,34 @@ public class TreeNodeController {
 		
 		
 		TreeRoot basic=new TreeRoot();
-		basic.setText("治理前");
+		if("1".equals(geotype)){//治理类型为搬迁避让
+			basic.setText("搬迁避让前");
+		}else
+		{
+			basic.setText("治理前");
+		}
 		basic.setNodes(basicfile);
 		basic.setTags(tags);
 		
 		
 		TreeRoot prevent=new TreeRoot();
-		prevent.setText("治理中");
+		if("1".equals(geotype)){//治理类型为搬迁避让
+			prevent.setText("搬迁避让中");
+		}else
+		{
+			prevent.setText("治理中");
+		}
 		prevent.setNodes(preventfile);
 		prevent.setTags(tags);
 		
 		
 		TreeRoot progress=new TreeRoot();
-		progress.setText("治理后");
+		if("1".equals(geotype)){//治理类型为搬迁避让
+			progress.setText("搬迁避让后");
+		}else
+		{
+			progress.setText("治理后");
+		}
 		progress.setNodes(progressfile);
 		progress.setTags(tags);
 		

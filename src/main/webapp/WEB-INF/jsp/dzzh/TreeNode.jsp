@@ -86,14 +86,19 @@ function reloadtree(){
 
 function uploadFile(){
 	console.log("--------------"+"uploadFile"+"----------------");
+	 var govertype="${geotype}";
+	 var file1;
+	 var file2;
+	 var file3;
+	 if(govertype=="2"){
 	//治理前
- 	var file1=$('#treeview-checkable').treeview('search', [ '治理前', {
+ 	file1=$('#treeview-checkable').treeview('search', [ '治理前', {
  		  ignoreCase: true,     // case insensitive
  		  exactMatch: true,    // like or equals
  		  revealResults: false,  // reveal matching nodes
  		}]);
  	//治理中
- 	var file2=$('#treeview-checkable').treeview('search', [ '治理中', {
+ 	 file2=$('#treeview-checkable').treeview('search', [ '治理中', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
@@ -102,12 +107,33 @@ function uploadFile(){
  	
  	
  	//治理后
- 	var file3=$('#treeview-checkable').treeview('search', [ '治理后', {
+ 	 file3=$('#treeview-checkable').treeview('search', [ '治理后', {
 		  ignoreCase: true,     // case insensitive
 		  exactMatch: true,    // like or equals
 		  revealResults: false,  // reveal matching nodes
 		}]);
- 
+	 }else{
+		 file1=$('#treeview-checkable').treeview('search', [ '搬迁避让前', {
+	 		  ignoreCase: true,     // case insensitive
+	 		  exactMatch: true,    // like or equals
+	 		  revealResults: false,  // reveal matching nodes
+	 		}]);
+	 	//治理中
+	 	 file2=$('#treeview-checkable').treeview('search', [ '搬迁避让中', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+
+	 	
+	 	
+	 	//治理后
+	 	 file3=$('#treeview-checkable').treeview('search', [ '搬迁避让后', {
+			  ignoreCase: true,     // case insensitive
+			  exactMatch: true,    // like or equals
+			  revealResults: false,  // reveal matching nodes
+			}]);
+	 }
 	var ids=[];
 	getNodeidArr(file1[0],ids);
 	getNodeidArr(file2[0],ids);
