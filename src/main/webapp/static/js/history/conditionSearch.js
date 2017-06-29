@@ -170,9 +170,27 @@ $('#map-search-data').bootstrapTable({
 //	});
 
 //坐标点定位（注意：必须是先筛选，再定位，逻辑不能错）
+	//单击定位
 var Mmarker;
 var selections;
 $("#map-search-data").on("click",function(){
+	selections = $('#map-search-data').bootstrapTable('getSelections');
+	if (Mmarker) {
+		map.removeOverLay(Mmarker);
+	}
+	map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 12);
+	var icon1 = new T.Icon({  
+        iconUrl: "static/images/location.gif", 
+        iconSize: new T.Point(40, 40), 
+        iconAnchor: new T.Point(20, 32) 
+    }); 
+    //向地图上添加自定义标注 
+	Mmarker = new T.Marker(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), {icon: icon1}); 
+    map.addOverLay(Mmarker);  
+  });
+
+//双击展示模态框
+$("#map-search-data").on("dblclick",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
     if (selections[0].governancetypeid ==0){   	
     	$('#account-Manager-add-dialog-start-sxgx').modal('show');
@@ -218,24 +236,9 @@ $("#map-search-data").on("click",function(){
     		$('#search-form-group').css('display','block');	 
     		$('#map-search-data-div').css('display','block');
     	  });
-	   })
-	   
-    } 
-	if (Mmarker) {
-		map.removeOverLay(Mmarker);
-	}
-	map.centerAndZoom(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), 12);
-	var icon1 = new T.Icon({  
-        iconUrl: "static/images/location.gif", 
-        iconSize: new T.Point(40, 40), 
-        iconAnchor: new T.Point(20, 32) 
-    }); 
-    //向地图上添加自定义标注 
-	Mmarker = new T.Marker(new T.LngLat(selections[0].xcoordinate, selections[0].ycoordinate), {icon: icon1}); 
-    map.addOverLay(Mmarker);  
-
-});
-
+	   }) 
+     } 
+	});
 //function startLoad(){
 //	$.ajax({
 //        type: "POST",
