@@ -52,7 +52,7 @@ $('#map-search-data').bootstrapTable({
     },*/
     columns: [
     	{checkbox: true},
-    	{field: 'id',title: 'id'}, 
+    	{field: 'id',title: '编号'}, 
         {field: 'name',title: '名称'}, 
         {field: 'location',title: '地址'}, 
         {field: 'governancetype',title: '治理类型'},
@@ -657,12 +657,12 @@ var Edit = function(value,row){
 	detailView : false, // 是否显示父子表
 	columns: [
 		{checkbox : true},
-		{field : 'id',title : '序号'}, 
-		{field : 'name',title : '姓名'}, 
-		{field : 'family',title : '人口'}, 
-		{field : 'relocate_flag',title : '是否搬迁',formatter:bg}, 
-		{field : 'relocate_time',title : '搬迁时间'},
-		{field: 'cz',title: '操作', formatter:Edit},   
+		{field : 'id',title : '序号',align:"center"}, 
+		{field : 'name',title : '姓名',align:"center"}, 
+		{field : 'family',title : '人口',align:"center"}, 
+		{field : 'relocate_flag',title : '是否搬迁',align:"center",formatter:bg}, 
+		{field : 'relocate_time',title : '搬迁时间',align:"center"},
+		{field: 'cz',title: '操作',align:"center", formatter:Edit},   
   ],
 	dataType : 'json',
 	queryParams : function(params) {

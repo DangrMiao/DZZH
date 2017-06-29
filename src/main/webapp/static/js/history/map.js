@@ -452,7 +452,7 @@ function drawTMakers(lnglats){
             iconAnchor: new T.Point(6, 18) 
         });*/
     	var iconC = new T.Icon({ 
-            iconUrl: "static/images/levelC.png", 
+            iconUrl: "static/images/levelA.png", 
             iconSize: new T.Point(12, 12), 
             iconAnchor: new T.Point(6, 18) 
         });  

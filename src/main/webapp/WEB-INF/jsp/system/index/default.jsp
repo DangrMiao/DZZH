@@ -98,7 +98,7 @@
 
 	
 		<!-- 图例 -->	
-	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:120px;z-index:900; right:0px;top:42px">
+	<div class="" id="map-legend" style="opacity: 1;filter:alpha(opacity=90);;position:absolute;width:120px; height:120px;z-index:900; right:0px;top:42px">
 		<button id="map-legend-btn" type="button" style="height: 35px;width: 120px;text-align: center;" class="btn">图例</button>						
 		<div id="" class="sidebar">						 				
 
@@ -118,7 +118,7 @@
 
 		   <%--拆除--%>
 		   <div class="row" style="height: 20px;width: 160px;margin-top: 25px;margin-left:6px">
-			   <img class="col-xs-6 col-sm-3" src="static/images/levelC.png"></img>
+			   <img class="col-xs-6 col-sm-3" src="static/images/levelA.png"></img>
 			   <label class="col-xs-6 col-sm-6">治理完成</label>
 		   </div>
 
@@ -131,7 +131,7 @@
 		<div class="modal-content">
 			<div class="modal-header" style="text-align:center;font-size:12px">
 				<button type="button" class="close" data-dismiss="modal" id="start-sxgx-close" aria-hidden="true">&times;</button> 
-				<h5 class="modal-title" id="" >信息展示</h5>
+				<h5 class="modal-title" id="" >详情</h5>
 			</div>
 			<div class="modal-body" style="height: 100%;margin-right:10px">
 				<form class="form-horizontal" role="form" id ="form-start-sxgx">
@@ -293,7 +293,7 @@
 		 	   		    </select>
 					</div>
 				</form>
-				 <div style="margin-left:442px;margin-top:-46px">
+				 <div style="margin-left:620px;margin-top:-46px">
 						<button type="button" class="btn btn-primary btn-sm"  id="bqbr-save-submit">信息更新</button>
 						<!-- <button type="button" class="btn btn-warning btn-sm"  id="bqbr-bqry-submit">搬迁人员</button> -->
 				 </div> 
@@ -321,8 +321,8 @@
 			</div>
 			<div class="modal-body" style="height:100%;">
 			 <div id="settlement-monitor-table" style="margin-top: -12px;">
-			     <div class="heading btn-group" id="settlement-monitor-data-toorbar" style="left: -345px;"> 				         
-					 <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-sm">添加人员</button> 						    
+			     <div class="heading btn-group" id="settlement-monitor-data-toorbar" style="left: -340px;"> 				         
+					 <button id="settlement-monitor-toorbar-add" type="button" class="btn btn-primary">添加人员</button> 						    
 				 </div> 
 				 <div id="House-bqry-data-div" class="settlemrnt-ob-data">
 					<table id="House-bqry-data"  style="background-color: rgba(242, 242, 242, 0.9);" class="table table-striped table-bordered table-hover no-border-top scrolltable">
@@ -529,13 +529,13 @@
 					    <option>开化县</option>
 				    </select>
 		 	   </div>  -->
-		 	   <div style="padding-right: 0px;" class="input-group">
+		 	   <div style="padding-left: 10px;" class="input-group">
 		 	   	   <label class="search-label">名称:</label>
-		 	  	   <input type="text" style="height: 25px;" class="search-content" name="name">
+		 	  	   <input type="text" style="height: 25px;margin-left:15px" class="search-content" name="name">
 		 	   </div>
-		 	   <div style="padding-right: 0px;" class="input-group">
+		 	   <div style="padding-left: 10px;" class="input-group">
 		 	   	   <label class="search-label">治理类型:</label>
-		 	  	   <select name="governancetype" style="height: 25px;" class="selectpicker show-tick search-content">
+		 	  	   <select name="governancetype" style="height: 25px;margin-left:15px" class="selectpicker show-tick search-content">
 					    <option></option>
 					    <option value="0">监测</option>
 					    <option value="1">搬迁避让</option>
@@ -543,18 +543,18 @@
 				    </select>
 		 	   </div>	
 		
-		 	    <div style="padding-right: 0px;" class="input-group">
+		 	    <div style="padding-left: 10px;" class="input-group">
 		 	   	   <label class="search-label">规模等级:</label>
-		 	  	   <select name="scalegrad" style="height: 25px;" class="selectpicker show-tick search-content">
+		 	  	   <select name="scalegrad" style="height: 25px;margin-left:15px" class="selectpicker show-tick search-content">
 					    <option></option>
 					    <option>小型</option>
 					    <option>中型</option>
 					    <option>大型</option>
 				    </select>
 		 	   </div>
-		 	   <div style="padding-right: 0px;" class="input-group">
+		 	   <div style="padding-left: 10px;" class="input-group">
 		 	   	   <label class="search-label">稳定性:</label>
-		 	  	   <select name="thisstage" style="height: 25px;" class="selectpicker show-tick search-content">
+		 	  	   <select name="thisstage" style="height: 25px;margin-left:15px" class="selectpicker show-tick search-content">
 					    <option></option>
 					    <option>不稳定</option>
 					    <option>较稳定</option>
