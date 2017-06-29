@@ -556,7 +556,10 @@ function PointClick(e){
         	})
 		}
     	else if(data.rows[0].governancetypeid ==1){
-    		Ajax.getJson("relocation/search_relocation",params, function(datas){
+    		var datases = {}
+    		datases.hiddendanger_id = params.id;
+    		console.log(datases)
+    		Ajax.getJson("relocation/search_relocation",datases, function(datas){
     			datas.rows[0].Handle = data.rows[0].Handle;;	
     			console.log(datas)
     		$('#account-Manager-add-dialog-bqbr-second').modal('show');
@@ -571,7 +574,10 @@ function PointClick(e){
     	   })
     	}
     	else if(data.rows[0].governancetypeid ==2){
-    		Ajax.getJson("engineer/search_engineer",params, function(datas){
+    		var datases = {}
+    		datases.hiddendanger_id = params.id;
+    		console.log(datases)
+    		Ajax.getJson("engineer/search_engineer",datases, function(datas){
     			//
     			datas.rows[0].Handle = data.rows[0].Handle;;	
     			console.log(datas)

@@ -23,7 +23,9 @@ public class PersonService implements PersonManager{
 	 {
 		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		 try {
+			 if( h != null && h.getRelocate_time() != null){
 				h.setRelocate_time(fmt.format(fmt.parse(h.getRelocate_time())));//最小单位为秒
+			 }
 			} catch (java.text.ParseException e) {
 				e.printStackTrace();
 			}

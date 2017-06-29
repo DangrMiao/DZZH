@@ -98,7 +98,7 @@
 
 	
 		<!-- 图例 -->	
-	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:120px;z-index:900; right:0px;top:550px">
+	<div class="" id="map-legend" style="opacity: 0.9;filter:alpha(opacity=90);;position:absolute;width:120px; height:120px;z-index:900; right:0px;top:42px">
 		<button id="map-legend-btn" type="button" style="height: 35px;width: 120px;text-align: center;" class="btn">图例</button>						
 		<div id="" class="sidebar">						 				
 
@@ -141,7 +141,7 @@
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">计划时间:</label>
-						<input class="col-sm-7 date-picker" name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/></div>
+						<input class="col-sm-7 date-picker" required name="strplancompletiontime" id="" type="text" data-date-format="yyyy-mm-dd" style="height:26px;" placeholder="请输入计划时间" class="form-control"/></div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">名称:</label>
 						<input class="col-sm-7" style="height:26px" name = "name" type="text" class="form-control"  >
@@ -181,7 +181,7 @@
 		 	   		    </select>
 					</div>
 					<div class="modal-footer" style="text-align: center;background:white;">
-						<button type="button" class="btn btn-info btn-sm"  id="start-save-submit">信息更新</button>
+						<button type="submit" class="btn btn-info btn-sm"  id="start-save-submit">信息更新</button>
 				   </div>
 				</form>
 			</div>
@@ -556,13 +556,13 @@
 		 	   	   <label class="search-label">稳定性:</label>
 		 	  	   <select name="thisstage" style="height: 25px;" class="selectpicker show-tick search-content">
 					    <option></option>
-					    <option>好</option>
-					    <option>较好</option>
-					    <option>差</option>
-					    <option>较差</option>
+					    <option>不稳定</option>
+					    <option>较稳定</option>
 					    <option>低易发</option>
 					    <option>中易发</option>
-					    <option>稳定</option>
+					    <option>趋减弱</option>
+					    <option>趋增强</option>
+					    
 				    </select>
 		 	   </div>  
 		 	   	   <button id="search-form-group-search-btn" type="button" class="btn btn-sm btn-success form-group">

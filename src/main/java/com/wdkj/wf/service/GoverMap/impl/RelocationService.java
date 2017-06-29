@@ -52,7 +52,9 @@ public class RelocationService  implements RelocationManager{
 	 {
 		 SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		 try {
+			 if( h != null && h.getCreate_time() != null){
 				h.setCreate_time(fmt.format(fmt.parse(h.getCreate_time())));//最小单位为秒
+			 }
 			} catch (java.text.ParseException e) {
 				e.printStackTrace();
 			}
@@ -85,7 +87,7 @@ public class RelocationService  implements RelocationManager{
 	  * coordinate表示形式转换为数值格式120.22222;
 	  * 
 	  */
-	 public static void setcolor(relocationProject c)
+	/* public static void setcolor(relocationProject c)
 	 {
 		 int color =c.getPlancompletiontime().compareTo(new Date());
 		 if(c.getCompletion()>=100){c.setColor(1);}////蓝色代表任务已完成1
@@ -93,7 +95,7 @@ public class RelocationService  implements RelocationManager{
 			 if(color<=0){c.setColor(-1);}//红色代表任务未完成，期限已到-1
 			 else{c.setColor(0); }//黑色代表任务未完成，但期限未到0
 		 } 
-	 }
+	 }*/
 	 
 	 
 	@Override
@@ -104,7 +106,7 @@ public class RelocationService  implements RelocationManager{
 			 c=datalist.get(i);
 			 convertTodata(c);//日期转换为数值格式("yyyy-MM-dd");
 			 convertcoordinate(c);//坐标转换为数值格式，如120.222;
-			 setcolor(c);//设置颜色; 1蓝色已完成，    -1红色未完成，   ，0黑色正常
+			// setcolor(c);//设置颜色; 1蓝色已完成，    -1红色未完成，   ，0黑色正常
 			 } 
 		return datalist;
 	}

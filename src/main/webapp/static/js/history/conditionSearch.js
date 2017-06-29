@@ -174,7 +174,6 @@ var Mmarker;
 var selections;
 $("#map-search-data").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
-	console.log(selections[0])
     if (selections[0].governancetypeid ==0){   	
     	$('#account-Manager-add-dialog-start-sxgx').modal('show');
 		FormUtils.loadForm('form-start-sxgx',selections[0]);
@@ -187,10 +186,11 @@ $("#map-search-data").on("click",function(){
 	}
     else if(selections[0].governancetypeid ==1){  
     	var params={};
-		params.id=selections[0].id;
+		params.hiddendanger_id=selections[0].id;
+		console.log(params)
 		Ajax.getJson("relocation/search_relocation",params, function(data){
 			data.rows[0].Handle = selections[0].Handle;
-			console.log(data)
+			//console.log(data)
 		$('#account-Manager-add-dialog-bqbr-second').modal('show');
 		treeConframe.window.goto_treenode_by_projectid(data.rows[0].id,1);
 		FormUtils.loadForm('form-second-bqbr',data.rows[0]);
@@ -205,9 +205,8 @@ $("#map-search-data").on("click",function(){
     }
     else if(selections[0].governancetypeid ==2){
     	var params={};
-		params.id=selections[0].id;
+		params.hiddendanger_id=selections[0].id;
 		Ajax.getJson("engineer/search_engineer",params, function(data){
-			
 			data.rows[0].Handle = selections[0].Handle;
 			console.log(data)
 		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
@@ -411,57 +410,75 @@ $("#map-search-data").on("click",function(){
     //“暂定”的属性更新提交
     $("#start-save-submit").on("click",function(){
     	selections = $('#map-search-data').bootstrapTable('getSelections');
-     	var params = FormUtils.getData("form-start-sxgx");
-     	 
+     	
+       	$('#form-start-sxgx').validate({ 
+    		showErrors: function(errorMap,errorList){
+                if(errorList && errorList.length && errorList.length > 0){
+                    var error = errorList[0];
+                    //$('#house-info-panel .validate-tips-label').text(error.message);
+                }
+            },             
+            //验证成功后提交
+            submitHandler: function(form){
+            	var params = FormUtils.getData("form-start-sxgx");
+	           	 Ajax.postJson(baseUrl+'map/update_map', params, function(data){
+	          		if(data.code > 0){ 
+	                      $.gritter.add({
+	      	                title: '提示',
+	      	                text: '保存成功',
+	      	                time: 1000,	                
+	
+	                      }); 
+	                    	//刷新
+	                    	$('#map-search-data').bootstrapTable('refresh');
+	                    	$('#account-Manager-add-dialog-start-sxgx').modal('hide');
+	                    	$('#search-form-group').css('display','block');	
+	                    	$('#map-search-data-div').css('display','block'); 
+	                    	
+	                       	var monitors = {};
+	                       	monitors.hiddendanger_id = params.id;
+	                       	monitors.name = params.name;
+	                       	monitors.create_time = params.strplancompletiontime;
+	                        if(params.governancetypeid=="1"){
+	                    	    		Ajax.postJson(baseUrl+'relocation/add_RP', monitors, function(data){
+	                    	    			if(data.code > 0){ 
+	                        	                console.log("成功")
+	                        	            }else{                
+	                        	                 console.log("失败")
+	                        	             }
+	                    	    	});
+	                       	}
+	                    	else if(params.governancetypeid=="2"){
+	                    	    	Ajax.postJson(baseUrl+'engineer/add_EP', monitors, function(data){
+	                    	    		if(data.code > 0){ 
+	                    	                console.log("成功")
+	                    	            }else{                
+	                    	                 console.log("失败")
+	                    	             }
+	                    	    	});
+	                    	}
+	                  }else{                
+	                      	$.gritter.add({
+	                              title: '提示',
+	                              text: '保存失败:' + data.message,
+	                              time: 1000,
+	                      });
+	                   }
+	          	}); 
+	           	 
+            },        
+        });
+       	
+
      	//console.log(selections[0])
      	//params.plancompletiontime=params.strplancompletiontime;
      	//params.id=selections[0].id;
      	//console.log(params)
      	
-     	 Ajax.postJson(baseUrl+'map/update_map', params, function(data){
-     		if(data.code > 0){ 
-                 $.gritter.add({
- 	                title: '提示',
- 	                text: '保存成功',
- 	                time: 1000,	                
-
-                 }); 
-             }else{                
-                 	$.gritter.add({
-                         title: '提示',
-                         text: '保存失败:' + data.message,
-                         time: 1000,
-                 });
-              }
-     	}); 
+ 
      	 
-      	//刷新
-      	$('#map-search-data').bootstrapTable('refresh');
-      	$('#account-Manager-add-dialog-start-sxgx').modal('hide');
-      	$('#search-form-group').css('display','block');	
-      	$('#map-search-data-div').css('display','block');  
-       	var monitors = {};
-       	monitors.id = params.id;
-       	monitors.name = params.name;
-       	monitors.create_time = params.strplancompletiontime;
-        if(params.governancetypeid=="1"){
-    	    		Ajax.postJson(baseUrl+'relocation/add_RP', monitors, function(data){
-    	    			if(data.code > 0){ 
-        	                console.log("成功")
-        	            }else{                
-        	                 console.log("失败")
-        	             }
-    	    	});
-       	}
-    	else if(params.governancetypeid=="2"){
-    	    	Ajax.postJson(baseUrl+'engineer/add_EP', monitors, function(data){
-    	    		if(data.code > 0){ 
-    	                console.log("成功")
-    	            }else{                
-    	                 console.log("失败")
-    	             }
-    	    	});
-    	}
+
+       	
        	
  	});
  
@@ -594,7 +611,7 @@ var Edit = function(value,row){
 	$("#bqbr-bqry-submit").on("click",function() {
 	   	selections = $('#map-search-data').bootstrapTable('getSelections');
 	   	var BqbrBqry={};
-	   	BqbrBqry.id = selections[0].id;
+	   	BqbrBqry.hiddendanger_id = selections[0].id;
 	   	console.log(BqbrBqry)
 	    Ajax.getJson("relocation/search_relocation",BqbrBqry, function(data){
 		//console.log(data)
@@ -708,7 +725,7 @@ $("#settlement-monitor-toorbar-add").on("click",function(){
 $("#settlement-add-dq-btn-add").on("click",function(){
 	selections = $('#map-search-data').bootstrapTable('getSelections');
    	var BqbrBqrybc={};
-   	BqbrBqrybc.id = selections[0].id;
+   	BqbrBqrybc.hiddendanger_id= selections[0].id;
     Ajax.getJson("relocation/search_relocation",BqbrBqrybc, function(data){
 	var params = FormUtils.getData("add-bq-settlement-form");
 	params.id = data.rows[0].id;

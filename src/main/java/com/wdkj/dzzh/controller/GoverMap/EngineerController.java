@@ -48,10 +48,10 @@ public class EngineerController  extends BaseController {
 	public String add_engineerproject(engineerproject params){
 		try {
 			EngineerService.addEngineer(params);
-			hiddendanger h=new hiddendanger();
+			/*hiddendanger h=new hiddendanger();
 			h.setId(params.getHiddendanger_id());
 			h.setGovernancetype("2");
-			EngineerService.updatehdgovertype(h);
+			EngineerService.updatehdgovertype(h);*/
 			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
 		} catch (Exception e) {
 			logger.error("查询发生错误", e);

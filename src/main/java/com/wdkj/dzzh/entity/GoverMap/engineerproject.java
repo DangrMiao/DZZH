@@ -16,7 +16,7 @@ public class engineerproject extends PagedEntity implements Serializable{
 	public int headcount;
 	public String create_time;
 	public String type;
-	public int hiddendanger_id;
+	public String hiddendanger_id;
 	public String hiddendanger_name;
 	public String  x;
 	public String  y;
@@ -81,10 +81,11 @@ public class engineerproject extends PagedEntity implements Serializable{
 	public void setHiddendanger_name(String hiddendanger_name) {
 		this.hiddendanger_name = hiddendanger_name;
 	}
-	public int getHiddendanger_id() {
+ 
+	public String getHiddendanger_id() {
 		return hiddendanger_id;
 	}
-	public void setHiddendanger_id(int hiddendanger_id) {
+	public void setHiddendanger_id(String hiddendanger_id) {
 		this.hiddendanger_id = hiddendanger_id;
 	}
 	public int getId() {

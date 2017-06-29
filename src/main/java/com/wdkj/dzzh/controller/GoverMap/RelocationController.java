@@ -62,10 +62,10 @@ public class RelocationController  extends BaseController {
 	public String add_relocationProject(relocationProject params){
 		try {
 			RelocationService.addRelocation(params);
-			hiddendanger h=new hiddendanger();
+			/*hiddendanger h=new hiddendanger();
 			h.setId(params.getHiddendanger_id());
 			h.setGovernancetype("1");
-			RelocationService.updatehdgovertype(h);
+			RelocationService.updatehdgovertype(h);*/
 			
 			return JSONUtil.toJsonString(new JsonResult(1, "修改成功!", null));
 		} catch (Exception e) {

@@ -7,7 +7,7 @@ import com.weidekeji.common.entity.PagedEntity;
 
 public class  hiddendanger extends PagedEntity implements Serializable{
 	
-	public int id;////////////////
+	public String id;////////////////
 	public String name;///////////////
 	public String coordinate;
 	private double xcoordinate;
@@ -106,10 +106,11 @@ public class  hiddendanger extends PagedEntity implements Serializable{
 	public void setColor(int color) {
 		this.color = color;
 	}
-	public int getId() {
+ 
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
