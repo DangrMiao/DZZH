@@ -66,7 +66,7 @@ $( function() {
 		var hmainT = document.getElementById("page");
 		var bheightT = document.documentElement.clientHeight;
 		hmainT .style.width = '100%';
-		hmainT .style.height = (bheightT -10)+ 'px';
+		hmainT .style.height = (bheightT -5)+ 'px';
 	}
 	cmainFrameT();
 	window.onresize=function(){  

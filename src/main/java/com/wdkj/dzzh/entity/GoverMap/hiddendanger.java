@@ -30,7 +30,13 @@ public class  hiddendanger extends PagedEntity implements Serializable{
 	public String  scalegrad;/////////////////////
 	public String  district;////////////////////
 	public String  Township;////////////////////////
-
+	public String  peoples;////////////////////////
+	public String getPeoples() {
+		return peoples;
+	}
+	public void setPeoples(String peoples) {
+		this.peoples = peoples;
+	}
 	public int getHandle() {
 		return Handle;
 	}

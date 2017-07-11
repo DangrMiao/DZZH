@@ -13,7 +13,7 @@
 		g.`name` as governancetype ,h.thisstage,h.`completion`,
 		h.plancompletiontime   as plancompletiontime ,
 		h.plancompletiontime  as strplancompletiontime,
-		h.x,h.y,h.govertype,h.scale,h.scalegrad,h.district,h.Handle
+		h.x,h.y,h.govertype,h.scale,h.scalegrad,h.district,h.Handle,h.peoples
 		from hiddendanger h ,governancetype g 
 		where h.governancetype=g.id
 		
@@ -68,7 +68,8 @@
 				scalegrad =#{scalegrad},
 				thisstage = #{thisstage},
 				completion = #{completion},
-				governancetype = #{governancetypeid}	
+				governancetype = #{governancetypeid},
+				peoples = #{peoples}	
 		where `id` = #{id}
   	</update>
   	
@@ -77,7 +78,7 @@
 		g.`name` as governancetype ,h.thisstage,h.`completion`,
 		h.plancompletiontime   as plancompletiontime ,
 		h.plancompletiontime  as strplancompletiontime,
-		h.x,h.y,h.govertype,h.scale,h.scalegrad,h.Handle
+		h.x,h.y,h.govertype,h.scale,h.scalegrad,h.Handle,h.peoples
 		from hiddendanger h ,governancetype g  
 		where h.governancetype=g.id and h.`id` = #{id} 	
     </select>

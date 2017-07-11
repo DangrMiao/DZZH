@@ -26,6 +26,7 @@ public class MapService implements MapManager{
 	  * @param angle
 	  * @return
 	  */
+ 
 	 public static double convertToAngle(String angle,hiddendanger h)
 	 {
 	  StringBuffer transAngle = new StringBuffer(angle);
@@ -79,7 +80,7 @@ public class MapService implements MapManager{
 		 {
 			 c.setXcoordinate(convertToAngle(x,c));
 		 }else{
-			 c.setXcoordinate(Double.parseDouble(x)/10000);
+			 c.setXcoordinate((Double.parseDouble(x)/10000));
 		 }
 		 String y=c.getY();
 		 if(y.contains("°"))
