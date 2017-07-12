@@ -1,5 +1,5 @@
 var map = new TMap("mapDiv");
-$(function() {
+function first() {
 //	var iconMarkers=[];
 	//var data = {name:"",governancetype:""};
     $.ajax({
@@ -10,37 +10,19 @@ $(function() {
         success: function(data){ 
        		loadMap();
        	    drawTMakers(data.rows);  
-       	    //console.log(data.rows)
+//       	    console.log(iconMarkers)
        	    addTEvent(iconMarkers,data.rows);  		            
           }
      });
-    areas();
+    loadMap();
+};
 
-    //图例的隐藏和显示
-    var legendShow = true;
-    $('#map-legend-btn').on("click", function(){
-        if(legendShow){
-            $("#map-legend").animate({bottom: -165}, "fast", function(){
-                legendShow = false;
-            });
-        }else{
-            //showToolbar();
-            $("#map-legend").animate({bottom: 0}, "fast", function(){
-            	legendShow = true;
-            });
-        }
-    });
-    
-    function loadMap() {
-//        map = new T.Map('mapDiv');
-    	var zoom = 12;
-    	map.enableHandleMouseScroll();
-        //瑞安市 120.646360,27.776520
-        //杭州市 120.149920,30.274190
-        map.centerAndZoom(new TLngLat(120.149920, 30.274190), zoom);
-    }
-});
-
+function loadMap() {
+//  map = new T.Map('mapDiv');
+	var zoom = 12;
+	map.enableHandleMouseScroll();
+  map.centerAndZoom(new TLngLat(120.149920, 30.274190), zoom);
+}
 
 function drawTMakers(lnglats){    	   	
 	iconMarkers=[];
@@ -65,7 +47,9 @@ function drawTMakers(lnglats){
 	    if (lnglats[i].Handle == 0) {  
         	marker = new TMarker(new TLngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconD});
         	map.addOverLay(marker);
-        	iconMarkers.push(marker);  
+        	iconMarkers.push(marker); 
+        	iconMarkers[i].id=lnglats[i].id;
+        	
         } 
 	    /*else if (lnglats[i].governancetypeid == 1) {
         	
@@ -77,21 +61,16 @@ function drawTMakers(lnglats){
         	marker = new TMarker(new TLngLat(lnglats[i].xcoordinate, lnglats[i].ycoordinate), {icon: iconC});
         	map.addOverLay(marker);
         	iconMarkers.push(marker);
+        	iconMarkers[i].id=lnglats[i].id;
 		} 
 	    if (iconMarkers[i]) {
 	    	iconMarkers[i].id=lnglats[i].id;	 
 		}
-	    iconMarkers[i].reform_type=lnglats[i].reform_type;
+//	    iconMarkers[i].reform_type=lnglats[i].reform_type;
     } 
     map.centerAndZoom(new TLngLat(118.8350, 29.1133), 10); 
-    
-    //debugger;
-//    var markers = new T.MarkerClusterer(map, {markers: iconMarkers}); 
-//    markers.setGridSize(150);
-//    map.centerAndZoom(new T.LngLat(118.8350, 29.1133), 10);
-//    markers.setMaxZoom(15);
-   }    
-    //console.log(iconMarkers); 
+  }
+
 }  
  
 function onMouseOver(m) {    
@@ -142,63 +121,12 @@ function onClose() {
     map.removeOverLay(labelC);
     map.removeOverLay(labelD);
 } 
-function ointClick(e){
-	var params={};
-	console.log(e.target)
-	params.id=e.target.id;
-	//debugger;
-	//获取房屋信息 
-    Ajax.getJson("map/search_map",params, function(data){
-     
-    	if (data.rows[0].governancetypeid ==0){ 
-    		$('#account-Manager-add-dialog-start-sxgx').modal('show');
-			FormUtils.loadForm('form-start-sxgx',data.rows[0]);
-			//$('#map-search-data-div').css('display','none');
-			//$('#search-form-group').css('display','none');
-			$("#start-sxgx-close").on("click",function(){
-        		$('#search-form-group').css('display','block');	
-        		$('#map-search-data-div').css('display','block');
-        	})
-		}
-    	else if(data.rows[0].governancetypeid ==1){
-    		var datases = {}
-    		datases.hiddendanger_id = params.id;
-    		console.log(datases)
-    		Ajax.getJson("relocation/search_relocation",datases, function(datas){
-    			datas.rows[0].Handle = data.rows[0].Handle;;	
-    			console.log(datas)
-    		$('#account-Manager-add-dialog-bqbr-second').modal('show');
-    		treeConframe.window.goto_treenode_by_projectid(datas.rows[0].id,1);
-			FormUtils.loadForm('form-second-bqbr',datas.rows[0]);
-			//$('#map-search-data-div').css('display','none');
-			//$('#search-form-group').css('display','none');
-			$("#bqbr-second-close").on("click",function(){
-        		$('#search-form-group').css('display','block');	
-        		$('#map-search-data-div').css('display','block');
-        	  });
-    	   })
-    	}
-    	else if(data.rows[0].governancetypeid ==2){
-    		var datases = {}
-    		datases.hiddendanger_id = params.id;
-    		console.log(datases)
-    		Ajax.getJson("engineer/search_engineer",datases, function(datas){
-    			//
-    			datas.rows[0].Handle = data.rows[0].Handle;;	
-    			console.log(datas)
-    		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
-    		treeConframe1.window.goto_treenode_by_projectid(datas.rows[0].id,2);
-			FormUtils.loadForm('form-second-gczl',datas.rows[0]);
-			//$('#map-search-data-div').css('display','none');
-			//$('#search-form-group').css('display','none');
-			$("#gczl-sxgx-second-close").on("click",function(){
-        		$('#search-form-group').css('display','block');	 
-        		$('#map-search-data-div').css('display','block');
-        	  });
-    	   })
-    	} 	
-    });
-}
+
+//H5版的点击事件
+/*function PointClick(e){
+}*/
+
+
 
 //加载PointClick、mouseover与mouseout事件。   
 //iconMakers是已添加的标注对象。  
@@ -210,21 +138,73 @@ function addTEvent(iconMakers,lnglats,eventFn){
     for (var i = 0;  i<arrLen; i++) {  
         //iconMakers[i].id=i; 
         // 绑定事件  
-        (function() {  
-            var m = iconMakers[i];
-//          m.addEventListener("click",f_wave);
-            TEvent.addListener(m,"click",PointClick);
-            
-//        	m.addListener("mouseover",function() {  
-//	        	
-//            	timer = setTimeout(mover, 500);//setTimeout不能带参数，所以用下面的方法处理。  
-//            	function mover() {  
-//                    eventFn(m);  
-//                   }                	
-//               }); 
-        	 //m.addListener("mouseout", onClose); 
-        })();  
-    }  
+    	  (function() {  
+              var m = iconMakers[i];
+//              点击事件（和H5版的区别）
+              TEvent.addListener(m,"click",function(){ 
+           		var params={};
+           		params.id=m.id;
+           		console.log(params)
+           		
+
+           		//debugger;
+           		//获取房屋信息 
+           	    Ajax.getJson("map/search_map",params, function(data){
+           	     
+           	    	if (data.rows[0].governancetypeid ==0){ 
+           	    		$('#account-Manager-add-dialog-start-sxgx').modal('show');
+           				FormUtils.loadForm('form-start-sxgx',data.rows[0]);
+           				//$('#map-search-data-div').css('display','none');
+           				//$('#search-form-group').css('display','none');
+           				$("#start-sxgx-close").on("click",function(){
+           	        		$('#search-form-group').css('display','block');	
+           	        		$('#map-search-data-div').css('display','block');
+           	        	})
+           			}
+           	    	else if(data.rows[0].governancetypeid ==1){
+           	    		var datases = {}
+           	    		datases.hiddendanger_id = params.id;
+           	    		console.log(datases)
+           	    		Ajax.getJson("relocation/search_relocation",datases, function(datas){
+           	    			datas.rows[0].Handle = data.rows[0].Handle;;	
+           	    			console.log(datas)
+           	    		$('#account-Manager-add-dialog-bqbr-second').modal('show');
+           	    		treeConframe.window.goto_treenode_by_projectid(datas.rows[0].id,1);
+           				FormUtils.loadForm('form-second-bqbr',datas.rows[0]);
+           				//$('#map-search-data-div').css('display','none');
+           				//$('#search-form-group').css('display','none');
+           				$("#bqbr-second-close").on("click",function(){
+           	        		$('#search-form-group').css('display','block');	
+           	        		$('#map-search-data-div').css('display','block');
+           	        	  });
+           	    	   })
+           	    	}
+           	    	else if(data.rows[0].governancetypeid ==2){
+           	    		var datases = {}
+           	    		datases.hiddendanger_id = params.id;
+           	    		console.log(datases)
+           	    		Ajax.getJson("engineer/search_engineer",datases, function(datas){
+           	    			//
+           	    			datas.rows[0].Handle = data.rows[0].Handle;	
+           	    			console.log(datas)
+           	    		$('#account-Manager-add-dialog-gczl-sxgx-second').modal('show');
+           	    		treeConframe1.window.goto_treenode_by_projectid(datas.rows[0].id,2);
+           				FormUtils.loadForm('form-second-gczl',datas.rows[0]);
+           				//$('#map-search-data-div').css('display','none');
+           				//$('#search-form-group').css('display','none');
+           				$("#gczl-sxgx-second-close").on("click",function(){
+           	        		$('#search-form-group').css('display','block');	 
+           	        		$('#map-search-data-div').css('display','block');
+           	        	  });
+           	    	   })
+           	    	} 	
+           	    });
+           		
+           		
+           		
+              });    
+          })();
+    } 
 }
 
 function areas() { 

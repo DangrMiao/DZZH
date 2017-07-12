@@ -21,8 +21,9 @@
 	<link rel="stylesheet" href="static/ace/css/datepicker.css" />
 	<link rel="stylesheet" href="static/html_UI/assets/css/jquery.gritter.css" />
 	<link rel="stylesheet" href="static/ace/css/bootstrap-table.min.css">
-
 	<%--表单--%>
+
+	
 	<link rel="stylesheet" href="static/css/form.css">
 	<style>
     .input-group{
@@ -40,7 +41,7 @@
 	 }
 </style>
 </head>
-<body class="no-skin" style="overflow: hidden;">
+<body onLoad="Ditufirst()" class="no-skin" style="overflow: hidden;">
 	
 	<!-- /section:basics/navbar.layout -->
 	<div class="main-container" id="main-container" style="position:absolute;width:100%; height:100%">
@@ -166,11 +167,6 @@
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">稳定性:</label>
 						<input class="col-sm-7" style="height:26px" type="text" name = "thisstage" class="form-control"  > 
-					</div>
-					
-					<div style="text-align: right;" class="form-group">
-						<label class="col-sm-4">威胁人数(人):</label>
-						<input class="col-sm-7" style="height:26px" type="text" name = "peoples" class="form-control"  > 
 					</div>
 					<div style="text-align: right;" class="form-group">
 						<label class="col-sm-4">治理进度(%):</label>
@@ -561,12 +557,12 @@
 		 	   	   <label class="search-label">稳定性:</label>
 		 	  	   <select name="thisstage" style="height: 25px;margin-left:15px" class="selectpicker show-tick search-content">
 					    <option></option>
-					    <option>较好</option>
-					    <option>差</option>
-					    <option>较差</option>
-					    <option>中易发</option>
+					    <option>不稳定</option>
+					    <option>较稳定</option>
 					    <option>低易发</option>
-				 
+					    <option>中易发</option>
+					    <option>趋减弱</option>
+					    <option>趋增强</option>
 					    
 				    </select>
 		 	   </div>  
@@ -574,9 +570,12 @@
 						<span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
 						搜索
 				   </button>	 
-			   	<!-- <button id="search-form-group-btn" style="margin-left: 80px;" type="button" class="btn btn-sm btn-success form-group">
+			       <button id="image-group-btn" style="margin-left: 30px;" type="button" class="btn btn-sm btn-success form-group" onClick="YingXiang()">
 						影像
-				   </button>  -->
+				   </button> 
+				    <button id="map-group-btn" style="margin-left: 30px;" type="button" class="btn btn-sm btn-success form-group" onClick="Ditu()">
+						地图
+				   </button>
 			   <!-- 	<div style="padding-right: 20px;display: none;" class="input-group" >
 		 	   		<label class="search-label"></label>
 		 	  	   <input type="text" style="height: 25px;" class="search-content" name="governancetype" value="0">
@@ -628,14 +627,13 @@
 	<script src="static/ace/js/dataTables/bootstrap-table-zh-CN.js"></script>
 	<!--提示框-->
 	<!-- 天地图API -->
-	<script src=" http://api.tianditu.com/api?v=4.0" type="text/javascript"></script>
+	<script src="http://api.tianditu.com/js/maps.js" type="text/javascript"></script>
 	<script src="static/js/common/commonUtils.js" type="text/javascript"></script>
 
 	<%--js文件--%>
-    <script src="static/js/history/map.js" type="text/javascript"></script>
-	<script src="static/js/history/addHouse.js" type="text/javascript"></script> 
-	<script src="static/js/history/conditionSearch.js" type="text/javascript"></script>
-	<script src="static/js/history/monitor.js" type="text/javascript"></script>
+    <script src="static/js/default/map.js" type="text/javascript"></script>
+	<script src="static/js/default/conditionSearch.js" type="text/javascript"></script>
+ 
 	</body>
 
  	<script type="text/javascript">
@@ -652,6 +650,7 @@
 				.off('resize.chosen')
 				.on('resize.chosen', function() {
 					$('.chosen-select').each(function() {
+						
 						 var $this = $(this);
 						 $this.next().css({'width': $this.parent().width()});
 					});
@@ -688,5 +687,41 @@
 <%-- 		function toExcel(){
 			window.location.href='<%=basePath%>history/excel';
 		} --%>
+		
+
+        
+        function Ditufirst() { 
+            
+            map.centerAndZoom(new TLngLat(118.8350, 29.1133),10); 
+			map.enableDoubleClickZoom()
+			map.enableHandleMouseScroll();
+			//map.setMapType(TMAP_HYBRID_MAP);
+			map.setMapType(TMAP_NORMAL_MAP);
+			//map.setMapType(TMAP_SATELLITE_MAP);
+			//map.setMapType(TMAP_HYBRID_MAP);
+			areas();
+			first();
+        }
+        
+        function YingXiang() { 
+       	 
+            map.centerAndZoom(new TLngLat(118.8350, 29.1133),10); 
+			map.enableDoubleClickZoom()
+			map.enableHandleMouseScroll();
+			//map.setMapType(TMAP_HYBRID_MAP);
+			//map.setMapType(TMAP_NORMAL_MAP);
+			//map.setMapType(TMAP_SATELLITE_MAP);
+			map.setMapType(TMAP_HYBRID_MAP);			 
+        }
+        
+ 		function Ditu() { 
+            map.centerAndZoom(new TLngLat(118.8350, 29.1133),10); 
+			map.enableDoubleClickZoom()
+			map.enableHandleMouseScroll();
+			//map.setMapType(TMAP_HYBRID_MAP);
+			map.setMapType(TMAP_NORMAL_MAP);
+			//map.setMapType(TMAP_SATELLITE_MAP);
+			//map.setMapType(TMAP_HYBRID_MAP);
+        }
 	</script>
 </html>
